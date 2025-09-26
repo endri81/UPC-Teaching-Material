@@ -1,0 +1,2268 @@
+\documentclass[10pt]{beamer}
+\usetheme{Boadilla}
+\input{slides_English.sty}
+
+% Package imports
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{algorithm2e}
+\usepackage{subcaption}
+
+% Bibliography setup
+\usepackage[authoryear,round]{natbib}
+\bibliographystyle{chicago}
+
+% Document information
+\title{t-SNE: Visualizing High-Dimensional Data Through Probabilistic Embeddings}
+\subtitle{Advanced Multivariate Analysis\\Master in Statistics and Data Science}
+\author{Endri Raco, PhD}
+\institute{Universitat Politècnica de Catalunya}
+\date{October, 2025}
+
+\begin{document}
+
+%==============================================================================
+% SLIDE 1: Title Slide
+%==============================================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+%==============================================================================
+% SLIDE 2: The Fundamental Challenge
+%==============================================================================
+\begin{frame}{The Fundamental Challenge of High-Dimensional Visualization}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{The Problem We Face Daily:}
+\vspace{0.3cm}
+
+Consider the MNIST digit dataset:
+\begin{itemize}
+    \item Each image: 784 dimensions (28×28 pixels)
+    \item 60,000 training samples
+    \item 10 distinct classes
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{The Core Question:}\\
+\emph{How do we visualize the structure of data living in $\mathbb{R}^{784}$ on a 2D screen?}
+
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.65]
+    % High-dimensional space
+    \draw[thick] (0,0) circle (1.8cm);
+    \node at (0,-2.3) {$\mathbb{R}^{784}$};
+    
+    % Points in high-D
+    \foreach \i in {1,...,8} {
+        \pgfmathsetmacro{\angle}{360/8*\i}
+        \pgfmathsetmacro{\radius}{1.3+0.3*rand}
+        \fill[blue!70] (\angle:\radius) circle (2pt);
+    }
+    
+    % Arrow to low-D
+    \draw[->,thick,red!70] (2.2,0) -- (3.8,0);
+    \node[above] at (3,0.2) {\small Embedding};
+    
+    % Low-dimensional space
+    \draw[thick] (5.8,0) circle (1.4cm);
+    \node at (5.8,-2) {$\mathbb{R}^{2}$};
+    
+    % Points in low-D (scattered)
+    \foreach \i in {1,...,5} {
+        \pgfmathsetmacro{\angle}{360/5*\i}
+        \pgfmathsetmacro{\radius}{0.7+0.3*rand}
+        \fill[blue!30] (5.8,0) +(\angle:\radius) circle (2pt);
+    }
+    
+    % Question mark
+    \node[red,scale=1.8] at (5.8,0) {?};
+\end{tikzpicture}
+\end{figure}
+
+\vspace{0.3cm}
+\textbf{The Stakes:}\\
+Good visualization reveals patterns.\\
+Poor visualization hides structure.
+\end{column}
+\end{columns}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 3: When Classical Methods Fail
+%==============================================================================
+\begin{frame}{When Classical Methods Fail: PCA on Complex Data}
+
+\vspace{-0.2cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % PCA Result (Left)
+    \begin{scope}[shift={(0,0)}]
+        \begin{axis}[
+            width=5cm, height=4.5cm,
+            xlabel={PC1},
+            ylabel={PC2},
+            title={PCA Projection},
+            xmin=-3, xmax=3,
+            ymin=-3, ymax=3,
+            axis equal,
+            grid=major,
+            grid style={gray!30}
+        ]
+        % Overlapping clusters
+        \addplot[only marks, mark=*, mark size=1pt, blue!60, opacity=0.6] 
+            coordinates {(-0.5,0.2) (-0.3,0.4) (-0.6,0.1) (-0.4,0.3) (-0.2,0.5)
+                        (0.3,0.1) (0.5,0.3) (0.2,0.4) (0.4,0.2) (0.6,0.5)
+                        (-0.1,-0.3) (0.1,-0.2) (-0.2,-0.4) (0.2,-0.1) (0,-0.5)};
+        \addplot[only marks, mark=*, mark size=1pt, red!60, opacity=0.6] 
+            coordinates {(-0.4,0.1) (-0.2,0.3) (-0.3,0.2) (-0.1,0.4) (0,0.2)
+                        (0.4,0.3) (0.2,0.1) (0.3,0.4) (0.5,0.2) (0.1,0.3)
+                        (0,-0.2) (-0.1,-0.1) (0.1,-0.3) (-0.2,-0.2) (0.2,-0.4)};
+        \addplot[only marks, mark=*, mark size=1pt, green!60, opacity=0.6] 
+            coordinates {(-0.3,-0.1) (-0.1,0.1) (-0.2,0) (0,0.1) (-0.4,0)
+                        (0.3,0) (0.1,0.2) (0.4,0.1) (0.2,0) (0.5,0.1)
+                        (-0.1,-0.4) (0.1,-0.1) (0,-0.3) (0.2,-0.2) (-0.2,-0.5)};
+        \end{axis}
+    \end{scope}
+    
+    % t-SNE Result (Right)
+    \begin{scope}[shift={(6.5,0)}]
+        \begin{axis}[
+            width=5cm, height=4.5cm,
+            xlabel={t-SNE 1},
+            ylabel={t-SNE 2},
+            title={t-SNE Projection},
+            xmin=-3, xmax=3,
+            ymin=-3, ymax=3,
+            axis equal,
+            grid=major,
+            grid style={gray!30}
+        ]
+        % Well-separated clusters
+        \addplot[only marks, mark=*, mark size=1pt, blue!80] 
+            coordinates {(-2.0,1.5) (-1.8,1.7) (-2.1,1.4) (-1.9,1.6) (-2.2,1.8)
+                        (-2.0,1.3) (-1.7,1.5) (-2.1,1.7) (-1.9,1.4) (-2.0,1.6)};
+        \addplot[only marks, mark=*, mark size=1pt, red!80] 
+            coordinates {(1.5,1.8) (1.7,2.0) (1.4,1.9) (1.6,1.7) (1.8,1.9)
+                        (1.5,2.1) (1.7,1.8) (1.4,2.0) (1.6,1.9) (1.8,1.7)};
+        \addplot[only marks, mark=*, mark size=1pt, green!80] 
+            coordinates {(0.2,-1.8) (0.4,-2.0) (0.1,-1.7) (0.3,-1.9) (0.5,-1.8)
+                        (0.2,-2.1) (0.4,-1.9) (0.1,-2.0) (0.3,-1.8) (0.5,-2.0)};
+        \end{axis}
+    \end{scope}
+\end{tikzpicture}
+\end{figure}
+
+\vspace{-0.1cm}
+\textbf{Key Observation:} PCA preserves \emph{global} structure by maximizing variance.\\
+\textbf{The Problem:} Local neighborhoods—where the real clustering happens—get destroyed.
+
+\vspace{0.15cm}
+\begin{alertblock}{The Core Insight}
+What if, instead of preserving distances, we preserved \emph{neighborhoods}?
+\end{alertblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 4: The Core Idea
+%==============================================================================
+\begin{frame}{The Core Idea: Preserving Local Neighborhoods}
+
+\begin{center}
+\textbf{\Large The Fundamental Principle of t-SNE}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\centering
+\textbf{In High Dimensions ($\mathbb{R}^{d}$)}\\
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=1.0]
+    % Center point
+    \fill[red] (0,0) circle (3pt);
+    \node[below] at (0,-0.2) {$\mathbf{x}_i$};
+    
+    % Neighbors
+    \fill[blue] (0.7,0.5) circle (2pt);
+    \node[right] at (0.7,0.5) {\tiny $\mathbf{x}_j$};
+    
+    \fill[blue] (-0.6,0.4) circle (2pt);
+    \fill[blue] (0.3,-0.5) circle (2pt);
+    
+    % Distant points
+    \fill[gray!50] (2.0,1.5) circle (2pt);
+    \fill[gray!50] (-1.8,1.3) circle (2pt);
+    \fill[gray!50] (1.5,-1.7) circle (2pt);
+    
+    % Neighborhood circle
+    \draw[dashed,blue!50] (0,0) circle (1cm);
+    \node[blue] at (0,1.3) {\small Neighborhood};
+\end{tikzpicture}
+
+\vspace{0.15cm}
+Point $\mathbf{x}_i$ has nearby neighbors\\
+(small distances in $\mathbb{R}^{d}$)
+
+\end{column}
+\begin{column}{0.5\textwidth}
+\centering
+\textbf{In Low Dimensions ($\mathbb{R}^{2}$)}\\
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=1.0]
+    % Center point
+    \fill[red] (0,0) circle (3pt);
+    \node[below] at (0,-0.2) {$\mathbf{y}_i$};
+    
+    % Same neighbors preserved
+    \fill[blue] (0.7,0.5) circle (2pt);
+    \node[right] at (0.7,0.5) {\tiny $\mathbf{y}_j$};
+    
+    \fill[blue] (-0.6,0.4) circle (2pt);
+    \fill[blue] (0.3,-0.5) circle (2pt);
+    
+    % Distant points remain distant
+    \fill[gray!50] (2.0,1.5) circle (2pt);
+    \fill[gray!50] (-1.8,1.3) circle (2pt);
+    \fill[gray!50] (1.5,-1.7) circle (2pt);
+    
+    % Preserved neighborhood
+    \draw[dashed,blue!50] (0,0) circle (1cm);
+    \node[blue] at (0,1.3) {\small Preserved!};
+\end{tikzpicture}
+
+\vspace{0.15cm}
+Same neighbors stay close\\
+(neighborhood structure preserved)
+
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+
+\begin{block}{The Strategy}
+\centering
+\textbf{If point $j$ is a neighbor of point $i$ in high dimensions,}\\
+\textbf{then $j$ should remain a neighbor of $i$ in low dimensions.}
+\end{block}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 5: From Distance to Similarity
+%==============================================================================
+\begin{frame}{Building the Mathematics: From Distance to Similarity}
+
+\textbf{Step 1: The Raw Material—Euclidean Distance}
+
+\vspace{0.2cm}
+We start with points $\mathbf{x}_i, \mathbf{x}_j \in \mathbb{R}^d$ and compute:
+\begin{equation}
+d_{ij} = \|\mathbf{x}_i - \mathbf{x}_j\|_2 = \sqrt{\sum_{k=1}^{d} (x_{ik} - x_{jk})^2}
+\end{equation}
+
+\vspace{0.3cm}
+\textbf{The Problem:} Distance alone doesn't capture "neighborness"
+\begin{itemize}
+    \item Distance = 1.0 might be "close" in sparse regions
+    \item Distance = 1.0 might be "far" in dense regions
+    \item We need a \emph{relative} measure, not absolute
+\end{itemize}
+
+\vspace{0.3cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Sparse region
+    \begin{scope}[shift={(0,0)}]
+        \node[above] at (0,1.2) {\small Sparse Region};
+        \fill[red] (0,0) circle (2pt);
+        \fill[blue] (1.2,0) circle (2pt);
+        \draw[<->,thick] (0.1,-0.3) -- (1.1,-0.3);
+        \node[below] at (0.6,-0.5) {\tiny $d=1.0$};
+        \node[green!70!black] at (0.6,-0.9) {\small "Close"};
+    \end{scope}
+    
+    % Dense region
+    \begin{scope}[shift={(4.5,0)}]
+        \node[above] at (0,1.2) {\small Dense Region};
+        \fill[red] (0,0) circle (2pt);
+        \fill[gray] (0.3,0.2) circle (1.5pt);
+        \fill[gray] (-0.2,0.3) circle (1.5pt);
+        \fill[gray] (0.4,-0.2) circle (1.5pt);
+        \fill[blue] (1.2,0) circle (2pt);
+        \draw[<->,thick] (0.1,-0.3) -- (1.1,-0.3);
+        \node[below] at (0.6,-0.5) {\tiny $d=1.0$};
+        \node[red!70!black] at (0.6,-0.9) {\small "Far"};
+    \end{scope}
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 6: Converting Distance to Similarity
+%==============================================================================
+\begin{frame}{Building the Mathematics: Converting Distance to Similarity}
+
+\textbf{Step 2: The Gaussian Kernel—From Distance to Similarity}
+
+\vspace{0.15cm}
+We need to convert distance to a similarity score between 0 and 1:
+\begin{equation}
+\text{similarity}_{ij} = \exp\left(-\frac{d_{ij}^2}{2\sigma_i^2}\right)
+\end{equation}
+
+\vspace{0.2cm}
+\textbf{Why the Gaussian kernel?}
+\begin{itemize}
+    \item Close points ($d_{ij} \approx 0$) → similarity $\approx 1$
+    \item Far points ($d_{ij} \gg \sigma_i$) → similarity $\approx 0$
+    \item Smooth, differentiable decay
+    \item The parameter $\sigma_i$ controls the "width" of the neighborhood
+\end{itemize}
+
+\vspace{0.15cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    \begin{axis}[
+        width=8cm, height=3.8cm,
+        xlabel={Distance $d_{ij}$},
+        ylabel={Similarity},
+        xmin=0, xmax=4,
+        ymin=0, ymax=1.1,
+        legend pos=north east,
+        legend style={font=\tiny},
+        grid=both,
+        grid style={gray!30},
+        label style={font=\small},
+        tick label style={font=\tiny}
+    ]
+    % Different sigma values
+    \addplot[blue, thick, smooth, domain=0:4, samples=100] 
+        {exp(-x^2/(2*0.5^2))};
+    \addlegendentry{$\sigma_i = 0.5$}
+    
+    \addplot[red, thick, smooth, domain=0:4, samples=100] 
+        {exp(-x^2/(2*1.0^2))};
+    \addlegendentry{$\sigma_i = 1.0$}
+    
+    \addplot[green!70!black, thick, smooth, domain=0:4, samples=100] 
+        {exp(-x^2/(2*1.5^2))};
+    \addlegendentry{$\sigma_i = 1.5$}
+    \end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 7: The Bandwidth Problem
+%==============================================================================
+\begin{frame}{The Critical Problem: One $\sigma$ Does Not Fit All}
+
+\begin{center}
+\textbf{\large Different regions need different bandwidths!}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\centering
+\textbf{Dense Region}\\
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=0.8]
+    % Dense cluster
+    \fill[red] (0,0) circle (3pt);
+    \node[below] at (0,-0.3) {$\mathbf{x}_i$};
+    
+    % Many nearby points
+    \foreach \angle/\dist in {30/0.4, 60/0.5, 120/0.45, 180/0.5, 240/0.4, 300/0.55} {
+        \fill[blue!70] (\angle:\dist) circle (2pt);
+    }
+    
+    % Small sigma circle
+    \draw[dashed, orange, thick] (0,0) circle (0.6cm);
+    \node[orange] at (0,-1.2) {Need small $\sigma_i$};
+\end{tikzpicture}
+
+\vspace{0.2cm}
+Many neighbors nearby\\
+→ Use \textbf{narrow} kernel
+
+\end{column}
+\begin{column}{0.5\textwidth}
+\centering
+\textbf{Sparse Region}\\
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=0.8]
+    % Sparse point
+    \fill[red] (0,0) circle (3pt);
+    \node[below] at (0,-0.3) {$\mathbf{x}_j$};
+    
+    % Few distant points
+    \fill[blue!70] (1.2, 0.8) circle (2pt);
+    \fill[blue!70] (-1.0, -0.9) circle (2pt);
+    \fill[blue!70] (0.9, -1.1) circle (2pt);
+    
+    % Large sigma circle
+    \draw[dashed, orange, thick] (0,0) circle (1.3cm);
+    \node[orange] at (0,-1.8) {Need large $\sigma_j$};
+\end{tikzpicture}
+
+\vspace{0.2cm}
+Few neighbors, all distant\\
+→ Use \textbf{wide} kernel
+
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+
+\begin{alertblock}{The Key Insight}
+Each point $i$ needs its own $\sigma_i$ adapted to its local density!\\
+But how do we choose these $\sigma_i$ values systematically?
+\end{alertblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 8: Perplexity Solution
+%==============================================================================
+\begin{frame}{The Solution: Perplexity—A User-Friendly Parameter}
+
+\textbf{The Perplexity Concept:} "How many effective neighbors should each point have?"
+
+\vspace{0.15cm}
+\begin{block}{Definition of Perplexity}
+\begin{equation}
+\text{Perp}(P_i) = 2^{H(P_i)} = 2^{-\sum_j p_{j|i} \log_2 p_{j|i}}
+\end{equation}
+where $H(P_i)$ is the Shannon entropy of the distribution $P_i$.
+\end{block}
+
+\vspace{0.1cm}
+\begin{exampleblock}{Shannon Entropy Connection}
+\footnotesize
+Entropy measures uncertainty: for uniform distribution over $k$ outcomes, $H = \log_2(k)$\\
+Thus: Perp $= 2^{\log_2(k)} = k$ — the "effective" number of outcomes\\
+\textit{Reference: Shannon (1948), "A Mathematical Theory of Communication"}
+\end{exampleblock}
+
+\vspace{0.1cm}
+\textbf{Intuition:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Perplexity $\approx$ effective number of neighbors
+    \item User sets one global perplexity (typically 5–50)
+    \item Algorithm finds $\sigma_i$ for each point to match this perplexity
+    \item Perplexity = 30 means "each point should have roughly 30 effective neighbors"
+\end{itemize}
+
+\vspace{0.05cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.6]
+    % Binary search illustration
+    \draw[thick,->] (0,0) -- (6,0) node[right] {\tiny $\sigma_i$};
+    \draw[thick,->] (0,0) -- (0,2) node[above] {\tiny Perplexity};
+    
+    % Target perplexity line
+    \draw[dashed, red, thick] (0,1.1) -- (6,1.1);
+    \node[red, left] at (0,1.1) {\tiny Target};
+    
+    % Perplexity curve
+    \draw[blue, thick, smooth] plot coordinates {
+        (0.5,0.3) (1,0.5) (2,0.75) (3,1.0) (3.2,1.1) (4,1.3) (5,1.6) (5.8,1.85)
+    };
+    
+    % Binary search point
+    \fill[green!70!black] (3.2,1.1) circle (2.5pt);
+    \node[below] at (3.2,-0.1) {\tiny $\sigma_i^*$};
+    
+    \node[blue] at (4.5,0.8) {\tiny Binary search};
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 9: Building Probability Distributions
+%==============================================================================
+\begin{frame}{From Similarities to Probabilities: The Full Formula}
+
+\textbf{Step 3: Normalizing to Create Probability Distributions}
+
+\vspace{0.2cm}
+We convert similarities to conditional probabilities:
+\begin{equation}
+p_{j|i} = \frac{\exp\left(-\|\mathbf{x}_i - \mathbf{x}_j\|^2 / 2\sigma_i^2\right)}{\sum_{k \neq i} \exp\left(-\|\mathbf{x}_i - \mathbf{x}_k\|^2 / 2\sigma_i^2\right)}
+\end{equation}
+
+\vspace{0.2cm}
+\textbf{Properties:}
+\begin{itemize}
+    \item $p_{j|i} \in [0,1]$ for all $i,j$
+    \item $\sum_{j \neq i} p_{j|i} = 1$ (true probability distribution)
+    \item $p_{i|i} = 0$ by convention (no self-similarity)
+    \item $p_{j|i} \neq p_{i|j}$ in general (asymmetric)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Interpretation:} $p_{j|i}$ = "If I pick a neighbor of point $i$ proportional to similarity, what's the probability I pick point $j$?"
+
+\vspace{0.2cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Point i and its probability distribution
+    \fill[red] (0,0) circle (3pt);
+    \node[below] at (0,-0.2) {$\mathbf{x}_i$};
+    
+    % Neighbors with probability values
+    \fill[blue] (1.0,0.3) circle (2pt);
+    \node[right] at (1.0,0.3) {\tiny $p_{j|i}=0.3$};
+    
+    \fill[blue] (0.5,0.8) circle (2pt);
+    \node[above] at (0.5,0.8) {\tiny $p_{k|i}=0.4$};
+    
+    \fill[blue] (-0.7,0.5) circle (2pt);
+    \node[left] at (-0.7,0.5) {\tiny $p_{l|i}=0.2$};
+    
+    \fill[blue!40] (2.0,1.5) circle (2pt);
+    \node[right] at (2.0,1.5) {\tiny $p_{m|i}=0.08$};
+    
+    \fill[blue!20] (-1.8,-1.3) circle (2pt);
+    \node[left] at (-1.8,-1.3) {\tiny $p_{n|i}=0.02$};
+    
+    % Sum notation
+    \node[green!60!black] at (3.5,0) {$\sum = 1.0$};
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 10: Low-Dimensional Mapping
+%==============================================================================
+\begin{frame}{Mapping to Low Dimensions: The Target Distribution}
+
+\textbf{In the low-dimensional space ($\mathbb{R}^2$):}
+
+\vspace{0.15cm}
+We have map points $\mathbf{y}_i, \mathbf{y}_j \in \mathbb{R}^2$ and define:
+\begin{equation}
+q_{j|i} = \frac{\exp\left(-\|\mathbf{y}_i - \mathbf{y}_j\|^2\right)}{\sum_{k \neq i} \exp\left(-\|\mathbf{y}_i - \mathbf{y}_k\|^2\right)}
+\end{equation}
+
+\vspace{0.15cm}
+\textbf{Critical Difference: Fixed variance!}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item No $\sigma$ parameter in low dimensions (effectively $\sigma = 1/\sqrt{2}$)
+    \item Why? We want the \emph{map} to handle density differences
+    \item Points should spread out or compress naturally
+    \item The optimization will arrange points to match neighborhoods
+\end{itemize}
+
+\vspace{0.15cm}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\centering
+\textbf{High-D: Adaptive $\sigma_i$}
+\begin{tikzpicture}[scale=0.65]
+    \fill[red] (0,0) circle (2pt);
+    \node[below] at (0,-0.2) {\tiny $\mathbf{x}_i$};
+    
+    % Variable width kernels
+    \draw[dashed, blue!50] (0,0) circle (0.7cm);
+    \node[blue] at (0,-1.1) {\tiny Variable $\sigma_i$};
+    
+    \fill[red] (2.3,0) circle (2pt);
+    \node[below] at (2.3,-0.2) {\tiny $\mathbf{x}_j$};
+    \draw[dashed, blue!50] (2.3,0) circle (1.1cm);
+    \node[blue] at (2.3,-1.5) {\tiny Variable $\sigma_j$};
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.5\textwidth}
+\centering
+\textbf{Low-D: Fixed kernel}
+\begin{tikzpicture}[scale=0.65]
+    \fill[red] (0,0) circle (2pt);
+    \node[below] at (0,-0.2) {\tiny $\mathbf{y}_i$};
+    
+    % Fixed width kernels
+    \draw[dashed, green!50] (0,0) circle (0.7cm);
+    \node[green!70!black] at (0,-1.1) {\tiny Fixed width};
+    
+    \fill[red] (2.3,0) circle (2pt);
+    \node[below] at (2.3,-0.2) {\tiny $\mathbf{y}_j$};
+    \draw[dashed, green!50] (2.3,0) circle (0.7cm);
+    \node[green!70!black] at (2.3,-1.1) {\tiny Fixed width};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\vspace{0.1cm}
+\begin{block}{The Goal}
+Find map points $\{\mathbf{y}_1, \ldots, \mathbf{y}_n\}$ such that $Q$ matches $P$ as closely as possible!
+\end{block}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 11: KL Divergence - Measuring the Mismatch
+%==============================================================================
+\begin{frame}{Measuring the Mismatch: Kullback-Leibler Divergence}
+
+\textbf{The Core Question:} How do we measure if distribution $Q$ matches distribution $P$?
+
+\vspace{0.2cm}
+\begin{block}{The Cost Function: KL Divergence}
+\begin{equation}
+C = \sum_i KL(P_i \| Q_i) = \sum_i \sum_{j \neq i} p_{j|i} \log \frac{p_{j|i}}{q_{j|i}}
+\end{equation}
+\end{block}
+
+\vspace{0.15cm}
+\textbf{Why KL Divergence?}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Measures "information lost" when using $Q$ to approximate $P$
+    \item Always non-negative, zero only when $P = Q$
+    \item \textbf{Crucially asymmetric}: $KL(P\|Q) \neq KL(Q\|P)$
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{The Asymmetry Table—The Secret to Local Structure Preservation:}
+\begin{center}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Scenario} & \textbf{$p_{j|i}$ (High-D)} & \textbf{$q_{j|i}$ (Low-D)} \\
+\hline
+True neighbor & Large & \textcolor{green!70!black}{Must be large} \\
+& & \textcolor{green!70!black}{(big penalty if small)} \\
+\hline
+Not neighbor & Small & \textcolor{orange}{Can be anything} \\
+& & \textcolor{orange}{(small penalty regardless)} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.1cm}
+\begin{alertblock}{Key Insight}
+KL divergence heavily penalizes placing true neighbors far apart,\\
+but barely penalizes placing non-neighbors close together!
+\end{alertblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 12: Asymmetry Visualization
+%==============================================================================
+\begin{frame}{The Asymmetry in Action: Why Local Structure Wins}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\centering
+\textbf{Scenario A: Missing a Neighbor}\\
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=0.8]
+    % High-D
+    \node[above] at (0,1.5) {\small High-D};
+    \fill[red] (0,0) circle (3pt);
+    \fill[blue] (0.8,0) circle (3pt);
+    \draw[<->, thick, green!70!black] (0.1,0) -- (0.7,0);
+    \node[below] at (0.4,-0.3) {\tiny Close};
+    
+    % Arrow
+    \draw[->, thick, gray] (1.5,0) -- (2.5,0);
+    
+    % Low-D
+    \node[above] at (4,1.5) {\small Low-D};
+    \fill[red] (3,0) circle (3pt);
+    \fill[blue] (5,0) circle (3pt);
+    \draw[<->, thick, red] (3.1,0) -- (4.9,0);
+    \node[below] at (4,-0.3) {\tiny Far!};
+    
+    % Penalty
+    \node[red, thick] at (2.5,-1) {$\boldsymbol{\times}$ Huge penalty!};
+    \node at (2.5,-1.5) {\tiny $p_{j|i} \log \frac{p_{j|i}}{q_{j|i}}$ is large};
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.5\textwidth}
+\centering
+\textbf{Scenario B: False Neighbor}\\
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=0.8]
+    % High-D
+    \node[above] at (0,1.5) {\small High-D};
+    \fill[red] (0,0) circle (3pt);
+    \fill[blue] (2,0) circle (3pt);
+    \draw[<->, thick, red] (0.1,0) -- (1.9,0);
+    \node[below] at (1,-0.3) {\tiny Far};
+    
+    % Arrow
+    \draw[->, thick, gray] (2.5,0) -- (3.5,0);
+    
+    % Low-D
+    \node[above] at (4.5,1.5) {\small Low-D};
+    \fill[red] (4,0) circle (3pt);
+    \fill[blue] (4.8,0) circle (3pt);
+    \draw[<->, thick, green!70!black] (4.1,0) -- (4.7,0);
+    \node[below] at (4.4,-0.3) {\tiny Close!};
+    
+    % Penalty
+    \node[orange] at (3,-1) {$\checkmark$ Small penalty};
+    \node at (3,-1.5) {\tiny $p_{j|i} \approx 0$, so penalty $\approx 0$};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+\textbf{The Consequence:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Algorithm prioritizes preserving true neighborhoods
+    \item Distant points can move closer if needed (crowding problem!)
+    \item This is why SNE focuses on local structure
+\end{itemize}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 13: Symmetric SNE
+%==============================================================================
+\begin{frame}{Improving the Framework: Symmetric SNE}
+
+\textbf{The Original SNE Problem:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Conditional probabilities: $p_{j|i} \neq p_{i|j}$ and $q_{j|i} \neq q_{i|j}$
+    \item Complex gradients with $2n$ different distributions
+    \item Outliers get crushed (if point $i$ is isolated, all $p_{j|i}$ are tiny)
+\end{itemize}
+
+\vspace{0.15cm}
+\begin{block}{The Solution: Joint Probabilities}
+Instead of conditional, use joint probabilities:
+\begin{equation}
+p_{ij} = \frac{p_{j|i} + p_{i|j}}{2n}, \quad \text{ensuring } \sum_{i,j} p_{ij} = 1
+\end{equation}
+\end{block}
+
+\vspace{0.1cm}
+\textbf{Benefits of Symmetry:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Single cost function: $C = KL(P\|Q) = \sum_{i,j} p_{ij} \log \frac{p_{ij}}{q_{ij}}$
+    \item Simpler gradients: $\frac{\partial C}{\partial \mathbf{y}_i} = 4 \sum_j (p_{ij} - q_{ij})(\mathbf{y}_i - \mathbf{y}_j)$
+    \item Better outlier handling: if $p_{j|i}$ is tiny but $p_{i|j}$ isn't, the average helps
+    \item Each pair $(i,j)$ contributes once, not twice
+\end{itemize}
+
+\vspace{0.1cm}
+\begin{exampleblock}{Practical Impact}
+\footnotesize
+Symmetric SNE converges faster and produces cleaner embeddings,\\
+setting the stage for the final innovation: the Student-t distribution!
+\end{exampleblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 14: The Crowding Problem
+%==============================================================================
+\begin{frame}{The Fundamental Flaw: The Crowding Problem}
+
+\begin{center}
+\textbf{\large Why SNE Struggles with Well-Separated Clusters}
+\end{center}
+
+\vspace{0.1cm}
+\textbf{The Volume Mismatch:}
+\begin{itemize}
+    \setlength\itemsep{-0.1em}
+    \item In high-D: vast space to arrange moderate distances
+    \item In 2D: limited space causes "traffic jam" of moderate distances
+    \item Result: clusters overlap that shouldn't!
+\end{itemize}
+
+\vspace{0.1cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % High-D representation
+    \node[above] at (2,2.1) {\footnotesize High-D Space};
+    \draw[thick] (2,0) circle (1.6cm);
+    
+    % Three well-separated clusters
+    \fill[blue!30] (1.1,0.3) circle (0.22cm);
+    \fill[red!30] (2.9,0.3) circle (0.22cm);
+    \fill[green!30] (2,-0.6) circle (0.22cm);
+    
+    % Distance annotations
+    \draw[<->, gray] (1.3,0.3) -- (2.7,0.3);
+    \node[above, gray] at (2,0.3) {\tiny moderate};
+    
+    % Arrow to Low-D
+    \draw[->, thick, red!70] (4,0) -- (5.5,0);
+    \node[above] at (4.75,0) {\footnotesize SNE};
+    
+    % Low-D with crowding
+    \node[above] at (7.5,2.1) {\footnotesize 2D Space (SNE)};
+    \draw[thick] (7.5,0) circle (1.2cm);
+    
+    % Overlapping clusters
+    \fill[blue!30, opacity=0.7] (7.1,0.15) circle (0.25cm);
+    \fill[red!30, opacity=0.7] (7.8,0.15) circle (0.25cm);
+    \fill[green!30, opacity=0.7] (7.45,-0.25) circle (0.25cm);
+    
+    \node[red] at (7.5,-1.6) {\footnotesize Clusters forced together!};
+\end{tikzpicture}
+\end{figure}
+
+\vspace{0.05cm}
+\textbf{The Mathematical Root:}
+\vspace{-0.1cm}
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{0.9}
+\begin{tabular}{lcc}
+\hline
+\textbf{Distance Type} & \textbf{Gaussian} & \textbf{Problem} \\
+\hline
+Small (neighbors) & $e^{-d^2} \approx 1$ & Preserved $\checkmark$ \\
+Moderate (between) & $e^{-d^2} \approx 0.1$ & \textcolor{red}{Too much weight!} \\
+Large (far) & $e^{-d^2} \approx 0$ & Already zero \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 15: The t-SNE Innovation
+%==============================================================================
+\begin{frame}{The Breakthrough: Student-t Distribution}
+
+\textbf{The Elegant Solution:} Replace Gaussian with Student-t (df=1) in low dimensions!
+
+\vspace{0.15cm}
+\begin{block}{The t-SNE Formula}
+In low dimensions, use:
+\begin{equation}
+q_{ij} = \frac{(1 + ||\mathbf{y}_i - \mathbf{y}_j||^2)^{-1}}{\sum_{k \neq l} (1 + ||\mathbf{y}_k - \mathbf{y}_l||^2)^{-1}}
+\end{equation}
+This is the Student-t distribution with one degree of freedom (Cauchy distribution).
+\end{block}
+
+\vspace{0.1cm}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.65]
+    \begin{axis}[
+        width=5.5cm, height=3.5cm,
+        xlabel={\tiny Distance},
+        ylabel={\tiny Similarity},
+        xmin=0, xmax=5,
+        ymin=0, ymax=1,
+        legend pos=north east,
+        legend style={font=\tiny},
+        grid=major,
+        grid style={gray!20},
+        label style={font=\tiny},
+        tick label style={font=\tiny}
+    ]
+    \addplot[blue, thick, domain=0:5, samples=100] {exp(-x^2)};
+    \addlegendentry{Gaussian}
+    
+    \addplot[red, thick, domain=0:5, samples=100] {1/(1+x^2)};
+    \addlegendentry{Student-t}
+    
+    % Highlight difference
+    \draw[<->, green!70!black, thick] (axis cs:2,0.018) -- (axis cs:2,0.2);
+    \node[green!70!black, right] at (axis cs:2.2,0.1) {\tiny Gap!};
+    \end{axis}
+\end{tikzpicture}
+
+\vspace{0.1cm}
+\textbf{Why This Works:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Heavy tails:} slower decay
+    \item \textbf{More "room":} for separation
+    \item \textbf{Result:} better clusters!
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{Visual Impact:}\\
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=0.55]
+    % SNE result
+    \node[above] at (0,2.3) {\tiny SNE (Gaussian)};
+    \draw[thick] (0,0) circle (2cm);
+    
+    % Overlapping clusters in SNE
+    \fill[blue!40, opacity=0.8] (-0.5,0.3) circle (0.5cm);
+    \fill[red!40, opacity=0.8] (0.5,0.3) circle (0.5cm);
+    \fill[green!40, opacity=0.8] (0,-0.5) circle (0.5cm);
+    
+    \node at (0,-2.5) {\tiny Crowded};
+    
+    % Arrow
+    \draw[->, thick] (2.5,0) -- (3.5,0);
+    
+    % t-SNE result
+    \node[above] at (6,2.3) {\tiny t-SNE (Student-t)};
+    \draw[thick] (6,0) circle (2cm);
+    
+    % Well-separated clusters in t-SNE
+    \fill[blue!70] (5.2,0.8) circle (0.35cm);
+    \fill[red!70] (6.8,0.8) circle (0.35cm);
+    \fill[green!70] (6,-0.9) circle (0.35cm);
+    
+    \node at (6,-2.5) {\tiny Well-separated};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\vspace{0.05cm}
+\begin{alertblock}{The t-SNE Magic}
+Heavy tails create "repulsion" between clusters while preserving local neighborhoods!
+\end{alertblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 16: Gradient Descent Optimization
+%==============================================================================
+\begin{frame}{Gradient Descent: Making t-SNE Work}
+
+\textbf{The Optimization Problem:}
+\begin{equation}
+\min_{\mathbf{Y}} C = KL(P||Q) = \sum_{i,j} p_{ij} \log \frac{p_{ij}}{q_{ij}}
+\end{equation}
+
+\vspace{0.1cm}
+\textbf{The Gradient (simplified t-SNE form):}
+\begin{equation}
+\frac{\partial C}{\partial \mathbf{y}_i} = 4 \sum_j (p_{ij} - q_{ij}) \cdot \frac{(\mathbf{y}_i - \mathbf{y}_j)}{1 + ||\mathbf{y}_i - \mathbf{y}_j||^2}
+\end{equation}
+
+\vspace{0.1cm}
+\textbf{Physical Interpretation—Forces Between Points:}
+\begin{itemize}
+    \setlength\itemsep{-0.1em}
+    \item \textbf{Attractive force:} when $p_{ij} > q_{ij}$ (should be neighbors but aren't)
+    \item \textbf{Repulsive force:} when $p_{ij} < q_{ij}$ (shouldn't be neighbors but are)
+    \item Points move until forces balance
+\end{itemize}
+
+\vspace{0.05cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % Attractive forces
+    \fill[red] (0,0) circle (3pt);
+    \fill[blue] (2,0) circle (3pt);
+    \draw[->, thick, green!70!black] (0.2,0) -- (1.0,0);
+    \draw[->, thick, green!70!black] (1.8,0) -- (1.0,0);
+    \node[above] at (1,0.2) {\tiny Attract};
+    \node[below] at (1,-0.25) {\tiny $p_{ij} > q_{ij}$};
+    
+    % Repulsive forces
+    \fill[red] (4,0) circle (3pt);
+    \fill[blue] (5,0) circle (3pt);
+    \draw[->, thick, red] (4.2,0) -- (3.5,0);
+    \draw[->, thick, red] (4.8,0) -- (5.5,0);
+    \node[above] at (4.5,0.2) {\tiny Repel};
+    \node[below] at (4.5,-0.25) {\tiny $p_{ij} < q_{ij}$};
+\end{tikzpicture}
+\end{figure}
+
+\vspace{0.05cm}
+\begin{exampleblock}{Optimization Details}
+\footnotesize
+\textbf{Learning rate:} Typically 200-500 \quad \textbf{Momentum:} $\alpha$ = 0.5 → 0.8\\
+\textbf{Early exaggeration:} Multiply $p_{ij}$ by 4 for first 50 iterations
+\end{exampleblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 17: Computational Efficiency
+%==============================================================================
+\begin{frame}{Computational Efficiency: Making t-SNE Scalable}
+
+\textbf{The Computational Challenge:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Naive implementation: $O(n^2)$ for each iteration
+    \item Need to compute all pairwise distances and probabilities
+    \item For $n=10,000$ points: 100 million computations per iteration!
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Key Optimization: Barnes-Hut Approximation}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Group distant points using quad-tree/oct-tree
+    \item Treat clusters as single points for repulsive forces
+    \item Reduces complexity to $O(n \log n)$
+\end{itemize}
+
+\vspace{0.15cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.65]
+    % Exact computation
+    \node[above] at (1.5,2) {\footnotesize Exact};
+    \fill[red] (0,0) circle (3pt);
+    \foreach \angle in {0,40,80,120,160,200,240,280,320} {
+        \fill[blue] (\angle:1.5) circle (2pt);
+        \draw[->, gray, opacity=0.5] (0,0) -- (\angle:1.3);
+    }
+    \node[below] at (0,-2) {\tiny All interactions};
+    
+    % Barnes-Hut
+    \node[above] at (6,2) {\footnotesize Barnes-Hut};
+    \fill[red] (5,0) circle (3pt);
+    
+    % Individual nearby points
+    \foreach \angle in {0,40,80} {
+        \fill[blue] (5,0) ++(\angle:0.7) circle (2pt);
+        \draw[->, gray] (5,0) -- +(\angle:0.5);
+    }
+    
+    % Grouped distant points
+    \draw[dashed, orange] (6.5,0.5) circle (0.3cm);
+    \fill[orange!50] (6.5,0.5) circle (2pt);
+    \draw[->, orange, thick] (5.2,0.1) -- (5.8,0.3);
+    \node[below] at (5,-2) {\tiny Group distant points};
+\end{tikzpicture}
+\end{figure}
+
+\vspace{0.1cm}
+\textbf{Speed-up:} $\frac{n}{\log n} \approx 750\times$ faster for $n=10,000$!
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 18: Hyperparameter Tuning
+%==============================================================================
+\begin{frame}{Hyperparameter Tuning: Getting the Best Results}
+
+\begin{center}
+\textbf{\large Critical Parameters and Their Impact}
+\end{center}
+
+\vspace{0.2cm}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Perplexity (5-50)}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Low (5-10):} Focus on very local structure
+    \item \textbf{Medium (20-30):} Balanced view
+    \item \textbf{High (40-50):} More global structure
+\end{itemize}
+
+\vspace{0.15cm}
+\begin{tikzpicture}[scale=0.5]
+    % Low perplexity
+    \node[above] at (0,2) {\tiny Perp=5};
+    \foreach \i in {1,...,3} {
+        \foreach \j in {1,...,3} {
+            \fill[blue!60] (\i*0.3,\j*0.3) circle (2pt);
+        }
+    }
+    \foreach \i in {1,...,3} {
+        \foreach \j in {1,...,3} {
+            \fill[red!60] (\i*0.3+1.5,\j*0.3) circle (2pt);
+        }
+    }
+    \node[below] at (1.5,-0.5) {\tiny Many clusters};
+    
+    % High perplexity
+    \node[above] at (5,2) {\tiny Perp=50};
+    \fill[blue!60] (4.5,0.8) circle (0.4cm);
+    \fill[red!60] (5.5,0.8) circle (0.4cm);
+    \node[below] at (5,-0.5) {\tiny Merged clusters};
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Learning Rate (100-1000)}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Too low:} Stuck in bad minima
+    \item \textbf{Too high:} Points explode
+    \item \textbf{Auto-scaling:} $\eta = n/12$ works well
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Number of Iterations}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Minimum: 250 iterations
+    \item Standard: 1000 iterations
+    \item Large/complex data: 5000+
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.2cm}
+\begin{alertblock}{Rule of Thumb for Perplexity}
+\footnotesize
+Perplexity should be between 5 and 50, typically $\sqrt{n}/20$ to $\sqrt{n}/5$ where $n$ is sample size.\\
+Try multiple values: if consistent patterns appear across different perplexities, they're likely real.
+\end{alertblock}
+
+\vspace{0.15cm}
+\begin{exampleblock}{Early Exaggeration Trick}
+\footnotesize
+Multiply all $p_{ij}$ by 4-12 in early iterations to form tight clusters early.\\
+This helps separate clusters that should be distinct from the start.
+\end{exampleblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 19: Interpreting t-SNE Results
+%==============================================================================
+\begin{frame}{Critical: How to (Not) Interpret t-SNE}
+
+\begin{center}
+\textbf{\Large What You CAN and CANNOT Trust}
+\end{center}
+
+\vspace{0.2cm}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{\textcolor{green!70!black}{CAN Trust:}}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item[$\checkmark$] Local neighborhoods
+    \item[$\checkmark$] Which points cluster together
+    \item[$\checkmark$] Presence of clusters
+    \item[$\checkmark$] Relative density within clusters
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=0.7]
+    \draw[green!70!black, thick, dashed] (-0.5,-0.5) rectangle (3.5,1.5);
+    \fill[blue!60] (0,0) circle (0.3cm);
+    \fill[blue!60] (1,0.5) circle (0.3cm);
+    \fill[blue!60] (0.8,0) circle (0.3cm);
+    \node[green!70!black] at (1.5,-0.8) {\tiny These cluster together};
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{\textcolor{red}{CANNOT Trust:}}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item[$\boldsymbol{\times}$] Distances between clusters
+    \item[$\boldsymbol{\times}$] Cluster sizes (area)
+    \item[$\boldsymbol{\times}$] Cluster shapes
+    \item[$\boldsymbol{\times}$] Exact positions
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=0.7]
+    \fill[blue!60] (0,0) circle (0.2cm);
+    \fill[red!60] (2.5,0) circle (0.4cm);
+    \draw[<->, red, thick] (0.3,0) -- (2.1,0);
+    \node[red] at (1.2,-0.5) {\tiny Meaningless!};
+    \draw[red, thick] (2.9,0.3) -- (3.2,0.6);
+    \draw[red, thick] (2.9,-0.3) -- (3.2,-0.6);
+    \node[red] at (3.5,0) {\tiny Size?};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\vspace{0.2cm}
+\textbf{Common Misinterpretations to Avoid:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item "Cluster A is twice as big as B" — \textcolor{red}{NO!} Sizes are arbitrary
+    \item "These clusters are far apart" — \textcolor{red}{NO!} Inter-cluster distance meaningless
+    \item "This cluster has a moon shape" — \textcolor{red}{NO!} Shapes are distorted
+    \item "The center point is special" — \textcolor{red}{NO!} Positions are relative
+\end{itemize}
+
+\vspace{0.15cm}
+\begin{alertblock}{Golden Rule}
+t-SNE preserves \textbf{who is your neighbor}, not \textbf{how far away they are}!
+\end{alertblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 20: R Implementation Overview
+%==============================================================================
+\begin{frame}{R Implementation: Getting Started}
+
+\begin{center}
+\textbf{\Large Running t-SNE in R}
+\end{center}
+
+\vspace{0.2cm}
+\textbf{Required Package:}
+\begin{itemize}
+    \item \texttt{Rtsne} — Main t-SNE implementation
+    \item Install: \texttt{install.packages("Rtsne")}
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Basic Workflow:}
+\begin{enumerate}
+    \setlength\itemsep{0em}
+    \item \textbf{Prepare data:} Numeric matrix, remove duplicates
+    \item \textbf{Choose parameters:} Perplexity, iterations, learning rate
+    \item \textbf{Run t-SNE:} \texttt{Rtsne()} function
+    \item \textbf{Visualize:} Extract Y coordinates and plot
+    \item \textbf{Validate:} Try different perplexities
+\end{enumerate}
+
+\vspace{0.2cm}
+\begin{exampleblock}{Scripts for Today's Session}
+\footnotesize
+\textbf{Script 1:} \texttt{01\_tsne\_basics.R} — Basic t-SNE on iris dataset\\
+\textbf{Script 2:} \texttt{02\_parameter\_exploration.R} — Effect of perplexity\\
+\textbf{Script 3:} \texttt{03\_mnist\_example.R} — Larger dataset (MNIST subset)\\
+\textbf{Script 4:} \texttt{04\_comparison\_methods.R} — t-SNE vs PCA vs MDS
+\end{exampleblock}
+
+\vspace{0.15cm}
+\textbf{Key Parameters to Remember:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \texttt{perplexity}: 5-50 (default 30)
+    \item \texttt{max\_iter}: 1000+ for convergence
+    \item \texttt{set.seed()}: Always set for reproducibility
+\end{itemize}
+
+\end{frame}
+
+
+%==============================================================================
+% SLIDE 21: Gradient Components Deep Dive
+%==============================================================================
+\begin{frame}{Deep Dive: The Gradient Components}
+
+\textbf{Breaking Down the t-SNE Gradient:}
+
+\vspace{0.2cm}
+The gradient has two competing components:
+
+\begin{equation}
+\frac{\partial C}{\partial \mathbf{y}_i} = 4 \sum_j \underbrace{(p_{ij} - q_{ij})}_{\text{error}} \cdot \underbrace{\frac{(\mathbf{y}_i - \mathbf{y}_j)}{1 + ||\mathbf{y}_i - \mathbf{y}_j||^2}}_{\text{direction \& magnitude}}
+\end{equation}
+
+\vspace{0.2cm}
+\textbf{Component Analysis:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Error term} $(p_{ij} - q_{ij})$: How wrong is our current embedding?
+    \item \textbf{Direction} $(\mathbf{y}_i - \mathbf{y}_j)$: Which way to move point $i$?
+    \item \textbf{Magnitude modifier} $\frac{1}{1 + ||\mathbf{y}_i - \mathbf{y}_j||^2}$: Student-t kernel
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Why the factor of 4?}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Comes from symmetrization: $p_{ij} = \frac{p_{j|i} + p_{i|j}}{2n}$
+    \item Derivative of Student-t: $\frac{\partial}{\partial y_i}(1 + d^2)^{-1} = -2y_i(1 + d^2)^{-2}$
+    \item Combined with normalization constants → factor of 4
+\end{itemize}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 22: Early Exaggeration Details
+%==============================================================================
+\begin{frame}{Early Exaggeration: Forcing Initial Separation}
+
+\textbf{The Technique:}
+\begin{equation}
+p_{ij}^{\text{exaggerated}} = \alpha \cdot p_{ij}, \quad \text{where } \alpha = 4 \text{ or } 12
+\end{equation}
+
+\vspace{0.2cm}
+\textbf{Timeline:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Iterations 1-50: Apply exaggeration ($\alpha = 12$ recommended)
+    \item Iterations 51-250: Remove exaggeration, let settle
+    \item Iterations 251+: Fine-tune positions
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Before exaggeration
+    \node[above] at (1.5,1.5) {\small Without Exaggeration};
+    \draw[thick] (1.5,0) circle (1.2cm);
+    \fill[blue!40, opacity=0.7] (1.2,0.2) circle (0.3cm);
+    \fill[red!40, opacity=0.7] (1.8,0.1) circle (0.3cm);
+    \fill[green!40, opacity=0.7] (1.5,-0.2) circle (0.3cm);
+    
+    % Arrow
+    \draw[->, thick] (3,0) -- (4,0);
+    \node[above] at (3.5,0) {\small $\alpha = 12$};
+    
+    % After exaggeration
+    \node[above] at (6,1.5) {\small With Exaggeration};
+    \draw[thick] (6,0) circle (1.2cm);
+    \fill[blue!70] (5.3,0.5) circle (0.2cm);
+    \fill[red!70] (6.7,0.4) circle (0.2cm);
+    \fill[green!70] (6,-0.6) circle (0.2cm);
+\end{tikzpicture}
+\end{figure}
+
+\vspace{0.1cm}
+\textbf{Why It Works:}
+Forces tight clusters early, preventing them from mixing during optimization
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 23: Momentum and Learning Rate
+%==============================================================================
+\begin{frame}{Advanced Optimization: Momentum \& Adaptive Learning}
+
+\textbf{Momentum Update Rule:}
+\begin{equation}
+\mathbf{y}_i^{(t+1)} = \mathbf{y}_i^{(t)} + \eta \frac{\partial C}{\partial \mathbf{y}_i} + \alpha(t)(\mathbf{y}_i^{(t)} - \mathbf{y}_i^{(t-1)})
+\end{equation}
+
+\vspace{0.15cm}
+\textbf{Momentum Schedule (van der Maaten 2014):}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item $t < 250$: $\alpha = 0.5$ (low momentum during early exaggeration)
+    \item $t \geq 250$: $\alpha = 0.8$ (high momentum for fine-tuning)
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Adaptive Learning Rate:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item If cost improves: $\eta^{(t+1)} = \eta^{(t)} \times 1.01$
+    \item If cost worsens: $\eta^{(t+1)} = \eta^{(t)} \times 0.5$
+    \item Minimum: $\eta_{\min} = 10$
+\end{itemize}
+
+\vspace{0.15cm}
+\begin{exampleblock}{Implementation Tip}
+\footnotesize
+Most modern implementations use adaptive learning with gradient clipping:\\
+\texttt{grad\_norm = max(1, ||gradient||/threshold)}\\
+\texttt{gradient = gradient / grad\_norm}
+\end{exampleblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 24: Barnes-Hut Algorithm Details
+%==============================================================================
+\begin{frame}{Barnes-Hut Approximation: The Technical Details}
+
+\textbf{The Core Idea:} Use a tree structure to group distant points
+
+\vspace{0.15cm}
+\textbf{Quadtree Construction (2D):}
+\begin{enumerate}
+    \setlength\itemsep{0em}
+    \item Recursively divide space into quadrants
+    \item Stop when cell contains $\leq 1$ point
+    \item Store center of mass for each cell
+\end{enumerate}
+
+\vspace{0.15cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % Main square
+    \draw[thick] (0,0) rectangle (4,4);
+    
+    % Quadrant divisions
+    \draw (2,0) -- (2,4);
+    \draw (0,2) -- (4,2);
+    
+    % Further subdivision in one quadrant
+    \draw (3,0) -- (3,2);
+    \draw (2,1) -- (4,1);
+    
+    % Points
+    \fill[red] (0.5,3.5) circle (2pt);
+    \fill[blue] (1.5,2.5) circle (2pt);
+    \fill[blue] (1.2,2.8) circle (2pt);
+    \fill[green] (3.5,1.5) circle (2pt);
+    \fill[green] (3.2,1.3) circle (2pt);
+    \fill[green] (3.7,1.7) circle (2pt);
+    \fill[orange] (2.5,0.5) circle (2pt);
+    
+    % Center of mass for grouped points
+    \fill[green!50] (3.47,1.5) circle (3pt);
+    \draw[green, thick] (3.47,1.5) circle (0.4cm);
+    
+    % Annotation
+    \node[right] at (4.5,2) {\small Cell with};
+    \node[right] at (4.5,1.5) {\small multiple points};
+    \draw[->] (4.5,1.5) -- (3.9,1.5);
+\end{tikzpicture}
+\end{figure}
+
+\vspace{0.15cm}
+\textbf{Barnes-Hut Criterion:}
+\begin{equation}
+\text{If } \frac{\text{cell\_width}}{||\mathbf{y}_i - \mathbf{cell\_center}||} < \theta \text{ then treat as single point}
+\end{equation}
+
+Typical $\theta = 0.5$ (trade-off: speed vs accuracy)
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 25: Initialization Strategies
+%==============================================================================
+\begin{frame}{Initialization Strategies: Starting Smart}
+
+\textbf{Three Main Approaches:}
+
+\vspace{0.2cm}
+\textbf{1. Random Initialization}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Sample from $\mathcal{N}(0, 10^{-4})$ 
+    \item Simple but unstable
+    \item Different runs → different results
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{2. PCA Initialization (Recommended)}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Start with first 2 principal components
+    \item Preserves global structure initially
+    \item Faster convergence (30-50\% fewer iterations)
+    \item More reproducible results
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{3. Multiple Random Restarts}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Run t-SNE 5-10 times
+    \item Choose embedding with lowest KL divergence
+    \item Computationally expensive but robust
+\end{itemize}
+
+\vspace{0.15cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.6]
+    % Random init
+    \node[above] at (0,2) {\tiny Random};
+    \foreach \i in {1,...,20} {
+        \pgfmathsetmacro{\x}{rand*2}
+        \pgfmathsetmacro{\y}{rand*2}
+        \fill[blue!50] (\x,\y) circle (1pt);
+    }
+    
+    % PCA init
+    \node[above] at (4,2) {\tiny PCA};
+    \foreach \i in {0,0.2,...,1.8} {
+        \fill[blue!50] (\i+3.5,\i*0.3) circle (1pt);
+        \fill[red!50] (\i+3.5,1-\i*0.2) circle (1pt);
+    }
+    
+    % Multiple runs
+    \node[above] at (8,2) {\tiny Multiple};
+    \foreach \j in {0,0.5,1} {
+        \foreach \i in {1,...,5} {
+            \pgfmathsetmacro{\x}{rand*0.5+7.5+\j}
+            \pgfmathsetmacro{\y}{rand*0.5+\j*0.5}
+            \fill[blue!30] (\x,\y) circle (1pt);
+        }
+    }
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 26: Quality Metrics for t-SNE
+%==============================================================================
+\begin{frame}{Assessing t-SNE Quality: Beyond Visual Inspection}
+
+\textbf{Quantitative Metrics:}
+
+\vspace{0.2cm}
+\textbf{1. KL Divergence (Built-in)}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Final cost value from optimization
+    \item Lower is better, but scale depends on data
+    \item Useful for comparing different runs
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{2. Trustworthiness \& Continuity}
+\begin{equation}
+T(k) = 1 - \frac{2}{nk(2n-3k-1)} \sum_i \sum_{j \in U_i^{(k)}} (r_{ij} - k)
+\end{equation}
+where $U_i^{(k)}$ = points in k-NN in 2D but not in high-D
+
+\vspace{0.15cm}
+\textbf{3. Neighborhood Preservation}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \% of k-NN preserved from high-D to low-D
+    \item Typically check k = 5, 10, 20, 50
+    \item Good embeddings: >80\% for k=10
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{4. Silhouette Score}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Measures cluster separation quality
+    \item Range: [-1, 1], higher is better
+    \item Only valid if true clusters exist
+\end{itemize}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 27: Domain Applications - Genomics
+%==============================================================================
+\begin{frame}{Application: Single-Cell Genomics}
+
+\textbf{The Challenge:} Visualizing 20,000+ genes across 100,000+ cells
+
+\vspace{0.2cm}
+\textbf{Typical Workflow:}
+\begin{enumerate}
+    \setlength\itemsep{0em}
+    \item \textbf{Preprocessing:} Log-normalize, select highly variable genes
+    \item \textbf{Dimensionality reduction:} PCA to 50 components
+    \item \textbf{t-SNE:} On PCA output, perplexity 30-100
+    \item \textbf{Clustering:} Identify cell types
+    \item \textbf{Annotation:} Map clusters to biological meaning
+\end{enumerate}
+
+\vspace{0.2cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Simulated single-cell clusters
+    \node[above] at (3,3) {\small Cell Type Discovery};
+    
+    % T cells
+    \fill[blue!60] (1,1.5) circle (0.4cm);
+    \node[below] at (1,1) {\tiny T cells};
+    
+    % B cells
+    \fill[red!60] (2.5,2) circle (0.35cm);
+    \node[below] at (2.5,1.5) {\tiny B cells};
+    
+    % NK cells
+    \fill[green!60] (4,1.2) circle (0.3cm);
+    \node[below] at (4,0.8) {\tiny NK cells};
+    
+    % Monocytes
+    \fill[orange!60] (3,0.3) circle (0.45cm);
+    \node[below] at (3,-0.2) {\tiny Monocytes};
+    
+    % Dendritic
+    \fill[purple!60] (5,2.2) circle (0.25cm);
+    \node[right] at (5.3,2.2) {\tiny Dendritic};
+\end{tikzpicture}
+\end{figure}
+
+\vspace{0.1cm}
+\textbf{Key Considerations:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Use higher perplexity (50-100) for large datasets
+    \item Often combined with UMAP for speed
+    \item Batch effects can create false clusters
+\end{itemize}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 28: Application - Natural Language Processing
+%==============================================================================
+\begin{frame}{Application: Word Embeddings \& Document Analysis}
+
+\textbf{Visualizing Word Vectors (Word2Vec, GloVe):}
+
+\vspace{0.2cm}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Setup:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Input: 300-dimensional word vectors
+    \item Goal: Discover semantic relationships
+    \item Perplexity: 20-40
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{What t-SNE Reveals:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Semantic clusters (animals, countries, verbs)
+    \item Analogical relationships
+    \item Polysemy (multiple meanings)
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{tikzpicture}[scale=0.8]
+    % Countries cluster
+    \draw[blue!30, thick] (0.5,2) circle (0.8cm);
+    \node at (0.3,2.2) {\tiny France};
+    \node at (0.7,2) {\tiny Germany};
+    \node at (0.5,1.8) {\tiny Spain};
+    
+    % Animals cluster
+    \draw[green!30, thick] (3,2) circle (0.7cm);
+    \node at (2.8,2.2) {\tiny cat};
+    \node at (3.2,2) {\tiny dog};
+    \node at (3,1.8) {\tiny mouse};
+    
+    % Verbs cluster
+    \draw[red!30, thick] (2,0.5) circle (0.9cm);
+    \node at (1.8,0.7) {\tiny run};
+    \node at (2.2,0.5) {\tiny walk};
+    \node at (2,0.3) {\tiny jump};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\vspace{0.2cm}
+\textbf{Document Clustering:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item TF-IDF or Doc2Vec representations
+    \item Reveals topic clusters
+    \item Useful for corpus exploration
+\end{itemize}
+
+\vspace{0.15cm}
+\begin{alertblock}{NLP Tip}
+Pre-reduce to 50-100 dims with PCA/SVD before t-SNE for better results
+\end{alertblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 29: Application - Computer Vision
+%==============================================================================
+\begin{frame}{Application: Deep Learning Feature Visualization}
+
+\textbf{Visualizing CNN Representations:}
+
+\vspace{0.2cm}
+\textbf{Common Use Cases:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Final layer features (before softmax)
+    \item Intermediate layer activations
+    \item Learned embeddings (face recognition, image retrieval)
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % CNN Architecture
+    \node[rectangle, draw, minimum width=0.5cm, minimum height=1.5cm] at (0,0) {\tiny Input};
+    \node[rectangle, draw, minimum width=0.8cm, minimum height=1.2cm] at (1.5,0) {\tiny Conv};
+    \node[rectangle, draw, minimum width=0.8cm, minimum height=1cm] at (3,0) {\tiny Conv};
+    \node[rectangle, draw, minimum width=0.6cm, minimum height=0.8cm] at (4.5,0) {\tiny FC};
+    
+    % Arrows
+    \draw[->] (0.3,0) -- (1.1,0);
+    \draw[->] (1.9,0) -- (2.6,0);
+    \draw[->] (3.4,0) -- (4.1,0);
+    \draw[->] (4.8,0) -- (5.5,0);
+    
+    % t-SNE arrow
+    \draw[->, thick, red] (5.5,0) -- (6.5,-0.5);
+    \node[red] at (6,-0.2) {\tiny t-SNE};
+    
+    % Visualization
+    \draw[thick] (7,-1.5) rectangle (9,0.5);
+    \foreach \i in {1,...,5} {
+        \pgfmathsetmacro{\x}{rand*1.5+7.2}
+        \pgfmathsetmacro{\y}{rand*1.5-1.2}
+        \fill[blue!60] (\x,\y) circle (2pt);
+    }
+    \foreach \i in {1,...,5} {
+        \pgfmathsetmacro{\x}{rand*1.5+7.2}
+        \pgfmathsetmacro{\y}{rand*1.5-1.2}
+        \fill[red!60] (\x,\y) circle (2pt);
+    }
+\end{tikzpicture}
+\end{figure}
+
+\vspace{0.2cm}
+\textbf{Example: MNIST Digit Recognition}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Extract 128-dim features from trained network
+    \item t-SNE with perplexity $30-50$
+    \item Results: Clear digit clusters
+    \item Reveals confusions (e.g., 4 $\leftrightarrow$ 9, 3 $\leftrightarrow$ 8)
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Best Practices:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Use features before final classification layer
+    \item Normalize features before t-SNE
+    \item Color by true labels to assess quality
+\end{itemize}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 30: Common Pitfalls and Solutions
+%==============================================================================
+\begin{frame}{Common Pitfalls: What Can Go Wrong}
+
+\textbf{1. Points Collapsing to Center}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Cause:} Learning rate too high
+    \item \textbf{Solution:} Reduce learning rate, use gradient clipping
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{2. Poor Separation Despite Clear Clusters}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Cause:} Perplexity too high
+    \item \textbf{Solution:} Try perplexity $\in [5, \sqrt{n}/5]$
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{3. Different Runs Give Different Results}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Cause:} Random initialization
+    \item \textbf{Solution:} Set seed, use PCA initialization, run multiple times
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{4. Outliers Dominating Visualization}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Cause:} Outliers have very different scales
+    \item \textbf{Solution:} Remove outliers or use robust scaling
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{5. Slow Convergence}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \textbf{Cause:} Too many iterations on bad initialization
+    \item \textbf{Solution:} Use PCA init, early exaggeration, momentum
+\end{itemize}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 31: Complexity Analysis Detailed
+%==============================================================================
+\begin{frame}{Computational Complexity: Detailed Analysis}
+
+\textbf{Naive t-SNE Complexity:}
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+\textbf{Operation} & \textbf{Complexity} & \textbf{For $n=10,000$} \\
+\hline
+Compute all $p_{ij}$ & $O(n^2)$ & 100M operations \\
+Compute all $q_{ij}$ per iteration & $O(n^2)$ & 100M operations \\
+Gradient computation per iteration & $O(n^2)$ & 100M operations \\
+Total for 1000 iterations & $O(n^2 \cdot T)$ & 100B operations \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.2cm}
+\textbf{Barnes-Hut t-SNE Complexity:}
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+\textbf{Operation} & \textbf{Complexity} & \textbf{For $n=10,000$} \\
+\hline
+Build quadtree & $O(n \log n)$ & 130K operations \\
+Compute forces & $O(n \log n)$ & 130K operations \\
+Total for 1000 iterations & $O(n \log n \cdot T)$ & 130M operations \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.2cm}
+\textbf{Speed-up factor:} $\frac{n}{\log n} \approx 750\times$ faster for $n=10,000$!
+
+\vspace{0.1cm}
+\textbf{Memory Requirements:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Naive: $O(n^2)$ to store all pairwise distances
+    \item Barnes-Hut: $O(n)$ for tree structure
+\end{itemize}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 32: Modern Scaling Approaches
+%==============================================================================
+\begin{frame}{Scaling to Millions: Modern Approaches}
+
+\textbf{Challenge:} Even Barnes-Hut struggles with $n > 100,000$
+
+\vspace{0.2cm}
+\textbf{Solution 1: Landmark-based t-SNE}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Select $m \ll n$ landmark points
+    \item Embed landmarks with regular t-SNE
+    \item Project remaining points using interpolation
+    \item Complexity: $O(m^2 \log m + nm)$
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Solution 2: FFT-accelerated t-SNE (FIt-SNE)}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Use Fast Fourier Transform for gradient computation
+    \item Interpolation on regular grid
+    \item Complexity: $O(n \log n)$ with better constants
+    \item 10-100× faster than Barnes-Hut for large $n$
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Solution 3: Parametric t-SNE}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Learn neural network $f: \mathbb{R}^d \rightarrow \mathbb{R}^2$
+    \item Can embed new points without re-running
+    \item Good for streaming data
+\end{itemize}
+
+\vspace{0.1cm}
+\begin{alertblock}{Recommendation}
+\footnotesize
+For $n < 10,000$: Standard Barnes-Hut\\
+For $10,000 < n < 1M$: FIt-SNE\\
+For $n > 1M$: Landmark or parametric approaches
+\end{alertblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 33: Alternative Divergences
+%==============================================================================
+\begin{frame}{Beyond KL Divergence: Alternative Formulations}
+
+\textbf{Original t-SNE:} Kullback-Leibler divergence
+\begin{equation}
+C_{KL} = \sum_{i,j} p_{ij} \log \frac{p_{ij}}{q_{ij}}
+\end{equation}
+
+\vspace{0.15cm}
+\textbf{Alternative 1: Jensen-Shannon Divergence}
+\begin{equation}
+C_{JS} = \frac{1}{2}KL(P||M) + \frac{1}{2}KL(Q||M), \quad M = \frac{P+Q}{2}
+\end{equation}
+\begin{itemize}
+    \item Symmetric measure
+    \item More stable gradients
+    \item Used in JS-SNE variant
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Alternative 2: Wasserstein Distance}
+\begin{equation}
+C_{W} = \inf_{\gamma \in \Gamma(P,Q)} \sum_{i,j} \gamma_{ij} \cdot d(\mathbf{y}_i, \mathbf{y}_j)
+\end{equation}
+\begin{itemize}
+    \item Considers geometry of space
+    \item Better for imbalanced clusters
+    \item Computationally more expensive
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Research Note:} Most variants show marginal improvements over KL
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 34: Distribution Comparisons
+%==============================================================================
+\begin{frame}{Distribution Choice: Why Student-t with df=1?}
+
+\textbf{Tested Distributions in Low-D Space:}
+
+\vspace{0.15cm}
+\begin{center}
+\small
+\begin{tabular}{lcc}
+\hline
+\textbf{Distribution} & \textbf{Formula} & \textbf{Tail Decay} \\
+\hline
+Gaussian & $e^{-d^2}$ & Exponential \\
+Student-t (df=1) & $(1 + d^2)^{-1}$ & $O(d^{-2})$ \\
+Student-t (df=2) & $(1 + d^2/2)^{-3/2}$ & $O(d^{-3})$ \\
+Exponential & $e^{-d}$ & Exponential \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.2cm}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    \begin{axis}[
+        width=8cm, height=4cm,
+        xlabel={\footnotesize Distance},
+        ylabel={\footnotesize Similarity},
+        xmin=0, xmax=5,
+        ymin=0, ymax=1,
+        legend pos=north east,
+        legend style={font=\tiny},
+        grid=major,
+        grid style={gray!20}
+    ]
+    \addplot[blue, thick, domain=0:5, samples=100] {exp(-x^2)};
+    \addlegendentry{Gaussian}
+    
+    \addplot[red, thick, domain=0:5, samples=100] {1/(1+x^2)};
+    \addlegendentry{t (df=1)}
+    
+    \addplot[green, thick, domain=0:5, samples=100] {(1+x^2/2)^(-1.5)};
+    \addlegendentry{t (df=2)}
+    
+    \addplot[orange, thick, domain=0:5, samples=100] {exp(-x)};
+    \addlegendentry{Exponential}
+    \end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\textbf{Winner:} Student-t (df=1) provides optimal balance
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 35: UMAP vs t-SNE
+%==============================================================================
+\begin{frame}{Modern Alternative: UMAP vs t-SNE}
+
+\textbf{UMAP (Uniform Manifold Approximation and Projection):}
+
+\vspace{0.15cm}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Similarities:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Non-linear embedding
+    \item Preserves local structure
+    \item Uses graph-based approach
+    \item Similar visual results
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{UMAP Advantages:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Faster: $O(n^{1.14})$ complexity
+    \item Preserves more global structure
+    \item Theoretical foundation (topology)
+    \item Supports embedding new points
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{t-SNE Advantages:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item More established/studied
+    \item Better cluster separation
+    \item Clearer interpretation
+    \item Robust to hyperparameters
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Key Difference:}\\
+\footnotesize
+t-SNE: Probabilistic approach\\
+UMAP: Topological approach\\
+
+\vspace{0.15cm}
+\textbf{When to Use Which:}\\
+\footnotesize
+t-SNE: Final visualization\\
+UMAP: Exploratory analysis
+\end{column}
+\end{columns}
+
+\vspace{0.15cm}
+\begin{alertblock}{Current Consensus}
+\footnotesize
+Both are valuable tools. t-SNE for publication-quality cluster visualization,\\
+UMAP for interactive exploration and when global structure matters.
+\end{alertblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 36: Mathematical Proof - Gradient Derivation
+%==============================================================================
+\begin{frame}{Mathematical Deep Dive: Gradient Derivation}
+
+\textbf{Starting from the cost function:}
+\begin{equation}
+C = \sum_{i,j} p_{ij} \log \frac{p_{ij}}{q_{ij}}
+\end{equation}
+
+\textbf{Step 1:} Express $q_{ij}$ with Student-t:
+\begin{equation}
+q_{ij} = \frac{(1 + ||\mathbf{y}_i - \mathbf{y}_j||^2)^{-1}}{\sum_{k \neq l} (1 + ||\mathbf{y}_k - \mathbf{y}_l||^2)^{-1}} = \frac{w_{ij}}{Z}
+\end{equation}
+
+\textbf{Step 2:} Take derivative w.r.t. $\mathbf{y}_i$:
+\begin{equation}
+\frac{\partial C}{\partial \mathbf{y}_i} = \sum_j p_{ij} \frac{\partial \log q_{ij}}{\partial \mathbf{y}_i}
+\end{equation}
+
+\textbf{Step 3:} Apply chain rule:
+\begin{equation}
+\frac{\partial \log q_{ij}}{\partial \mathbf{y}_i} = \frac{1}{q_{ij}} \frac{\partial q_{ij}}{\partial \mathbf{y}_i}
+\end{equation}
+
+\textbf{Step 4:} Final gradient (after simplification):
+\begin{equation}
+\frac{\partial C}{\partial \mathbf{y}_i} = 4 \sum_j (p_{ij} - q_{ij}) w_{ij} (\mathbf{y}_i - \mathbf{y}_j)
+\end{equation}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 37: Convergence Properties
+%==============================================================================
+\begin{frame}{Convergence Properties and Guarantees}
+
+\textbf{What We Can Prove:}
+
+\vspace{0.2cm}
+\textbf{1. Cost Function Properties}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item KL divergence is convex in $q_{ij}$
+    \item But non-convex in $\mathbf{y}_i$ (multiple local minima)
+    \item Bounded below by 0
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{2. Gradient Descent Convergence}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item With small enough learning rate: guaranteed to converge
+    \item Converges to local minimum (not necessarily global)
+    \item Early exaggeration helps escape poor local minima
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{3. Asymptotic Behavior}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item As $t \rightarrow \infty$: $||d\mathbf{y}_i/dt|| \rightarrow 0$
+    \item Points reach equilibrium configuration
+    \item Forces balance: $\sum_j F_{ij} = 0$ for all $i$
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{What We Cannot Prove:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Global optimality of solution
+    \item Uniqueness of embedding (up to rotation/reflection)
+    \item Preservation of specific geometric properties
+\end{itemize}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 38: Interactive t-SNE
+%==============================================================================
+\begin{frame}{Interactive t-SNE: Real-time Exploration}
+
+\textbf{Interactive Tools and Frameworks:}
+
+\vspace{0.2cm}
+\textbf{1. TensorBoard Projector}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Web-based visualization
+    \item Supports metadata/labels
+    \item Real-time parameter adjustment
+    \item Integration with TensorFlow
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{2. Embedding Projector (standalone)}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \url{projector.tensorflow.org}
+    \item Upload custom data
+    \item PCA → t-SNE pipeline
+    \item 3D visualization option
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{3. R Shiny Applications}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Custom dashboards with \texttt{shiny}
+    \item Real-time perplexity adjustment
+    \item Linked brushing with other plots
+    \item Export capabilities
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Key Features for Interactivity:}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Hover tooltips with point information
+    \item Zoom and pan capabilities
+    \item Dynamic coloring by metadata
+    \item Animation of optimization process
+\end{itemize}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 39: Advanced R Implementation
+%==============================================================================
+\begin{frame}{Advanced R Implementation: Beyond Basics}
+
+\textbf{Optimizing t-SNE in R:}
+
+\vspace{0.2cm}
+\textbf{1. Parallel Processing}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Use \texttt{parallel} package for multiple runs
+    \item \texttt{foreach} with \texttt{doParallel} backend
+    \item Speed up 3-4× on multicore systems
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{2. Custom Distance Metrics}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \texttt{Rtsne} accepts distance matrices
+    \item Use \texttt{proxy::dist()} for custom metrics
+    \item Examples: cosine, Manhattan, Mahalanobis
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{3. Preprocessing Pipeline}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \texttt{scale()}: Standardization
+    \item \texttt{prcomp()}: PCA reduction
+    \item \texttt{Rtsne::normalize\_input()}: Built-in normalization
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{4. Visualization Enhancements}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \texttt{ggplot2}: Publication-quality plots
+    \item \texttt{plotly}: Interactive 3D t-SNE
+    \item \texttt{gganimate}: Animate convergence
+    \item \texttt{ggrepel}: Non-overlapping labels
+\end{itemize}
+
+\vspace{0.1cm}
+\begin{exampleblock}{Pro Tip}
+\footnotesize
+Save intermediate iterations: \texttt{Rtsne(..., Y\_init = prev\_Y)}\\
+Allows continuation if interrupted and convergence analysis
+\end{exampleblock}
+
+\end{frame}
+
+%==============================================================================
+% SLIDE 40: Future Directions and Research
+%==============================================================================
+\begin{frame}{Future Directions and Current Research}
+
+\textbf{Active Research Areas:}
+
+\vspace{0.2cm}
+\textbf{1. Theoretical Foundations}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Formal guarantees for cluster preservation
+    \item Connection to spectral methods
+    \item Optimal kernel selection theory
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{2. Algorithmic Improvements}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item GPU acceleration (RAPIDS cuML)
+    \item Quantum t-SNE algorithms
+    \item Online/streaming t-SNE
+    \item Hierarchical t-SNE for multi-scale
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{3. Applications and Extensions}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Time-series t-SNE (preserving temporal structure)
+    \item Multi-view t-SNE (multiple data modalities)
+    \item Supervised t-SNE (using label information)
+    \item Uncertainty quantification in embeddings
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{4. Integration with Deep Learning}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item End-to-end trainable t-SNE layers
+    \item Variational t-SNE
+    \item Adversarial t-SNE for robust embeddings
+\end{itemize}
+
+\end{frame}
+\end{document}

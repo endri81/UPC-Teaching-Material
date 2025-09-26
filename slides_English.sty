@@ -1,0 +1,400 @@
+%\setcounter{secnumdepth}{3} % De esta forma también se numeran las subsubsections
+\setcounter{secnumdepth}{2} % De esta forma no se numeran las subsubsections
+
+\newcommand{\E}{ \mathbb{E} }
+\newcommand{\R}{ \mathbb{R} }
+\newcommand{\N}{ \mathbb{N} }
+\newcommand{\Z}{ \mathbb{Z} }
+\newcommand{\smallR}{ {\footnotesize \mathbb{R}} }
+
+\def\eps{\varepsilon}
+\def\then{\Rightarrow}
+\def\then{\Leftrightarrow}
+\def\tiende{\longrightarrow}
+
+\def\befi{\begin{figure}}
+\def\enfi{\end{figure}}
+
+\def\bc{\begin{center}}
+\def\ec{\end{center}}
+
+\def\bt{\begin{tabular}}
+\def\et{\end{tabular}}
+
+\def\barr{\begin{array}}
+\def\earr{\end{array}}
+
+\def\bi{\begin{itemize}}
+\def\ei{\end{itemize}}
+
+\def\bealf{\begin{enumerate}\renewcommand{\theenumi}{\alph{enumi}}}
+\def\benum{\begin{enumerate}}
+\def\eenum{\end{enumerate}}
+
+\def\bd{\begin{description}}
+\def\ed{\end{description}}
+
+\def\bq{\begin{quotation}\noindent}
+\def\eq{\end{quotation}}
+
+\def\ul#1{\underline{#1}}
+
+%\def\prob{\mbox{Prob}}
+\def\prob{\mbox{P}}
+
+
+\def\www#1{{\tt #1}}
+
+\def\refeq#1{(\ref{#1})}
+
+% \def\subsubsubsection#1{{\sf #1}\addtocontents{toc}{#1}}
+
+
+
+\newcommand\var{\mbox{Var}\,}
+\def\cov{\mbox{Cov}}
+\def\rank{\mbox{rank}}
+
+\def\square{{\vcenter{\vbox{\hrule height.8pt \hbox{vrule width.8pt height6pt
+\kern6pt \vrule width.8pt \hrule height.8pt}}}}}
+
+
+\def\dem{\noindent {\bf Proof:} }
+%\def\proof{\noindent {\bf Proof:} }
+
+\newcommand{\cqd}
+{
+$\hbox{ }$ \hfill $\Box$
+ \protect\vspace{1ex}
+}
+
+\def\pto{$\bullet$}
+\def\then{\Longrightarrow}
+\def\to{\rightarrow}
+\def\iff{\Longleftrightarrow}
+\def\sii{\Longleftrightarrow}
+\def\flecha{\longrightarrow}
+
+\def\mediana{\mbox{med}}
+
+\def\plim{{\mbox p}\!\lim}
+\def\toP{\stackrel{P}{\to}}
+\def\corr{\mbox{Corr}}
+
+\def\stackrelmeu#1#2{\stackrel{#2}{#1}}
+
+%  Captions
+\long\def\@makecaption#1#2{
+   \vskip 10pt
+   \setbox\@tempboxa\hbox{{\footnotesize\bf #1}: {\footnotesize\rm #2}}
+   \ifdim \wd\@tempboxa >\hsize              % IF longer than one line:
+      {\footnotesize\bf #1}: {\footnotesize\rm #2}\par   % THEN set as
+                                             %  ordinary paragraph.
+   \else                                     % ELSE  center.
+      \hbox to\hsize{\hfil\box\@tempboxa\hfil}
+   \fi}
+
+%
+\newcounter{numtema}
+\def\programa{\section{Program} \setcounter{numtema}{0}}
+\def\tema{\stepcounter{numtema}\item[{\bf Chapter \arabic{numtema}.}]}
+
+%
+\def\iid{i.i.d.r.v.}
+%
+\newtheorem{docu}{Documento}
+\def\paper#1{\begin{docu}\label{#1} \end{docu} }
+
+%% Para editar el documento como libro
+% \newtheorem{defi}{Definición}[chapter]
+% \newtheorem{lema}{Lema}[chapter]
+% \newtheorem{prop}{Proposición}[chapter]
+% \newtheorem{propo}[prop]{Proposición}
+% \newtheorem{teorema}{Teorema}[chapter]
+% \newtheorem{corol}{Corolario}[chapter]
+%% Fin Para
+
+% Para editar transparencias
+\newtheorem{defi}{Definition}
+\newtheorem{lema}{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{propo}[prop]{Proposition}
+\newtheorem{teorema}{Theorem}
+\newtheorem{corol}{Corollary}
+% Fin Para
+
+%%%%%%%%% definiciones nuevas, a partir de julio del 2000
+%% Para editar el documento como libro
+%\newtheorem{ejemplo}{Ejemplo}[chapter]
+%% Fin Para
+
+% Para editar transparencias
+\newtheorem{ejemplo}{Example}
+% Fin Para
+
+\def\bej{\vspace*{1em}
+\begin{ejemplo}\rm
+\noindent\hrulefill\\}
+\def\eej{\\.\hrulefill.\\
+\end{ejemplo}}
+
+\def\bejcont#1{\vspace*{1em}
+\noindent\hrulefill\\ {\bf Example \ref{#1}, page \pageref{#1}. Continuation.} }
+\def\eejcont{\\.\hrulefill.\\}
+
+%\def\titulo#1{\medskip\noindent{\sf #1}\newline}
+\def\titulo#1{\medskip\noindent{\large \sf #1}\newline}
+
+\def\w{\omega}
+\def\W{\Omega}
+
+\def\A{\mathcal{A}}
+\def\B{\mathcal{B}}
+\def\C{\mathcal{C}}
+\def\D{\mathcal{D}}
+\def\cD{\mathcal{D}}
+\def\F{\mathcal{F}}
+%\def\ll{\mbox{{\it l$\;$}}}
+\def\ll{\ell}
+\def\L{\mathcal{L}}
+\def\T{\mathcal{T}}
+\def\S{\mathcal{S}}
+\def\cI{\mathcal{I}}
+
+\def\P{\mathbf{P}}
+
+\def\cN{\mathcal{N}}
+\def\calN{\mathcal{N}}
+\def\cY{\mathcal{Y}}
+\def\calY{\mathcal{Y}}
+\def\cZ{\mathcal{Z}}
+\def\calZ{\mathcal{Z}}
+\def\cX{\mathcal{X}}
+\def\calX{\mathcal{X}}
+\def\X{\!\!\begin{array}[t]{c}X\\[-1.2ex]\!\!\widetilde{\;\;\;}\\[-1.7ex]\end{array}\!\!}
+\def\x{\!\!\begin{array}[t]{c}x\\[-1.2ex]\widetilde{\;}\\[-1.7ex]\end{array}\!\!}
+
+\def\Y{\!\!\begin{array}[t]{c}Y\\[-1.2ex]\!\!\widetilde{\;\;\;}\\[-1.7ex]\end{array}\!\!}
+\def\y{\!\!\begin{array}[t]{c}y\\[-1.1ex]\widetilde{\;}\\[-1.9ex]\end{array}\!\!}
+
+\def\a{\!\!\begin{array}[t]{c}a\\[-1.2ex]\widetilde{\;}\\[-1.7ex]\end{array}\!\!}
+\def\vcero{\!\!\begin{array}[t]{c}0\\[-1.2ex]\widetilde{\;}\\[-1.7ex]\end{array}\!\!}
+
+%\def\refers#1{\ \smallsize{\sc References:} #1}
+\def\refers#1{\hspace*{\fill}\begin{minipage}{10cm}\raggedleft{\small
+      {\sc References:} #1}\end{minipage}\medskip }
+
+\def\med#1{\overline{#1}}
+
+\def\si{\mbox{ si }}
+
+\def\sumn{\sum_{i=1}^n}
+\def\prodn{\prod_{i=1}^n}
+
+\def\fa{\mbox{ for all }} %\fa: for all
+\def\cs{\mbox{ almost sure}}
+
+\def\vol{\mbox{Volume}}
+
+\def\emv{maximum likelihood estimator}
+\def\mle{maximum likelihood estimator}
+
+\def\parcial#1#2#3{{{\partial^{#3}} #1\over \partial #2^{#3}}}
+\def\deriv#1#2#3{{{d^{#3}} #1\over d#2^{#3}}}
+\def\grad{\nabla}
+
+\def\th{\theta}
+\def\Th{\Theta}
+\def\hth{\hat{\theta}}
+\def\tth{\!\!\begin{array}[t]{c}\theta\\[-1.2ex]\widetilde{\;\;\;}\\[-1.7ex]\end{array}\!\!}
+\def\htth{\hat{\!\!\begin{array}[t]{c}\theta\\[-1.2ex]\widetilde{\;\;\;}\\[-1.7ex]\end{array}\!\!}}
+
+\def\teta{\!\!\begin{array}[t]{c}\eta\\[-1.2ex]\widetilde{\;\;\;}\\[-1.7ex]\end{array}\!\!}
+
+\def\Bern{\mbox{Bern}}
+\def\Pois{\mbox{Poisson}}
+
+\def\cte{\mbox{cte}}
+
+\def\umvue{UMVUE}
+\def\CR{Cramér-Rao}
+\def\RB{Rao-Blackwell}
+\def\LS{Lehmann-Scheffé}
+\def\TCL{Central Limit Theorem}
+\def\CLT{Central Limit Theorem}
+
+\def\AN{\mbox{\em AN}}
+\def\ARE{\mbox{\em ARE}}
+
+\def\test#1#2{\left\{\begin{array}{l}H_0: #1\\H_1:
+      #2\end{array}\right.}
+
+\def\deffun#1#2#3#4#5{\begin{array}{rcccl}
+#1 &:& #2 & \longrightarrow & #3\\
+   & & #4 & \longrightarrow & #5
+\end{array}}
+
+\def\len{\mbox{Long}}
+
+\def\yt{\mbox{ y }} % 'y' como texto dentro de matemáticas
+
+%%%%%%%%%%%%%%%% Control de comentarios al margen
+% Con la siguiente definición son omitidos
+\def\omitir#1{}
+\renewcommand{\marginpar}{\omitir}
+%%% Activar la linea siguiente para que salgan impresos como notas a
+%%% pie de página
+%\renewcommand{\marginpar}{\footnote}
+
+
+
+%%%%% comandos hojas de problemas
+
+%\def\seccion#1{\bigskip \pagebreak[1] \noindent {\bf #1} }
+\def\seccion#1{\bigskip \item[] {\large \bf #1} }
+
+\def\df{\text{df}}
+\def\sign{\text{sign}}
+
+\def\ba{{\bf a}}
+\def\bb{{\bf b}}
+\def\be{{\bf e}}
+\def\ff{{\bf f}}
+\def\bh{{\bf h}}
+\def\bn{{\bf n}}
+\def\bp{{\bf p}}
+\def\br{{\bf r}}
+\def\bt{{\bf t}}
+\def\bv{{\bf v}}
+\def\bx{{\bf x}}
+\def\by{{\bf y}}
+\def\bw{{\bf w}}
+\def\bz{{\bf z}}
+\def\bA{{\bf A}}
+\def\bD{{\bf D}}
+\def\bG{{\bf G}}
+\def\bH{{\bf H}}
+\def\bI{{\bf I}}
+\def\bK{{\bf K}}
+\def\bL{{\bf L}}
+\def\bM{{\bf M}}
+\def\bN{{\bf N}}
+\def\bU{{\bf U}}
+\def\bV{{\bf V}}
+\def\bW{{\bf W}} 
+\def\bX{{\bf X}}
+\def\bY{{\bf Y}}
+\def\bZ{{\bf Z}}%{{\mathbf Z}}
+
+\def\bnu{\boldsymbol\nu}
+\def\bmu{\boldsymbol\mu}
+\def\balpha{\boldsymbol\alpha}
+\def\bbeta{\boldsymbol\beta}
+\def\blambda{\boldsymbol\lambda}
+\def\bepsilon{\boldsymbol\varepsilon}
+\def\btheta{\boldsymbol\theta}
+\def\brho{\boldsymbol\rho}
+
+\def\E{\mathbb{E}}
+\def\one{\mathbb{I}}
+
+\def\bzero{\mathbf 0}
+
+\def\ave{\mbox{ave}}
+\def\oob{{\sc oob}}
+
+\def\diag{\mbox{Diag}}
+\def\Trace{\mbox{Trace}}
+\def\trace{\mbox{Trace}}
+\def\tr{^{\mbox{\scriptsize T}}}
+
+
+%% Changing the background color of a frame
+\def\frameyellow#1{
+	{\setbeamercolor{background canvas}{bg=yellow!20}
+		\begin{frame}
+			#1
+		\end{frame}
+	}
+}
+%% Changing the background color of a frame
+\def\frameblue#1{
+	{\setbeamercolor{background canvas}{bg=blue!10}
+		\begin{frame}
+			#1
+		\end{frame}
+	}
+}
+
+
+
+%%%%%%%%%%%%%%%%%% To include source code in slides
+% include the source code between
+% \begin{lstlisting}
+%  ...
+% \end{lstlisting}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{lightgray}{rgb}{0.95,0.95,0.95}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ 
+	backgroundcolor=\color{lightgray},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\itshape\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	firstnumber=1000,                % start line enumeration with line 1000
+	frame=none,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\bfseries\color{blue},       % keyword style
+	language=R,                      % the language of the code
+	morekeywords={*,...},            % if you want to add more keywords to the set
+	numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2,	                   % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+% % % % % % Curvas principales: princurv.sty
+\newcommand{\al}{\alpha} 
+\newcommand{\talpha}{\hat{\balpha}} 
+\newcommand{\tal}{\talpha} 
+%\newcommand{\x}{x^0} 
+\newcommand{\SV}{\widetilde{\mbox{Var}}}
+\newcommand{\SE}{\widetilde{\bmu}} 
+\newcommand{\STV}{\widetilde{\phi}} 
+\newcommand{\wtb}{\widetilde{\bb}} 
+\newcommand{\smu}{\widetilde{\bmu}} 
+\newcommand{\sphi}{\widetilde{\phi}} 
+\newcommand{\prev}{\mbox{Prev}} 
+\newcommand{\wh}{\widehat}
+%\newcommand{\var}{\mbox{Var}} 
+
+\newcommand{\HSPC}{{HSPC}} 
+\newcommand{\GHSPC}{{GHSPC}} 
+\newcommand{\GTV}{\mbox{GTV}} 
+\newcommand{\GE}{\mbox{GE}} 
+\def\supp{\mbox{Support}}
+\def\remark{\medskip\pagebreak[1]\noindent{\bf Remark.\ }}
+
+\def\Remp{R_{\footnotesize\rm emp}}
+\def\Rreg{R_{\footnotesize\rm reg}}
+
+
