@@ -703,304 +703,62 @@ but with probabilistic approach
 \end{frame}
 
 
-% SLIDE 11: High-Dimensional Similarity - Gaussian Kernels
-\begin{frame}{High-Dimensional Similarity: Gaussian Kernels}
-\vspace{-0.2cm}
-
-\textbf{\color{upcblue}The Core Question:} How similar are two points in high-dimensional space?
-
-\vspace{0.3cm}
-\begin{columns}[T]
-\begin{column}{0.5\textwidth}
-\textbf{\color{upcblue}Gaussian Similarity}
-\vspace{0.2cm}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.8]
-    % Central point
-    \node[circle, fill=upcblue, inner sep=2pt] at (0,0) (xi) {};
-    \node[below] at (xi) {\footnotesize $\mathbf{x}_i$};
-    
-    % Gaussian circles
-    \draw[upcblue!30, dashed] (0,0) circle (0.5cm);
-    \draw[upcblue!50, dashed] (0,0) circle (1cm);
-    \draw[upcblue!70, dashed] (0,0) circle (1.5cm);
-    
-    % Nearby points
-    \node[circle, fill=red!80, inner sep=2pt] at (0.3,0.2) (xj) {};
-    \node[right] at (xj) {\tiny $\mathbf{x}_j$ (high sim)};
-    
-    \node[circle, fill=orange!60, inner sep=2pt] at (0.8,-0.6) (xk) {};
-    \node[right] at (xk) {\tiny $\mathbf{x}_k$ (medium)};
-    
-    \node[circle, fill=yellow!40, inner sep=2pt] at (-1.3,0.9) (xl) {};
-    \node[left] at (xl) {\tiny $\mathbf{x}_l$ (low)};
-\end{tikzpicture}
-\end{center}
-
-\small
-\textcolor{upcgray}{Similarity decreases with distance}\\
-\textcolor{upcgray}{following Gaussian decay}
-\end{column}
-
-\begin{column}{0.5\textwidth}
-\textbf{\color{upcblue}Mathematical Form}
-\vspace{0.2cm}
-
-Unnormalized similarity:
-$$\text{sim}(i,j) = \exp\left(-\frac{\|\mathbf{x}_i - \mathbf{x}_j\|^2}{2\sigma_i^2}\right)$$
-
-\vspace{0.3cm}
-\textbf{Key Properties:}
-\begin{itemize}
-    \small
-    \item Range: $(0, 1]$
-    \item Max when $i = j$
-    \item Smooth decay
-    \item Point-specific $\sigma_i$
-\end{itemize}
-
-\vspace{0.2cm}
-\small
-\textcolor{highlight}{\textbf{Critical:}} $\sigma_i$ controls the\\
-"neighborhood size" for point $i$
-\end{column}
-\end{columns}
-
-\vspace{0.3cm}
-\begin{center}
-\colorbox{upcblue!10}{
-\begin{minipage}{0.85\textwidth}
-\centering
-\footnotesize\textit{Reference: van der Maaten \& Hinton (2008), Equation 1}
-\end{minipage}
-}
-\end{center}
-\end{frame}
 
 
-% SLIDE 12: High-Dimensional Similarity - The Formula
-\begin{frame}{The Conditional Probability $p_{j|i}$}
-\vspace{-0.3cm}
-
-\begin{center}
-\colorbox{upcblue!10}{
-\begin{minipage}{0.85\textwidth}
-\centering
-\large
-$$p_{j|i} = \frac{\exp(-\|\mathbf{x}_i - \mathbf{x}_j\|^2 / 2\sigma_i^2)}{\sum_{k \neq i} \exp(-\|\mathbf{x}_i - \mathbf{x}_k\|^2 / 2\sigma_i^2)}$$
-\end{minipage}
-}
-\end{center}
-
-\vspace{0.2cm}
-\textbf{\color{upcblue}Breaking Down the Components:}
-
-\vspace{0.15cm}
-\begin{columns}[T]
-\begin{column}{0.48\textwidth}
-\textbf{Numerator:}
-$$\exp\left(-\frac{\|\mathbf{x}_i - \mathbf{x}_j\|^2}{2\sigma_i^2}\right)$$
-
-\footnotesize
-\vspace{-0.1cm}
-\begin{itemize}
-    \setlength\itemsep{0.1em}
-    \item $\|\mathbf{x}_i - \mathbf{x}_j\|^2$: Squared distance
-    \item $\sigma_i^2$: Variance for point $i$
-    \item Gaussian kernel at $\mathbf{x}_i$
-\end{itemize}
-\end{column}
-
-\begin{column}{0.48\textwidth}
-\textbf{Denominator:}
-$$\sum_{k \neq i} \exp\left(-\frac{\|\mathbf{x}_i - \mathbf{x}_k\|^2}{2\sigma_i^2}\right)$$
-
-\footnotesize
-\vspace{-0.1cm}
-\begin{itemize}
-    \setlength\itemsep{0.1em}
-    \item Sum over all other points
-    \item Ensures $\sum_j p_{j|i} = 1$
-    \item Makes it a probability
-\end{itemize}
-\end{column}
-\end{columns}
-
-\vspace{0.15cm}
-\begin{center}
-\begin{tikzpicture}[scale=0.7]
-    % Visualization
-    \node[circle, fill=upcblue, inner sep=2pt] at (0,0) (xi) {};
-    \node[below] at (xi) {\tiny $\mathbf{x}_i$};
-    
-    % Probability arrows
-    \draw[->, thick, red!80] (0,0) -- (1,0.4) node[right] {\tiny $p_{j|i} = 0.3$};
-    \draw[->, thick, orange!60] (0,0) -- (0.7,-0.6) node[right] {\tiny $p_{k|i} = 0.2$};
-    \draw[->, thick, blue!50] (0,0) -- (-0.8,0.2) node[left] {\tiny $p_{l|i} = 0.05$};
-\end{tikzpicture}
-\end{center}
-
-\vspace{-0.1cm}
-\begin{center}
-\colorbox{highlight!20}{
-\begin{minipage}{0.8\textwidth}
-\centering
-\tiny\textbf{Interpretation:} $p_{j|i}$ = probability that $i$ picks $j$ as neighbor
-\end{minipage}
-}
-\end{center}
-\end{frame}
-
-
-
-% SLIDE 13: Perplexity - An Intuitive Bandwidth
-\begin{frame}{Tuning Neighborhood Size: Perplexity}
-\vspace{-0.2cm}
-
-\textbf{\color{upcblue}The Problem:} How to choose $\sigma_i$ for each point?
-
-\vspace{0.2cm}
-\begin{center}
-\colorbox{upcblue!10}{
-\begin{minipage}{0.85\textwidth}
-\centering
-\textbf{Solution:} Use \textit{Perplexity} - a user-specified parameter that\\
-indirectly sets $\sigma_i$ through binary search
-\end{minipage}
-}
-\end{center}
-
-\vspace{0.3cm}
-\begin{columns}[T]
-\begin{column}{0.48\textwidth}
-\textbf{\color{upcblue}Definition}
-\vspace{0.2cm}
-
-$$\text{Perp}(P_i) = 2^{H(P_i)}$$
-
-where Shannon entropy:
-$$H(P_i) = -\sum_j p_{j|i} \log_2 p_{j|i}$$
-
-\vspace{0.2cm}
-\textbf{Interpretation:}\\
-\footnotesize
-Perplexity = effective number of neighbors
-
-\vspace{0.2cm}
-\textbf{Typical values:} 5-50
-\end{column}
-
-\begin{column}{0.48\textwidth}
-\textbf{\color{upcblue}Binary Search for $\sigma_i$}
-\vspace{0.2cm}
-
-\begin{tikzpicture}[scale=0.7]
-    % Flow diagram
-    \node[draw, rounded corners, fill=upcblue!10] (start) at (0,0) {\footnotesize Set target Perp};
-    \node[draw, rounded corners, fill=highlight!10] (search) at (0,-1.2) {\footnotesize Binary search $\sigma_i$};
-    \node[draw, rounded corners, fill=upcgray!10] (compute) at (0,-2.4) {\footnotesize Compute $P_i$};
-    \node[draw, rounded corners, fill=upcgray!10] (check) at (0,-3.6) {\footnotesize Check Perp$(P_i)$};
-    
-    \draw[->, thick] (start) -- (search);
-    \draw[->, thick] (search) -- (compute);
-    \draw[->, thick] (compute) -- (check);
-    \draw[->, thick] (check.west) .. controls (-2,-3.6) and (-2,-1.2) .. (search.west);
-    
-    \node at (2.5,-1.8) {\footnotesize \textit{Until convergence}};
-\end{tikzpicture}
-\end{column}
-\end{columns}
-
-\vspace{0.2cm}
-\begin{center}
-\begin{tikzpicture}[scale=0.8]
-    % Visual comparison
-    \node at (-3,0) {\footnotesize \textbf{Low Perplexity (5)}};
-    \node[circle, fill=upcblue, inner sep=1.5pt] at (-3,-0.5) {};
-    \draw[upcblue!60, thick] (-3,-0.5) circle (0.3cm);
-    \node at (-3,-1.2) {\tiny Local focus};
-    
-    \node at (0,0) {\footnotesize \textbf{Medium Perplexity (30)}};
-    \node[circle, fill=upcblue, inner sep=1.5pt] at (0,-0.5) {};
-    \draw[upcblue!60, thick] (0,-0.5) circle (0.6cm);
-    \node at (0,-1.2) {\tiny Balanced};
-    
-    \node at (3,0) {\footnotesize \textbf{High Perplexity (50)}};
-    \node[circle, fill=upcblue, inner sep=1.5pt] at (3,-0.5) {};
-    \draw[upcblue!60, thick] (3,-0.5) circle (0.9cm);
-    \node at (3,-1.2) {\tiny Global view};
-\end{tikzpicture}
-\end{center}
-\end{frame}
-
-
-
-
-% SLIDE 14: Visualizing Perplexity's Effect
-\begin{frame}{Perplexity in Action}
+% SLIDE 11: The Core Challenge - Defining 'Neighborhood'
+\begin{frame}{The Challenge of Defining 'Neighborhood'}
 \vspace{-0.2cm}
 
 \begin{center}
-\textbf{\color{upcblue}How Perplexity Affects Point Neighborhoods}
+\textbf{\color{upcblue}A Fundamental Question:} When are two points "neighbors"?
 \end{center}
 
 \vspace{0.3cm}
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
 \textbf{\color{upcblue}Dense Region}
-\vspace{0.2cm}
-
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
-    % Dense cluster of points
-    \node[circle, fill=upcblue, inner sep=2pt] at (0,0) {};
-    \foreach \angle in {0,30,...,330} {
-        \node[circle, fill=upcgray!60, inner sep=1pt] at ({0.4*cos(\angle)},{0.4*sin(\angle)}) {};
-    }
-    \foreach \angle in {15,45,...,345} {
-        \node[circle, fill=upcgray!40, inner sep=1pt] at ({0.8*cos(\angle)},{0.8*sin(\angle)}) {};
+    % Dense cluster
+    \node[circle, fill=red, inner sep=2pt] at (0,0) {};
+    \node[below] at (0,-0.2) {\tiny A};
+    \node[circle, fill=red, inner sep=2pt] at (0.7,0) {};
+    \node[below] at (0.7,-0.2) {\tiny B};
+    
+    % Other nearby points
+    \foreach \angle in {30,60,120,150,210,240,300,330} {
+        \node[circle, fill=upcgray!60, inner sep=1pt] at ({0.35+0.4*cos(\angle)},{0.4*sin(\angle)}) {};
     }
     
-    % Gaussian curve
-    \draw[upcblue, thick, dashed] (0,0) circle (0.5cm);
-    \node at (0.7,-0.35) {\tiny $\sigma_i$ \textcolor{upcblue}{small}};
+    \draw[<->, thick] (0.1,0.15) -- (0.6,0.15);
+    \node at (0.35,0.35) {\tiny 1 unit};
     
-    \node at (0,-1.5) {\footnotesize \textbf{Small $\sigma_i$ needed}};
+    \node at (0,-1.5) {\footnotesize Many neighbors nearby};
 \end{tikzpicture}
 \end{center}
-
-\footnotesize
-Many nearby points\\
-$\rightarrow$ Narrow Gaussian\\
-$\rightarrow$ Small $\sigma_i$ achieves target perplexity
 \end{column}
 
 \begin{column}{0.48\textwidth}
 \textbf{\color{upcblue}Sparse Region}
-\vspace{0.2cm}
-
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
     % Sparse points
-    \node[circle, fill=upcblue, inner sep=2pt] at (0,0) {};
-    \node[circle, fill=upcgray!60, inner sep=1pt] at (0.9,0.3) {};
-    \node[circle, fill=upcgray!60, inner sep=1pt] at (-0.8,0.5) {};
-    \node[circle, fill=upcgray!40, inner sep=1pt] at (0.4,-1.1) {};
-    \node[circle, fill=upcgray!40, inner sep=1pt] at (-1.2,-0.6) {};
+    \node[circle, fill=blue, inner sep=2pt] at (0,0) {};
+    \node[below] at (0,-0.2) {\tiny C};
+    \node[circle, fill=blue, inner sep=2pt] at (0.7,0) {};
+    \node[below] at (0.7,-0.2) {\tiny D};
     
-    % Gaussian curve
-    \draw[upcblue, thick, dashed] (0,0) circle (1.1cm);
-    \node at (1.4,-0.7) {\tiny $\sigma_i$ \textcolor{upcblue}{large}};
+    % Few distant points
+    \node[circle, fill=upcgray!40, inner sep=1pt] at (1.8,0.5) {};
+    \node[circle, fill=upcgray!40, inner sep=1pt] at (-1.5,-0.6) {};
+    \node[circle, fill=upcgray!40, inner sep=1pt] at (0.3,1.4) {};
     
-    \node at (0,-1.5) {\footnotesize \textbf{Large $\sigma_i$ needed}};
+    \draw[<->, thick] (0.1,0.15) -- (0.6,0.15);
+    \node at (0.35,0.35) {\tiny 1 unit};
+    
+    \node at (0,-1.5) {\footnotesize Few neighbors nearby};
 \end{tikzpicture}
 \end{center}
-
-\footnotesize
-Few nearby points\\
-$\rightarrow$ Wide Gaussian\\
-$\rightarrow$ Large $\sigma_i$ achieves target perplexity
 \end{column}
 \end{columns}
 
@@ -1009,492 +767,568 @@ $\rightarrow$ Large $\sigma_i$ achieves target perplexity
 \colorbox{highlight!20}{
 \begin{minipage}{0.85\textwidth}
 \centering
-\footnotesize\textbf{Key Insight:} SNE automatically adapts to local data density\\
-\footnotesize Dense regions get small $\sigma_i$, sparse regions get large $\sigma_i$
+\textbf{The Problem:} Should A-B have the same "similarity" as C-D?\\
+\footnotesize Both are 1 unit apart, but contexts are completely different!
 \end{minipage}
 }
 \end{center}
 
 \vspace{0.2cm}
 \begin{center}
-\begin{tikzpicture}[scale=0.9]
-    % Perplexity effect visualization
-    \draw[->] (-4,0) -- (4,0) node[right] {\footnotesize Perplexity};
-    \draw[->] (0,-0.2) -- (0,1.5) node[above] {\footnotesize $\sigma_i$};
-    
-    % Points showing relationship
-    \foreach \x/\y in {-3/0.3, -2/0.5, -1/0.7, 0/0.9, 1/1.1, 2/1.25, 3/1.35} {
-        \node[circle, fill=upcblue, inner sep=1pt] at (\x,\y) {};
-    }
-    \draw[upcblue, thick] plot[smooth] coordinates {(-3,0.3) (-2,0.5) (-1,0.7) (0,0.9) (1,1.1) (2,1.25) (3,1.35)};
-    
-    \node at (0,-0.5) {\tiny Binary search finds appropriate $\sigma_i$};
-\end{tikzpicture}
+\textit{\color{upcblue}We need similarity to be \textbf{relative to local density}}
 \end{center}
 \end{frame}
 
+% SLIDE 12: Step 1 - From Distance to Similarity
+\begin{frame}{Tool 1: The Gaussian Kernel}
+\vspace{-0.2cm}
 
+\textbf{\color{upcblue}Building Our Similarity Measure Step by Step}
 
+\vspace{0.2cm}
+\begin{center}
+\textbf{Step 1:} Start with squared Euclidean distance
+$$d_{ij}^2 = \|\mathbf{x}_i - \mathbf{x}_j\|^2$$
+\end{center}
 
+\vspace{0.2cm}
+\begin{center}
+\textbf{Step 2:} Convert distance to similarity (closer = more similar)
+$$\text{sim} = \exp(-d_{ij}^2)$$
 
+\begin{tikzpicture}[scale=0.7]
+    \draw[->] (0,0) -- (4,0) node[right] {\footnotesize distance};
+    \draw[->] (0,0) -- (0,2) node[above] {\footnotesize similarity};
+    \draw[thick, upcblue, domain=0:3.5] plot (\x, {1.8*exp(-\x/2)});
+    \node at (2,-0.5) {\footnotesize Exponential decay};
+\end{tikzpicture}
+\end{center}
 
-% SLIDE 15: Low-Dimensional Similarity - Gaussian for SNE
-\begin{frame}{Low-Dimensional Similarity ($q_{j|i}$): Standard Gaussians}
-\vspace{-0.3cm}
+\vspace{0.2cm}
+\begin{center}
+\textbf{Step 3:} Add bandwidth control with $\sigma_i$ 
+$$\text{sim} = \exp\left(-\frac{\|\mathbf{x}_i - \mathbf{x}_j\|^2}{2\sigma_i^2}\right)$$
+
+\begin{tikzpicture}[scale=0.6]
+    \draw[->] (0,0) -- (4,0) node[right] {\tiny distance};
+    \draw[->] (0,0) -- (0,2) node[above] {\tiny similarity};
+    
+    \draw[thick, red, domain=0:3.5] plot (\x, {1.8*exp(-2*\x)});
+    \node[red] at (1.5,0.8) {\tiny small $\sigma$};
+    
+    \draw[thick, blue, domain=0:3.5] plot (\x, {1.8*exp(-0.3*\x)});
+    \node[blue] at (3,1.2) {\tiny large $\sigma$};
+\end{tikzpicture}
+\end{center}
 
 \begin{center}
 \colorbox{upcblue!10}{
 \begin{minipage}{0.85\textwidth}
 \centering
+\footnotesize $\sigma_i$ is our "tuning knob" - it adapts to local density!
+\end{minipage}
+}
+\end{center}
+\end{frame}
+
+% SLIDE 13: Step 2 - The Normalization Problem
+\begin{frame}{From Similarity Scores to Probabilities}
+\vspace{-0.2cm}
+
+\textbf{\color{upcblue}The Next Problem:} Our similarity scores aren't probabilities!
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Point i and its similarities
+    \node[circle, fill=upcblue, inner sep=3pt] at (0,0) {};
+    \node[below] at (0,-0.2) {\footnotesize $\mathbf{x}_i$};
+    
+    % Neighbors with similarity scores
+    \node[circle, fill=upcgray, inner sep=2pt] at (1.5,0.8) {};
+    \node[right] at (1.7,0.8) {\footnotesize sim = 0.8};
+    
+    \node[circle, fill=upcgray, inner sep=2pt] at (2,0) {};
+    \node[right] at (2.2,0) {\footnotesize sim = 0.6};
+    
+    \node[circle, fill=upcgray, inner sep=2pt] at (1.2,-0.9) {};
+    \node[right] at (1.4,-0.9) {\footnotesize sim = 0.4};
+    
+    \node[circle, fill=upcgray, inner sep=2pt] at (-1.5,0.5) {};
+    \node[left] at (-1.7,0.5) {\footnotesize sim = 0.3};
+    
+    \node[circle, fill=upcgray, inner sep=2pt] at (-1,-1) {};
+    \node[left] at (-1.2,-1) {\footnotesize sim = 0.2};
+    
+    \draw[->, red, thick] (3,0) -- (4,0);
+    
+    \node at (5.5,0) {\footnotesize Sum = 2.3 $\neq$ 1};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+\begin{center}
+\colorbox{highlight!20}{
+\begin{minipage}{0.85\textwidth}
+\centering
+\textbf{Why is this a problem?}\\
+\footnotesize
+- We want to interpret values as probabilities\\
+- Probabilities must sum to 1\\
+- Need consistent scale across all points
+\end{minipage}
+}
+\end{center}
+
+\vspace{0.2cm}
+\begin{center}
+\textit{\color{upcblue}Question: How do we normalize these scores?}
+\end{center}
+\end{frame}
+
+% SLIDE 14: Step 3 - The Solution (Softmax)
+\begin{frame}{Tool 2: Softmax for Normalization}
+\vspace{-0.2cm}
+
+\textbf{\color{upcblue}The Solution:} Divide by the sum of all similarities!
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Normalization formula visualization
+    \node[draw, rounded corners, fill=upcblue!10, minimum width=6cm, minimum height=1.5cm] at (0,0) {
+        \begin{minipage}{5.8cm}
+        \centering
+        $$p_{j|i} = \frac{\text{similarity to } j}{\text{sum of all similarities}}$$
+        \end{minipage}
+    };
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{The Complete Formula:}
+\begin{center}
+\colorbox{upcblue!10}{
+\begin{minipage}{0.9\textwidth}
+\centering
+$$p_{j|i} = \frac{\exp(-\|\mathbf{x}_i - \mathbf{x}_j\|^2 / 2\sigma_i^2)}{\sum_{k \neq i} \exp(-\|\mathbf{x}_i - \mathbf{x}_k\|^2 / 2\sigma_i^2)}$$
+\end{minipage}
+}
+\end{center}
+
+\vspace{0.3cm}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{This is the Softmax!}
+\footnotesize
+- Standard tool in ML\\
+- Converts scores to probabilities\\
+- Preserves relative magnitudes\\
+- Ensures $\sum_j p_{j|i} = 1$
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Interpretation:}
+\footnotesize
+$p_{j|i}$ = probability that point $i$\\
+would pick point $j$ as its neighbor\\
+if picking based on similarity
+\end{column}
+\end{columns}
+
+\vspace{0.2cm}
+\begin{center}
+\colorbox{highlight!20}{
+\begin{minipage}{0.85\textwidth}
+\centering
+\footnotesize Now we have valid probability distributions, but still need to set each $\sigma_i$!
+\end{minipage}
+}
+\end{center}
+\end{frame}
+
+% SLIDE 15: The Perplexity Puzzle
+\begin{frame}{An Impossible Task: Setting Each $\sigma_i$}
+\vspace{-0.2cm}
+
+\textbf{\color{upcblue}The Remaining Challenge:} How to choose $\sigma_i$ for every point?
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Dataset with many points
+    \foreach \i in {1,...,30} {
+        \pgfmathsetmacro{\rx}{4*rand}
+        \pgfmathsetmacro{\ry}{2*rand}
+        \node[circle, fill=upcgray!40, inner sep=1pt] at (\rx,\ry) {};
+    }
+    
+    % Highlight a few points
+    \node[circle, fill=red, inner sep=2pt] at (1,0.5) {};
+    \node at (1,0.2) {\tiny $\sigma_1 = ?$};
+    
+    \node[circle, fill=blue, inner sep=2pt] at (3,1.5) {};
+    \node at (3,1.2) {\tiny $\sigma_2 = ?$};
+    
+    \node[circle, fill=green, inner sep=2pt] at (0.5,1.8) {};
+    \node at (0.5,1.5) {\tiny $\sigma_3 = ?$};
+    
+    \node at (2,-0.5) {\footnotesize ... thousands of points!};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+\begin{center}
+\colorbox{red!10}{
+\begin{minipage}{0.85\textwidth}
+\centering
+\textbf{Problems with manual setting:}\\
+\footnotesize
+- Need different $\sigma_i$ for each point (adapts to density)\\
+- Dataset might have thousands of points\\
+- No intuitive way to choose values\\
+- Trial and error is impractical
+\end{minipage}
+}
+\end{center}
+
+\vspace{0.3cm}
+\begin{center}
+\textit{\color{upcblue}We need a more intuitive, global parameter!}
+\end{center}
+\end{frame}
+
+% SLIDE 16: The Solution - Perplexity
+\begin{frame}{A Better Knob: Perplexity}
+\vspace{-0.2cm}
+
+\textbf{\color{upcblue}The Elegant Solution:} Specify the "effective number of neighbors"!
+
+\vspace{0.3cm}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Perplexity Definition:}
+$$\text{Perp}(P_i) = 2^{H(P_i)}$$
+
+where entropy:
+$$H(P_i) = -\sum_j p_{j|i} \log_2 p_{j|i}$$
+
+\vspace{0.2cm}
+\textbf{Intuition:}\\
+\footnotesize
+"I want each point to have\\
+about 30 effective neighbors"\\
+$\Rightarrow$ Set Perplexity = 30
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{The Algorithm:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+    \node[draw, rounded corners, fill=upcblue!10] at (0,0) {\footnotesize User sets Perp};
+    \draw[->, thick] (0,-0.5) -- (0,-1.5);
+    
+    \node[draw, rounded corners, fill=highlight!10] at (0,-2) {\footnotesize For each point $i$:};
+    \draw[->, thick] (0,-2.5) -- (0,-3.5);
+    
+    \node[draw, rounded corners, fill=upcgray!10] at (0,-4) {
+        \begin{minipage}{3cm}
+        \centering
+        \tiny Binary search to find\\
+        \tiny $\sigma_i$ that achieves\\
+        \tiny target perplexity
+        \end{minipage}
+    };
+\end{tikzpicture}
+\end{center}
+\end{column}
+\end{columns}
+
+\vspace{0.2cm}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Visual effect
+    \node at (-3,0) {\footnotesize Dense region};
+    \node[circle, fill=upcblue, inner sep=1.5pt] at (-3,-0.5) {};
+    \draw[upcblue, thick] (-3,-0.5) circle (0.3cm);
+    \node at (-3,-1) {\tiny auto: small $\sigma$};
+    
+    \node at (0,0) {\footnotesize Medium density};
+    \node[circle, fill=upcblue, inner sep=1.5pt] at (0,-0.5) {};
+    \draw[upcblue, thick] (0,-0.5) circle (0.5cm);
+    \node at (0,-1) {\tiny auto: medium $\sigma$};
+    
+    \node at (3,0) {\footnotesize Sparse region};
+    \node[circle, fill=upcblue, inner sep=1.5pt] at (3,-0.5) {};
+    \draw[upcblue, thick] (3,-0.5) circle (0.8cm);
+    \node at (3,-1) {\tiny auto: large $\sigma$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\colorbox{upcblue!10}{
+\begin{minipage}{0.85\textwidth}
+\centering
+\footnotesize\textbf{Result:} One intuitive parameter (Perplexity) automatically sets all $\sigma_i$ values!
+\end{minipage}
+}
+\end{center}
+\end{frame}
+
+% SLIDE 17: Low-Dimensional Similarities
+\begin{frame}{Mapping to the Low-D Space: q(j|i)}
+\vspace{-0.2cm}
+
+\textbf{\color{upcblue}The Next Step:} Define similarities in the map space
+
+\vspace{0.3cm}
+\begin{center}
+\colorbox{upcblue!10}{
+\begin{minipage}{0.85\textwidth}
+\centering
+Similar formula, but with a crucial difference:
 $$q_{j|i} = \frac{\exp(-\|\mathbf{y}_i - \mathbf{y}_j\|^2)}{\sum_{k \neq i} \exp(-\|\mathbf{y}_i - \mathbf{y}_k\|^2)}$$
 \end{minipage}
 }
 \end{center}
 
-\vspace{0.2cm}
-\textbf{\color{upcblue}Key Differences from High-D:}
+\vspace{0.3cm}
+\textbf{Key Difference: Fixed variance!}
 
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
-\textbf{Fixed Variance}
-
 \begin{center}
+\textbf{High-D Space}\\
+\begin{tikzpicture}[scale=0.6]
+    \node[circle, fill=upcblue, inner sep=2pt] at (0,0) {};
+    \draw[upcblue, dashed] (0,0) circle (0.4cm);
+    \node[circle, fill=upcblue, inner sep=2pt] at (2,0) {};
+    \draw[upcblue, dashed] (2,0) circle (0.8cm);
+    
+    \node at (1,-1.2) {\tiny Varying $\sigma_i$};
+\end{tikzpicture}
+\end{center}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{center}
+\textbf{Low-D Space}\\
 \begin{tikzpicture}[scale=0.6]
     \node[circle, fill=highlight, inner sep=2pt] at (0,0) {};
-    \node[below] at (0,0) {\tiny $\mathbf{y}_i$};
-    \draw[highlight!40, dashed] (0,0) circle (0.6cm);
-    \node at (0,-1.2) {\tiny $\sigma^2 = 0.5$ (fixed)};
+    \draw[highlight, dashed] (0,0) circle (0.5cm);
+    \node[circle, fill=highlight, inner sep=2pt] at (2,0) {};
+    \draw[highlight, dashed] (2,0) circle (0.5cm);
+    
+    \node at (1,-1.2) {\tiny Fixed $\sigma = 1/\sqrt{2}$};
 \end{tikzpicture}
 \end{center}
-
-\footnotesize
-No point-specific $\sigma_i$\\
-Often $\sigma^2 = 0.5$\\
-Or absorbed into gradient
-\end{column}
-
-\begin{column}{0.48\textwidth}
-\textbf{Why Fixed?}
-
-\footnotesize
-1. \textbf{Equal density:}\\
-   Points equally dense in low-D\\
-2. \textbf{Scale arbitrary:}\\
-   Can rescale embedding\\
-3. \textbf{Simplification:}\\
-   Fewer parameters
-
-\vspace{0.2cm}
-\textcolor{highlight}{\textbf{Result:}} Simpler optimization
 \end{column}
 \end{columns}
 
-\vspace{0.2cm}
+\vspace{0.3cm}
 \begin{center}
+\colorbox{highlight!20}{
+\begin{minipage}{0.85\textwidth}
+\centering
+\textbf{Why fixed variance?}\\
+\footnotesize
+- Encourages uniform distribution in visualization\\
+- Prevents all points from collapsing together\\
+- Scale of map is arbitrary anyway
+\end{minipage}
+}
+\end{center}
+\end{frame}
+
+% SLIDE 18: The Grand Objective
+\begin{frame}{The Objective: Aligning P and Q}
+\vspace{-0.2cm}
+
+\textbf{\color{upcblue}Where We Are:}
+
+\vspace{0.3cm}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{center}
+\textbf{High-D Space}\\
+\vspace{0.2cm}
 \begin{tikzpicture}[scale=0.7]
-    \node at (-2.5,0) {\tiny \textbf{High-D Space}};
-    \draw[upcblue!20, fill=upcblue!10] (-3.5,-0.5) rectangle (-1.5,-1);
-    \node at (-2.5,-0.75) {\tiny varying $\sigma_i$};
+    \draw[fill=upcblue!10] (-1.5,-1.5) rectangle (1.5,1.5);
+    \node at (0,1.8) {\footnotesize Data points $\mathbf{x}_i$};
     
-    \draw[->, thick, upcgray] (-1,0) -- (1,0) node[midway, above] {\tiny map};
+    \node[circle, fill=upcblue, inner sep=2pt] at (0,0) {};
+    \foreach \angle/\p in {30/0.3, 90/0.2, 150/0.15, 210/0.1, 270/0.15, 330/0.1} {
+        \node[circle, fill=upcgray, inner sep=1pt] at ({cos(\angle)},{sin(\angle)}) {};
+        \draw[->, thick] (0,0) -- ({0.5*cos(\angle)},{0.5*sin(\angle)});
+    }
     
-    \node at (2.5,0) {\tiny \textbf{Low-D Space}};
-    \draw[highlight!20, fill=highlight!10] (1.5,-0.5) rectangle (3.5,-1);
-    \node at (2.5,-0.75) {\tiny fixed $\sigma$};
-\end{tikzpicture}
-\end{center}
-\end{frame}
-
-% SLIDE 16: Measuring Mismatch - KL Divergence (Repaired and Enhanced)
-\begin{frame}{Measuring Mismatch: Kullback-Leibler Divergence}
-\vspace{-0.2cm}
-
-% --- The KL Divergence Formula ---
-\begin{center}
-\colorbox{upcblue!10}{
-\begin{minipage}{0.9\textwidth}
-\centering
-\small Intuition: The cost of encoding data from distribution $P$ using a code optimized for distribution $Q$.
-$$ \text{KL}(P||Q) = \sum_{j} p_j \log\left(\frac{p_j}{q_j}\right) $$
-\end{minipage}
-}
-\end{center}
-\vspace{0.2cm}
-
-% --- Columns for Properties and Penalty Visualization ---
-\begin{columns}[T]
-\begin{column}{0.48\textwidth}
-\textbf{\color{upcblue}Key Properties}
-\begin{itemize}
-    \setlength\itemsep{0.3em}
-    \item Always non-negative: $\text{KL}(P||Q) \ge 0$
-    \item Zero if and only if $P=Q$
-    \item \textbf{Not a distance metric} because it's \textbf{asymmetric}:
-    \begin{itemize}
-        \item[] $\text{KL}(P||Q) \neq \text{KL}(Q||P)$
-    \end{itemize}
-\end{itemize}
-
-\vspace{0.1cm}
-\colorbox{highlight!20}{
-\begin{minipage}{0.9\linewidth}
-\small
-\textbf{SNE's Goal:} Minimize $\sum_i \text{KL}(P_i||Q_i)$, where $P_i$ are high-dim probabilities and $Q_i$ are low-dim probabilities.
-\end{minipage}
-}
-
-\end{column}
-
-\begin{column}{0.48\textwidth}
-\textbf{\color{upcblue}Asymmetric Penalty}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.65]
-    % Axes
-    \draw[->] (0,0) -- (2.5,0) node[below] {\tiny Low-dim prob. $q_j$};
-    \draw[->] (0,0) -- (0,2.2) node[left] {\tiny Cost};
-    
-    % Plots of the cost term contribution: -p_j * log(q_j)
-    \draw[highlight, thick, domain=0.05:2.2] plot (\x, {-0.7*ln(\x)}) node[right, font=\tiny, xshift=2pt] {$p_j$ is large};
-    \draw[upcblue, thick, domain=0.05:2.2] plot (\x, {-0.2*ln(\x)}) node[above, font=\tiny, xshift=-5pt] {$p_j$ is small};
-\end{tikzpicture}
-\end{center}
-\footnotesize
-\textbf{Focus:} A large penalty is incurred for representing nearby points ($p_j$ large) with distant map points ($q_j$ small).
-
-\end{column}
-\end{columns}
-\vspace{0.2cm}
-
-% --- Visual Summary of Penalties ---
-\begin{center}
-\begin{tikzpicture}[
-    bar/.style={fill, minimum width=0.25cm},
-    label/.style={font=\footnotesize}
-]
-    % Case 1: High Cost
-    \begin{scope}[xshift=-3.5cm]
-        \node[label, align=center] at (0.25, 1) {\textbf{High Cost}};
-        % p_j is large
-        \draw[bar, upcblue!80, minimum height=0.7cm] (0,0) -- (0,0.7);
-        \node[label] at (0, -0.2) {$p_j$ (large)};
-        % q_j is small
-        \draw[bar, highlight!80, minimum height=0.15cm] (0.6,0) -- (0.6,0.15);
-        \node[label] at (0.6, -0.2) {$q_j$ (small)};
-        
-        \node[label, color=highlight] at (2, 0.35) {$\implies$ Large Penalty};
-    \end{scope}
-
-    % Case 2: Low Cost
-    \begin{scope}[xshift=3.5cm]
-        \node[label, align=center] at (0.25, 1) {\textbf{Low Cost}};
-        % p_j is small
-        \draw[bar, upcblue!80, minimum height=0.15cm] (0,0) -- (0,0.15);
-        \node[label] at (0, -0.2) {$p_j$ (small)};
-        % q_j is large
-        \draw[bar, highlight!80, minimum height=0.7cm] (0.6,0) -- (0.6,0.7);
-        \node[label] at (0.6, -0.2) {$q_j$ (large)};
-        
-        \node[label, color=upcgray] at (2, 0.35) {$\implies$ Small Penalty};
-    \end{scope}
-\end{tikzpicture}
-\end{center}
-\end{frame}
-
-
-
-% SLIDE 17: SNE's Cost Function
-\begin{frame}{SNE Cost Function: C(Y)}
-\vspace{-0.2cm}
-
-\begin{center}
-\colorbox{upcblue!10}{
-\begin{minipage}{0.85\textwidth}
-\centering
-\large
-$$C(Y) = \sum_{i=1}^{n} \text{KL}(P_i || Q_i) = \sum_i \sum_j p_{j|i} \log \frac{p_{j|i}}{q_{j|i}}$$
-\end{minipage}
-}
-\end{center}
-
-\vspace{0.3cm}
-\textbf{\color{upcblue}Understanding the Cost:}
-
-\begin{columns}[T]
-\begin{column}{0.48\textwidth}
-\textbf{What We Minimize}
-\vspace{0.1cm}
-
-\footnotesize
-Sum over all points $i$:\\
-Each $i$ has its own distribution $P_i$\\
-We want $Q_i$ to match $P_i$
-
-\vspace{0.2cm}
-\begin{center}
-\begin{tikzpicture}[scale=0.6]
-    \draw[->] (0,0) -- (2.5,0) node[right] {\tiny iteration};
-    \draw[->] (0,0) -- (0,2) node[above] {\tiny C(Y)};
-    
-    \draw[upcblue, thick] plot[smooth] coordinates {(0,1.8) (0.5,1.5) (1,1.2) (1.5,0.8) (2,0.5)};
-    \node at (1,-0.5) {\tiny Decreasing cost};
+    \node at (0,-1.8) {\footnotesize Distributions $P_i$};
+    \node at (0,-2.1) {\tiny (fixed by data)};
 \end{tikzpicture}
 \end{center}
 \end{column}
 
 \begin{column}{0.48\textwidth}
-\textbf{Asymmetric Penalties}
-\vspace{0.1cm}
-
 \begin{center}
-\begin{tikzpicture}[scale=0.5]
-    % Nearby points
-    \node[circle, fill=upcblue, inner sep=1pt] at (0,1) {};
-    \node[circle, fill=upcblue, inner sep=1pt] at (0.3,1.2) {};
-    \draw[<->, red, thick] (0.1,1.1) -- (0.2,1.1);
-    \node at (0.15,0.7) {\tiny Must stay close};
+\textbf{Low-D Space}\\
+\vspace{0.2cm}
+\begin{tikzpicture}[scale=0.7]
+    \draw[fill=highlight!10] (-1.5,-1.5) rectangle (1.5,1.5);
+    \node at (0,1.8) {\footnotesize Map points $\mathbf{y}_i$};
     
-    % Distant points
-    \node[circle, fill=upcgray, inner sep=1pt] at (2,1) {};
-    \node[circle, fill=upcgray, inner sep=1pt] at (2.3,0.8) {};
-    \draw[<->, orange, dashed] (2.1,0.9) -- (2.2,0.9);
-    \node at (2.15,0.5) {\tiny Can be flexible};
+    \node[circle, fill=highlight, inner sep=2pt] at (0,0) {};
+    \foreach \angle/\p in {45/0.1, 100/0.3, 180/0.2, 240/0.05, 300/0.25, 350/0.1} {
+        \node[circle, fill=upcgray, inner sep=1pt] at ({cos(\angle)},{sin(\angle)}) {};
+        \draw[->, thick, red] (0,0) -- ({0.5*cos(\angle)},{0.5*sin(\angle)});
+    }
+    
+    \node at (0,-1.8) {\footnotesize Distributions $Q_i$};
+    \node at (0,-2.1) {\tiny (we optimize)};
 \end{tikzpicture}
 \end{center}
-
-\footnotesize
-\textcolor{red}{High penalty:}\\
-Similar points mapped far\\
-\textcolor{orange}{Low penalty:}\\
-Distant points mapped close
 \end{column}
 \end{columns}
 
 \vspace{0.3cm}
 \begin{center}
-\colorbox{highlight!20}{
+\colorbox{upcblue!10}{
 \begin{minipage}{0.85\textwidth}
 \centering
-\footnotesize\textbf{Result:} SNE preserves local neighborhoods at the expense of global structure
+\textbf{The Goal:} Arrange points $\mathbf{y}_i$ so that $Q_i \approx P_i$ for all $i$
 \end{minipage}
 }
 \end{center}
 
 \vspace{0.2cm}
 \begin{center}
-\footnotesize
-\textit{Reference: Hinton \& Roweis (2002), van der Maaten \& Hinton (2008) Eq. 3}
+\textit{\color{upcblue}Question: How do we measure the total "mismatch"?}
 \end{center}
 \end{frame}
 
-% SLIDE 18: The Asymmetry and Local Focus of SNE
-\begin{frame}{What Does SNE Prioritize?}
+% SLIDE 19: Measuring Mismatch - KL Divergence
+\begin{frame}{Tool 3: Kullback-Leibler Divergence}
 \vspace{-0.2cm}
 
-\textbf{\color{upcblue}The Asymmetry of KL Divergence in Action}
+\textbf{\color{upcblue}Measuring Distribution Mismatch:} KL Divergence
 
 \vspace{0.3cm}
+\begin{center}
+\colorbox{upcblue!10}{
+\begin{minipage}{0.85\textwidth}
+\centering
+$$\text{KL}(P||Q) = \sum_j p_j \log\left(\frac{p_j}{q_j}\right)$$
+\footnotesize "The cost of encoding data from P using a code optimized for Q"
+\end{minipage}
+}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Critical Property: Asymmetry!}
+
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
-    % Case 1: Similar points separated
-    \node at (-3,2) {\textbf{Case 1: Similar $\rightarrow$ Separated}};
+    % Case illustrations
+    \node at (-3,1.5) {\footnotesize \textbf{Case 1: $p_j$ large, $q_j$ small}};
+    \draw[fill=upcblue!60] (-3.5,0.5) rectangle (-3.3,1);
+    \node at (-3.4,0.2) {\tiny $p_j$};
+    \draw[fill=highlight!30] (-2.8,0.5) rectangle (-2.6,0.6);
+    \node at (-2.7,0.2) {\tiny $q_j$};
     
-    % High-D space
-    \draw[fill=upcblue!10] (-5,0.5) rectangle (-1,1.5);
-    \node at (-3,1.8) {\footnotesize High-D Space};
-    \node[circle, fill=upcblue, inner sep=2pt] at (-3.5,1) {};
-    \node[circle, fill=upcblue, inner sep=2pt] at (-2.5,1) {};
-    \draw[<->, thick] (-3.3,1) -- (-2.7,1);
-    \node at (-3,0.5) {\tiny Close (large $p_{j|i}$)};
+    \node at (-3,-0.2) {\footnotesize $\log(p_j/q_j)$ is \textcolor{red}{large positive}};
+    \node at (-3,-0.5) {\footnotesize $\Rightarrow$ \textcolor{red}{High penalty!}};
     
-    % Arrow down
-    \draw[->, red, very thick] (-3,0.2) -- (-3,-0.8) node[midway, right] {\footnotesize\textcolor{red}{HIGH PENALTY}};
+    \node at (3,1.5) {\footnotesize \textbf{Case 2: $p_j$ small, $q_j$ large}};
+    \draw[fill=upcblue!30] (2.5,0.5) rectangle (2.7,0.6);
+    \node at (2.6,0.2) {\tiny $p_j$};
+    \draw[fill=highlight!60] (3.2,0.5) rectangle (3.4,1);
+    \node at (3.3,0.2) {\tiny $q_j$};
     
-    % Low-D space
-    \draw[fill=highlight!10] (-5,-2.5) rectangle (-1,-1.5);
-    \node at (-3,-1.2) {\footnotesize Low-D Space};
-    \node[circle, fill=highlight, inner sep=2pt] at (-4.5,-2) {};
-    \node[circle, fill=highlight, inner sep=2pt] at (-1.5,-2) {};
-    \draw[<->, thick] (-4.3,-2) -- (-1.7,-2);
-    \node at (-3,-2.5) {\tiny Far apart (small $q_{j|i}$)};
-    
-    % Case 2: Distant points collapsed
-    \node at (3,2) {\textbf{Case 2: Distant $\rightarrow$ Collapsed}};
-    
-    % High-D space
-    \draw[fill=upcblue!10] (1,0.5) rectangle (5,1.5);
-    \node at (3,1.8) {\footnotesize High-D Space};
-    \node[circle, fill=upcblue, inner sep=2pt] at (1.5,1) {};
-    \node[circle, fill=upcblue, inner sep=2pt] at (4.5,1) {};
-    \draw[<->, dashed] (1.7,1) -- (4.3,1);
-    \node at (3,0.5) {\tiny Far apart (small $p_{j|i}$)};
-    
-    % Arrow down
-    \draw[->, orange, very thick] (3,0.2) -- (3,-0.8) node[midway, right] {\footnotesize\textcolor{orange}{low penalty}};
-    
-    % Low-D space
-    \draw[fill=highlight!10] (1,-2.5) rectangle (5,-1.5);
-    \node at (3,-1.2) {\footnotesize Low-D Space};
-    \node[circle, fill=highlight, inner sep=2pt] at (2.5,-2) {};
-    \node[circle, fill=highlight, inner sep=2pt] at (3.5,-2) {};
-    \draw[<->, thick] (2.7,-2) -- (3.3,-2);
-    \node at (3,-2.5) {\tiny Close (large $q_{j|i}$)};
+    \node at (3,-0.2) {\footnotesize $\log(p_j/q_j)$ is negative};
+    \node at (3,-0.5) {\footnotesize $\Rightarrow$ \textcolor{orange}{Small penalty}};
 \end{tikzpicture}
 \end{center}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 \begin{center}
-\colorbox{upcblue!10}{
+\colorbox{highlight!20}{
 \begin{minipage}{0.85\textwidth}
 \centering
-\footnotesize\textbf{Key Insight:} SNE strongly preserves local neighborhoods (Case 1)\\
-\footnotesize but allows distant points to collapse (Case 2)
+\footnotesize\textbf{Implication:} Algorithm focuses on preserving local structure\\
+(high penalty for separating neighbors, low penalty for collapsing non-neighbors)
 \end{minipage}
 }
 \end{center}
 \end{frame}
 
-
-% SLIDE 19: Deriving the Gradient (Part 1)
-\begin{frame}{Optimizing SNE: The Gradient $\frac{\partial C}{\partial \mathbf{y}_i}$}
+% SLIDE 20: The SNE Cost Function
+\begin{frame}{The SNE Cost Function: C}
 \vspace{-0.2cm}
 
+\textbf{\color{upcblue}Putting It All Together:} The Complete Objective
+
+\vspace{0.3cm}
 \begin{center}
 \colorbox{upcblue!10}{
 \begin{minipage}{0.85\textwidth}
 \centering
-\textbf{Gradient Descent:} Update positions to minimize cost\\
-$$\mathbf{y}_i^{(t+1)} = \mathbf{y}_i^{(t)} - \eta \frac{\partial C}{\partial \mathbf{y}_i}$$
+$$C = \sum_{i=1}^n \text{KL}(P_i || Q_i) = \sum_i \sum_j p_{j|i} \log\frac{p_{j|i}}{q_{j|i}}$$
 \end{minipage}
 }
 \end{center}
 
 \vspace{0.3cm}
-\textbf{\color{upcblue}The SNE Gradient Formula:}
+\textbf{What This Means:}
 
-$$\frac{\partial C}{\partial \mathbf{y}_i} = 2 \sum_{j=1}^{n} (p_{ij} - q_{ij} + p_{ji} - q_{ji})(\mathbf{y}_i - \mathbf{y}_j)$$
-
-\vspace{0.2cm}
-\begin{columns}[T]
-\begin{column}{0.48\textwidth}
-\textbf{Key Components}
-\vspace{0.1cm}
-
-\footnotesize
-\textbf{Force terms:}\\
-$(p_{ij} - q_{ij})$: Mismatch from $i$ to $j$\\
-$(p_{ji} - q_{ji})$: Mismatch from $j$ to $i$\\
-
-\vspace{0.2cm}
-\textbf{Direction:}\\
-$(\mathbf{y}_i - \mathbf{y}_j)$: Vector from $j$ to $i$
-\end{column}
-
-\begin{column}{0.48\textwidth}
-\textbf{Derivation Steps}
-\vspace{0.1cm}
-
-\footnotesize
-1. Start with KL divergence\\
-2. Apply chain rule\\
-3. Differentiate w.r.t. $\mathbf{y}_i$\\
-4. Account for asymmetry\\
-5. Simplify terms
-
-\vspace{0.2cm}
-\textit{Full derivation in van der Maaten \& Hinton (2008), Section 2}
-\end{column}
-\end{columns}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Visualization of the optimization
+    \node[draw, rounded corners, fill=upcblue!10, minimum width=3cm, minimum height=1cm] at (-3,0) {
+        \begin{minipage}{2.8cm}
+        \centering
+        \footnotesize
+        Random initial\\
+        positions $\mathbf{y}_i$
+        \end{minipage}
+    };
+    
+    \draw[->, thick, upcblue] (-1.3,0) -- (-0.3,0);
+    
+    \node[draw, rounded corners, fill=highlight!10, minimum width=3cm, minimum height=1cm] at (1.5,0) {
+        \begin{minipage}{2.8cm}
+        \centering
+        \footnotesize
+        Gradient\\
+        descent
+        \end{minipage}
+    };
+    
+    \draw[->, thick, highlight] (3.2,0) -- (4.2,0);
+    
+    \node[draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=1cm] at (6,0) {
+        \begin{minipage}{2.8cm}
+        \centering
+        \footnotesize
+        Optimized\\
+        map
+        \end{minipage}
+    };
+    
+    \node at (1.5,-1.5) {\footnotesize Minimize $C$ by adjusting $\mathbf{y}_i$ positions};
+\end{tikzpicture}
+\end{center}
 
 \vspace{0.3cm}
 \begin{center}
 \colorbox{highlight!20}{
 \begin{minipage}{0.85\textwidth}
 \centering
-\footnotesize\textbf{Note:} The asymmetric nature requires considering both $p_{ij}$ and $p_{ji}$
+\footnotesize\textbf{The asymmetric penalty means:}\\
+- Similar points (high $p_{j|i}$) mapped far apart $\Rightarrow$ Large cost\\
+- Dissimilar points (low $p_{j|i}$) mapped close $\Rightarrow$ Small cost\\
+$\therefore$ SNE preserves local neighborhoods!
 \end{minipage}
 }
 \end{center}
 \end{frame}
 
-% SLIDE 20: Deriving the Gradient (Part 2: Intuition)
-\begin{frame}{Gradient Intuition: Forces at Play}
-\vspace{-0.2cm}
-
-\begin{center}
-\textbf{\color{upcblue}The Gradient as a System of Forces}
-\end{center}
-
-\vspace{0.3cm}
-\begin{center}
-\begin{tikzpicture}[scale=1.0]
-    % Central point
-    \node[circle, fill=upcblue, inner sep=3pt] at (0,0) (yi) {};
-    \node[below] at (yi) {\footnotesize $\mathbf{y}_i$};
-    
-    % Case 1: Attraction (p > q)
-    \node[circle, fill=highlight, inner sep=2pt] at (-3,1) (yj1) {};
-    \node[left] at (yj1) {\footnotesize $\mathbf{y}_j$};
-    \draw[->, red, very thick] (yi) -- (-1.2,0.4) node[midway, above] {\tiny Attract};
-    \node at (-3,-0.5) {\tiny $p_{ij} > q_{ij}$};
-    \node at (-3,-0.8) {\tiny Too far apart};
-    
-    % Case 2: Repulsion (p < q)
-    \node[circle, fill=highlight, inner sep=2pt] at (3,1) (yj2) {};
-    \node[right] at (yj2) {\footnotesize $\mathbf{y}_k$};
-    \draw[<-, orange, very thick] (yi) -- (1.2,0.4) node[midway, above] {\tiny Repel};
-    \node at (3,-0.5) {\tiny $p_{ik} < q_{ik}$};
-    \node at (3,-0.8) {\tiny Too close};
-    
-    % Balanced case
-    \node[circle, fill=green!60, inner sep=2pt] at (0,2) (yj3) {};
-    \node[above] at (yj3) {\footnotesize $\mathbf{y}_l$};
-    \node[green!60] at (0,1.3) {\tiny $p_{il} \approx q_{il}$};
-    \node[green!60] at (0,1) {\tiny No force};
-\end{tikzpicture}
-\end{center}
-
-\vspace{0.3cm}
-\begin{columns}[T]
-\begin{column}{0.48\textwidth}
-\begin{center}
-\colorbox{red!10}{
-\begin{minipage}{0.9\columnwidth}
-\centering
-\textbf{Attractive Force}\\
-\footnotesize
-When $p_{ij} > q_{ij}$:\\
-Points should be closer\\
-$\Rightarrow$ Pull together
-\end{minipage}
-}
-\end{center}
-\end{column}
-
-\begin{column}{0.48\textwidth}
-\begin{center}
-\colorbox{orange!10}{
-\begin{minipage}{0.9\columnwidth}
-\centering
-\textbf{Repulsive Force}\\
-\footnotesize
-When $p_{ij} < q_{ij}$:\\
-Points are too close\\
-$\Rightarrow$ Push apart
-\end{minipage}
-}
-\end{center}
-\end{column}
-\end{columns}
-
-\vspace{0.3cm}
-\begin{center}
-\colorbox{upcblue!10}{
-\begin{minipage}{0.85\textwidth}
-\centering
-\footnotesize\textbf{Equilibrium:} Forces balance when $p_{ij} = q_{ij}$ for all pairs
-\end{minipage}
-}
-\end{center}
-\end{frame}
 \end{document}

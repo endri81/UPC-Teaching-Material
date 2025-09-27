@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.27)  27 SEP 2025 15:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.27)  27 SEP 2025 15:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -800,20 +800,18 @@ Overfull \hbox (13.31577pt too wide) in paragraph at lines 539--539
 [10
 
 ]
-Overfull \vbox (33.08264pt too high) detected at line 779
- []
 
+LaTeX Font Warning: Font shape `OT1/cmss/bx/it' undefined
+(Font)              using `OT1/cmss/b/it' instead on input line 780.
+
+LaTeX Font Info:    Font shape `OT1/cmss/b/it' in size <10.95> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 780.
 
 
 [11
 
 ]
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <12> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 853.
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <14.4> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 853.
-
-Overfull \vbox (17.91463pt too high) detected at line 853
+Overfull \vbox (97.86034pt too high) detected at line 832
  []
 
 
@@ -821,15 +819,11 @@ Overfull \vbox (17.91463pt too high) detected at line 853
 [12
 
 ]
-Overfull \vbox (54.51157pt too high) detected at line 935
- []
-
-
 
 [13
 
 ]
-Overfull \vbox (66.75322pt too high) detected at line 1034
+Overfull \vbox (10.0992pt too high) detected at line 948
  []
 
 
@@ -837,21 +831,14 @@ Overfull \vbox (66.75322pt too high) detected at line 1034
 [14
 
 ]
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <14.4> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 999.
+
 
 [15
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1202--1202
-[]\OT1/cmss/bx/n/10 SNE's Goal: \OT1/cmss/m/n/10 Min-i-mize
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1202--1202
-[][] []\OT1/cmss/m/n/10 (\OT1/cmss/m/it/10 P[]\OMS/cmsy/m/n/10 jj\OT1/cmss/m/it/10 Q[]\OT1/cmss/m/n/10 )$, where $\OT1/cmss/m/it/10 P[]$ \OT1/cmss/m/n/10 are
- []
-
-
-Overfull \vbox (62.61792pt too high) detected at line 1202
+Overfull \vbox (34.6451pt too high) detected at line 1076
  []
 
 
@@ -859,7 +846,7 @@ Overfull \vbox (62.61792pt too high) detected at line 1202
 [16
 
 ]
-Overfull \vbox (39.25621pt too high) detected at line 1288
+Overfull \vbox (10.66124pt too high) detected at line 1141
  []
 
 
@@ -871,7 +858,7 @@ Overfull \vbox (39.25621pt too high) detected at line 1288
 [18
 
 ]
-Overfull \vbox (37.34195pt too high) detected at line 1418
+Overfull \vbox (13.54956pt too high) detected at line 1261
  []
 
 
@@ -879,7 +866,7 @@ Overfull \vbox (37.34195pt too high) detected at line 1418
 [19
 
 ]
-Overfull \vbox (16.31651pt too high) detected at line 1499
+Overfull \vbox (0.98529pt too high) detected at line 1332
  []
 
 
@@ -909,15 +896,15 @@ Package rerunfilecheck Info: File `t-sne-lecture.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 25805 strings out of 469728
- 524004 string characters out of 5475648
- 947158 words of memory out of 5000000
- 53713 multiletter control sequences out of 15000+600000
- 647275 words of font info for 111 fonts, out of 8000000 for 9000
+ 25738 strings out of 469728
+ 523167 string characters out of 5475648
+ 947232 words of memory out of 5000000
+ 53646 multiletter control sequences out of 15000+600000
+ 645669 words of font info for 105 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  101i,15n,107p,405b,1115s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on t-sne-lecture.pdf (20 pages, 306069 bytes).
+<c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on t-sne-lecture.pdf (20 pages, 300436 bytes).
 PDF statistics:
  690 PDF objects out of 1000 (max. 8388607)
  589 compressed objects within 6 object streams
