@@ -12,9 +12,10 @@
 \pgfplotsset{compat=1.18} % Good practice for pgfplots
 \usepackage{amsmath}      % For the 'align*' environment
 \usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, patterns}
-
-\pgfplotsset{compat=1.17}
-
+\usepackage{pifont}           % Provides the dingbat symbols like \ding{55}
+\usepackage{newunicodechar}   % Allows you to define Unicode characters
+\newunicodechar{✓}{\checkmark}
+\newunicodechar{✗}{\ding{55}}
 % Custom colors
 \definecolor{highDcolor}{RGB}{46, 134, 171}
 \definecolor{lowDcolor}{RGB}{162, 59, 114}
@@ -47,6 +48,62 @@
 \begin{frame}
 \titlepage
 \end{frame}
+
+% =================================================================
+% REVISED NEW SLIDE 1 (v5): FINAL COMPACT LAYOUT
+% =================================================================
+\begin{frame}{What is High-Dimensional Data? An Intuitive View}
+    \begin{block}{The Core Idea}
+        Think of data not as a spreadsheet, but as points in a "feature space." Each feature is a dimension.
+    \end{block}
+
+    \begin{columns}[T]
+        \column{0.45\textwidth}
+            \textbf{Simple Example: Housing Prices (2D)}
+            \begin{itemize}\small
+                \item Dimension 1: Square Footage
+                \item Dimension 2: Price
+                \item \textit{Easy to plot and see patterns!}
+            \end{itemize}
+
+            \vspace{0.4cm} % Further reduced vertical space
+            \textbf{Complex, High-Dimensional Examples:}
+            \begin{itemize}\small
+                \item \textbf{An Image (784-D):} Each pixel's brightness is one dimension.
+                \item \textbf{A Customer (100s of D):} Dimensions for age, purchase history, clicks...
+                \item \textbf{A Document (1000s of D):} Each dimension is a word's count.
+            \end{itemize}
+
+        \column{0.55\textwidth}
+            \begin{center}
+            \begin{tikzpicture}[scale=0.7] % Further reduced scale
+                \begin{scope}
+                    \draw[gray!30, thin, step=0.5] (-2,-2) grid (2,2);
+                    \fill[black!80] (-1.5,1.5) rectangle (-1,2);
+                    \fill[black!80] (-1,1.5) rectangle (-0.5,2);
+                    \fill[black!80] (-0.5,1.5) rectangle (0,2);
+                    \fill[black!80] (0,1.5) rectangle (0.5,2);
+                    \fill[black!80] (0.5,1.5) rectangle (1,2);
+                    \fill[black!70] (0,1) rectangle (0.5,1.5);
+                    \fill[black!60] (-0.5,0.5) rectangle (0,1);
+                    \fill[black!50] (-0.5,0) rectangle (0,0.5);
+                    \fill[black!40] (-1,-0.5) rectangle (-0.5,0);
+                    \fill[black!30] (-1,-1) rectangle (-0.5,-0.5);
+                    \fill[black!20] (-1.5,-1.5) rectangle (-1,-1);
+                    \draw[red, very thick] (0,1.5) rectangle (0.5,2);
+                    \node[text=red, align=center] at (3.7, 1.75) {\small One pixel = \\ \small One Dimension};
+                    \draw[->, red, thick] (0.5,1.75) -- (2.2,1.75);
+                \end{scope}
+            \end{tikzpicture}
+            
+            \begin{tcolorbox}[colback=yellow!10, colframe=orange!60, boxrule=1pt, width=\linewidth, top=1mm, bottom=1mm] % Added top/bottom padding control
+                \centering\small
+                \textbf{Key Idea:} We often work with data that has far more dimensions than the 2 or 3 we can perceive. This creates unexpected problems.
+            \end{tcolorbox}
+            \end{center}
+    \end{columns}
+\end{frame}
+
 
 \begin{frame}{What is Dimensionality Reduction?}
 \begin{block}{Definition}
@@ -268,6 +325,54 @@ Instead of asking "How close are points?" we ask "How likely are they neighbors?
 \end{tcolorbox}
 \end{frame}
 
+% ADD THIS AFTER SLIDE 5 (The Paradigm Shift)
+\begin{frame}{Why Probability Distributions for Neighborhoods?}
+\textbf{The Fundamental Question:}\\
+How do we mathematically represent "neighborliness" between points?
+
+\begin{columns}
+\column{0.5\textwidth}
+\textbf{Option 1: Binary (Yes/No)}
+\begin{itemize}
+\item Neighbor or not neighbor
+\item Problem: Too rigid!
+\item Loses gradual relationships
+\end{itemize}
+
+\textbf{Option 2: Raw Distances}
+\begin{itemize}
+\item Use actual measurements
+\item Problem: No context!
+\item 5 units means different things
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Option 3: Probabilities ✓}
+\begin{itemize}
+\item Continuous values [0,1]
+\item Context-aware (adapts to density)
+\item Mathematically tractable
+\item Information theory foundation
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Binary
+\draw[thick] (0,2) -- (1,2);
+\node at (0.5,1.7) {\tiny Binary};
+% Distance
+\draw[thick] (0,1) -- (1,0);
+\node at (0.5,0.7) {\tiny Distance};
+% Probability
+\draw[thick, blue] (0,0) .. controls (0.3,-0.3) and (0.7,-0.3) .. (1,-0.5);
+\node at (0.5,-0.8) {\tiny \textcolor{blue}{Probability}};
+\end{tikzpicture}
+\end{center}
+\end{columns}
+
+\vspace{0.3cm}
+\colorbox{green!20}{Next: How to convert distances to probabilities mathematically}
+\end{frame}
 
 \begin{frame}{Building Intuition: From Distances to Neighborhoods}
 \begin{columns}
@@ -1527,9 +1632,1208 @@ Perp = $\sqrt{N}/10$ to $\sqrt{N}/2$\\
 \end{frame}
 
 
-\end{document}
+% Slide 21 - MNIST CASE STUDY
+\begin{frame}{MNIST Case Study: Complete Pipeline}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Data Preparation}
+\textbf{1. Dataset:}
+\begin{itemize}
+\item 70,000 handwritten digits
+\item 28×28 pixels = 784 dimensions
+\end{itemize}
+
+\textbf{2. Preprocessing:}
+\begin{itemize}
+\item Scale pixels to [0,1]
+\item PCA to 50D (95\% variance)
+\item Remove outliers $(>3\sigma)$
+\end{itemize}
+
+\textbf{3. t-SNE Settings:}
+\begin{itemize}
+\item Perplexity = 30
+\item Learning rate = 200
+\item Iterations = 1000
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Result: Clear Digit Separation}\\[3mm]
+\begin{tikzpicture}[scale=0.8]
+\foreach \d/\x/\y/\c in {
+    0/0/0/blue,
+    1/2/1/red,
+    2/-1/2/green,
+    3/2/-1/orange,
+    4/-2/0/purple,
+    5/0/-2/brown,
+    6/1.5/2/pink,
+    7/-1.5/-1.5/gray,
+    8/0.5/-1/cyan,
+    9/1/0.5/yellow!80!black} {
+    \foreach \i in {1,...,12} {
+        \pgfmathsetmacro\rx{0.25*rnd}
+        \pgfmathsetmacro\ry{0.25*rnd}
+        \fill[\c!70] (\x+\rx,\y+\ry) circle (1.5pt);
+    }
+    \node at (\x,\y) {\textbf{\d}};
+}
+\end{tikzpicture}
+
+\vspace{3mm}
+\textbf{Success indicators:}
+\begin{itemize}
+\item Each digit forms cluster
+\item Similar digits nearby (7 near 1)
+\item Clear boundaries
+\end{itemize}
+\end{center}
+\end{columns}
+\end{frame}
+
+% Slide 22 - VALIDATION METRICS EXPLAINED
+\begin{frame}{Quantitative Validation: Understanding the Metrics}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{1. Neighborhood Preservation}
+\textbf{What it measures:}\\
+Do neighbors in high-D stay neighbors in 2D?
+
+\textbf{Formula:}
+$$\text{NPr}(k) = \frac{\text{overlap of } k \text{ neighbors}}{k}$$
+
+\textbf{Good values:}
+\begin{itemize}
+\item NPr(10) $> 0.7$ ✓
+\item NPr(30) $> 0.6$ ✓
+\item NPr(50) $> 0.5$ ✓
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{2. Trustworthiness}
+\textbf{What it measures:}\\
+Are 2D neighbors actually close in high-D?
+
+\textbf{Range:} 0 to 1 (higher = better)
+
+\textbf{Good values:}
+\begin{itemize}
+\item T(10) $> 0.95$ ✓
+\item T(30) $> 0.90$ ✓
+\end{itemize}
+
+\vspace{3mm}
+\textbf{Continuity:} Similar but checks if high-D neighbors preserved
+\end{block}
+\end{columns}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{yellow!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Rule:} If NPr > 0.6 and T > 0.9, your embedding is trustworthy}}
+\end{center}
+\end{frame}
+
+% Slide 23 - STABILITY ANALYSIS
+\begin{frame}{Stability Analysis: Is Your Embedding Reliable?}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Testing Protocol}
+\textbf{Steps:}
+\begin{enumerate}
+\item Run t-SNE 10 times
+\item Different random seeds
+\item Same parameters
+\item Compare results
+\end{enumerate}
+
+\textbf{Measure correlation:}
+\begin{itemize}
+\item Between pairwise distances
+\item Or cluster assignments
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Interpreting Results}\\[3mm]
+\begin{tikzpicture}[scale=0.9]
+% Good stability
+\draw[green!20, fill=green!20] (0,0) rectangle (3,0.5);
+\node[left] at (0,0.25) {$r > 0.9$};
+\node[right] at (3,0.25) {\small Very stable ✓};
+
+% Moderate
+\draw[yellow!40, fill=yellow!40] (0,-0.7) rectangle (2.5,-.2);
+\node[left] at (0,-0.45) {$r = 0.7-0.9$};
+\node[right] at (2.5,-0.45) {\small Acceptable};
+
+% Poor
+\draw[red!20, fill=red!20] (0,-1.4) rectangle (2,-0.9);
+\node[left] at (0,-1.15) {$r < 0.7$};
+\node[right] at (2,-1.15) {\small Unreliable ✗};
+\end{tikzpicture}
+
+\vspace{5mm}
+\textbf{Example correlation matrix:}\\
+\small
+\begin{tabular}{|c|c|c|c|}
+\hline
+Run & 1 & 2 & 3 \\
+\hline
+1 & 1.00 & 0.92 & 0.89 \\
+2 & 0.92 & 1.00 & 0.91 \\
+3 & 0.89 & 0.91 & 1.00 \\
+\hline
+\end{tabular}\\
+\normalsize
+Mean $r = 0.91$ → Very stable!
+\end{center}
+\end{columns}
+\end{frame}
+
+% Slide 24 - DATA PREPROCESSING
+\begin{frame}{Critical: Data Preprocessing for t-SNE}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Essential Steps}
+\textbf{1. Scaling (CRITICAL!)}
+\begin{itemize}
+\item Standardize: mean=0, std=1
+\item Or normalize to [0,1]
+\item \textcolor{red}{Never mix scales!}
+\end{itemize}
+
+\textbf{2. Dimensionality}
+\begin{itemize}
+\item If D > 50, use PCA first
+\item Keep 95\% variance
+\item Speeds computation 10×
+\end{itemize}
+
+\textbf{3. Missing Data}
+\begin{itemize}
+\item Impute with median
+\item Or remove samples
+\item Never use zeros!
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Preprocessing Pipeline}\\[3mm]
+\begin{tikzpicture}[scale=0.8, node distance=1.5cm]
+\node[draw, fill=blue!20] (raw) at (0,0) {Raw Data};
+\node[draw, fill=green!20] (scale) at (0,-1.5) {Scale};
+\node[draw, fill=green!20] (outlier) at (0,-3) {Remove Outliers};
+\node[draw, fill=green!20] (pca) at (0,-4.5) {PCA (if D>50)};
+\node[draw, fill=yellow!20] (tsne) at (0,-6) {t-SNE};
+
+\draw[->] (raw) -- (scale);
+\draw[->] (scale) -- (outlier);
+\draw[->] (outlier) -- (pca);
+\draw[->] (pca) -- (tsne);
+\end{tikzpicture}
+\end{center}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{red!20}{\parbox{0.8\textwidth}{\centering
+Bad preprocessing = bad embedding,\\
+regardless of t-SNE parameters!}}
+\end{center}
+\end{columns}
+\end{frame}
+
+% Slide 25 - t-SNE vs UMAP
+\begin{frame}{Modern Alternatives: When to Use What}
+\begin{center}
+\begin{tabular}{l|c|c|c}
+\textbf{Aspect} & \textbf{t-SNE} & \textbf{UMAP} & \textbf{Choose} \\
+\hline
+Speed & Slower & 5-10× faster & UMAP ✓ \\
+Local structure & Excellent & Excellent & Tie \\
+Global structure & Weak & Better & UMAP ✓ \\
+Scalability & <100K & Millions & UMAP ✓ \\
+Reproducibility & Random & More stable & UMAP ✓ \\
+New points & No & Yes & UMAP ✓ \\
+Interpretability & Intuitive & Complex & t-SNE ✓ \\
+Fine detail & Better & Good & t-SNE ✓ \\
+\end{tabular}
+\end{center}
+
+\vspace{5mm}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{center}
+\colorbox{blue!20}{\parbox{0.9\textwidth}{\centering
+\textbf{Use t-SNE when:}\\
+\small
+• Dataset < 50K points\\
+• Local detail critical\\
+• Publication figures\\
+• Exploring clusters}}
+\end{center}
+
+\column{0.5\textwidth}
+\begin{center}
+\colorbox{green!20}{\parbox{0.9\textwidth}{\centering
+\textbf{Use UMAP when:}\\
+\small
+• Large datasets\\
+• Need speed\\
+• Global structure matters\\
+• Production systems}}
+\end{center}
+\end{columns}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{yellow!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Pro tip:} Use both and trust what's consistent between them}}
+\end{center}
+\end{frame}
+
+% CONDENSED MATHEMATICAL ESSENTIALS (Replace slides 26-40 with these 5 slides)
+
+% Slide 26 - WHY SYMMETRIZATION MATTERS
+\begin{frame}{Mathematical Insight 1: Why Symmetrize?}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{The Problem}
+Original SNE uses asymmetric probabilities:
+$$p_{j|i} \neq p_{i|j}$$
+
+\textbf{Issue with outliers:}
+\begin{itemize}
+\item Outlier → others: very small
+\item Others → outlier: normal
+\item Result: Outliers disappear!
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{The Solution}
+Symmetrization:
+$$p_{ij} = \frac{p_{j|i} + p_{i|j}}{2n}$$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Regular points
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro\a{45*\i}
+    \fill[blue] (\a:1) circle (2pt);
+}
+% Outlier
+\fill[red] (2.5,0) circle (3pt);
+\draw[<->, thick, green] (1,0) -- (2.5,0);
+\node at (1.75,0.3) {\tiny preserved};
+\node at (0,-1.5) {Outlier stays connected};
+\end{tikzpicture}
+\end{center}
+\end{block}
+\end{columns}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{green!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Takeaway:} Symmetrization ensures every point gets fair representation}}
+\end{center}
+\end{frame}
+
+% Slide 27 - THE GRADIENT SIMPLIFIED
+\begin{frame}{Mathematical Insight 2: The Elegant Gradient}
+\begin{center}
+\Large The t-SNE gradient has beautiful structure:\\[5mm]
+\normalsize
+$$\frac{\partial C}{\partial y_i} = 4\sum_j \underbrace{(p_{ij} - q_{ij})}_{\text{error}} \cdot \underbrace{(y_i - y_j)}_{\text{direction}} \cdot \underbrace{(1 + d_{ij}^2)^{-1}}_{\text{adaptive weight}}$$
+\end{center}
+
+\vspace{5mm}
+\begin{columns}
+\column{0.33\textwidth}
+\begin{center}
+\textbf{Error Term}\\
+$(p_{ij} - q_{ij})$\\[3mm]
+\begin{tikzpicture}[scale=0.6]
+\fill[red] (0,0) circle (3pt);
+\fill[blue] (1.5,0) circle (3pt);
+\draw[thick, ->] (0,0) -- (1.5,0);
+\node at (0.75,-0.5) {\tiny How wrong?};
+\end{tikzpicture}
+\end{center}
+
+\column{0.33\textwidth}
+\begin{center}
+\textbf{Direction}\\
+$(y_i - y_j)$\\[3mm]
+\begin{tikzpicture}[scale=0.6]
+\fill[red] (0,0) circle (3pt);
+\fill[blue] (1,1) circle (3pt);
+\draw[thick, ->] (0,0) -- (1,1);
+\node at (0.5,-0.5) {\tiny Which way?};
+\end{tikzpicture}
+\end{center}
+
+\column{0.33\textwidth}
+\begin{center}
+\textbf{Adaptive Weight}\\
+$(1 + d_{ij}^2)^{-1}$\\[3mm]
+\begin{tikzpicture}[scale=0.6]
+\fill[red] (0,0) circle (3pt);
+\fill[blue] (0.5,0) circle (2pt);
+\fill[blue] (2,0) circle (2pt);
+\draw[thick, ->] (0,0) -- (0.5,0);
+\draw[thin, ->] (0,0) -- (2,0);
+\node at (1,-0.5) {\tiny How much?};
+\end{tikzpicture}
+\end{center}
+\end{columns}
+
+\vspace{5mm}
+\begin{center}
+\colorbox{blue!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Beautiful:} Nearby points get strong forces, distant points get weak forces}}
+\end{center}
+\end{frame}
+
+% Slide 28 - WHY STUDENT-T WITH DF=1
+\begin{frame}{Mathematical Insight 3: Why Exactly df=1?}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{The Student-t Family}
+General form with df=$\nu$:
+$$q_{ij} \propto (1 + d_{ij}^2/\nu)^{-(\nu+1)/2}$$
+
+\textbf{Special case $\nu=1$:}
+$$q_{ij} \propto (1 + d_{ij}^2)^{-1}$$
+
+This is the Cauchy distribution!
+\end{block}
+
+\vspace{1mm}
+\begin{block}{Why df=1 is Perfect}
+\begin{itemize}
+\item Heaviest possible tails
+\item Simplest gradient formula
+\item Maximum space for moderate distances
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Tail Thickness Comparison}\\[3mm]
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    xlabel={Distance},
+    ylabel={Decay rate},
+    width=6cm,
+    height=5cm,
+    ymode=log,
+    legend pos=north east,
+    legend style={font=\tiny}
+]
+\addplot[domain=1:5, samples=50, thick, red] {x^(-2)};
+\addlegendentry{df=1 ($d^{-2}$)}
+
+\addplot[domain=1:5, samples=50, thick, blue] {x^(-3)};
+\addlegendentry{df=2 ($d^{-3}$)}
+
+\addplot[domain=1:5, samples=50, thick, green] {x^(-6)};
+\addlegendentry{df=5 ($d^{-6}$)}
+
+\addplot[domain=1:5, samples=50, thick, gray, dashed] {exp(-x)};
+\addlegendentry{Gaussian}
+\end{axis}
+\end{tikzpicture}
+
+\vspace{3mm}
+df=1 has the slowest decay\\
+= most room for moderate distances
+\end{center}
+\end{columns}
+\end{frame}
+
+% Slide 29 - COMPUTATIONAL COMPLEXITY
+\begin{frame}{Practical Math: Computational Complexity}
+\begin{center}
+\begin{tabular}{l|c|c|c}
+\textbf{Algorithm} & \textbf{Time} & \textbf{Space} & \textbf{Practical Limit} \\
+\hline
+\hline
+Exact t-SNE & $O(n^2)$ & $O(n^2)$ & 5,000 points \\
+Barnes-Hut & $O(n \log n)$ & $O(n)$ & 100,000 points \\
+FFT-accelerated & $O(n)$ & $O(n)$ & 10 million points \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{5mm}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Where Time Goes}
+\begin{itemize}
+\item Computing $P$: Once, $O(n^2)$
+\item Computing $Q$: Every iteration
+\item Gradient: Every iteration
+\item Total: $\sim 1000$ iterations
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Speed Tips}
+\begin{itemize}
+\item PCA to 50D first: 10× speedup
+\item Barnes-Hut: 50× speedup
+\item Fewer iterations: 2× speedup
+\item GPU: 10-200× speedup
+\end{itemize}
+\end{block}
+\end{columns}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{yellow!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Rule of thumb:} 10K points = 1 minute, 100K points = 1 hour (CPU)}}
+\end{center}
+\end{frame}
+
+% Slide 30 - WHEN MATH MATTERS
+\begin{frame}{When Does the Math Actually Matter?}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Math You Can Ignore}
+\textcolor{gray}{For most users:}
+\begin{itemize}
+\item Lagrangian derivations
+\item Exact gradient formulas
+\item Entropy calculations
+\item Proof details
+\end{itemize}
+
+\vspace{3mm}
+Just use the default implementation!
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Math You Should Know}
+\textcolor{blue}{For better results:}
+\begin{itemize}
+\item Perplexity $\sim$ expected neighbors
+\item Heavy tails prevent crowding
+\item Local vs global structure trade-off
+\item Why preprocessing matters
+\end{itemize}
+
+\vspace{3mm}
+This helps you debug problems!
+\end{block}
+\end{columns}
+
+\vspace{5mm}
+\begin{center}
+\colorbox{green!20}{\parbox{0.85\textwidth}{\centering
+\textbf{The 80/20 Rule:}\\
+Understanding 20\% of the math gives you 80\% of the practical benefit}}
+\end{center}
+\end{frame}
 
 
+% Slide 41 - SINGLE-CELL GENOMICS APPLICATION
+\begin{frame}{Real-World Impact: Single-Cell Genomics}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{The Challenge}
+\textbf{Data characteristics:}
+\begin{itemize}
+\item 20,000+ genes per cell
+\item 100,000+ cells per experiment
+\item 90\%+ zeros (sparse data)
+\item Batch effects between samples
+\end{itemize}
 
+\textbf{Processing pipeline:}
+\begin{enumerate}
+\item Log-normalize counts
+\item Select top 2000 variable genes
+\item PCA to 50 components
+\item t-SNE with perplexity 30-100
+\end{enumerate}
+
+\textbf{Computational requirements:}
+\begin{itemize}
+\item Time: 2-4 hours (100K cells)
+\item RAM: 32-64 GB
+\item Software: Seurat, Scanpy
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Discovering Cell Types}\\[3mm]
+\begin{tikzpicture}[scale=0.8]
+% Cell type clusters with labels
+\foreach \type/\x/\y/\col/\name/\count in {
+    1/0/0/red/T-cells/3000,
+    2/2/1/blue/B-cells/2000,
+    3/-1/2/green/NK/500,
+    4/1.5/-1.5/orange/Monocytes/1500,
+    5/-2/-1/purple/Dendritic/300
+} {
+    \foreach \i in {1,...,20} {
+        \pgfmathsetmacro\rx{0.4*rnd}
+        \pgfmathsetmacro\ry{0.4*rnd}
+        \fill[\col!60, opacity=0.7] (\x+\rx,\y+\ry) circle (1.5pt);
+    }
+    \node at (\x,\y-0.6) {\footnotesize\name};
+    \node at (\x,\y-0.9) {\tiny\count\ cells};
+}
+\node at (0,-3) {\small Each cluster = cell type};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Impact:} Found 3 new cell subtypes in 2019 leading to new cancer therapies
+\end{columns}
+\end{frame}
+
+% Slide 42 - NLP APPLICATION
+\begin{frame}{NLP Revolution: Word Embeddings Visualization}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{The Pipeline}
+\textbf{Data preparation:}
+\begin{itemize}
+\item Word2Vec/BERT embeddings
+\item 300-768 dimensions
+\item Vocabulary: 10K-50K words
+\item Cosine distance metric
+\end{itemize}
+
+\textbf{t-SNE parameters:}
+\begin{itemize}
+\item Perplexity: 20-50
+\item Learning rate: 500
+\item Iterations: 5000
+\item Metric: cosine (not Euclidean!)
+\end{itemize}
+
+\textbf{Computational cost:}
+\begin{itemize}
+\item 10K words: 5 minutes
+\item 50K words: 45 minutes
+\item GPU recommended for >20K
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Semantic Clusters Revealed}\\[3mm]
+\begin{tikzpicture}[scale=0.8]
+% Royal cluster
+\node[blue] at (0,2) {\small king};
+\node[blue] at (0.5,1.8) {\small queen};
+\node[blue] at (-0.3,1.7) {\small prince};
+\node[blue] at (0.2,2.3) {\small royal};
+
+% Animal cluster
+\node[red] at (2.5,0.5) {\small cat};
+\node[red] at (2.8,0.2) {\small dog};
+\node[red] at (2.2,0) {\small pet};
+\node[red] at (2.5,0.8) {\small animal};
+
+% Vehicle cluster
+\node[green] at (-1,-1) {\small car};
+\node[green] at (-0.7,-1.2) {\small truck};
+\node[green] at (-1.3,-0.8) {\small vehicle};
+\node[green] at (-0.9,-1.5) {\small drive};
+
+% Country cluster
+\node[orange] at (1,0) {\small France};
+\node[orange] at (1.3,-0.3) {\small Paris};
+\node[orange] at (0.7,-0.2) {\small Europe};
+
+% Show relationships
+\draw[->, gray, dashed] (0.3,1.8) -- (2.2,0.3);
+\node[gray] at (1.2,1) {\tiny semantic distance};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Key insight:} Analogies preserved!\\
+king - man + woman $\sim$ queen
+\end{columns}
+\end{frame}
+
+% Slide 43 - DEEP LEARNING APPLICATION
+\begin{frame}{Deep Learning: Understanding Neural Networks}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Visualizing CNN Features}
+\textbf{What to visualize:}
+\begin{itemize}
+\item Layer activations (conv5, fc7)
+\item 512-4096 dimensional vectors
+\item Per image or per class
+\end{itemize}
+
+\textbf{Implementation:}
+\footnotesize
+\begin{enumerate}
+\item Extract features: 1 min/1K images
+\item PCA to 50D: 10 seconds
+\item t-SNE: 5-15 minutes
+\item Total: <20 min for 10K images
+\end{enumerate}
+\normalsize
+
+\textbf{Hardware requirements:}
+\begin{itemize}
+\item GPU for feature extraction
+\item 16GB RAM minimum
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{What You Discover}\\[3mm]
+\begin{tikzpicture}[scale=0.7]
+% Network diagram
+\draw[thick] (0,0) -- (0,3);
+\draw[thick] (2,0) -- (2,3);
+\draw[thick] (4,0) -- (4,3);
+
+\node at (0,3.3) {\small Input};
+\node at (2,3.3) {\small Conv5};
+\node at (4,3.3) {\small FC7};
+
+% Arrows to t-SNE
+\draw[->, thick, red] (2,1.5) -- (5,1.5);
+\draw[->, thick, blue] (4,1.5) -- (5,1.5);
+
+% t-SNE result
+\begin{scope}[shift={(7,1.5)}]
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro\a{45*\i}
+    \pgfmathsetmacro\r{0.8}
+    \fill[red!70] (\a:\r) circle (1.5pt);
+}
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro\a{45*\i+180}
+    \pgfmathsetmacro\r{0.8}
+    \fill[blue!70] (\a:\r) circle (1.5pt);
+}
+\node at (0,-1.5) {\small Classes separate};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Discoveries made:}
+\begin{itemize}
+\item Hierarchy emerges (dogs near wolves)
+\item Confusion patterns visible
+\item Dead neurons identified
+\item Adversarial vulnerabilities found
+\end{itemize}
+\end{columns}
+\end{frame}
+
+
+% ADVANCED METHODS - CONDENSED FROM 17 TO 5 SLIDES
+
+% Slide 44 - OVERVIEW OF EXTENSIONS
+\begin{frame}{Beyond Basic t-SNE: Advanced Methods Overview}
+\begin{center}
+\textbf{Choose Your Enhancement Based on Your Need}
+\end{center}
+
+\vspace{3mm}
+\begin{tabular}{l|l|l}
+\textbf{Your Problem} & \textbf{Solution} & \textbf{Trade-off} \\
+\hline
+Need to embed new data & Parametric t-SNE & 10× slower training \\
+Data changes over time & Dynamic t-SNE & Complex parameters \\
+Dataset > 100K points & GPU acceleration & Requires CUDA \\
+Need inverse mapping & Parametric t-SNE & Less flexible \\
+Multiple scales important & Multi-scale t-SNE & More parameters \\
+Want global structure & UMAP instead & Different algorithm \\
+\end{tabular}
+
+\vspace{5mm}
+\begin{center}
+\colorbox{yellow!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Reality check:} 90\% of users just need standard t-SNE with good parameters}}
+\end{center}
+\end{frame}
+
+% Slide 45 - PARAMETRIC T-SNE
+\begin{frame}{Parametric t-SNE: Learning a Mapping Function}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{How It Works}
+Instead of just finding positions, learn a function $f_\theta: \mathbb{R}^d \to \mathbb{R}^2$
+
+\textbf{Architecture:}
+\begin{itemize}
+\item Neural network (3-5 layers)
+\item Input: high-D data
+\item Output: 2D coordinates
+\item Train to minimize t-SNE loss
+\end{itemize}
+
+\textbf{When to use:}
+\begin{itemize}
+\item Streaming data
+\item Need to embed new points
+\item Production systems
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Practical Details}
+\textbf{Advantages:}
+\begin{itemize}
+\item Embed new data instantly
+\item Consistent mapping
+\item Can learn inverse
+\end{itemize}
+
+\textbf{Disadvantages:}
+\begin{itemize}
+\item 10× slower to train
+\item Slightly worse quality
+\item Needs more tuning
+\end{itemize}
+
+\textbf{Implementation:}
+\begin{itemize}
+\item Library: \texttt{parametric\_tsne}
+\item Time: 2-5 hours for 50K points
+\item GPU recommended
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% Slide 46 - GPU ACCELERATION
+\begin{frame}[fragile]{GPU Acceleration: Scaling to Millions}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Performance Gains}
+\begin{center}
+\begin{tabular}{l|r|r}
+\textbf{Dataset} & \textbf{CPU} & \textbf{GPU} \\
+\hline
+10K & 2 min & 10 sec \\
+100K & 2 hours & 5 min \\
+1M & Days & 1 hour \\
+\end{tabular}
+\end{center}
+
+\vspace{3mm}
+\textbf{Speedup:} 20-200× typical
+\end{block}
+
+\vspace{3mm}
+\begin{block}{Requirements}
+\begin{itemize}
+\item NVIDIA GPU ($\geq$ 4GB VRAM)
+\item CUDA toolkit installed
+\item Libraries: RAPIDS, cuda-tsne
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Implementation Tips}
+\textbf{Best practices:}
+\begin{itemize}
+\item Batch size = 512-1024
+\item Use mixed precision
+\item Monitor GPU memory
+\end{itemize}
+
+\textbf{Code example:}
+\footnotesize
+\begin{verbatim}
+# RAPIDS cuML
+from cuml import TSNE
+tsne = TSNE(n_components=2,
+            perplexity=30,
+            method='fft')  # Fast!
+Y = tsne.fit_transform(X)
+\end{verbatim}
+\normalsize
+
+\textbf{Cloud options:}
+\begin{itemize}
+\item Google Colab (free tier)
+\item AWS EC2 p3 instances
+\item \$1-3/hour typical cost
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% Slide 47 - DYNAMIC T-SNE
+\begin{frame}{Dynamic t-SNE: Visualizing Change Over Time}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{The Approach}
+Add temporal coherence to cost:
+$$C_{\text{total}} = C_{\text{t-SNE}} + \lambda C_{\text{temporal}}$$
+
+\textbf{Use cases:}
+\begin{itemize}
+\item Gene expression over time
+\item Topic evolution in text
+\item Learning progression
+\item Market dynamics
+\end{itemize}
+
+\textbf{Key parameter:}\\
+$\lambda$ = stability vs accuracy\\
+\small (0.1-0.5 typical)
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Visualization Example}\\[3mm]
+\begin{tikzpicture}[scale=0.7]
+% Time 1
+\begin{scope}[shift={(0,0)}]
+\draw[gray] (-1,-1) rectangle (1,1);
+\fill[blue!70] (-0.3,0.3) circle (3pt);
+\fill[red!70] (0.3,-0.3) circle (3pt);
+\node at (0,-1.3) {\tiny t=1};
+\end{scope}
+
+% Arrow
+\draw[->] (1.5,0) -- (2.5,0);
+
+% Time 2
+\begin{scope}[shift={(3.5,0)}]
+\draw[gray] (-1,-1) rectangle (1,1);
+\fill[blue!70] (-0.1,0.4) circle (3pt);
+\fill[red!70] (0.4,-0.1) circle (3pt);
+\draw[blue, ->] (-0.3,0.3) -- (-0.1,0.4);
+\draw[red, ->] (0.3,-0.3) -- (0.4,-0.1);
+\node at (0,-1.3) {\tiny t=2};
+\end{scope}
+\end{tikzpicture}
+
+Points move smoothly between frames
+\end{center}
+
+\textbf{Implementation:}
+\begin{itemize}
+\item Process all timepoints together
+\item 2-3× slower than static
+\item Results: animated visualization
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Slide 48 - PRACTICAL DECISION TREE
+\begin{frame}{Which Method Should You Actually Use?}
+\begin{center}
+\begin{tikzpicture}[scale=0.9, node distance=2cm]
+% Start
+\node[draw, fill=yellow!20] (start) at (0,0) {Start Here};
+
+% First decision
+\node[draw, diamond, fill=blue!20] (size) at (0,-2) {Data size?};
+\draw[->] (start) -- (size);
+
+% Size branches
+\node[draw, fill=green!20] (small) at (-3,-3.5) {Standard t-SNE};
+\draw[->] (size) -- node[left] {\small <10K} (small);
+
+\node[draw, fill=orange!20] (medium) at (0,-3.5) {Barnes-Hut};
+\draw[->] (size) -- node[right] {\small 10K-100K} (medium);
+
+\node[draw, diamond, fill=blue!20] (gpu) at (3,-3.5) {GPU?};
+\draw[->] (size) -- node[right] {\small >100K} (gpu);
+
+% GPU branches
+\node[draw, fill=green!20] (yesgpu) at (2,-5) {GPU t-SNE};
+\draw[->] (gpu) -- node[left] {\small Yes} (yesgpu);
+
+\node[draw, fill=red!20] (nogpu) at (4,-5) {Consider UMAP};
+\draw[->] (gpu) -- node[right] {\small No} (nogpu);
+
+% New data branch
+\node[draw, diamond, fill=blue!20] (newdata) at (0,-5) {New data?};
+\draw[->] (medium) -- (newdata);
+
+\node[draw, fill=purple!20] (param) at (-2,-6.5) {Parametric};
+\draw[->] (newdata) -- node[left] {\small Yes} (param);
+\end{tikzpicture}
+\end{center}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{green!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Default recipe:} Barnes-Hut t-SNE, perplexity=30, iterations=1000}}
+\end{center}
+\end{frame}
+
+% REPLACE SLIDES 61-75 WITH THESE 3 SLIDES
+
+% New Slide 61 (Replaces old 61-63)
+\begin{frame}{Key Extensions for Specialized Cases}
+\textbf{When Standard t-SNE Isn't Enough:}
+
+\begin{columns}
+\column{0.55\textwidth}
+\textbf{Supervised t-SNE (Fisher Kernel):}
+\begin{itemize}
+\item Incorporates class labels
+\item Modifies: $p_{ij} \times (1+\lambda)$ if same class
+\item Better class separation
+\item Use when: Labels available
+\end{itemize}
+
+\textbf{Alternative Kernels:}
+\begin{itemize}
+\item $\alpha$-SNE: $(1 + d^2)^{-\alpha}$ 
+\item Controls tail heaviness
+\item Use for specific distance needs
+\end{itemize}
+
+\column{0.45\textwidth}
+\small
+\begin{tabular}{l|l|l}
+\textbf{Method} & \textbf{Best For} & \textbf{Cost} \\
+\hline
+Standard & Exploration & $O(n \log n)$ \\
+Fisher & Classification & $O(n \log n)$ \\
+$\alpha$-SNE & Custom & $O(n^2)$ \\
+Parametric & New data & $O(n)$ + train \\
+\end{tabular}
+
+\vspace{0.3cm}
+\insight{Most users need only standard t-SNE. Consider extensions for specific requirements.}
+\end{columns}
+\end{frame}
+
+% New Slide 62 (Replaces old 64-70)
+\begin{frame}{Scaling to Millions of Points}
+\textbf{Three Approaches for Large-Scale t-SNE:}
+
+\begin{columns}
+\column{0.6\textwidth}
+\textbf{1. Approximation Methods:}
+\begin{itemize}
+\item \textbf{Random Walk:} Sample neighborhoods stochastically
+\item \textbf{Landmarks:} Embed subset, interpolate others
+\item \textbf{FFT:} For $d \leq 3$, use grid interpolation
+\end{itemize}
+
+\textbf{2. Computational Optimizations:}
+\begin{itemize}
+\item \textbf{GPU:} 50-100x speedup (RAPIDS, cuda-tsne)
+\item \textbf{Distributed:} Split across machines
+\item \textbf{Progressive:} Start with subset, add points
+\end{itemize}
+
+\textbf{3. Out-of-Sample Extension:}
+\begin{itemize}
+\item Train on subset, project new points
+\item Use parametric t-SNE or kernel regression
+\end{itemize}
+
+\column{0.4\textwidth}
+\begin{center}
+\textbf{Decision Tree:}
+\begin{tikzpicture}[scale=0.7]
+\node[draw, fill=blue!20] (root) at (0,0) {$n > 100K$?};
+\node[draw, fill=green!20] (gpu) at (-2,-1) {Try GPU};
+\node[draw, fill=green!20] (std) at (2,-1) {Standard};
+\node[draw, fill=yellow!20] (sample) at (-3,-2) {Sample};
+\node[draw, fill=yellow!20] (approx) at (-1,-2) {Approximate};
+
+\draw[->] (root) -- node[left] {Yes} (gpu);
+\draw[->] (root) -- node[right] {No} (std);
+\draw[->] (gpu) -- node[left] {$>1M$} (sample);
+\draw[->] (gpu) -- node[right] {$<1M$} (approx);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Implementation Libraries:}
+\begin{itemize}
+\item \texttt{openTSNE}: All methods
+\item \texttt{FIt-SNE}: FFT acceleration  
+\item \texttt{RAPIDS}: GPU implementation
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% New Slide 63 (Replaces old 71-75)
+\begin{frame}{Numerical Stability and Validation}
+\textbf{Critical Implementation Details:}
+
+\begin{columns}
+\column{0.5\textwidth}
+\textbf{Common Numerical Issues:}
+\begin{itemize}
+\item \textbf{Overflow:} Use log-sum-exp trick
+\item \textbf{Division by zero:} Add $\epsilon = 10^{-12}$
+\item \textbf{Gradient explosion:} Clip gradients to $[-4, 4]$
+\item \textbf{Poor initialization:} Multiple restarts
+\end{itemize}
+
+\textbf{Validation Best Practices:}
+\begin{itemize}
+\item Run \textbf{minimum 5 times} with different seeds
+\item Report \textbf{stability}: std dev of positions
+\item Check \textbf{convergence}: KL divergence plateau
+\item Measure \textbf{trustworthiness} at $k=10$
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Quality Checklist:}
+\begin{enumerate}
+\item[$\square$] Perplexity tested: 5-50 range
+\item[$\square$] Multiple runs performed
+\item[$\square$] Trustworthiness $> 0.9$
+\item[$\square$] No isolated points
+\item[$\square$] Convergence achieved
+\item[$\square$] Parameters documented
+\end{enumerate}
+
+\warning{Never trust a single t-SNE run!}
+
+\textbf{Reporting Requirements:}
+\begin{itemize}
+\item State exact parameters used
+\item Include convergence plots
+\item Show multiple perplexities
+\item Provide code/random seeds
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% REPLACE SLIDES 76-80 WITH THESE 3 SLIDES
+
+% New Slide 76 (Combines ethics and limitations more concisely)
+\begin{frame}{Critical Limitations and Ethical Use}
+\begin{columns}
+\column{0.5\textwidth}
+\textbf{Fundamental Limitations:}
+\begin{itemize}
+\item \textbf{Non-deterministic:} Different runs → different layouts
+\item \textbf{No absolute positions:} Only relative structure matters
+\item \textbf{No cluster sizes:} Visual size $\neq$ actual size
+\item \textbf{Parameter sensitive:} Results change with perplexity
+\end{itemize}
+
+\textbf{Ethical Responsibilities:}
+\begin{itemize}
+\item Report \textbf{all} parameters used
+\item Show \textbf{multiple} runs (minimum 3)
+\item Never cherry-pick best result
+\item Acknowledge when patterns unclear
+\end{itemize}
+
+\column{0.5\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Draw warning triangle
+\draw[thick, red, fill=yellow!30] (0,0) -- (2,0) -- (1,1.732) -- cycle;
+\node at (1,0.6) {\textbf{!}};
+\node[below] at (1,-0.3) {\small \textbf{Common Misuses:}};
+\node[text width=5cm, below] at (1,-0.7) {\footnotesize
+• Interpreting distances globally\\
+• Comparing cluster sizes\\
+• Single run as "truth"\\
+• Ignoring failed convergence
+};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+\ethics{Always provide: data, code, parameters, and multiple visualizations}
+\end{columns}
+\end{frame}
+
+% New Slide 77 (Condensed test questions - only essential ones)
+\begin{frame}{Key Takeaways: Test Your Understanding}
+\textbf{Five Essential Questions:}
+
+\begin{enumerate}
+\item \textbf{Why does SNE fail?}\\
+\textcolor{gray}{\small Hint: Think about available area in 2D for different distance scales}
+
+\item \textbf{How does Student-t distribution solve the crowding problem?}\\
+\textcolor{gray}{\small Hint: Compare tail behavior to Gaussian}
+
+\item \textbf{What does perplexity actually control?}\\
+\textcolor{gray}{\small Hint: Not just "number of neighbors"}
+
+\item \textbf{When should you NOT trust a t-SNE visualization?}\\
+\textcolor{gray}{\small Hint: Multiple warning signs exist}
+
+\item \textbf{What's the minimum validation needed?}\\
+\textcolor{gray}{\small Hint: Think runs, parameters, metrics}
+\end{enumerate}
+
+\vspace{0.5cm}
+\begin{center}
+\colorbox{green!20}{If you can answer these, you understand t-SNE's core concepts!}
+\end{center}
+\end{frame}
+
+% New Slide 78 (Final resources and practical summary)
+\begin{frame}{Resources and Final Guidance}
+\begin{columns}
+\column{0.5\textwidth}
+\textbf{Essential Resources:}
+\begin{itemize}
+\item \textbf{Original paper:} van der Maaten \& Hinton (2008)
+\item \textbf{Interactive guide:} distill.pub/2016/misread-tsne
+\item \textbf{Python:} \texttt{scikit-learn}, \texttt{openTSNE}
+\item \textbf{R:} \texttt{Rtsne}, \texttt{tsne}
+\item \textbf{GPU:} \texttt{rapids-tsne}, \texttt{tsnecuda}
+\end{itemize}
+
+\textbf{Getting Started Checklist:}
+\begin{enumerate}
+\item Start with perplexity = $n/100$
+\item Run at least 3 times
+\item Try perplexities: 5, 30, 50, 100
+\item Check convergence (1000+ iterations)
+\item Validate with known structure
+\end{enumerate}
+
+\column{0.5\textwidth}
+\textbf{Decision Flowchart:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6, font=\footnotesize]
+\node[draw, fill=blue!20] (start) at (0,0) {Use t-SNE?};
+\node[draw, fill=green!20] (explore) at (-2,-1.5) {Yes: Explore};
+\node[draw, fill=red!20] (measure) at (2,-1.5) {No: PCA/MDS};
+\node[text width=3cm] (q1) at (0,-0.7) {\tiny Need exact distances?};
+\node[text width=3cm] (q2) at (-2,-2.3) {\tiny Visualization goal};
+
+\draw[->] (start) -- (q1);
+\draw[->] (q1) -- node[left] {\tiny No} (explore);
+\draw[->] (q1) -- node[right] {\tiny Yes} (measure);
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Remember:}\\
+t-SNE is a \textbf{tool for exploration}, not proof\\
+Trust \textbf{consistent patterns} across runs\\
+Always \textbf{validate} findings with other methods
+
+\vspace{0.3cm}
+\begin{center}
+\colorbox{blue!20}{\textbf{Thank you! Questions welcome}}\\
+\small Contact: eraco@polytechnic.cat
+\end{center}
+\end{columns}
+\end{frame}
 
 \end{document}

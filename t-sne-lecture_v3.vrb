@@ -1,0 +1,56 @@
+\frametitle{GPU Acceleration: Scaling to Millions}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Performance Gains}
+\begin{center}
+\begin{tabular}{l|r|r}
+\textbf{Dataset} & \textbf{CPU} & \textbf{GPU} \\
+\hline
+10K & 2 min & 10 sec \\
+100K & 2 hours & 5 min \\
+1M & Days & 1 hour \\
+\end{tabular}
+\end{center}
+
+\vspace{3mm}
+\textbf{Speedup:} 20-200× typical
+\end{block}
+
+\vspace{3mm}
+\begin{block}{Requirements}
+\begin{itemize}
+\item NVIDIA GPU ($\geq$ 4GB VRAM)
+\item CUDA toolkit installed
+\item Libraries: RAPIDS, cuda-tsne
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Implementation Tips}
+\textbf{Best practices:}
+\begin{itemize}
+\item Batch size = 512-1024
+\item Use mixed precision
+\item Monitor GPU memory
+\end{itemize}
+
+\textbf{Code example:}
+\footnotesize
+\begin{verbatim}
+# RAPIDS cuML
+from cuml import TSNE
+tsne = TSNE(n_components=2,
+            perplexity=30,
+            method='fft')  # Fast!
+Y = tsne.fit_transform(X)
+\end{verbatim}
+\normalsize
+
+\textbf{Cloud options:}
+\begin{itemize}
+\item Google Colab (free tier)
+\item AWS EC2 p3 instances
+\item \$1-3/hour typical cost
+\end{itemize}
+\end{block}
+\end{columns}
