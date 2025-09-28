@@ -885,6 +885,648 @@ In 2D, we need room for varying distances that doesn't geometrically exist!}}
 \end{center}
 \end{frame}
 
+% Slide 11
+\begin{frame}{SNE's Fatal Flaw Visualized}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{center}
+\textbf{High-D: Room for all}\\[0.3cm]
+\begin{tikzpicture}[scale=1.2]
+\foreach \r/\c in {0.5/green, 0.8/yellow, 1.1/orange, 1.4/red} {
+    \foreach \a in {0,60,...,300} {
+        \fill[\c!70] (\a:\r) circle (2pt);
+    }
+}
+\node at (0,-2) {Distinct distances};
+\end{tikzpicture}
+\end{center}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{2D with Gaussian: Crushed!}\\[0.3cm]
+\begin{tikzpicture}[scale=1.2]
+\shade[inner color=white, outer color=red!30] (0,0) circle (0.5);
+\foreach \i in {1,...,20} {
+    \pgfmathsetmacro\r{0.3*rnd}
+    \pgfmathsetmacro\a{360*rnd}
+    \fill[black!50] (\a:\r) circle (1.5pt);
+}
+\node at (0,-2) {Cannot represent};
+\node at (0,-2.5) {moderate distances};
+\end{tikzpicture}
+\end{center}
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\Large\textbf{Solution: Use distribution with heavier tails!}
+\end{center}
+\end{frame}
+
+
+% Slide 12 - REVISED VERSION
+\begin{frame}{The t-SNE Innovation: Student-t Distribution}
+\vspace{-3mm}
+\begin{columns}
+\column{0.55\textwidth}
+\begin{block}{The Key Change}
+\textbf{SNE (Gaussian in 2D):}
+$$q_{ij} = \frac{e^{-d_{ij}^2}}{\sum_{k \neq l} e^{-d_{kl}^2}}$$
+
+\textbf{t-SNE (Student-t in 2D):}
+$$q_{ij} = \frac{(1 + d_{ij}^2)^{-1}}{\sum_{k \neq l} (1 + d_{kl}^2)^{-1}}$$
+
+\vspace{1mm}
+\textbf{Mathematical Properties:}
+\begin{itemize}
+\item Polynomial decay: $O(d^{-2})$ vs exponential
+\item Heavy tails preserve moderate distances
+\item Cauchy distribution (df = 1)
+\end{itemize}
+\end{block}
+
+\column{0.45\textwidth}
+\begin{center}
+\textbf{Decay Comparison}\\[2mm]
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    xlabel={Distance},
+    ylabel={Similarity},
+    width=6cm,
+    height=4.5cm,
+    grid=major,
+    legend pos=north east,
+    domain=0:4,
+    ymode=log,
+    ymin=0.001, ymax=1
+]
+\addplot[samples=100, thick, blue] {exp(-x^2)};
+\addlegendentry{Gaussian}
+\addplot[samples=100, thick, red, line width=1.5pt] {1/(1+x^2)};
+\addlegendentry{Student-t}
+
+% Mark the key difference region
+\fill[green, opacity=0.2] (axis cs:1.5,0.001) rectangle (axis cs:3,0.1);
+\node at (axis cs:2.25,0.02) {\tiny Room for};
+\node at (axis cs:2.25,0.008) {\tiny moderate};
+\node at (axis cs:2.25,0.003) {\tiny distances};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{columns}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{green!20}{\parbox{0.9\textwidth}{\centering
+\textbf{How it solves crowding:} Heavy tails provide "space" for moderate distances\\
+that doesn't exist geometrically in 2D but exists mathematically in the similarity function}}
+\end{center}
+\end{frame}
+
+% Slide 13
+\begin{frame}{Quantifying the Solution}
+\begin{block}{Similarity Ratio Analysis}
+For distances $d_1 = 1$ and $d_2 = 3$:
+  \end{block}
+
+\begin{columns}
+\column{0.5\textwidth}
+\textbf{Gaussian:}
+$$\frac{q(d_1)}{q(d_2)} = \frac{e^{-1}}{e^{-9}} = e^8 \approx 2981$$
+  \textcolor{red}{Moderate distance becomes "infinite"}
+
+\column{0.5\textwidth}
+\textbf{Student-t:}
+$$\frac{q(d_1)}{q(d_2)} = \frac{1/(1+1)}{1/(1+9)} = 5$$
+  \textcolor{green}{Moderate distance preserved}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\colorbox{yellow!30}{\Large 600× difference in representation capacity!}
+\end{center}
+\end{frame}
+
+
+% Slide 14a - THE THREE KEY MODIFICATIONS
+\begin{frame}{From SNE to t-SNE: Three Critical Changes}
+\vspace{-3mm}
+\begin{center}
+\Large\textbf{The Evolution}
+\end{center}
+
+\vspace{1mm}
+\begin{block}{Modification 1: Symmetrization}
+\textbf{SNE:} Asymmetric $p_{j|i} \neq p_{i|j}$\\
+\textbf{t-SNE:} Symmetric $p_{ij} = p_{ji} = \frac{p_{j|i} + p_{i|j}}{2n}$
+
+\vspace{1mm}
+\textbf{Why?} 
+\begin{itemize}
+\item Simplifies gradient (one term instead of two)
+\item Ensures outliers get fair representation
+\item More elegant optimization
+\end{itemize}
+\end{block}
+
+\begin{block}{Modification 2: Student-t in Low-D}
+\textbf{SNE:} $q_{ij} = \frac{\exp(-d_{ij}^2)}{\sum_{k \neq l}\exp(-d_{kl}^2)}$ (Gaussian)\\
+\textbf{t-SNE:} $q_{ij} = \frac{(1+d_{ij}^2)^{-1}}{\sum_{k \neq l}(1+d_{kl}^2)^{-1}}$ (Student-t)
+
+\vspace{1mm}
+\textbf{Why?} Solves crowding with heavy tails
+\end{block}
+
+\begin{block}{Modification 3: Single KL Divergence}
+\textbf{SNE:} $C = \sum_i \text{KL}(P_i||Q_i)$ (sum of individual KLs)\\
+\textbf{t-SNE:} $C = \text{KL}(P||Q)$ (single joint KL)
+
+\vspace{1mm}
+\textbf{Why?} Works with symmetric probabilities
+\end{block}
+\end{frame}
+
+% Slide 14b - THE UNIFIED ALGORITHM
+\begin{frame}{The Complete t-SNE Algorithm}
+\vspace{-3mm}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Input → Probabilities}
+\textbf{1. Compute pairwise affinities:}
+\small
+$$p_{j|i} = \frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_k \exp(-\|x_i-x_k\|^2/2\sigma_i^2)}$$
+\normalsize
+
+\textbf{2. Symmetrize:}
+$$p_{ij} = \frac{p_{j|i} + p_{i|j}}{2n}$$
+
+\textbf{3. Early exaggeration:}
+$$p_{ij} \leftarrow 4 \cdot p_{ij} \text{ (first 250 iter)}$$
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Optimization}
+\textbf{4. Initialize:} $y_i \sim \mathcal{N}(0, 10^{-4})$
+
+\textbf{5. Compute low-D similarities:}
+\small
+$$q_{ij} = \frac{(1+\|y_i-y_j\|^2)^{-1}}{\sum_{k \neq l}(1+\|y_k-y_l\|^2)^{-1}}$$
+\normalsize
+
+\textbf{6. Update via gradient:}
+\small
+$$\frac{\partial C}{\partial y_i} = 4\sum_j (p_{ij} - q_{ij})(y_i - y_j)(1 + d_{ij}^2)^{-1}$$
+\normalsize
+
+\textbf{7. Iterate until convergence}
+\end{block}
+\end{columns}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{blue!20}{\parbox{0.9\textwidth}{\centering
+\textbf{Result:} An elegant algorithm that preserves local structure while solving crowding}}
+\end{center}
+\end{frame}
+
+% Slide 15
+\begin{frame}{Understanding the Gradient: Force Interpretation}
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\fill[red] (0,0) circle (3pt);
+\node[above] at (0,0.2) {$y_i$};
+
+\foreach \angle/\dist in {30/1.5, 90/1.2, 150/1.3} {
+  \draw[->, thick, green!70, >=stealth] (0,0) -- (\angle:\dist);
+  \fill[green] (\angle:\dist) circle (2pt);
+}
+
+\foreach \angle/\dist in {210/1, 270/0.8, 330/1.1} {
+  \draw[<-, thick, red!70, >=stealth] (\angle:\dist) -- (\angle:0.3);
+  \fill[gray] (\angle:\dist) circle (2pt);
+}
+
+\node at (0,-2) {$\nabla C = 4\sum_j \underbrace{(p_{ij} - q_{ij})}_{\text{error}} \underbrace{(y_i - y_j)}_{\text{direction}} \underbrace{(1 + d_{ij}^2)^{-1}}_{\text{adaptive weight}}$};
+\end{tikzpicture}
+\end{center}
+
+\insight{Weight term prevents distant clusters from merging}
+\end{frame}
+
+
+% Slide 16a - EARLY EXAGGERATION
+\begin{frame}{Optimization Trick 1: Early Exaggeration}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{The Technique}
+\textbf{What:} Multiply $P$ by 4 for first 250 iterations
+$$p_{ij}^{\text{early}} = 4 \cdot p_{ij}$$
+
+\textbf{Effect on forces:}
+\begin{itemize}
+\item True neighbors pull 4× harder
+\item Clusters form quickly
+\item Global structure emerges first
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Visual Effect}\\[3mm]
+\begin{tikzpicture}[scale=0.7]
+% Before
+\draw[gray] (-1.5,-0.5) rectangle (1.5,0.5);
+\foreach \i in {1,...,15} {
+    \pgfmathsetmacro\x{3*rnd-1.5}
+    \pgfmathsetmacro\y{rnd-0.5}
+    \fill[blue!50] (\x,\y) circle (1pt);
+}
+\node at (0,-0.8) {\small Random start};
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=0.7]
+% After
+\draw[gray] (-1.5,-0.5) rectangle (1.5,0.5);
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro\r{0.15*rnd}
+    \pgfmathsetmacro\a{72*rnd}
+    \fill[red!70] (-0.8,0) ++(\a:\r) circle (1.5pt);
+    \fill[green!70] (0.8,0) ++(\a:\r) circle (1.5pt);
+}
+\node at (0,-0.8) {\small After 250 iter};
+\end{tikzpicture}
+\end{center}
+\end{columns}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{green!20}{\parbox{0.85\textwidth}{\centering
+Strong initial forces prevent poor local arrangements}}
+\end{center}
+\end{frame}
+
+% Slide 16b - MOMENTUM
+\begin{frame}{Optimization Trick 2: Momentum}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{The Technique}
+\textbf{Update equation:}
+\small
+$$\Delta y_i^{(t)} = -\eta \nabla_i + \alpha(t) \Delta y_i^{(t-1)}$$
+\normalsize
+
+\textbf{Schedule:}
+$$\alpha(t) = \begin{cases}
+0.5 & t < 250 \\
+0.8 & t \geq 250
+\end{cases}$$
+
+\textbf{Benefits:}
+\begin{itemize}
+\item Escapes local minima
+\item Smooths optimization
+\item Reduces oscillations
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Effect on Optimization}\\[3mm]
+\begin{tikzpicture}[scale=0.7]
+% Cost landscape
+\draw[thick, gray!50] plot[smooth, tension=0.7] coordinates {(0,2) (1,1) (1.5,1.5) (2,0.5) (3,0.8) (4,0)};
+
+% Without momentum
+\draw[red, thick, ->] (0.5,1.8) -- (1,1.2);
+\fill[red] (1,1.2) circle (2pt);
+\node[red] at (1,1.5) {\tiny Stuck};
+
+% With momentum
+\draw[blue, thick, ->] (0.5,1.6) -- (2.5,0.4);
+\draw[blue, thick, ->] (2.5,0.4) -- (4,0);
+\fill[blue] (4,0) circle (2pt);
+\node[blue] at (4,-0.3) {\tiny Success};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Analogy:} Ball rolling downhill - momentum carries it over bumps
+\end{columns}
+\end{frame}
+
+% Slide 16c - ADAPTIVE LEARNING
+\begin{frame}{Optimization Trick 3: Adaptive Learning Rate}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{The Technique}
+\textbf{Adaptation rule:}
+\small
+\begin{itemize}
+\item Same direction: $\eta \times 1.2$
+\item Direction change: $\eta \times 0.8$
+\item Min: $\eta_{\min} = 0.01$
+\item Max: $\eta_{\max} = 1000$
+\end{itemize}
+\normalsize
+
+\textbf{Benefits:}
+\begin{itemize}
+\item Fast in flat regions
+\item Careful near minima
+\item Automatic adjustment
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Learning Rate Evolution}\\[3mm]
+\begin{tikzpicture}[scale=0.6]
+\begin{axis}[
+    xlabel={\tiny Iteration},
+    ylabel={\tiny Learning Rate},
+    width=6cm,
+    height=4cm,
+    legend pos=north east,
+    legend style={font=\tiny}
+]
+% Adaptive
+\addplot[thick, red, mark=none] coordinates {
+    (0,200) (100,180) (200,100) (300,80) (400,50)
+};
+\addlegendentry{Adaptive}
+
+% Fixed
+\addplot[thick, blue, dashed] coordinates {
+    (0,200) (400,200)
+};
+\addlegendentry{Fixed}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{columns}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{green!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Combined:} 5× speedup (5000 → 1000 iterations)}}
+\end{center}
+\end{frame}
+
+
+% Slide 17 - BARNES-HUT REVISED
+\begin{frame}{Barnes-Hut: Scaling to Large Datasets}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{The Algorithm}
+\textbf{Key Idea:} Treat distant clusters as single points
+
+\textbf{Steps:}
+\begin{enumerate}
+\item Build quadtree (2D) or octree (3D)
+\item For each point, traverse tree
+\item Apply criterion: $\frac{r_{\text{cell}}}{d_{\text{to cell}}} < \theta$
+\item If satisfied, use center of mass
+\end{enumerate}
+
+\textbf{Parameter:} $\theta \in [0.5, 0.8]$\\
+\small (higher = faster but less accurate)
+\end{block}
+
+\column{0.5\textwidth}
+\begin{center}
+\textbf{Tree Approximation}\\[2mm]
+\begin{tikzpicture}[scale=0.8]
+\draw[thick] (0,0) rectangle (4,4);
+\draw (2,0) -- (2,4);
+\draw (0,2) -- (4,2);
+\draw (1,2) -- (1,4);
+\draw (0,3) -- (2,3);
+
+% Points
+\foreach \i in {1,...,15} {
+  \pgfmathsetmacro\x{4*rnd}
+  \pgfmathsetmacro\y{4*rnd}
+  \fill[blue] (\x,\y) circle (1pt);
+}
+
+% Highlight distant cell
+\fill[red!30, opacity=0.5] (2,2) rectangle (4,4);
+\node at (3,3) {\small 1 point};
+\draw[<-] (3.5,3) -- (4.5,3.5) node[right] {\tiny Center of mass};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tabular}{l|r|r}
+\textbf{Points} & \textbf{Exact} & \textbf{Barnes-Hut} \\
+\hline
+1,000 & 1 sec & 0.1 sec \\
+10,000 & 100 sec & 2 sec \\
+100,000 & 10,000 sec & 50 sec \\
+\end{tabular}
+\end{center}
+\end{columns}
+\end{frame}
+
+% Slide 18 - DEBUGGING REVISED
+\begin{frame}{Debugging t-SNE: Visual Diagnosis Guide}
+\begin{center}
+\textbf{Common Problems and Their Fixes}\\[3mm]
+\begin{tikzpicture}[scale=0.85]
+% Problem 1: Ball
+\begin{scope}[shift={(0,0)}]
+\shade[ball color=gray!30] (0,0) circle (0.6);
+\foreach \i in {1,...,15} {
+  \pgfmathsetmacro\r{0.2*rnd}
+  \pgfmathsetmacro\a{24*\i}
+  \fill[black!50] (\a:\r) circle (1pt);
+}
+\node at (0,-1) {\small\textbf{Ball}};
+\node at (0,-1.3) {\tiny LR too low};
+\node at (0,-1.6) {\tiny\textcolor{red}{Fix: LR > 100}};
+\end{scope}
+
+% Problem 2: Scattered
+\begin{scope}[shift={(3,0)}]
+\foreach \i in {1,...,15} {
+  \pgfmathsetmacro\x{1.2*rnd-0.6}
+  \pgfmathsetmacro\y{1.2*rnd-0.6}
+  \fill[black!50] (\x,\y) circle (1pt);
+}
+\node at (0,-1) {\small\textbf{Scattered}};
+\node at (0,-1.3) {\tiny LR too high};
+\node at (0,-1.6) {\tiny\textcolor{red}{Fix: LR < 500}};
+\end{scope}
+
+% Problem 3: Fragmented
+\begin{scope}[shift={(6,0)}]
+\foreach \c in {0,120,240} {
+  \foreach \i in {1,...,4} {
+    \pgfmathsetmacro\r{0.15*rnd}
+    \pgfmathsetmacro\a{\c+15*rnd}
+    \fill[black!50] (\a:0.4+\r) circle (1pt);
+  }
+}
+\node at (0,-1) {\small\textbf{Fragmented}};
+\node at (0,-1.3) {\tiny Perp too low};
+\node at (0,-1.6) {\tiny\textcolor{red}{Fix: Perp > 20}};
+\end{scope}
+
+% Problem 4: Good
+\begin{scope}[shift={(9,0)}]
+\foreach \c/\col in {45/blue,165/red,285/green} {
+  \foreach \i in {1,...,6} {
+    \pgfmathsetmacro\r{0.2*rnd}
+    \pgfmathsetmacro\a{\c+20*rnd}
+    \fill[\col!70] (\a:0.5+\r) circle (1.5pt);
+  }
+}
+\node at (0,-1) {\small\textbf{Good!}};
+\node at (0,-1.3) {\tiny Balanced};
+\node at (0,-1.6) {\tiny\textcolor{green}{LR=200, Perp=30}};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{yellow!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Golden Rule:} Run multiple times with different seeds. Trust what's consistent.}}
+\end{center}
+\end{frame}
+
+% Slide 19 - PERPLEXITY EFFECTS REVISED
+\begin{frame}{Perplexity: Your Main Control Parameter}
+\begin{columns}
+\column{0.6\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Perp = 5
+\begin{scope}[shift={(0,0)}]
+\foreach \c in {0,72,144,216,288} {
+  \foreach \i in {1,...,3} {
+    \pgfmathsetmacro\r{0.15*rnd}
+    \pgfmathsetmacro\a{\c+15*rnd}
+    \fill[blue!70] (\a:0.8+\r) circle (1.5pt);
+  }
+}
+\node at (0,-1.3) {Perplexity = 5};
+\node at (0,-1.6) {\tiny Many fragments};
+\end{scope}
+
+% Perp = 30
+\begin{scope}[shift={(3.5,0)}]
+\foreach \c/\col in {60/blue,180/red,300/green} {
+  \foreach \i in {1,...,8} {
+    \pgfmathsetmacro\r{0.25*rnd}
+    \pgfmathsetmacro\a{\c+30*rnd}
+    \fill[\col!70] (\a:0.6+\r) circle (1.5pt);
+  }
+}
+\node at (0,-1.3) {Perplexity = 30};
+\node at (0,-1.6) {\tiny Clear clusters};
+\end{scope}
+
+% Perp = 100
+\begin{scope}[shift={(7,0)}]
+\foreach \i in {1,...,25} {
+  \pgfmathsetmacro\r{0.8*rnd}
+  \pgfmathsetmacro\a{360*rnd}
+  \fill[gray!70] (\a:\r) circle (1.5pt);
+}
+\node at (0,-1.3) {Perplexity = 100};
+\node at (0,-1.6) {\tiny One blob};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\column{0.4\textwidth}
+\begin{block}{How to Choose?}
+\textbf{Rule of thumb:}\\
+Perp = $\sqrt{N}/10$ to $\sqrt{N}/2$\\
+\small (N = number of points)
+
+\vspace{3mm}
+\textbf{Examples:}
+\begin{itemize}
+\item 1,000 points: 5-15
+\item 10,000 points: 20-50
+\item 100,000 points: 50-150
+\end{itemize}
+
+\vspace{3mm}
+\textbf{Strategy:}
+\begin{enumerate}
+\item Try 3 values (low, mid, high)
+\item Look for consistency
+\item Trust stable structures
+\end{enumerate}
+\end{block}
+\end{columns}
+
+\vspace{3mm}
+\begin{center}
+\colorbox{blue!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Key Insight:} Truth is what's consistent across multiple perplexity values}}
+\end{center}
+\end{frame}
+
+% Slide 20 - CRITICAL WARNINGS (MINIMAL CHANGES)
+\begin{frame}{Critical: What You CANNOT Interpret}
+\begin{center}
+\Large\textcolor{red}{\textbf{The Three Deadly Sins of t-SNE}}
+\end{center}
+
+\vspace{3mm}
+\begin{columns}
+\column{0.33\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\shade[ball color=blue!30] (-0.5,0) circle (0.8);
+\shade[ball color=red!30] (0.5,0) circle (0.3);
+\draw[red, thick] (0,-0.7) -- (0,0.7);
+\draw[red, thick] (-0.7,0) -- (0.7,0);
+\node at (0,-1.3) {\textbf{Sin \#1}};
+\node at (0,-1.6) {\small Size $\neq$ Count};
+\node at (0,-1.9) {\tiny\textcolor{red}{Visual area meaningless}};
+\end{tikzpicture}
+\end{center}
+
+\column{0.33\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\fill[blue!50] (-1,0) circle (0.3);
+\fill[red!50] (1,0) circle (0.3);
+\draw[<->, thick] (-0.6,0) -- (0.6,0);
+\node at (0,0.3) {\textcolor{red}{?}};
+\draw[red, thick] (0,-0.5) -- (0,0.5);
+\node at (0,-1.3) {\textbf{Sin \#2}};
+\node at (0,-1.6) {\small Distance meaningless};
+\node at (0,-1.9) {\tiny\textcolor{red}{Between clusters}};
+\end{tikzpicture}
+\end{center}
+
+\column{0.33\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\fill[green!50] (0,0.5) circle (0.3);
+\fill[orange!50] (0,-0.5) circle (0.3);
+\draw[<->, red, thick] (-0.5,0.5) -- (-0.5,-0.5);
+\node[red] at (-0.8,0) {\tiny ?};
+\node at (0,-1.3) {\textbf{Sin \#3}};
+\node at (0,-1.6) {\small Position arbitrary};
+\node at (0,-1.9) {\tiny\textcolor{red}{No axes meaning}};
+\end{tikzpicture}
+\end{center}
+\end{columns}
+
+\vspace{5mm}
+\begin{center}
+\colorbox{yellow!20}{\parbox{0.85\textwidth}{\centering
+\textbf{Remember:} Only local neighborhoods are meaningful. Everything else is artifact.}}
+\end{center}
+\end{frame}
+
+
 \end{document}
 
 
