@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.27)  28 SEP 2025 13:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.28)  28 SEP 2025 19:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -573,87 +573,112 @@ File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \tikz@expandcount=\count366
  (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgfplots/pgfplots.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
-Package: pgfplots 2025/08/14 v1.18.2 Data Visualization (1.18.2)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
-\t@pgfplots@toka=\toks48
-\t@pgfplots@tokb=\toks49
-\t@pgfplots@tokc=\toks50
-\pgfplots@tmpa=\dimen315
-\c@pgfplots@coordindex=\count367
-\c@pgfplots@scanlineindex=\count368
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_loader.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_pgfutil-common-lists.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructure.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructureext.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray.code.tex
-\c@pgfplotsarray@tmp=\count369
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatrix.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshared.code.tex
-\c@pgfplotstable@counta=\count370
-\t@pgfplotstable@a=\toks51
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.data.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.surfshading.code.tex
-\c@pgfplotslibrarysurf@no=\count371
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surfshading.pgfsys-pdftex.def))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.tex))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
-\pgfdecoratedcompleteddistance=\dimen316
-\pgfdecoratedremainingdistance=\dimen317
-\pgfdecoratedinputsegmentcompleteddistance=\dimen318
-\pgfdecoratedinputsegmentremainingdistance=\dimen319
-\pgf@decorate@distancetomove=\dimen320
-\pgf@decorate@repeatstate=\count372
-\pgfdecorationsegmentamplitude=\dimen321
-\pgfdecorationsegmentlength=\dimen322
-)
-\tikz@lib@dec@box=\box83
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.contourlua.code.tex)
-\pgfplots@numplots=\count373
-\pgfplots@xmin@reg=\dimen323
-\pgfplots@xmax@reg=\dimen324
-\pgfplots@ymin@reg=\dimen325
-\pgfplots@ymax@reg=\dimen326
-\pgfplots@zmin@reg=\dimen327
-\pgfplots@zmax@reg=\dimen328
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryplotmarks.code.tex
-File: tikzlibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
-File: pgflibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
  (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count374
-\float@exts=\toks52
-\float@box=\box84
-\@float@everytoks=\toks53
-\@floatcapt=\box85
+\c@float@type=\count367
+\float@exts=\toks48
+\float@box=\box83
+\@float@everytoks=\toks49
+\@floatcapt=\box84
 ) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
-\@float@every@algorithm=\toks54
-\c@algorithm=\count375
+\@float@every@algorithm=\toks50
+\c@algorithm=\count368
 ) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
 Package: algpseudocode 
  (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count376
-\c@ALG@rem=\count377
-\c@ALG@nested=\count378
+\c@ALG@line=\count369
+\c@ALG@rem=\count370
+\c@ALG@nested=\count371
 \ALG@tlm=\skip67
 \ALG@thistlm=\skip68
-\c@ALG@Lnr=\count379
-\c@ALG@blocknr=\count380
-\c@ALG@storecount=\count381
-\c@ALG@tmpcounter=\count382
+\c@ALG@Lnr=\count372
+\c@ALG@blocknr=\count373
+\c@ALG@storecount=\count374
+\c@ALG@tmpcounter=\count375
 \ALG@tmplength=\skip69
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2025/09/09 version 6.8.0 text color boxes
+ (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks51
+\verbatim@line=\toks52
+\verbatim@in@stream=\read3
+) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+ (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\tcb@titlebox=\box85
+\tcb@upperbox=\box86
+\tcb@lowerbox=\box87
+\tcb@phantombox=\box88
+\c@tcbbreakpart=\count376
+\c@tcblayer=\count377
+\c@tcolorbox@number=\count378
+\l__tcobox_tmpa_box=\box89
+\l__tcobox_tmpa_dim=\dimen315
+\tcb@temp=\box90
+\tcb@temp=\box91
+\tcb@temp=\box92
+\tcb@temp=\box93
+) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgfplots/pgfplots.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2025/08/14 v1.18.2 Data Visualization (1.18.2)
+ (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
+\t@pgfplots@toka=\toks53
+\t@pgfplots@tokb=\toks54
+\t@pgfplots@tokc=\toks55
+\pgfplots@tmpa=\dimen316
+\c@pgfplots@coordindex=\count379
+\c@pgfplots@scanlineindex=\count380
+ (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_loader.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_pgfutil-common-lists.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructure.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructureext.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count381
+) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatrix.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshared.code.tex
+\c@pgfplotstable@counta=\count382
+\t@pgfplotstable@a=\toks56
+) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.data.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count383
+ (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surfshading.pgfsys-pdftex.def))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.tex))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen317
+\pgfdecoratedremainingdistance=\dimen318
+\pgfdecoratedinputsegmentcompleteddistance=\dimen319
+\pgfdecoratedinputsegmentremainingdistance=\dimen320
+\pgf@decorate@distancetomove=\dimen321
+\pgf@decorate@repeatstate=\count384
+\pgfdecorationsegmentamplitude=\dimen322
+\pgfdecorationsegmentlength=\dimen323
+)
+\tikz@lib@dec@box=\box94
+) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.contourlua.code.tex)
+\pgfplots@numplots=\count385
+\pgfplots@xmin@reg=\dimen324
+\pgfplots@xmax@reg=\dimen325
+\pgfplots@ymin@reg=\dimen326
+\pgfplots@ymax@reg=\dimen327
+\pgfplots@zmin@reg=\dimen328
+\pgfplots@zmax@reg=\dimen329
+) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+ (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
  (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfarrowinset=\dimen329
-\pgfarrowlength=\dimen330
-\pgfarrowwidth=\dimen331
-\pgfarrowlinewidth=\dimen332
+\pgfarrowinset=\dimen330
+\pgfarrowlength=\dimen331
+\pgfarrowwidth=\dimen332
+\pgfarrowlinewidth=\dimen333
 ) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
@@ -664,28 +689,28 @@ File: tikzlibrarypatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 File: pgflibrarypatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count383
+\l__color_backend_stack_int=\count386
 ) (./t-sne-lecture_v3.aux)
 \openout1 = `t-sne-lecture_v3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -727,53 +752,53 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 38.
+Package hyperref Info: Link coloring OFF on input line 40.
  (./t-sne-lecture_v3.out) (./t-sne-lecture_v3.out)
 \@outlinefile=\write5
 \openout5 = `t-sne-lecture_v3.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 38.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 40.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 38.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 40.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 38.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 38.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 38.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 38.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 40.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 38.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 38.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 38.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 40.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 38.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 38.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 38.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 40.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 38.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 38.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 40.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 38.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 40.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 38.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 38.
+(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 38.
+(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 38.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 38.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 40.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 38.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 40.
  (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
@@ -794,23 +819,19 @@ Package pgfplots notification 'compat/show suggested version=true': you might be
 [1
 
 {c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 84.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 78.
  (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 84.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 78.
  (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \vbox (30.83766pt too high) detected at line 84
- []
-
-
 
 [2
 
 ]
-Overfull \vbox (11.3744pt too high) detected at line 123
+Overfull \vbox (30.83766pt too high) detected at line 115
  []
 
 
@@ -818,7 +839,7 @@ Overfull \vbox (11.3744pt too high) detected at line 123
 [3
 
 ]
-Overfull \vbox (60.7506pt too high) detected at line 142
+Overfull \vbox (48.12195pt too high) detected at line 200
  []
 
 
@@ -826,8 +847,7 @@ Overfull \vbox (60.7506pt too high) detected at line 142
 [4
 
 ]
-Overfull \hbox (29.7938pt too wide) in paragraph at lines 175--175
-[][][][][][][]  
+Overfull \vbox (60.7506pt too high) detected at line 219
  []
 
 
@@ -835,12 +855,7 @@ Overfull \hbox (29.7938pt too wide) in paragraph at lines 175--175
 [5
 
 ]
-Overfull \hbox (6.0pt too wide) in paragraph at lines 197--197
- [][][][][][] 
- []
-
-
-Overfull \vbox (32.86952pt too high) detected at line 197
+Overfull \vbox (14.13576pt too high) detected at line 269
  []
 
 
@@ -852,12 +867,19 @@ Overfull \vbox (32.86952pt too high) detected at line 197
 [7
 
 ]
-Package pgfplots info on input line 277: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Overfull \hbox (29.7938pt too wide) in paragraph at lines 351--351
+[][][][][][][]  
+ []
+
 
 
 [8
 
 ]
+Overfull \vbox (10.49713pt too high) detected at line 415
+ []
+
+
 
 [9
 
@@ -870,8 +892,7 @@ Package pgfplots info on input line 277: Using 'lua backend=false' for axis: x c
 [11
 
 ]
-Overfull \hbox (142.56648pt too wide) in paragraph at lines 401--401
-[][][][][][][]  
+Overfull \vbox (17.16501pt too high) detected at line 509
  []
 
 
@@ -879,579 +900,52 @@ Overfull \hbox (142.56648pt too wide) in paragraph at lines 401--401
 [12
 
 ]
+Overfull \vbox (12.745pt too high) detected at line 569
+ []
+
+
 
 [13
 
 ]
+Overfull \vbox (41.7374pt too high) detected at line 628
+ []
+
+
 
 [14
 
 ]
+Package pgfplots info on input line 693: Using 'lua backend=false' for axis: x coord trafo unsupported.
+
+Overfull \vbox (37.58444pt too high) detected at line 693
+ []
+
+
 
 [15
 
 ]
+Overfull \vbox (35.28214pt too high) detected at line 770
+ []
+
+
 
 [16
 
 ]
+Package pgfplots info on input line 827: Using 'lua backend=false' for axis: ymode=log unsupported (yet).
+
 
 [17
 
 ]
+Overfull \vbox (41.23875pt too high) detected at line 886
+ []
+
+
 
 [18
-
-]
-
-[19
-
-]
-
-[20
-
-]
-
-[21
-
-]
-Overfull \vbox (11.90387pt too high) detected at line 776
- []
-
-
-
-[22
-
-]
-
-[23
-
-]
-
-[24
-
-]
-
-[25
-
-]
-
-[26
-
-]
-
-[27
-
-]
-
-[28
-
-]
-
-[29
-
-]
-
-[30
-
-]
-
-[31
-
-]
-
-[32
-
-]
-Overfull \vbox (9.38905pt too high) detected at line 1089
- []
-
-
-
-[33
-
-]
-
-[34
-
-]
-
-[35
-
-]
-Overfull \vbox (39.84698pt too high) detected at line 1180
- []
-
-
-
-[36
-
-]
-
-[37
-
-]
-
-[38
-
-]
-
-[39
-
-]
-
-[40
-
-]
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-! Missing control sequence inserted.
-<inserted text> 
-                \inaccessible 
-l.1363 \end{frame}
-                  
-Please don't say `\def cs{...}', say `\def\cs{...}'.
-I've inserted an inaccessible control sequence so that your
-definition will be completed without mixing me up too badly.
-You can recover graciously from this error, if you're
-careful; see exercise 27.2 in The TeXbook.
-
-
-
-[41
-
-]
-
-[42
-
-]
-
-[43
-
-]
-
-[44
-
-]
-
-[45
-
-]
-Package pgfplots info on input line 1570: Using 'lua backend=false' for axis: ymode=log unsupported (yet).
-
-
-[46
-
-]
-
-[47
-
-]
-Overfull \vbox (3.07785pt too high) detected at line 1615
- []
-
-
-
-[48
-
-]
-
-[49
-
-]
-
-[50
-
-]
-
-[51
-
-]
-
-[52
-
-]
-Package pgfplots info on input line 1814: Using 'lua backend=false' for axis: x coord trafo unsupported.
-
-
-[53
-
-]
-Overfull \vbox (0.95496pt too high) detected at line 1852
- []
-
-
-
-[54
-
-]
-Overfull \vbox (2.96855pt too high) detected at line 1875
- []
-
-
-
-[55
-
-]
-Overfull \vbox (20.65422pt too high) detected at line 1909
- []
-
-
-
-[56
-
-]
-
-[57
-
-]
-Package pgfplots info on input line 1982: Using 'lua backend=false' for axis: xmode=log unsupported (yet).
-Package pgfplots info on input line 1982: Using 'lua backend=false' for axis: ymode=log unsupported (yet).
-
-
-[58
-
-]
-
-[59
-
-]
-
-[60
-
-]
-
-[61
-
-]
-
-[62
-
-]
-Overfull \vbox (34.60124pt too high) detected at line 2151
- []
-
-
-
-[63
-
-]
-
-[64
-
-]
-
-[65
-
-]
-Overfull \vbox (10.80597pt too high) detected at line 2230
- []
-
-
-
-[66
-
-]
-
-[67
-
-]
-
-[68
-
-]
-
-LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <10> not available
-(Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 2327.
-
-
-Overfull \vbox (1.79536pt too high) detected at line 2327
- []
-
-
-
-[69
-
-]
-LaTeX Font Info:    Trying to load font information for OMS+cmss on input line 2370.
-LaTeX Font Info:    No file OMScmss.fd. on input line 2370.
-
-
-LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
-(Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 2370.
-
-
-
-[70
-
-]
-Overfull \vbox (18.28998pt too high) detected at line 2419
- []
-
-
-
-[71
-
-]
-Overfull \hbox (87.44897pt too wide) in paragraph at lines 2453--2453
-[][][][][][][]  
- []
-
-
-
-[72
-
-]
-
-[73
-
-]
-Overfull \vbox (91.12642pt too high) detected at line 2518
- []
-
-
-
-[74
-
-]
-
-[75
-
-]
-
-[76
-
-]
-
-[77
-
-]
-Overfull \vbox (37.41467pt too high) detected at line 2656
- []
-
-
-
-[78
-
-]
-
-[79
-
-]
-Overfull \vbox (34.19849pt too high) detected at line 2707
- []
-
-
-
-[80
 
 ]
 \tf@nav=\write6
@@ -1468,26 +962,22 @@ Overfull \vbox (34.19849pt too high) detected at line 2707
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
-
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
 Package rerunfilecheck Info: File `t-sne-lecture_v3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 38797 strings out of 469728
- 930180 string characters out of 5475648
- 1446325 words of memory out of 5000000
- 66422 multiletter control sequences out of 15000+600000
- 642603 words of font info for 94 fonts, out of 8000000 for 9000
+ 39163 strings out of 469728
+ 951671 string characters out of 5475648
+ 1475302 words of memory out of 5000000
+ 66901 multiletter control sequences out of 15000+600000
+ 641664 words of font info for 90 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 101i,21n,107p,734b,2575s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1095.600pk> <c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcsx1095.600pk> <c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1440.600pk><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on t-sne-lecture_v3.pdf (80 pages, 590629 bytes).
+ 101i,24n,107p,766b,2640s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1000.600pk> <c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1095.600pk><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on t-sne-lecture_v3.pdf (18 pages, 265079 bytes).
 PDF statistics:
- 2620 PDF objects out of 2984 (max. 8388607)
- 2258 compressed objects within 23 object streams
- 161 named destinations out of 1000 (max. 500000)
- 757 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 747 PDF objects out of 1000 (max. 8388607)
+ 593 compressed objects within 6 object streams
+ 37 named destinations out of 1000 (max. 500000)
+ 451 words of extra memory for PDF output out of 10000 (max. 10000000)
 
