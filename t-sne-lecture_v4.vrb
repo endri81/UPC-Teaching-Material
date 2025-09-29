@@ -1,0 +1,25 @@
+\frametitle{R: Rtsne Package}
+
+\begin{verbatim}
+library(Rtsne)
+
+# Prepare data
+X <- as.matrix(your_data)
+
+# Run t-SNE
+tsne_out <- Rtsne(X,
+                   dims = 2,
+                   perplexity = 30,
+                   theta = 0.5,
+                   max_iter = 1000)
+
+# Extract embedding
+Y <- tsne_out$Y
+
+# Plot
+plot(Y, col = labels)
+\end{verbatim}
+
+\note{
+[2 min] R users implementation.
+}
