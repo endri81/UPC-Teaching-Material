@@ -1,661 +1,838 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.27)  28 SEP 2025 00:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2025.9.4)  29 SEP 2025 19:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **t-sne-lecture_v2.tex
 (./t-sne-lecture_v2.tex
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-09-02>
-(c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamer.cls
-Document Class: beamer 2025/08/13 v3.76 A class for typesetting presentations
-(c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasemodes.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count275
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14>
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamer.cls
+Document Class: beamer 2019/09/29 v3.57 A class for typesetting presentations
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasemodes.sty
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count167
 )
-\beamer@tempbox=\box53
-\beamer@tempcount=\count276
-\c@beamerpauses=\count277
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasedecode.sty
-\beamer@slideinframe=\count278
-\beamer@minimum=\count279
-\beamer@decode@box=\box54
+\beamer@tempbox=\box45
+\beamer@tempcount=\count168
+\c@beamerpauses=\count169
+
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasedecode.sty
+\beamer@slideinframe=\count170
+\beamer@minimum=\count171
+\beamer@decode@box=\box46
 )
-\beamer@commentbox=\box55
-\beamer@modecount=\count280
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2024/12/12 v1.0g TeX engine tests
+\beamer@commentbox=\box47
+\beamer@modecount=\count172
 )
-\headdp=\dimen148
-\footheight=\dimen149
-\sidebarheight=\dimen150
-\beamer@tempdim=\dimen151
-\beamer@finalheight=\dimen152
-\beamer@animht=\dimen153
-\beamer@animdp=\dimen154
-\beamer@animwd=\dimen155
-\beamer@leftmargin=\dimen156
-\beamer@rightmargin=\dimen157
-\beamer@leftsidebar=\dimen158
-\beamer@rightsidebar=\dimen159
-\beamer@boxsize=\dimen160
-\beamer@vboxoffset=\dimen161
-\beamer@descdefault=\dimen162
-\beamer@descriptionwidth=\dimen163
-\beamer@lastskip=\skip49
-\beamer@areabox=\box56
-\beamer@animcurrent=\box57
-\beamer@animshowbox=\box58
-\beamer@sectionbox=\box59
-\beamer@logobox=\box60
-\beamer@linebox=\box61
-\beamer@sectioncount=\count281
-\beamer@subsubsectionmax=\count282
-\beamer@subsectionmax=\count283
-\beamer@sectionmax=\count284
-\beamer@totalheads=\count285
-\beamer@headcounter=\count286
-\beamer@partstartpage=\count287
-\beamer@sectionstartpage=\count288
-\beamer@subsectionstartpage=\count289
-\beamer@animationtempa=\count290
-\beamer@animationtempb=\count291
-\beamer@xpos=\count292
-\beamer@ypos=\count293
-\beamer@ypos@offset=\count294
-\beamer@showpartnumber=\count295
-\beamer@currentsubsection=\count296
-\beamer@coveringdepth=\count297
-\beamer@sectionadjust=\count298
-\beamer@toclastsection=\count299
-\beamer@tocsectionnumber=\count300
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseoptions.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks17
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2019/11/07 v1.0c TeX engine tests
 ))
-\beamer@paperwidth=\skip50
-\beamer@paperheight=\skip51
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+\headdp=\dimen134
+\footheight=\dimen135
+\sidebarheight=\dimen136
+\beamer@tempdim=\dimen137
+\beamer@finalheight=\dimen138
+\beamer@animht=\dimen139
+\beamer@animdp=\dimen140
+\beamer@animwd=\dimen141
+\beamer@leftmargin=\dimen142
+\beamer@rightmargin=\dimen143
+\beamer@leftsidebar=\dimen144
+\beamer@rightsidebar=\dimen145
+\beamer@boxsize=\dimen146
+\beamer@vboxoffset=\dimen147
+\beamer@descdefault=\dimen148
+\beamer@descriptionwidth=\dimen149
+\beamer@lastskip=\skip47
+\beamer@areabox=\box48
+\beamer@animcurrent=\box49
+\beamer@animshowbox=\box50
+\beamer@sectionbox=\box51
+\beamer@logobox=\box52
+\beamer@linebox=\box53
+\beamer@sectioncount=\count173
+\beamer@subsubsectionmax=\count174
+\beamer@subsectionmax=\count175
+\beamer@sectionmax=\count176
+\beamer@totalheads=\count177
+\beamer@headcounter=\count178
+\beamer@partstartpage=\count179
+\beamer@sectionstartpage=\count180
+\beamer@subsectionstartpage=\count181
+\beamer@animationtempa=\count182
+\beamer@animationtempb=\count183
+\beamer@xpos=\count184
+\beamer@ypos=\count185
+\beamer@ypos@offset=\count186
+\beamer@showpartnumber=\count187
+\beamer@currentsubsection=\count188
+\beamer@coveringdepth=\count189
+\beamer@sectionadjust=\count190
+\beamer@tocsectionnumber=\count191
+
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaseoptions.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+))
+\beamer@paperwidth=\skip48
+\beamer@paperheight=\skip49
+
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count301
-\Gm@cntv=\count302
-\c@Gm@tempcnt=\count303
-\Gm@bindingoffset=\dimen164
-\Gm@wd@mp=\dimen165
-\Gm@odd@mp=\dimen166
-\Gm@even@mp=\dimen167
-\Gm@layoutwidth=\dimen168
-\Gm@layoutheight=\dimen169
-\Gm@layouthoffset=\dimen170
-\Gm@layoutvoffset=\dimen171
-\Gm@dimlist=\toks18
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/math/pgfmath.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks19
-\pgfutil@tempdima=\dimen172
-\pgfutil@tempdimb=\dimen173
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box62
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/pgf.revision.tex)
-Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks20
-\pgfkeys@temptoks=\toks21
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
-\pgfkeys@tmptoks=\toks22
-))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex
-\pgf@x=\dimen174
-\pgf@xa=\dimen175
-\pgf@xb=\dimen176
-\pgf@xc=\dimen177
-\pgf@y=\dimen178
-\pgf@ya=\dimen179
-\pgf@yb=\dimen180
-\pgf@yc=\dimen181
-\c@pgf@counta=\count304
-\c@pgf@countb=\count305
-\c@pgf@countc=\count306
-\c@pgf@countd=\count307
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen182
-\pgfmath@count=\count308
-\pgfmath@box=\box63
+\Gm@cnth=\count192
+\Gm@cntv=\count193
+\c@Gm@tempcnt=\count194
+\Gm@bindingoffset=\dimen150
+\Gm@wd@mp=\dimen151
+\Gm@odd@mp=\dimen152
+\Gm@even@mp=\dimen153
+\Gm@layoutwidth=\dimen154
+\Gm@layoutheight=\dimen155
+\Gm@layouthoffset=\dimen156
+\Gm@layoutvoffset=\dimen157
+\Gm@dimlist=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen158
+\Gin@req@width=\dimen159
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks16
+\pgfutil@tempdima=\dimen160
+\pgfutil@tempdimb=\dimen161
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box54
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2020/01/08 v3.1.5b (3.1.5b)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks17
+\pgfkeys@temptoks=\toks18
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex
+\pgfkeys@tmptoks=\toks19
+))
+\pgf@x=\dimen162
+\pgf@y=\dimen163
+\pgf@xa=\dimen164
+\pgf@ya=\dimen165
+\pgf@xb=\dimen166
+\pgf@yb=\dimen167
+\pgf@xc=\dimen168
+\pgf@yc=\dimen169
+\pgf@xd=\dimen170
+\pgf@yd=\dimen171
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count195
+\c@pgf@countb=\count196
+\c@pgf@countc=\count197
+\c@pgf@countd=\count198
+\t@pgf@toka=\toks20
+\t@pgf@tokb=\toks21
+\t@pgf@tokc=\toks22
+\pgf@sys@id@count=\count199
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2020/01/08 v3.1.5b (3.1.5b)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f
+File: pgfsys-common-pdf.def 2020/01/08 v3.1.5b (3.1.5b)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex
+File: pgfsyssoftpath.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgfsyssoftpath@smallbuffer@items=\count266
+\pgfsyssoftpath@bigbuffer@items=\count267
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex
+File: pgfsysprotocol.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen172
+\pgfmath@count=\count268
+\pgfmath@box=\box55
 \pgfmath@toks=\toks23
 \pgfmath@stack@operand=\toks24
 \pgfmath@stack@operation=\toks25
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count309
-))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size11.clo
-File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 106.
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count269
 ))
-\Gin@req@height=\dimen183
-\Gin@req@width=\dimen184
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
-Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@x=\dimen185
-\pgf@y=\dimen186
-\pgf@xa=\dimen187
-\pgf@ya=\dimen188
-\pgf@xb=\dimen189
-\pgf@yb=\dimen190
-\pgf@xc=\dimen191
-\pgf@yc=\dimen192
-\pgf@xd=\dimen193
-\pgf@yd=\dimen194
-\w@pgf@writea=\write3
-\r@pgf@reada=\read2
-\c@pgf@counta=\count310
-\c@pgf@countb=\count311
-\c@pgf@countc=\count312
-\c@pgf@countd=\count313
-\t@pgf@toka=\toks26
-\t@pgf@tokb=\toks27
-\t@pgf@tokc=\toks28
-\pgf@sys@id@count=\count314
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
-File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x
+File: pgfcorepoints.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgf@picminx=\dimen173
+\pgf@picmaxx=\dimen174
+\pgf@picminy=\dimen175
+\pgf@picmaxy=\dimen176
+\pgf@pathminx=\dimen177
+\pgf@pathmaxx=\dimen178
+\pgf@pathminy=\dimen179
+\pgf@pathmaxy=\dimen180
+\pgf@xx=\dimen181
+\pgf@xy=\dimen182
+\pgf@yx=\dimen183
+\pgf@yy=\dimen184
+\pgf@zx=\dimen185
+\pgf@zy=\dimen186
 )
-Driver file for pgf: pgfsys-pdftex.def
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
-File: pgfsys-pdftex.def 2025-08-29 v3.1.11a (3.1.11a)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
-File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
-))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
-File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfsyssoftpath@smallbuffer@items=\count315
-\pgfsyssoftpath@bigbuffer@items=\count316
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
-File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
-File: color.cfg 2016/01/02 v1.6 sample color configuration
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex
+File: pgfcorepathconstruct.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgf@path@lastx=\dimen187
+\pgf@path@lasty=\dimen188
 )
-Package xcolor Info: Driver file: pdftex.def on input line 274.
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
-Package xcolor Info: Model `RGB' extended on input line 1365.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
-Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
-File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@picminx=\dimen195
-\pgf@picmaxx=\dimen196
-\pgf@picminy=\dimen197
-\pgf@picmaxy=\dimen198
-\pgf@pathminx=\dimen199
-\pgf@pathmaxx=\dimen256
-\pgf@pathminy=\dimen257
-\pgf@pathmaxy=\dimen258
-\pgf@xx=\dimen259
-\pgf@xy=\dimen260
-\pgf@yx=\dimen261
-\pgf@yy=\dimen262
-\pgf@zx=\dimen263
-\pgf@zy=\dimen264
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
-File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@path@lastx=\dimen265
-\pgf@path@lasty=\dimen266
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
-File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@shorten@end@additional=\dimen267
-\pgf@shorten@start@additional=\dimen268
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
-File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfpic=\box64
-\pgf@hbox=\box65
-\pgf@layerbox@main=\box66
-\pgf@picture@serial@count=\count317
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
-File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgflinewidth=\dimen269
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
-File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@pt@x=\dimen270
-\pgf@pt@y=\dimen271
-\pgf@pt@temp=\dimen272
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
-File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
-File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
-File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
-File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfarrowsep=\dimen273
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
-File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@max=\dimen274
-\pgf@sys@shading@range@num=\count318
-\pgf@shadingcount=\count319
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
-File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
-File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfexternal@startupbox=\box67
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
-File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
-File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
-File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
-File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/xxcolor.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex
+File: pgfcorepathusage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgf@shorten@end@additional=\dimen189
+\pgf@shorten@start@additional=\dimen190
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x
+File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgfpic=\box56
+\pgf@hbox=\box57
+\pgf@layerbox@main=\box58
+\pgf@picture@serial@count=\count270
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex
+File: pgfcoregraphicstate.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgflinewidth=\dimen191
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex
+File: pgfcoretransformations.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgf@pt@x=\dimen192
+\pgf@pt@y=\dimen193
+\pgf@pt@temp=\dimen194
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex
+File: pgfcoreobjects.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex
+File: pgfcorepathprocessing.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x
+File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgfarrowsep=\dimen195
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgf@max=\dimen196
+\pgf@sys@shading@range@num=\count271
+\pgf@shadingcount=\count272
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex
+File: pgfcoreexternal.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgfexternal@startupbox=\box59
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x
+File: pgfcorelayers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex
+File: pgfcoretransparency.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex
+File: pgfcorepatterns.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+))) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/xxcolor.sty
 Package: xxcolor 2003/10/24 ver 0.1
-\XC@nummixins=\count320
-\XC@countmixins=\count321
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
-Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
-package with kernel methods
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
-Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
-Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
-Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+\XC@nummixins=\count273
+\XC@countmixins=\count274
+)
+(/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
+Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
-Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
-Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
-Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
-Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
-))
-\c@section@level=\count322
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
-Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
-\@linkdim=\dimen275
-\Hy@linkcounter=\count323
-\Hy@pagecounter=\count324
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
+)
+\@linkdim=\dimen197
+\Hy@linkcounter=\count275
+\Hy@pagecounter=\count276
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count325
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
-Now handling font encoding PU ...
-... no UTF-8 mapping file for font encoding PU
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-Package hyperref Info: Option `bookmarks' set `true' on input line 4066.
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 4066.
-Package hyperref Info: Option `implicit' set `false' on input line 4066.
-Package hyperref Info: Hyper figures OFF on input line 4195.
-Package hyperref Info: Link nesting OFF on input line 4200.
-Package hyperref Info: Hyper index ON on input line 4203.
-Package hyperref Info: Plain pages OFF on input line 4210.
-Package hyperref Info: Backreferencing OFF on input line 4215.
+\Hy@SavedSpaceFactor=\count277
+\pdfmajorversion=\count278
+Package hyperref Info: Option `bookmarks' set `true' on input line 4421.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 4421.
+Package hyperref Info: Option `implicit' set `false' on input line 4421.
+Package hyperref Info: Hyper figures OFF on input line 4547.
+Package hyperref Info: Link nesting OFF on input line 4552.
+Package hyperref Info: Hyper index ON on input line 4555.
+Package hyperref Info: Plain pages OFF on input line 4562.
+Package hyperref Info: Backreferencing OFF on input line 4567.
 Package hyperref Info: Implicit mode OFF; no redefinition of LaTeX internals.
-Package hyperref Info: Bookmarks ON on input line 4462.
-\c@Hy@tempcnt=\count326
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip17
+Package hyperref Info: Bookmarks ON on input line 4800.
+\c@Hy@tempcnt=\count279
+
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4801.
-\XeTeXLinkMargin=\dimen276
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+LaTeX Info: Redefining \url on input line 5159.
+\XeTeXLinkMargin=\dimen198
+
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
-Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
 ))
-\Fld@menulength=\count327
-\Field@Width=\dimen277
-\Fld@charsize=\dimen278
-Package hyperref Info: Hyper figures OFF on input line 6078.
-Package hyperref Info: Link nesting OFF on input line 6083.
-Package hyperref Info: Hyper index ON on input line 6086.
-Package hyperref Info: backreferencing OFF on input line 6093.
-Package hyperref Info: Link coloring OFF on input line 6098.
-Package hyperref Info: Link coloring with OCG OFF on input line 6103.
-Package hyperref Info: PDF/A mode OFF on input line 6108.
-\Hy@abspage=\count328
+\Fld@menulength=\count280
+\Field@Width=\dimen199
+\Fld@charsize=\dimen256
+Package hyperref Info: Hyper figures OFF on input line 6430.
+Package hyperref Info: Link nesting OFF on input line 6435.
+Package hyperref Info: Hyper index ON on input line 6438.
+Package hyperref Info: backreferencing OFF on input line 6445.
+Package hyperref Info: Link coloring OFF on input line 6450.
+Package hyperref Info: Link coloring with OCG OFF on input line 6455.
+Package hyperref Info: PDF/A mode OFF on input line 6460.
+LaTeX Info: Redefining \ref on input line 6500.
+LaTeX Info: Redefining \pageref on input line 6504.
+\Hy@abspage=\count281
 
 
 Package hyperref Message: Stopped early.
 
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
-\Fld@listcount=\count329
-\c@bookmark@seq@number=\count330
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
-Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
+Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
+)
+\Fld@listcount=\count282
+\c@bookmark@seq@number=\count283
+
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaserequires.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasecompatibility.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasefont.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaserequires.sty
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasecompatibility.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasefont.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks29
+\@emptytoks=\toks26
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetranslator.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/translator.sty
-Package: translator 2021-05-31 v1.12d Easy translation of strings in LaTeX
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasemisc.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetwoscreens.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseoverlay.sty
-\beamer@argscount=\count331
-\beamer@lastskipcover=\skip52
-\beamer@trivlistdepth=\count332
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetitle.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasesection.sty
-\c@lecture=\count333
-\c@part=\count334
-\c@section=\count335
-\c@subsection=\count336
-\c@subsubsection=\count337
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseframe.sty
-\beamer@framebox=\box68
-\beamer@frametitlebox=\box69
-\beamer@zoombox=\box70
-\beamer@zoomcount=\count338
-\beamer@zoomframecount=\count339
-\beamer@frametextheight=\dimen279
-\c@subsectionslide=\count340
-\beamer@frametopskip=\skip53
-\beamer@framebottomskip=\skip54
-\beamer@frametopskipautobreak=\skip55
-\beamer@framebottomskipautobreak=\skip56
-\beamer@envbody=\toks30
-\framewidth=\dimen280
-\c@framenumber=\count341
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseverbatim.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/sansmathaccent.sty
+Package: sansmathaccent 2020/01/31
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2020/01/24 v3.29 KOMA-Script package (loading files)
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasetranslator.sty
+(/usr/share/texlive/texmf-dist/tex/latex/translator/translator.sty
+Package: translator 2019-05-31 v1.12a Easy translation of strings in LaTeX
+))
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasemisc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasetwoscreens.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaseoverlay.sty
+\beamer@argscount=\count284
+\beamer@lastskipcover=\skip50
+\beamer@trivlistdepth=\count285
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasetitle.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasesection.sty
+\c@lecture=\count286
+\c@part=\count287
+\c@section=\count288
+\c@subsection=\count289
+\c@subsubsection=\count290
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaseframe.sty
+\beamer@framebox=\box60
+\beamer@frametitlebox=\box61
+\beamer@zoombox=\box62
+\beamer@zoomcount=\count291
+\beamer@zoomframecount=\count292
+\beamer@frametextheight=\dimen257
+\c@subsectionslide=\count293
+\beamer@frametopskip=\skip51
+\beamer@framebottomskip=\skip52
+\beamer@frametopskipautobreak=\skip53
+\beamer@framebottomskipautobreak=\skip54
+\beamer@envbody=\toks27
+\framewidth=\dimen258
+\c@framenumber=\count294
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaseverbatim.sty
 \beamer@verbatimfileout=\write4
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseframesize.sty
-\beamer@splitbox=\box71
-\beamer@autobreakcount=\count342
-\beamer@autobreaklastheight=\dimen281
-\beamer@frametitletoks=\toks31
-\beamer@framesubtitletoks=\toks32
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseframecomponents.sty
-\beamer@colheight=\skip57
-\beamer@footins=\box72
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasecolor.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasenotes.sty
-\beamer@frameboxcopy=\box73
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetoc.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetemplates.sty
-\beamer@sbttoks=\toks33
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseauxtemplates.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseboxes.sty
-\bmb@box=\box74
-\bmb@colorbox=\box75
-\bmb@boxwidth=\dimen282
-\bmb@boxheight=\dimen283
-\bmb@prevheight=\dimen284
-\bmb@temp=\dimen285
-\bmb@dima=\dimen286
-\bmb@dimb=\dimen287
-\bmb@prevheight=\dimen288
 )
-\beamer@blockheadheight=\dimen289
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaselocalstructure.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/enumerate.sty
-Package: enumerate 2023/07/04 v3.00 enumerate extensions (DPC)
-\@enLab=\toks34
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaseframesize.sty
+\beamer@splitbox=\box63
+\beamer@autobreakcount=\count295
+\beamer@autobreaklastheight=\dimen259
+\beamer@frametitletoks=\toks28
+\beamer@framesubtitletoks=\toks29
 )
-\beamer@bibiconwidth=\skip58
-\c@figure=\count343
-\c@table=\count344
-\abovecaptionskip=\skip59
-\belowcaptionskip=\skip60
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasenavigation.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasenavigationsymbols.tex)
-\beamer@section@min@dim=\dimen290
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetheorems.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2025/06/16 v2.17y AMS math features
-\@mathmargin=\skip61
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaseframecomponents.sty
+\beamer@footins=\box64
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasecolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasenotes.sty
+\beamer@frameboxcopy=\box65
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasetoc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasetemplates.sty
+\beamer@sbttoks=\toks30
+
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaseauxtemplates.sty
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaseboxes.sty
+\bmb@box=\box66
+\bmb@colorbox=\box67
+\bmb@boxshadow=\box68
+\bmb@boxshadowball=\box69
+\bmb@boxshadowballlarge=\box70
+\bmb@temp=\dimen260
+\bmb@dima=\dimen261
+\bmb@dimb=\dimen262
+\bmb@prevheight=\dimen263
+)
+\beamer@blockheadheight=\dimen264
+))
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbaselocalstructure.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
+\@enLab=\toks31
+)
+\c@figure=\count296
+\c@table=\count297
+\abovecaptionskip=\skip55
+\belowcaptionskip=\skip56
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasenavigation.sty
+\beamer@section@min@dim=\dimen265
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasetheorems.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2020/01/20 v2.17e AMS math features
+\@mathmargin=\skip57
 
 For additional information on amsmath, use the `?' option.
-(c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2024/11/17 v2.01 AMS text
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks35
-\ex@=\dimen291
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+\@emptytoks=\toks32
+\ex@=\dimen266
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen292
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2022/04/08 v2.04 operator names
+\pmbraise@=\dimen267
 )
-\inf@bad=\count345
-LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count346
-\leftroot@=\count347
-LaTeX Info: Redefining \overline on input line 398.
-LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count348
-\DOTSCASE@=\count349
-LaTeX Info: Redefining \ldots on input line 495.
-LaTeX Info: Redefining \dots on input line 498.
-LaTeX Info: Redefining \cdots on input line 619.
-\Mathstrutbox@=\box76
-\strutbox@=\box77
-LaTeX Info: Redefining \big on input line 721.
-LaTeX Info: Redefining \Big on input line 722.
-LaTeX Info: Redefining \bigg on input line 723.
-LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen293
-LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count350
-LaTeX Info: Redefining \bmod on input line 904.
-LaTeX Info: Redefining \pmod on input line 909.
-LaTeX Info: Redefining \smash on input line 939.
-LaTeX Info: Redefining \relbar on input line 969.
-LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count351
-\dotsspace@=\muskip18
-\c@parentequation=\count352
-\dspbrk@lvl=\count353
-\tag@help=\toks36
-\row@=\count354
-\column@=\count355
-\maxfields@=\count356
-\andhelp@=\toks37
-\eqnshift@=\dimen294
-\alignsep@=\dimen295
-\tagshift@=\dimen296
-\tagwidth@=\dimen297
-\totwidth@=\dimen298
-\lineht@=\dimen299
-\@envbody=\toks38
-\multlinegap=\skip62
-\multlinetaggap=\skip63
-\mathdisplay@stack=\toks39
-LaTeX Info: Redefining \[ on input line 2949.
-LaTeX Info: Redefining \] on input line 2950.
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.sty
-Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks40
-\thm@bodyfont=\toks41
-\thm@headfont=\toks42
-\thm@notefont=\toks43
-\thm@headpunct=\toks44
-\thm@preskip=\skip64
-\thm@postskip=\skip65
-\thm@headsep=\skip66
-\dth@everypar=\toks45
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
 )
-\c@theorem=\count357
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasethemes.sty)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerthemedefault.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerfontthemedefault.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamercolorthemedefault.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerinnerthemedefault.sty
-\beamer@dima=\dimen300
-\beamer@dimb=\dimen301
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerouterthemedefault.sty))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerthemeMadrid.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamercolorthemewhale.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamercolorthemeorchid.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamercolorthemeseahorse.sty) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
-Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
-File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfnodeparttextbox=\box78
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
-File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
-Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@nodesepstart=\dimen302
-\pgf@nodesepend=\dimen303
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
-Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
-Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
-\pgffor@iter=\dimen304
-\pgffor@skip=\dimen305
-\pgffor@stack=\toks46
-\pgffor@toks=\toks47
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
-Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
-File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@plot@mark@count=\count358
-\pgfplotmarksize=\dimen306
+\inf@bad=\count298
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count299
+\leftroot@=\count300
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count301
+\DOTSCASE@=\count302
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box71
+\strutbox@=\box72
+\big@size=\dimen268
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count303
+\c@MaxMatrixCols=\count304
+\dotsspace@=\muskip17
+\c@parentequation=\count305
+\dspbrk@lvl=\count306
+\tag@help=\toks33
+\row@=\count307
+\column@=\count308
+\maxfields@=\count309
+\andhelp@=\toks34
+\eqnshift@=\dimen269
+\alignsep@=\dimen270
+\tagshift@=\dimen271
+\tagwidth@=\dimen272
+\totwidth@=\dimen273
+\lineht@=\dimen274
+\@envbody=\toks35
+\multlinegap=\skip58
+\multlinetaggap=\skip59
+\mathdisplay@stack=\toks36
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
 )
-\tikz@lastx=\dimen307
-\tikz@lasty=\dimen308
-\tikz@lastxsaved=\dimen309
-\tikz@lastysaved=\dimen310
-\tikz@lastmovetox=\dimen311
-\tikz@lastmovetoy=\dimen312
-\tikzleveldistance=\dimen313
-\tikzsiblingdistance=\dimen314
-\tikz@figbox=\box79
-\tikz@figbox@bg=\box80
-\tikz@tempbox=\box81
-\tikz@tempbox@bg=\box82
-\tikztreelevel=\count359
-\tikznumberofchildren=\count360
-\tikznumberofcurrentchild=\count361
-\tikz@fig@count=\count362
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
-File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfmatrixcurrentrow=\count363
-\pgfmatrixcurrentcolumn=\count364
-\pgf@matrix@numberofcolumns=\count365
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2017/10/31 v2.20.4
+\thm@style=\toks37
+\thm@bodyfont=\toks38
+\thm@headfont=\toks39
+\thm@notefont=\toks40
+\thm@headpunct=\toks41
+\thm@preskip=\skip60
+\thm@postskip=\skip61
+\thm@headsep=\skip62
+\dth@everypar=\toks42
 )
-\tikz@expandcount=\count366
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
-File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-))) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/algorithms/algorithm.sty
-Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
+\c@theorem=\count310
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasethemes.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerthemedefault.sty
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerfontthemedefault.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamercolorthemedefault.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerinnerthemedefault.sty
+\beamer@dima=\dimen275
+\beamer@dimb=\dimen276
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthemedefault.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerthemeMadrid.sty
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamercolorthemewhale.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamercolorthemeorchid.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamercolorthemeseahorse.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+Package: pgf 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgfnodeparttextbox=\box73
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty
+Package: pgfcomp-version-0-65 2020/01/08 v3.1.5b (3.1.5b)
+\pgf@nodesepstart=\dimen277
+\pgf@nodesepend=\dimen278
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty
+Package: pgfcomp-version-1-18 2020/01/08 v3.1.5b (3.1.5b)
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen279
+\pgffor@skip=\dimen280
+\pgffor@stack=\toks43
+\pgffor@toks=\toks44
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex
+File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgf@plot@mark@count=\count311
+\pgfplotmarksize=\dimen281
+)
+\tikz@lastx=\dimen282
+\tikz@lasty=\dimen283
+\tikz@lastxsaved=\dimen284
+\tikz@lastysaved=\dimen285
+\tikz@lastmovetox=\dimen286
+\tikz@lastmovetoy=\dimen287
+\tikzleveldistance=\dimen288
+\tikzsiblingdistance=\dimen289
+\tikz@figbox=\box74
+\tikz@figbox@bg=\box75
+\tikz@tempbox=\box76
+\tikz@tempbox@bg=\box77
+\tikztreelevel=\count312
+\tikznumberofchildren=\count313
+\tikznumberofcurrentchild=\count314
+\tikz@fig@count=\count315
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\pgfmatrixcurrentrow=\count316
+\pgfmatrixcurrentcolumn=\count317
+\pgf@matrix@numberofcolumns=\count318
+)
+\tikz@expandcount=\count319
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count367
-\float@exts=\toks48
-\float@box=\box83
-\@float@everytoks=\toks49
-\@floatcapt=\box84
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+\c@float@type=\count320
+\float@exts=\toks45
+\float@box=\box78
+\@float@everytoks=\toks46
+\@floatcapt=\box79
 )
-\@float@every@algorithm=\toks50
-\c@algorithm=\count368
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/algorithms/algorithmic.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks47
+\c@algorithm=\count321
+)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count369
-\c@ALC@line=\count370
-\c@ALC@rem=\count371
-\c@ALC@depth=\count372
-\ALC@tlm=\skip67
-\algorithmicindent=\skip68
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/soul/soul.sty
-Package: soul 2023-06-14 v3.1 Permit use of UTF-8 characters in soul (HO)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/soul/soul-ori.sty
-Package: soul-ori 2023-06-14 v3.1 letterspacing/underlining (mf)
-\SOUL@word=\toks51
-\SOUL@lasttoken=\toks52
-\SOUL@syllable=\toks53
-\SOUL@cmds=\toks54
-\SOUL@buffer=\toks55
-\SOUL@token=\toks56
-\SOUL@syllgoal=\dimen315
-\SOUL@syllwidth=\dimen316
-\SOUL@charkern=\dimen317
-\SOUL@hyphkern=\dimen318
-\SOUL@dimen=\dimen319
-\SOUL@dimeni=\dimen320
-\SOUL@minus=\count373
-\SOUL@comma=\count374
-\SOUL@apo=\count375
-\SOUL@grave=\count376
-\SOUL@spaceskip=\skip69
-\SOUL@ttwidth=\dimen321
-\SOUL@uldp=\dimen322
-\SOUL@ulht=\dimen323
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
-Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
-File: tikzlibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
-File: pgflibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
-File: tikzlibraryarrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
-File: pgflibraryarrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\arrowsize=\dimen324
-)) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
-File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count377
-) (./t-sne-lecture_v2.aux)
+\c@ALC@unique=\count322
+\c@ALC@line=\count323
+\c@ALC@rem=\count324
+\c@ALC@depth=\count325
+\ALC@tlm=\skip63
+\algorithmicindent=\skip64
+)
+(/usr/share/texlive/texmf-dist/tex/latex/soul/soul.sty
+Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
+\SOUL@word=\toks48
+\SOUL@lasttoken=\toks49
+\SOUL@cmds=\toks50
+\SOUL@buffer=\toks51
+\SOUL@token=\toks52
+\SOUL@spaceskip=\skip65
+\SOUL@ttwidth=\dimen290
+\SOUL@uldp=\dimen291
+\SOUL@ulht=\dimen292
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.
+tex
+File: pgflibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\arrowsize=\dimen293
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/newunicodechar/newunicodechar.sty
+Package: newunicodechar 2018/04/08 v1.2 Defining Unicode characters
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/pifont.sty
+Package: pifont 2005/04/12 PSNFSS-v9.2a Pi font support (SPQR) 
+LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count326
+\l__pdf_internal_box=\box80
+)
+(./t-sne-lecture_v2.aux)
 \openout1 = `t-sne-lecture_v2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -691,92 +868,136 @@ LaTeX Font Info:    ... okay on input line 27.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count327
+\scratchdimen=\dimen294
+\scratchbox=\box81
+\nofMPsegments=\count328
+\nofMParguments=\count329
+\everyMPshowfont=\toks53
+\MPscratchCnt=\count330
+\MPscratchDim=\dimen295
+\MPnumerator=\count331
+\makeMPintoPDFobject=\count332
+\everyMPtoPDFconversion=\toks54
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
 ))
-Package hyperref Info: Link coloring OFF on input line 27.
- (./t-sne-lecture_v2.out) (./t-sne-lecture_v2.out)
+ABD: EveryShipout initializing macros
+\AtBeginShipoutBox=\box82
+Package hyperref Info: Link coloring OFF on input line 30.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count333
+)
+LaTeX Info: Redefining \ref on input line 30.
+LaTeX Info: Redefining \pageref on input line 30.
+LaTeX Info: Redefining \nameref on input line 30.
+
+(./t-sne-lecture_v2.out) (./t-sne-lecture_v2.out)
 \@outlinefile=\write5
 \openout5 = `t-sne-lecture_v2.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 27.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 30.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 27.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 30.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 27.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 27.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 27.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 27.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 30.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 27.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 27.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 27.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 30.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 27.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 27.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 27.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 30.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 27.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 27.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 30.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 27.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 30.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 27.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 27.
+(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 27.
+(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 27.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 27.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 27.
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 30.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 30.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
+(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 3
+0.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 3
+0.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
+ut line 30.
+
+(/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary
+-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
+)
+(/usr/share/texlive/texmf-dist/tex/latex/translator/translator-bibliography-dic
+tionary-English.dict
 Dictionary: translator-bibliography-dictionary, Language: English 
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/translator-environment-dictionary-English.dict
+)
+(/usr/share/texlive/texmf-dist/tex/latex/translator/translator-environment-dict
+ionary-English.dict
 Dictionary: translator-environment-dictionary, Language: English 
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/translator-months-dictionary-English.dict
+)
+(/usr/share/texlive/texmf-dist/tex/latex/translator/translator-months-dictionar
+y-English.dict
 Dictionary: translator-months-dictionary, Language: English 
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/translator-numbers-dictionary-English.dict
+)
+(/usr/share/texlive/texmf-dist/tex/latex/translator/translator-numbers-dictiona
+ry-English.dict
 Dictionary: translator-numbers-dictionary, Language: English 
-) (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
+)
+(/usr/share/texlive/texmf-dist/tex/latex/translator/translator-theorem-dictiona
+ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 ) (./t-sne-lecture_v2.nav)
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 27--27
+Overfull \hbox (121.47002pt too wide) in paragraph at lines 30--30
  [][]  \OT1/cmss/m/n/6 ([])  
  []
 
 
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 27--27
+Overfull \hbox (114.44911pt too wide) in paragraph at lines 30--30
  [][][][]  
  []
-
-
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 32--32
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 32--32
- [][][][]  
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -790,28 +1011,28 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [1
 
-{c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 77--77
- [][]  \OT1/cmss/m/n/6 ([])  
- []
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 80.
 
 
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 77--77
- [][][][]  
- []
-
-LaTeX Font Info:    Trying to load font information for U+msa on input line 77.
-(c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 77.
- (c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+LaTeX Font Info:    Trying to load font information for U+msb on input line 80.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \vbox (102.13pt too high) detected at line 77
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on inp
+ut line 80.
+
+(/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
+File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/ma
+thkerncmss.
+)
+Overfull \vbox (102.13pt too high) detected at line 80
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -826,59 +1047,8 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [2
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 144--144
- [][]  \OT1/cmss/m/n/6 ([])  
+Overfull \vbox (44.30568pt too high) detected at line 147
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 144--144
- [][][][]  
- []
-
-
-! LaTeX Error: Unicode character ● (U+25CF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.144 \end{frame}
-                 
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ● (U+25CF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.144 \end{frame}
-                 
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ● (U+25CF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.144 \end{frame}
-                 
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-Overfull \vbox (77.53088pt too high) detected at line 144
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -893,18 +1063,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [3
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 186--186
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 186--186
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -917,18 +1075,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [4
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 213--213
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 213--213
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -941,32 +1087,22 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [5
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 239--239
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 239--239
- [][][][]  
- []
-
-<./Figures/swiss_roll_3d.png, id=188, 578.16pt x 433.62pt>
+<./Figures/swiss_roll_3d.png, id=165, 578.16pt x 433.62pt>
 File: ./Figures/swiss_roll_3d.png Graphic file (type png)
 <use ./Figures/swiss_roll_3d.png>
-Package pdftex.def Info: ./Figures/swiss_roll_3d.png  used on input line 239.
+Package pdftex.def Info: ./Figures/swiss_roll_3d.png  used on input line 242.
 (pdftex.def)             Requested size: 143.00432pt x 107.25346pt.
-<./Figures/swiss_roll_pca.png, id=189, 578.16pt x 433.62pt>
+<./Figures/swiss_roll_pca.png, id=166, 578.16pt x 433.62pt>
 File: ./Figures/swiss_roll_pca.png Graphic file (type png)
 <use ./Figures/swiss_roll_pca.png>
-Package pdftex.def Info: ./Figures/swiss_roll_pca.png  used on input line 239.
+Package pdftex.def Info: ./Figures/swiss_roll_pca.png  used on input line 242.
 (pdftex.def)             Requested size: 143.00432pt x 107.25346pt.
-<./Figures/swiss_roll_tsne.png, id=190, 578.16pt x 433.62pt>
+<./Figures/swiss_roll_tsne.png, id=167, 578.16pt x 433.62pt>
 File: ./Figures/swiss_roll_tsne.png Graphic file (type png)
 <use ./Figures/swiss_roll_tsne.png>
-Package pdftex.def Info: ./Figures/swiss_roll_tsne.png  used on input line 239.
+Package pdftex.def Info: ./Figures/swiss_roll_tsne.png  used on input line 242.
+
 (pdftex.def)             Requested size: 143.00432pt x 107.25346pt.
-
-
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
@@ -979,34 +1115,8 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [6
 
- <./Figures/swiss_roll_3d.png> <./Figures/swiss_roll_pca.png> <./Figures/swiss_roll_tsne.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 261--261
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 261--261
- [][][][]  
- []
-
-<./Figures/genomics_icon.png, id=218, 578.16pt x 433.62pt>
-File: ./Figures/genomics_icon.png Graphic file (type png)
-<use ./Figures/genomics_icon.png>
-Package pdftex.def Info: ./Figures/genomics_icon.png  used on input line 261.
-(pdftex.def)             Requested size: 85.35826pt x 64.01463pt.
-<./Figures/nlp_icon.png, id=219, 578.16pt x 433.62pt>
-File: ./Figures/nlp_icon.png Graphic file (type png)
-<use ./Figures/nlp_icon.png>
-Package pdftex.def Info: ./Figures/nlp_icon.png  used on input line 261.
-(pdftex.def)             Requested size: 85.35826pt x 64.01463pt.
-<./Figures/vision_icon.png, id=220, 578.16pt x 433.62pt>
-File: ./Figures/vision_icon.png Graphic file (type png)
-<use ./Figures/vision_icon.png>
-Package pdftex.def Info: ./Figures/vision_icon.png  used on input line 261.
-(pdftex.def)             Requested size: 85.35826pt x 64.01463pt.
-
-
-
+ <./Figures/swiss_roll_3d.png> <./Figures/swiss_roll_pca.png> <./Figures/swiss_
+roll_tsne.png>]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1018,31 +1128,21 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [7
 
- <./Figures/genomics_icon.png> <./Figures/nlp_icon.png> <./Figures/vision_icon.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 293--293
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 293--293
- [][][][]  
- []
-
-<./Figures/curse_dimensionality_animation.png, id=249, 722.7pt x 433.62pt>
+]
+<./Figures/curse_dimensionality_animation.png, id=221, 722.7pt x 433.62pt>
 File: ./Figures/curse_dimensionality_animation.png Graphic file (type png)
 <use ./Figures/curse_dimensionality_animation.png>
-Package pdftex.def Info: ./Figures/curse_dimensionality_animation.png  used on input line 293.
+Package pdftex.def Info: ./Figures/curse_dimensionality_animation.png  used on 
+input line 341.
 (pdftex.def)             Requested size: 195.00348pt x 116.99956pt.
 
-Overfull \hbox (163.3623pt too wide) in paragraph at lines 293--293
+Overfull \hbox (163.3623pt too wide) in paragraph at lines 341--341
 [][][][][][][]  
  []
 
 
-Overfull \vbox (1.12996pt too high) detected at line 293
+Overfull \vbox (1.12996pt too high) detected at line 341
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1057,18 +1157,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [8
 
  <./Figures/curse_dimensionality_animation.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 319--319
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 319--319
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1081,26 +1169,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [9
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 344--344
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 344--344
- [][][][]  
- []
-
-<./Figures/information_visual.png, id=318, 578.16pt x 433.62pt>
-File: ./Figures/information_visual.png Graphic file (type png)
-<use ./Figures/information_visual.png>
-Package pdftex.def Info: ./Figures/information_visual.png  used on input line 344.
-(pdftex.def)             Requested size: 173.33496pt x 130.00098pt.
-
-Overfull \hbox (162.04764pt too wide) in paragraph at lines 344--344
+Overfull \hbox (162.04764pt too wide) in paragraph at lines 419--419
 [][][][][][][]  
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1114,26 +1185,16 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [10
 
- <./Figures/information_visual.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 360--360
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 360--360
- [][][][]  
- []
-
-<./Figures/distance_to_probability_animation.png, id=350, 722.7pt x 433.62pt>
+]
+<./Figures/distance_to_probability_animation.png, id=305, 722.7pt x 433.62pt>
 File: ./Figures/distance_to_probability_animation.png Graphic file (type png)
 <use ./Figures/distance_to_probability_animation.png>
-Package pdftex.def Info: ./Figures/distance_to_probability_animation.png  used on input line 360.
+Package pdftex.def Info: ./Figures/distance_to_probability_animation.png  used 
+on input line 435.
 (pdftex.def)             Requested size: 390.00697pt x 234.00575pt.
 
-Overfull \vbox (104.13618pt too high) detected at line 360
+Overfull \vbox (104.13618pt too high) detected at line 435
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1148,18 +1209,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [11
 
  <./Figures/distance_to_probability_animation.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 378--378
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 378--378
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1172,18 +1221,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [12
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 397--397
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 397--397
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1196,30 +1233,21 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [13
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 418--418
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 418--418
- [][][][]  
- []
-
-<./Figures/adaptive_bandwidth_dense.png, id=448, 433.62pt x 433.62pt>
+<./Figures/adaptive_bandwidth_dense.png, id=388, 433.62pt x 433.62pt>
 File: ./Figures/adaptive_bandwidth_dense.png Graphic file (type png)
 <use ./Figures/adaptive_bandwidth_dense.png>
-Package pdftex.def Info: ./Figures/adaptive_bandwidth_dense.png  used on input line 418.
+Package pdftex.def Info: ./Figures/adaptive_bandwidth_dense.png  used on input 
+line 493.
 (pdftex.def)             Requested size: 216.67201pt x 216.67052pt.
-<./Figures/adaptive_bandwidth_sparse.png, id=449, 433.62pt x 433.62pt>
+<./Figures/adaptive_bandwidth_sparse.png, id=389, 433.62pt x 433.62pt>
 File: ./Figures/adaptive_bandwidth_sparse.png Graphic file (type png)
 <use ./Figures/adaptive_bandwidth_sparse.png>
-Package pdftex.def Info: ./Figures/adaptive_bandwidth_sparse.png  used on input line 418.
+Package pdftex.def Info: ./Figures/adaptive_bandwidth_sparse.png  used on input
+ line 493.
 (pdftex.def)             Requested size: 216.67201pt x 216.67052pt.
 
-Overfull \vbox (83.47017pt too high) detected at line 418
+Overfull \vbox (83.47017pt too high) detected at line 493
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1233,26 +1261,17 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [14
 
- <./Figures/adaptive_bandwidth_dense.png> <./Figures/adaptive_bandwidth_sparse.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 441--441
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 441--441
- [][][][]  
- []
-
-<./Figures/perplexity_visual.png, id=489, 867.24pt x 722.7pt>
+ <./Figures/adaptive_bandwidth_dense.png> <./Figures/adaptive_bandwidth_sparse.
+png>]
+<./Figures/perplexity_visual.png, id=416, 867.24pt x 722.7pt>
 File: ./Figures/perplexity_visual.png Graphic file (type png)
 <use ./Figures/perplexity_visual.png>
-Package pdftex.def Info: ./Figures/perplexity_visual.png  used on input line 441.
-(pdftex.def)             Requested size: 216.67201pt x 180.55325pt.
+Package pdftex.def Info: ./Figures/perplexity_visual.png  used on input line 51
+7.
+(pdftex.def)             Requested size: 151.66974pt x 126.38617pt.
 
-Overfull \vbox (55.64427pt too high) detected at line 441
+Overfull \vbox (1.47719pt too high) detected at line 517
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1267,27 +1286,18 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [15
 
  <./Figures/perplexity_visual.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 464--464
- [][]  \OT1/cmss/m/n/6 ([])  
- []
+LaTeX Font Info:    Trying to load font information for OMS+cmss on input line 
+542.
+LaTeX Font Info:    No file OMScmss.fd. on input line 542.
 
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 464--464
- [][][][]  
- []
-
-LaTeX Font Info:    Trying to load font information for OMS+cmss on input line 464.
-LaTeX Font Info:    No file OMScmss.fd. on input line 464.
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 464.
+(Font)              for symbol `textbraceleft' on input line 542.
 
 
-Overfull \vbox (15.53076pt too high) detected at line 464
+Overfull \vbox (15.53076pt too high) detected at line 542
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1302,79 +1312,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [16
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 489--489
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 489--489
- [][][][]  
- []
-
-<./Figures/kl_divergence_asymmetry.png, id=549, 722.7pt x 433.62pt>
-File: ./Figures/kl_divergence_asymmetry.png Graphic file (type png)
-<use ./Figures/kl_divergence_asymmetry.png>
-Package pdftex.def Info: ./Figures/kl_divergence_asymmetry.png  used on input line 489.
-(pdftex.def)             Requested size: 173.33496pt x 103.99814pt.
-
-! LaTeX Error: Not allowed in LR mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.489 \end{frame}
-                 
-You've lost some text.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.489 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.489 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Extra }, or forgotten \endgroup.
-\color@b@x ...hbox {\kern \fboxsep {\set@color #3}
-                                                  \kern \fboxsep }\dimen@ \h...
-l.489 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Extra }, or forgotten \endgroup.
-\color@b@x ...xsep {\set@color #3}\kern \fboxsep }
-                                                  \dimen@ \ht \z@ \advance \...
-l.489 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1386,31 +1323,17 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [17
 
- <./Figures/kl_divergence_asymmetry.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 504--504
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 504--504
- [][][][]  
- []
-
-<./Figures/kl_divergence_visualization.png, id=577, 722.7pt x 433.62pt>
+]
+<./Figures/kl_divergence_visualization.png, id=500, 722.7pt x 433.62pt>
 File: ./Figures/kl_divergence_visualization.png Graphic file (type png)
 <use ./Figures/kl_divergence_visualization.png>
-Package pdftex.def Info: ./Figures/kl_divergence_visualization.png  used on input line 504.
-(pdftex.def)             Requested size: 390.00697pt x 234.00575pt.
+Package pdftex.def Info: ./Figures/kl_divergence_visualization.png  used on inp
+ut line 604.
+(pdftex.def)             Requested size: 216.67201pt x 130.00098pt.
 
-Overfull \hbox (126.20963pt too wide) in paragraph at lines 504--504
-[][][][][][][]  
+Overfull \hbox (131.77586pt too wide) in paragraph at lines 604--604
+[][][][][][]  
  []
-
-
-Overfull \vbox (90.53618pt too high) detected at line 504
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1425,25 +1348,15 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [18
 
  <./Figures/kl_divergence_visualization.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 526--526
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 526--526
- [][][][]  
- []
-
-<./Figures/sne_gradient_forces.png, id=605, 578.16pt x 578.16pt>
+<./Figures/sne_gradient_forces.png, id=527, 578.16pt x 578.16pt>
 File: ./Figures/sne_gradient_forces.png Graphic file (type png)
 <use ./Figures/sne_gradient_forces.png>
-Package pdftex.def Info: ./Figures/sne_gradient_forces.png  used on input line 526.
-(pdftex.def)             Requested size: 216.67201pt x 216.6683pt.
+Package pdftex.def Info: ./Figures/sne_gradient_forces.png  used on input line 
+627.
+(pdftex.def)             Requested size: 108.336pt x 108.33415pt.
 
-Overfull \vbox (125.8948pt too high) detected at line 526
+Overfull \vbox (17.56065pt too high) detected at line 627
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1458,26 +1371,12 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [19
 
  <./Figures/sne_gradient_forces.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 547--547
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 547--547
- [][][][]  
- []
-
-<./Figures/crowding_problem_animation.png, id=635, 578.16pt x 433.62pt>
+<./Figures/crowding_problem_animation.png, id=555, 578.16pt x 433.62pt>
 File: ./Figures/crowding_problem_animation.png Graphic file (type png)
 <use ./Figures/crowding_problem_animation.png>
-Package pdftex.def Info: ./Figures/crowding_problem_animation.png  used on input line 547.
-(pdftex.def)             Requested size: 346.67653pt x 260.00197pt.
-
-Overfull \vbox (110.66986pt too high) detected at line 547
- []
-
-
-
+Package pdftex.def Info: ./Figures/crowding_problem_animation.png  used on inpu
+t line 648.
+(pdftex.def)             Requested size: 130.00452pt x 97.50073pt.
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
@@ -1491,26 +1390,16 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [20
 
  <./Figures/crowding_problem_animation.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 573--573
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 573--573
- [][][][]  
- []
-
-<./Figures/gaussian_vs_t_comparison.png, id=663, 722.7pt x 433.62pt>
+<./Figures/gaussian_vs_t_comparison.png, id=583, 722.7pt x 433.62pt>
 File: ./Figures/gaussian_vs_t_comparison.png Graphic file (type png)
 <use ./Figures/gaussian_vs_t_comparison.png>
-Package pdftex.def Info: ./Figures/gaussian_vs_t_comparison.png  used on input line 573.
+Package pdftex.def Info: ./Figures/gaussian_vs_t_comparison.png  used on input 
+line 675.
 (pdftex.def)             Requested size: 216.67201pt x 130.00098pt.
 
-Overfull \hbox (127.25758pt too wide) in paragraph at lines 573--573
+Overfull \hbox (124.21591pt too wide) in paragraph at lines 675--675
 [][][][][][][]  
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1525,79 +1414,15 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [21
 
  <./Figures/gaussian_vs_t_comparison.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 596--596
- [][]  \OT1/cmss/m/n/6 ([])  
+Overfull \hbox (10.99332pt too wide) in paragraph at lines 730--730
+[][]  
  []
 
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 596--596
- [][][][]  
- []
-
-<./Figures/distance_ratio_plot.png, id=691, 722.7pt x 433.62pt>
-File: ./Figures/distance_ratio_plot.png Graphic file (type png)
-<use ./Figures/distance_ratio_plot.png>
-Package pdftex.def Info: ./Figures/distance_ratio_plot.png  used on input line 596.
-(pdftex.def)             Requested size: 173.33496pt x 103.99814pt.
-
-! LaTeX Error: Not allowed in LR mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.596 \end{frame}
-                 
-You've lost some text.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.596 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.596 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Extra }, or forgotten \endgroup.
-\color@b@x ...hbox {\kern \fboxsep {\set@color #3}
-                                                  \kern \fboxsep }\dimen@ \h...
-l.596 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Extra }, or forgotten \endgroup.
-\color@b@x ...xsep {\set@color #3}\kern \fboxsep }
-                                                  \dimen@ \ht \z@ \advance \...
-l.596 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-
-
+LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 
+730.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
+File: ts1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1609,28 +1434,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [22
 
- <./Figures/distance_ratio_plot.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 611--611
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 611--611
- [][][][]  
- []
-
-<./Figures/heavy_tails_solution_animation.png, id=720, 578.16pt x 433.62pt>
-File: ./Figures/heavy_tails_solution_animation.png Graphic file (type png)
-<use ./Figures/heavy_tails_solution_animation.png>
-Package pdftex.def Info: ./Figures/heavy_tails_solution_animation.png  used on input line 611.
-(pdftex.def)             Requested size: 390.00697pt x 292.50223pt.
-
-Overfull \vbox (149.03265pt too high) detected at line 611
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1642,19 +1446,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [23
 
- <./Figures/heavy_tails_solution_animation.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 627--627
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 627--627
- [][][][]  
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1667,18 +1459,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [24
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 650--650
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 650--650
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1691,30 +1471,13 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [25
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 673--673
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 673--673
- [][][][]  
- []
-
-<./Figures/gradient_force_field.png, id=820, 578.16pt x 578.16pt>
-File: ./Figures/gradient_force_field.png Graphic file (type png)
-<use ./Figures/gradient_force_field.png>
-Package pdftex.def Info: ./Figures/gradient_force_field.png  used on input line 673.
-(pdftex.def)             Requested size: 346.67653pt x 346.6693pt.
-
-Overfull \hbox (58.96729pt too wide) in paragraph at lines 673--673
+Overfull \hbox (21.98059pt too wide) in paragraph at lines 892--892
 [][][][][][][]  
  []
 
 
-Overfull \vbox (210.9372pt too high) detected at line 673
+Overfull \vbox (8.80461pt too high) detected at line 892
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1728,21 +1491,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [26
 
- <./Figures/gradient_force_field.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 696--696
- [][]  \OT1/cmss/m/n/6 ([])  
+]
+Overfull \vbox (18.04349pt too high) detected at line 915
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 696--696
- [][][][]  
- []
-
-
-Overfull \vbox (18.04349pt too high) detected at line 696
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1757,32 +1508,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [27
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 720--720
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 720--720
- [][][][]  
- []
-
-<./Figures/early_exaggeration.png, id=877, 578.16pt x 361.35pt>
-File: ./Figures/early_exaggeration.png Graphic file (type png)
-<use ./Figures/early_exaggeration.png>
-Package pdftex.def Info: ./Figures/early_exaggeration.png  used on input line 720.
-(pdftex.def)             Requested size: 216.67201pt x 135.4177pt.
-<./Figures/momentum_schedule.png, id=878, 578.16pt x 361.35pt>
-File: ./Figures/momentum_schedule.png Graphic file (type png)
-<use ./Figures/momentum_schedule.png>
-Package pdftex.def Info: ./Figures/momentum_schedule.png  used on input line 720.
-(pdftex.def)             Requested size: 216.67201pt x 135.4177pt.
-
-Overfull \vbox (10.8215pt too high) detected at line 720
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1794,19 +1519,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [28
 
- <./Figures/early_exaggeration.png> <./Figures/momentum_schedule.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 738--738
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 738--738
- [][][][]  
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1819,27 +1532,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [29
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 765--765
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 765--765
- [][][][]  
- []
-
-<./Figures/barnes_hut_tree.png, id=945, 578.16pt x 578.16pt>
-File: ./Figures/barnes_hut_tree.png Graphic file (type png)
-<use ./Figures/barnes_hut_tree.png>
-Package pdftex.def Info: ./Figures/barnes_hut_tree.png  used on input line 765.
-(pdftex.def)             Requested size: 216.67201pt x 216.6683pt.
-
-Overfull \vbox (50.73204pt too high) detected at line 765
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1851,28 +1543,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [30
 
- <./Figures/barnes_hut_tree.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 784--784
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 784--784
- [][][][]  
- []
-
-<./Figures/debugging_visual_guide.png, id=974, 867.24pt x 722.7pt>
-File: ./Figures/debugging_visual_guide.png Graphic file (type png)
-<use ./Figures/debugging_visual_guide.png>
-Package pdftex.def Info: ./Figures/debugging_visual_guide.png  used on input line 784.
-(pdftex.def)             Requested size: 390.00697pt x 325.00247pt.
-
-Overfull \vbox (220.73697pt too high) detected at line 784
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1884,24 +1555,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [31
 
- <./Figures/debugging_visual_guide.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 813--813
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 813--813
- [][][][]  
- []
-
-<./Figures/perplexity_comparison.png, id=1004, 1084.05pt x 361.35pt>
-File: ./Figures/perplexity_comparison.png Graphic file (type png)
-<use ./Figures/perplexity_comparison.png>
-Package pdftex.def Info: ./Figures/perplexity_comparison.png  used on input line 813.
-(pdftex.def)             Requested size: 390.00697pt x 130.00319pt.
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -1913,36 +1567,27 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [32
 
- <./Figures/perplexity_comparison.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 843--843
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 843--843
- [][][][]  
- []
-
-<./Figures/sin1_cluster_size.png, id=1033, 578.16pt x 433.62pt>
+]
+<./Figures/sin1_cluster_size.png, id=909, 578.16pt x 433.62pt>
 File: ./Figures/sin1_cluster_size.png Graphic file (type png)
 <use ./Figures/sin1_cluster_size.png>
-Package pdftex.def Info: ./Figures/sin1_cluster_size.png  used on input line 843.
+Package pdftex.def Info: ./Figures/sin1_cluster_size.png  used on input line 12
+52.
 (pdftex.def)             Requested size: 143.00432pt x 107.25346pt.
-<./Figures/sin2_distances.png, id=1034, 578.16pt x 433.62pt>
+<./Figures/sin2_distances.png, id=910, 578.16pt x 433.62pt>
 File: ./Figures/sin2_distances.png Graphic file (type png)
 <use ./Figures/sin2_distances.png>
-Package pdftex.def Info: ./Figures/sin2_distances.png  used on input line 843.
+Package pdftex.def Info: ./Figures/sin2_distances.png  used on input line 1252.
+
 (pdftex.def)             Requested size: 143.00432pt x 107.25346pt.
-<./Figures/sin3_position.png, id=1035, 578.16pt x 433.62pt>
+<./Figures/sin3_position.png, id=911, 578.16pt x 433.62pt>
 File: ./Figures/sin3_position.png Graphic file (type png)
 <use ./Figures/sin3_position.png>
-Package pdftex.def Info: ./Figures/sin3_position.png  used on input line 843.
+Package pdftex.def Info: ./Figures/sin3_position.png  used on input line 1252.
 (pdftex.def)             Requested size: 143.00432pt x 107.25346pt.
 
-Overfull \vbox (4.45311pt too high) detected at line 843
+Overfull \vbox (4.45311pt too high) detected at line 1252
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -1956,39 +1601,24 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [33
 
- <./Figures/sin1_cluster_size.png> <./Figures/sin2_distances.png> <./Figures/sin3_position.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 877--877
- [][]  \OT1/cmss/m/n/6 ([])  
- []
+ <./Figures/sin1_cluster_size.png> <./Figures/sin2_distances.png> <./Figures/si
+n3_position.png>]
+
+LaTeX Warning: Command \texttimes invalid in math mode on input line 1286.
 
 
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 877--877
- [][][][]  
- []
+LaTeX Warning: Command \texttimes invalid in math mode on input line 1286.
 
-
-! LaTeX Error: Unicode character σ (U+03C3)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.877 \end{frame}
-                 
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-<./Figures/mnist_tsne_result.png, id=1063, 722.7pt x 578.16pt>
+Missing character: There is no � in font cmss10!
+<./Figures/mnist_tsne_result.png, id=938, 722.7pt x 578.16pt>
 File: ./Figures/mnist_tsne_result.png Graphic file (type png)
 <use ./Figures/mnist_tsne_result.png>
-Package pdftex.def Info: ./Figures/mnist_tsne_result.png  used on input line 877.
-(pdftex.def)             Requested size: 216.67201pt x 173.33464pt.
+Package pdftex.def Info: ./Figures/mnist_tsne_result.png  used on input line 12
+86.
+(pdftex.def)             Requested size: 173.33826pt x 138.66418pt.
 
-Overfull \vbox (37.59839pt too high) detected at line 877
+Overfull \vbox (2.92793pt too high) detected at line 1286
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -2003,20 +1633,8 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [34
 
  <./Figures/mnist_tsne_result.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 893--893
- [][]  \OT1/cmss/m/n/6 ([])  
+Overfull \vbox (29.59236pt too high) detected at line 1349
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 893--893
- [][][][]  
- []
-
-
-Overfull \vbox (11.0523pt too high) detected at line 893
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -2031,26 +1649,12 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [35
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 926--926
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 926--926
- [][][][]  
- []
-
-<./Figures/stability_analysis.png, id=1131, 578.16pt x 505.89pt>
+<./Figures/stability_analysis.png, id=992, 578.16pt x 505.89pt>
 File: ./Figures/stability_analysis.png Graphic file (type png)
 <use ./Figures/stability_analysis.png>
-Package pdftex.def Info: ./Figures/stability_analysis.png  used on input line 926.
-(pdftex.def)             Requested size: 216.67201pt x 189.58476pt.
-
-Overfull \vbox (76.44852pt too high) detected at line 926
- []
-
-
-
+Package pdftex.def Info: ./Figures/stability_analysis.png  used on input line 1
+382.
+(pdftex.def)             Requested size: 108.336pt x 94.79237pt.
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
@@ -2064,27 +1668,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [36
 
  <./Figures/stability_analysis.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 954--954
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 954--954
- [][][][]  
- []
-
-<./Figures/interactive_tsne_demo.png, id=1159, 578.16pt x 433.62pt>
-File: ./Figures/interactive_tsne_demo.png Graphic file (type png)
-<use ./Figures/interactive_tsne_demo.png>
-Package pdftex.def Info: ./Figures/interactive_tsne_demo.png  used on input line 954.
-(pdftex.def)             Requested size: 346.67653pt x 260.00197pt.
-
-Overfull \vbox (147.73656pt too high) detected at line 954
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2096,19 +1679,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [37
 
- <./Figures/interactive_tsne_demo.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 995--995
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 995--995
- [][][][]  
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2121,25 +1692,8 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [38
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1014--1014
- [][]  \OT1/cmss/m/n/6 ([])  
+Overfull \vbox (7.84146pt too high) detected at line 1558
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1014--1014
- [][][][]  
- []
-
-<./Figures/preprocessing_pipeline.png, id=1228, 578.16pt x 433.62pt>
-File: ./Figures/preprocessing_pipeline.png Graphic file (type png)
-<use ./Figures/preprocessing_pipeline.png>
-Package pdftex.def Info: ./Figures/preprocessing_pipeline.png  used on input line 1014.
-(pdftex.def)             Requested size: 303.3395pt x 227.50172pt.
-
-Overfull \vbox (149.48788pt too high) detected at line 1014
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -2153,28 +1707,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [39
 
- <./Figures/preprocessing_pipeline.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1037--1037
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1037--1037
- [][][][]  
- []
-
-<./Figures/failure_modes_gallery.png, id=1256, 867.24pt x 722.7pt>
-File: ./Figures/failure_modes_gallery.png Graphic file (type png)
-<use ./Figures/failure_modes_gallery.png>
-Package pdftex.def Info: ./Figures/failure_modes_gallery.png  used on input line 1037.
-(pdftex.def)             Requested size: 390.00697pt x 325.00247pt.
-
-Overfull \vbox (189.27037pt too high) detected at line 1037
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2186,26 +1719,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [40
 
- <./Figures/failure_modes_gallery.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1073--1073
- [][]  \OT1/cmss/m/n/6 ([])  
+]
+Overfull \vbox (5.77661pt too high) detected at line 1724
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1073--1073
- [][][][]  
- []
-
-<./Figures/single_cell_tsne.png, id=1284, 578.16pt x 433.62pt>
-File: ./Figures/single_cell_tsne.png Graphic file (type png)
-<use ./Figures/single_cell_tsne.png>
-Package pdftex.def Info: ./Figures/single_cell_tsne.png  used on input line 1073.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-Overfull \vbox (30.63582pt too high) detected at line 1073
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -2219,39 +1735,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [41
 
- <./Figures/single_cell_tsne.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1100--1100
- [][]  \OT1/cmss/m/n/6 ([])  
+]
+Overfull \vbox (41.30064pt too high) detected at line 1802
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1100--1100
- [][][][]  
- []
-
-<./Figures/word_embeddings_tsne.png, id=1312, 578.16pt x 433.62pt>
-File: ./Figures/word_embeddings_tsne.png Graphic file (type png)
-<use ./Figures/word_embeddings_tsne.png>
-Package pdftex.def Info: ./Figures/word_embeddings_tsne.png  used on input line 1100.
-(pdftex.def)             Requested size: 346.67653pt x 260.00197pt.
-
-! LaTeX Error: Unicode character ≈ (U+2248)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1100 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-Overfull \vbox (133.26987pt too high) detected at line 1100
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -2265,41 +1751,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [42
 
- <./Figures/word_embeddings_tsne.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1128--1128
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1128--1128
- [][][][]  
- []
-
-<./Figures/imagenet_tsne.png, id=1341, 722.7pt x 578.16pt>
-File: ./Figures/imagenet_tsne.png Graphic file (type png)
-<use ./Figures/imagenet_tsne.png>
-Package pdftex.def Info: ./Figures/imagenet_tsne.png  used on input line 1128.
-(pdftex.def)             Requested size: 216.67201pt x 173.33464pt.
-
-! LaTeX Error: Unicode character ≠ (U+2260)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1128 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-Overfull \vbox (42.70465pt too high) detected at line 1128
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2311,24 +1763,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [43
 
- <./Figures/imagenet_tsne.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1153--1153
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1153--1153
- [][][][]  
- []
-
-<./Figures/parametric_tsne_architecture.png, id=1370, 578.16pt x 433.62pt>
-File: ./Figures/parametric_tsne_architecture.png Graphic file (type png)
-<use ./Figures/parametric_tsne_architecture.png>
-Package pdftex.def Info: ./Figures/parametric_tsne_architecture.png  used on input line 1153.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2340,26 +1775,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [44
 
- <./Figures/parametric_tsne_architecture.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1168--1168
- [][]  \OT1/cmss/m/n/6 ([])  
+]
+Overfull \vbox (4.30331pt too high) detected at line 2018
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1168--1168
- [][][][]  
- []
-
-<./Figures/multiscale_tsne.png, id=1398, 578.16pt x 433.62pt>
-File: ./Figures/multiscale_tsne.png Graphic file (type png)
-<use ./Figures/multiscale_tsne.png>
-Package pdftex.def Info: ./Figures/multiscale_tsne.png  used on input line 1168.
-(pdftex.def)             Requested size: 346.67653pt x 260.00197pt.
-
-Overfull \vbox (159.66943pt too high) detected at line 1168
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -2373,28 +1791,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [45
 
- <./Figures/multiscale_tsne.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1191--1191
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1191--1191
- [][][][]  
- []
-
-<./Figures/dynamic_tsne.png, id=1426, 578.16pt x 433.62pt>
-File: ./Figures/dynamic_tsne.png Graphic file (type png)
-<use ./Figures/dynamic_tsne.png>
-Package pdftex.def Info: ./Figures/dynamic_tsne.png  used on input line 1191.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-Overfull \vbox (32.63167pt too high) detected at line 1191
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2406,32 +1803,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [46
 
- <./Figures/dynamic_tsne.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1214--1214
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1214--1214
- [][][][]  
- []
-
-
-! LaTeX Error: Unicode character ≥ (U+2265)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1214 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2444,26 +1816,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [47
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1234--1234
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1234--1234
- [][][][]  
- []
-
-<./Figures/information_loss_diagram.png, id=1506, 578.16pt x 433.62pt>
-File: ./Figures/information_loss_diagram.png Graphic file (type png)
-<use ./Figures/information_loss_diagram.png>
-Package pdftex.def Info: ./Figures/information_loss_diagram.png  used on input line 1234.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-Overfull \hbox (45.83209pt too wide) in paragraph at lines 1234--1234
+Overfull \hbox (45.83209pt too wide) in paragraph at lines 2131--2131
 [][][][][][][]  
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -2477,39 +1832,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [48
 
- <./Figures/information_loss_diagram.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1257--1257
- [][]  \OT1/cmss/m/n/6 ([])  
+]
+Overfull \vbox (27.43794pt too high) detected at line 2187
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1257--1257
- [][][][]  
- []
-
-<./Figures/force_simulation.png, id=1534, 578.16pt x 433.62pt>
-File: ./Figures/force_simulation.png Graphic file (type png)
-<use ./Figures/force_simulation.png>
-Package pdftex.def Info: ./Figures/force_simulation.png  used on input line 1257.
-(pdftex.def)             Requested size: 346.67653pt x 260.00197pt.
-
-! LaTeX Error: Unicode character ∝ (U+221D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1257 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-Overfull \vbox (124.26987pt too high) detected at line 1257
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -2523,19 +1848,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [49
 
- <./Figures/force_simulation.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1281--1281
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1281--1281
- [][][][]  
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2548,23 +1861,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [50
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1305--1305
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1305--1305
- [][][][]  
- []
-
-<./Figures/hyperparameter_grid.png, id=1591, 578.16pt x 433.62pt>
-File: ./Figures/hyperparameter_grid.png Graphic file (type png)
-<use ./Figures/hyperparameter_grid.png>
-Package pdftex.def Info: ./Figures/hyperparameter_grid.png  used on input line 1305.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2576,33 +1872,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [51
 
- <./Figures/hyperparameter_grid.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1328--1328
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1328--1328
- [][][][]  
- []
-
-<./Figures/feature_attribution.png, id=1619, 578.16pt x 433.62pt>
-File: ./Figures/feature_attribution.png Graphic file (type png)
-<use ./Figures/feature_attribution.png>
-Package pdftex.def Info: ./Figures/feature_attribution.png  used on input line 1328.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-<./Figures/confidence_regions.png, id=1620, 578.16pt x 433.62pt>
-File: ./Figures/confidence_regions.png Graphic file (type png)
-<use ./Figures/confidence_regions.png>
-Package pdftex.def Info: ./Figures/confidence_regions.png  used on input line 1328.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-Overfull \vbox (38.03421pt too high) detected at line 1328
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2614,19 +1884,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [52
 
- <./Figures/feature_attribution.png> <./Figures/confidence_regions.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1350--1350
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1350--1350
- [][][][]  
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2639,18 +1897,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [53
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1371--1371
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1371--1371
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2663,18 +1909,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [54
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1397--1397
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1397--1397
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2687,44 +1921,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [55
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1417--1417
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1417--1417
- [][][][]  
- []
-
-
-! LaTeX Error: Unicode character η (U+03B7)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1417 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ≥ (U+2265)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1417 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2737,18 +1933,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [56
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1435--1435
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1435--1435
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2761,18 +1945,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [57
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1472--1472
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1472--1472
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2785,18 +1957,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [58
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1500--1500
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1500--1500
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2809,18 +1969,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [59
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1525--1525
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1525--1525
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2833,18 +1981,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [60
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1542--1542
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1542--1542
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -2857,38 +1993,8 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [61
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1571--1571
- [][]  \OT1/cmss/m/n/6 ([])  
+Overfull \vbox (10.61203pt too high) detected at line 2602
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1571--1571
- [][][][]  
- []
-
-<./Figures/different_df_comparison.png, id=1922, 578.16pt x 433.62pt>
-File: ./Figures/different_df_comparison.png Graphic file (type png)
-<use ./Figures/different_df_comparison.png>
-Package pdftex.def Info: ./Figures/different_df_comparison.png  used on input line 1571.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-! LaTeX Error: Unicode character ∞ (U+221E)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1571 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-Overfull \vbox (44.23575pt too high) detected at line 1571
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -2902,124 +2008,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [62
 
- <./Figures/different_df_comparison.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1598--1598
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1598--1598
- [][][][]  
- []
-
-<./Figures/failed_embedding.png, id=1950, 578.16pt x 433.62pt>
-File: ./Figures/failed_embedding.png Graphic file (type png)
-<use ./Figures/failed_embedding.png>
-Package pdftex.def Info: ./Figures/failed_embedding.png  used on input line 1598.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-! LaTeX Error: Unicode character ✗ (U+2717)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1598 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ✓ (U+2713)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1598 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ✗ (U+2717)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1598 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ✗ (U+2717)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1598 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ✓ (U+2713)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1598 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ✓ (U+2713)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1598 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character ✓ (U+2713)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1598 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-<./Figures/fixed_embedding.png, id=1951, 578.16pt x 433.62pt>
-File: ./Figures/fixed_embedding.png Graphic file (type png)
-<use ./Figures/fixed_embedding.png>
-Package pdftex.def Info: ./Figures/fixed_embedding.png  used on input line 1598.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-Overfull \vbox (79.565pt too high) detected at line 1598
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3031,26 +2020,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [63
 
- <./Figures/failed_embedding.png> <./Figures/fixed_embedding.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1632--1632
- [][]  \OT1/cmss/m/n/6 ([])  
+]
+Overfull \vbox (19.0912pt too high) detected at line 2723
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1632--1632
- [][][][]  
- []
-
-<./Figures/fraud_detection_tsne.png, id=1979, 578.16pt x 433.62pt>
-File: ./Figures/fraud_detection_tsne.png Graphic file (type png)
-<use ./Figures/fraud_detection_tsne.png>
-Package pdftex.def Info: ./Figures/fraud_detection_tsne.png  used on input line 1632.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-Overfull \vbox (32.76498pt too high) detected at line 1632
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -3064,28 +2036,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [64
 
- <./Figures/fraud_detection_tsne.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1666--1666
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1666--1666
- [][][][]  
- []
-
-<./Figures/acceleration_comparison.png, id=2007, 578.16pt x 433.62pt>
-File: ./Figures/acceleration_comparison.png Graphic file (type png)
-<use ./Figures/acceleration_comparison.png>
-Package pdftex.def Info: ./Figures/acceleration_comparison.png  used on input line 1666.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-Overfull \vbox (19.90242pt too high) detected at line 1666
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3097,28 +2048,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [65
 
- <./Figures/acceleration_comparison.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1682--1682
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1682--1682
- [][][][]  
- []
-
-<./Figures/streaming_tsne.png, id=2036, 578.16pt x 433.62pt>
-File: ./Figures/streaming_tsne.png Graphic file (type png)
-<use ./Figures/streaming_tsne.png>
-Package pdftex.def Info: ./Figures/streaming_tsne.png  used on input line 1682.
-(pdftex.def)             Requested size: 346.67653pt x 260.00197pt.
-
-Overfull \vbox (130.1324pt too high) detected at line 1682
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3130,28 +2060,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [66
 
- <./Figures/streaming_tsne.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1714--1714
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1714--1714
- [][][][]  
- []
-
-<./Figures/cross_validation_tsne.png, id=2064, 578.16pt x 433.62pt>
-File: ./Figures/cross_validation_tsne.png Graphic file (type png)
-<use ./Figures/cross_validation_tsne.png>
-Package pdftex.def Info: ./Figures/cross_validation_tsne.png  used on input line 1714.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-Overfull \vbox (16.03166pt too high) detected at line 1714
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3163,28 +2072,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [67
 
- <./Figures/cross_validation_tsne.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1744--1744
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1744--1744
- [][][][]  
- []
-
-<./Figures/ensemble_methods.png, id=2093, 578.16pt x 433.62pt>
-File: ./Figures/ensemble_methods.png Graphic file (type png)
-<use ./Figures/ensemble_methods.png>
-Package pdftex.def Info: ./Figures/ensemble_methods.png  used on input line 1744.
-(pdftex.def)             Requested size: 346.67653pt x 260.00197pt.
-
-Overfull \vbox (137.86987pt too high) detected at line 1744
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3196,19 +2084,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [68
 
- <./Figures/ensemble_methods.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1767--1767
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1767--1767
- [][][][]  
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3221,25 +2097,8 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [69
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1800--1800
- [][]  \OT1/cmss/m/n/6 ([])  
+Overfull \vbox (14.9049pt too high) detected at line 3037
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1800--1800
- [][][][]  
- []
-
-<./Figures/memory_optimization.png, id=2158, 578.16pt x 433.62pt>
-File: ./Figures/memory_optimization.png Graphic file (type png)
-<use ./Figures/memory_optimization.png>
-Package pdftex.def Info: ./Figures/memory_optimization.png  used on input line 1800.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-Overfull \vbox (47.23582pt too high) detected at line 1800
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -3253,19 +2112,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [70
 
- <./Figures/memory_optimization.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1817--1817
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1817--1817
- [][][][]  
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3278,31 +2125,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [71
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1845--1845
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1845--1845
- [][][][]  
- []
-
-
-! LaTeX Error: Unicode character ≠ (U+2260)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1845 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3315,25 +2137,8 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [72
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1865--1865
- [][]  \OT1/cmss/m/n/6 ([])  
+Overfull \vbox (72.80162pt too high) detected at line 3136
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1865--1865
- [][][][]  
- []
-
-<./Figures/interactive_playground.png, id=2252, 578.16pt x 433.62pt>
-File: ./Figures/interactive_playground.png Graphic file (type png)
-<use ./Figures/interactive_playground.png>
-Package pdftex.def Info: ./Figures/interactive_playground.png  used on input line 1865.
-(pdftex.def)             Requested size: 346.67653pt x 260.00197pt.
-
-Overfull \vbox (170.93242pt too high) detected at line 1865
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -3347,19 +2152,7 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [73
 
- <./Figures/interactive_playground.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1886--1886
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1886--1886
- [][][][]  
- []
-
-
-
-
+]
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3372,37 +2165,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [74
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1914--1914
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1914--1914
- [][][][]  
- []
-
-
-LaTeX Warning: File `./Figures/perplexity_selection_guide.png' not found on input line 1914.
-
-
-! Package pdftex.def Error: File `./Figures/perplexity_selection_guide.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1914 \end{frame}
-                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \vbox (243.24362pt too high) detected at line 1914
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3415,18 +2177,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [75
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1948--1948
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1948--1948
- [][][][]  
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3439,38 +2189,8 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [76
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 1972--1972
- [][]  \OT1/cmss/m/n/6 ([])  
+Overfull \vbox (18.47606pt too high) detected at line 3281
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 1972--1972
- [][][][]  
- []
-
-<./Figures/exam_problem.png, id=2363, 578.16pt x 433.62pt>
-File: ./Figures/exam_problem.png Graphic file (type png)
-<use ./Figures/exam_problem.png>
-Package pdftex.def Info: ./Figures/exam_problem.png  used on input line 1972.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-! LaTeX Error: Unicode character η (U+03B7)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1972 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-Overfull \vbox (91.04695pt too high) detected at line 1972
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -3484,30 +2204,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [77
 
- <./Figures/exam_problem.png>]
-File: ./Figures/exam_problem.png Graphic file (type png)
-<use ./Figures/exam_problem.png>
-Package pdftex.def Info: ./Figures/exam_problem.png  used on input line 1972.
-(pdftex.def)             Requested size: 216.67201pt x 162.50124pt.
-
-
-! LaTeX Error: Unicode character η (U+03B7)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1972 \end{frame}
-                  
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-Overfull \vbox (91.04695pt too high) detected at line 1972
+]
+Overfull \vbox (14.49736pt too high) detected at line 3281
  []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -3522,27 +2221,6 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [78
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 2010--2010
- [][]  \OT1/cmss/m/n/6 ([])  
- []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 2010--2010
- [][][][]  
- []
-
-<./Figures/complete_journey.png, id=2419, 578.16pt x 433.62pt>
-File: ./Figures/complete_journey.png Graphic file (type png)
-<use ./Figures/complete_journey.png>
-Package pdftex.def Info: ./Figures/complete_journey.png  used on input line 2010.
-(pdftex.def)             Requested size: 390.00697pt x 292.50223pt.
-
-Overfull \vbox (167.23682pt too high) detected at line 2010
- []
-
-
-
-
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
  [][]  \OT1/cmss/m/n/6 ([])  
  []
@@ -3554,21 +2232,9 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 
 [79
 
- <./Figures/complete_journey.png>]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 2035--2035
- [][]  \OT1/cmss/m/n/6 ([])  
+]
+Overfull \vbox (28.85583pt too high) detected at line 3367
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 2035--2035
- [][][][]  
- []
-
-
-Overfull \vbox (23.16537pt too high) detected at line 2035
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -3583,20 +2249,8 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 [80
 
 ]
-Overfull \hbox (121.47002pt too wide) in paragraph at lines 2065--2065
- [][]  \OT1/cmss/m/n/6 ([])  
+Overfull \vbox (24.76765pt too high) detected at line 3398
  []
-
-
-Overfull \hbox (114.44911pt too wide) in paragraph at lines 2065--2065
- [][][][]  
- []
-
-
-Overfull \vbox (16.23175pt too high) detected at line 2065
- []
-
-
 
 
 Overfull \hbox (121.47002pt too wide) has occurred while \output is active
@@ -3620,31 +2274,58 @@ Overfull \hbox (114.44911pt too wide) has occurred while \output is active
 \tf@snm=\write8
 \openout8 = `t-sne-lecture_v2.snm'.
 
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3400.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3400.
  (./t-sne-lecture_v2.aux)
- ***********
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-09-02>
- ***********
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3400.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3400.
+
+Package rerunfilecheck Info: File `t-sne-lecture_v2.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: File `t-sne-lecture_v2.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 27270 strings out of 469728
- 561589 string characters out of 5475648
- 949318 words of memory out of 5000000
- 55029 multiletter control sequences out of 15000+600000
- 642332 words of font info for 93 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 101i,15n,107p,408b,916s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1000.600pk> <c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1095.600pk><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/ENDRI/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on t-sne-lecture_v2.pdf (81 pages, 2206628 bytes).
+ 25251 strings out of 481239
+ 501475 string characters out of 5920378
+ 773835 words of memory out of 5000000
+ 39766 multiletter control sequences out of 15000+600000
+ 549580 words of font info for 84 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 58i,15n,67p,800b,1099s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+symbols/msbm7.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss0600.pfb></
+usr/share/texmf/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf/font
+s/type1/public/cm-super/sfss1095.pfb></usr/share/texmf/fonts/type1/public/cm-su
+per/sfsx1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.p
+fb>
+Output written on t-sne-lecture_v2.pdf (81 pages, 1525486 bytes).
 PDF statistics:
- 2661 PDF objects out of 2984 (max. 8388607)
- 2259 compressed objects within 23 object streams
+ 2342 PDF objects out of 2487 (max. 8388607)
+ 2178 compressed objects within 22 object streams
  163 named destinations out of 1000 (max. 500000)
- 947 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 164 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -14,10 +14,7 @@ tsne_out <- Rtsne(X,
                    max_iter = 1000)
 
 # Extract embedding
-Y <- tsne_out$Y
-
-# Plot
-plot(Y, col = labels)
+Y <- tsne_out$Y (# Plot plot(Y, col = labels))
 \end{verbatim}
 
 \note{

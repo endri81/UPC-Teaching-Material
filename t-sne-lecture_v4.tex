@@ -543,6 +543,35 @@ Questions welcome at each checkpoint!
 }
 \end{frame}
 
+\begin{frame}{Mathematical Prerequisites Check}
+
+\begin{block}{Essential Concepts You'll Need}
+\begin{itemize}
+    \item \textbf{Entropy:} $H(p) = -\sum_i p_i \log(p_i)$
+    \begin{itemize}
+        \item Fair coin: $H = -0.5\log(0.5) - 0.5\log(0.5) = 1$ bit
+        \item Loaded coin $(0.9, 0.1)$: $H = 0.47$ bits $\rightarrow$ less uncertainty
+    \end{itemize}
+    
+    \item \textbf{KL Divergence:} $KL(P||Q) = \sum_i p_i \log(p_i/q_i)$
+    \begin{itemize}
+        \item Example: $P=[0.7,0.3]$, $Q=[0.5,0.5]$
+        \item $KL = 0.7\log(0.7/0.5) + 0.3\log(0.3/0.5) = 0.08$
+    \end{itemize}
+    
+    \item \textbf{Gradient Descent:} $x_{new} = x_{old} - \eta \cdot \nabla f(x)$
+    \begin{itemize}
+        \item Example: $f(x)=x^2$, $\nabla f(4)=8$, $\eta=0.1$
+        \item $x_{new} = 4 - 0.1 \cdot 8 = 3.2$ $\rightarrow$ moving toward minimum
+    \end{itemize}
+\end{itemize}
+\end{block}
+
+\centering
+\textit{Don't worry -- we'll review these as we use them!}
+
+\end{frame}
+
 % SLIDE 13: PART 2 TITLE
 \begin{frame}
 \frametitle{Part 2: From Distances to Probabilities}
@@ -718,6 +747,49 @@ B is A's primary neighbor
 \note{
 [2 min] Concrete numbers make it real.
 }
+\end{frame}
+
+\begin{frame}{Worked Example: Computing $p_{ij}$ Step-by-Step}
+
+\textbf{Given:} 3 points in 2D, perplexity = 2\\
+Points: $A(0,0)$, $B(1,0)$, $C(3,0)$
+
+\vspace{0.3cm}
+
+\begin{enumerate}
+    \item \textbf{Compute distances from A}
+    \begin{itemize}
+        \item $d_{AB} = 1$, $d_{AC} = 3$
+    \end{itemize}
+    
+    \item \textbf{Find $\sigma_A$ via binary search}\\
+    Target: $H(P_A) = \log(2) = 0.693$
+    
+    \begin{columns}
+    \column{0.48\textwidth}
+    Try $\sigma = 0.5$:
+    \begin{itemize}
+        \item $\tilde{p}_{B|A} = \exp(-1^2/2 \cdot 0.25) = 0.135$
+        \item $\tilde{p}_{C|A} = \exp(-9/2 \cdot 0.25) \approx 0$
+        \item $H = 0.41$ \textcolor{red}{(too low)}
+    \end{itemize}
+    
+    \column{0.48\textwidth}
+    Try $\sigma = 1.0$:
+    \begin{itemize}
+        \item $\tilde{p}_{B|A} = \exp(-0.5) = 0.606$
+        \item $\tilde{p}_{C|A} = \exp(-4.5) = 0.011$
+        \item $H = 0.69$ \textcolor{green}{\checkmark}
+    \end{itemize}
+    \end{columns}
+    
+    \item \textbf{Normalize}
+    \begin{itemize}
+        \item $p_{B|A} = 0.606/(0.606+0.011) = 0.982$
+        \item $p_{C|A} = 0.018$
+    \end{itemize}
+\end{enumerate}
+
 \end{frame}
 
 % SLIDE 18: PERPLEXITY CONCEPT
@@ -1040,6 +1112,62 @@ $$\sum_{i,j} p_{ij} = 1$$
 \note{
 [2 min] Major transition - the core problem.
 }
+\end{frame}
+
+\begin{frame}{Why PCA to 50D First?}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Computational Benefits}
+\textbf{Original:} 20,000D × 10,000 points
+\begin{itemize}
+    \item Distance calc: $O(20,000)$
+    \item Memory: 1.6 GB (float64)
+\end{itemize}
+
+\textbf{After PCA to 50D:}
+\begin{itemize}
+    \item Distance calc: $O(50)$
+    \item \textcolor{green}{400× faster!}
+    \item Memory: 4 MB
+    \item \textcolor{green}{400× less!}
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Quality Preservation}
+\begin{tikzpicture}[scale=0.7]
+    \begin{axis}[
+        xlabel={PC Number},
+        ylabel={Variance Explained (\%)},
+        ybar,
+        bar width=3pt,
+        ymin=0, ymax=40,
+        xtick={1,10,20,30,40,50},
+        width=6cm, height=4cm
+    ]
+    \addplot[fill=blue!30] coordinates {
+        (1,35) (2,12) (3,8) (5,5) (10,3) 
+        (20,1.5) (30,0.8) (40,0.5) (50,0.3)
+    };
+    \end{axis}
+\end{tikzpicture}
+\end{block}
+\end{columns}
+
+\vspace{0.3cm}
+\begin{exampleblock}{Example with RNA-seq data}
+\begin{itemize}
+    \item Original: 20,000 genes
+    \item PCA: 50 components capture 92\% variance
+    \item t-SNE quality: Nearly identical
+    \item Speed-up: 380×
+\end{itemize}
+\end{exampleblock}
+
+\centering
+\textbf{Key:} PCA removes noise while preserving structure
+
 \end{frame}
 
 % SLIDE 27: VOLUME SCALING
@@ -1804,6 +1932,49 @@ Early exag. & 4 & 12 & 20\\
 }
 \end{frame}
 
+\begin{frame}{t-SNE Troubleshooting Guide}
+
+\begin{tikzpicture}[
+    node distance=0.8cm,
+    prob/.style={rectangle, draw=red!60, fill=red!5, text width=4cm},
+    diag/.style={rectangle, draw=blue!60, fill=blue!5, text width=3cm},
+    sol/.style={rectangle, draw=green!60, fill=green!5, text width=3.5cm}
+]
+
+% Points explode
+\node[prob] (p1) at (0,0) {\textbf{Points explode/diverge?}};
+\node[diag, right=of p1] (d1) {Learning rate too high};
+\node[sol, right=of d1] (s1) {Reduce $\eta$ by 10×};
+
+% Clusters won't separate
+\node[prob, below=1cm of p1] (p2) {\textbf{Clusters won't separate?}};
+\node[diag, right=of p2] (d2) {Check iterations\\Check perplexity\\Check learning rate};
+\node[sol, right=of d2] (s2) {Run 2000+ iter\\Try perp = 15, 30\\Increase to 200-500};
+
+% Islands
+\node[prob, below=1cm of p2] (p3) {\textbf{See "islands" of points?}};
+\node[diag, right=of p3] (d3) {Perplexity too low};
+\node[sol, right=of d3] (s3) {Minimum perp = 15};
+
+% Blob
+\node[prob, below=1cm of p3] (p4) {\textbf{Everything merges?}};
+\node[diag, right=of p4] (d4) {Perplexity too high};
+\node[sol, right=of d4] (s4) {Maximum perp = n/3};
+
+% Arrows
+\draw[->, thick] (p1) -- (d1);
+\draw[->, thick] (d1) -- (s1);
+\draw[->, thick] (p2) -- (d2);
+\draw[->, thick] (d2) -- (s2);
+\draw[->, thick] (p3) -- (d3);
+\draw[->, thick] (d3) -- (s3);
+\draw[->, thick] (p4) -- (d4);
+\draw[->, thick] (d4) -- (s4);
+
+\end{tikzpicture}
+
+\end{frame}
+
 % SLIDE 49: CONVERGENCE MONITORING
 \begin{frame}
 \frametitle{Monitoring Convergence}
@@ -1926,6 +2097,57 @@ Critical questions:
   [2 min] Critical distinctions for interpretation.
 }
 \end{frame}
+
+\begin{frame}{Interpretation Exercise: Real or Artifact?}
+
+\begin{columns}
+\column{0.33\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.5]
+    \draw[fill=blue!30] (-1,1) circle (0.8);
+    \draw[fill=red!30] (1,-1) circle (0.8);
+\end{tikzpicture}
+
+\textbf{Q1:} Are these groups meaningfully different?
+
+\column{0.33\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.5]
+    \draw[fill=blue!30] (-1.5,0) circle (1.2);
+    \draw[fill=red!30] (1.5,0) circle (0.5);
+\end{tikzpicture}
+
+\textbf{Q2:} Is the left cluster actually bigger?
+
+\column{0.33\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.5]
+    \draw[fill=blue!30] (-2,0) circle (0.5);
+    \draw[fill=green!30] (0,0) circle (0.5);
+    \draw[fill=red!30] (2,0) circle (0.5);
+    \node at (-2,-1) {A};
+    \node at (0,-1) {B};
+    \node at (2,-1) {C};
+\end{tikzpicture}
+
+\textbf{Q3:} Is B intermediate between A and C?
+\end{columns}
+
+\vspace{0.5cm}
+
+\begin{block}{Answers}
+\begin{enumerate}
+    \item \textcolor{blue}{Check consistency}: Run 5 times with different perplexities
+    \item \textcolor{red}{NO!} t-SNE doesn't preserve sizes. Check original data.
+    \item \textcolor{red}{NO!} Inter-cluster distances meaningless. B might be closer to A or C in high-D.
+\end{enumerate}
+\end{block}
+
+\centering
+\textbf{Key Test:} Run 5 times. Pattern persists $\rightarrow$ likely real. Changes $\rightarrow$ artifact.
+
+\end{frame}
+
 
 % SLIDE 53: CLUSTER SEPARATION
 \begin{frame}
@@ -2322,6 +2544,48 @@ Scalability & <50K points & Millions\\
 }
 \end{frame}
 
+\begin{frame}{When to Use Which Method?}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Dataset Size \& Method Choice}
+\begin{tabular}{ll}
+\textbf{Size} & \textbf{Method} \\
+\hline
+$<$ 1K & t-SNE \\
+1K$-$50K & t-SNE $+$ Barnes-Hut \\
+50K-500K & UMAP \\
+$>$ 500K & FIt-SNE or UMAP \\
+$>$ 1M & RAPIDS-UMAP (GPU) \\
+\end{tabular}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Code Comparison}
+\texttt{\# t-SNE (5 min)}\\
+\texttt{tsne = TSNE(perplexity=30)}\\
+\texttt{Y\_tsne = tsne.fit\_transform(X)}\\
+\vspace{0.2cm}
+\texttt{\# UMAP (30 sec)}\\
+\texttt{umap = UMAP(n\_neighbors$=30$)}\\
+\texttt{Y\_umap = umap.fit\_transform(X)}
+\end{block}
+\end{columns}
+
+\vspace{0.3cm}
+
+\begin{block}{Specific Scenarios}
+\begin{itemize}
+    \item \textbf{Publication figure (5K cells):} t-SNE -- beautiful, trusted
+    \item \textbf{Real-time embedding:} UMAP -- supports transform()
+    \item \textbf{Global structure:} UMAP -- better topology
+    \item \textbf{Rare cell types:} t-SNE -- better local structure
+    \item \textbf{Production pipeline:} UMAP -- faster, deterministic
+\end{itemize}
+\end{block}
+
+\end{frame}
+
 % SLIDE 65: RECENT DEVELOPMENTS
 \begin{frame}
 \frametitle{Research Frontiers}
@@ -2357,35 +2621,6 @@ Ready to implement t-SNE!
 }
 \end{frame}
 
-% SLIDE 67: PYTHON IMPLEMENTATION
-\begin{frame}[fragile]
-\frametitle{Python: scikit-learn}
-
-\begin{verbatim}
-from sklearn.manifold import TSNE
-import numpy as np
-
-# Your data: n_samples × n_features
-X = load_data()
-
-# Configure t-SNE
-tsne = TSNE(n_components=2,
-            perplexity=30,
-            learning_rate=200,
-            n_iter=1000,
-            random_state=42)
-
-# Fit and transform
-Y = tsne.fit_transform(X)
-
-# Visualize
-plt.scatter(Y[:, 0], Y[:, 1])
-\end{verbatim}
-
-\note{
-[2 min] Standard implementation.
-}
-\end{frame}
 
 % SLIDE 68: R IMPLEMENTATION
 \begin{frame}[fragile]
@@ -2405,10 +2640,7 @@ tsne_out <- Rtsne(X,
                    max_iter = 1000)
 
 # Extract embedding
-Y <- tsne_out$Y
-
-# Plot
-plot(Y, col = labels)
+Y <- tsne_out$Y (# Plot plot(Y, col = labels))
 \end{verbatim}
 
 \note{
@@ -2472,6 +2704,71 @@ init & Initialization & pca or random\\
 \note{
 [2 min] Practical speedup tips.
 }
+\end{frame}
+
+
+\begin{frame}{Hands-On Exercise: Understanding t-SNE Computations}
+
+\begin{block}{Exercise: Compute t-SNE Components for 3 Points}
+Given points: $A(0,0)$, $B(2,0)$, $C(1,1)$ with perplexity = 2
+\end{block}
+
+\begin{columns}
+\column{0.5\textwidth}
+\textbf{Task 1: Compute $P$ matrix}
+\begin{enumerate}
+\footnotesize
+\item \textbf{Distances:}
+    \begin{itemize}
+    \footnotesize
+    \item $d_{AB} = 2$, $d_{AC} = \sqrt{2}$, $d_{BC} = \sqrt{2}$
+    \end{itemize}
+\item \textbf{Find $\sigma_A$:} (binary search)
+    \begin{itemize}
+    \footnotesize
+    \item Target: $H(P_A) = \log(2) = 0.693$
+    \item Result: $\sigma_A \approx 1.2$
+    \end{itemize}
+\item \textbf{Compute $p_{j|A}$:}
+    \begin{itemize}
+    \footnotesize
+    \item $p_{B|A} = 0.35$, $p_{C|A} = 0.65$
+    \end{itemize}
+\item \textbf{Symmetrize:}
+    \begin{itemize}
+    \footnotesize
+    \item $p_{AB} = (p_{B|A} + p_{A|B})/2n$
+    \end{itemize}
+\end{enumerate}
+
+\column{0.5\textwidth}
+\textbf{Task 2: Compute Gradient}
+\begin{enumerate}
+\footnotesize
+\item \textbf{Current positions:}
+    \begin{itemize}
+    \footnotesize
+    \item $y_A(0.1, 0.2)$, $y_B(0.8, 0.3)$, $y_C(0.4, 0.9)$
+    \end{itemize}
+\item \textbf{Compute $Q$ matrix:}
+    \begin{itemize}
+    \footnotesize
+    \item $q_{AB} = \frac{(1+||y_A-y_B||^2)^{-1}}{\sum_{k\neq l}(1+||y_k-y_l||^2)^{-1}}$
+    \item $q_{AB} = 0.28$, $q_{AC} = 0.31$, $q_{BC} = 0.41$
+    \end{itemize}
+\item \textbf{Gradient for point A:}
+    \begin{itemize}
+    \footnotesize
+    \item $\frac{\partial C}{\partial y_A} = 4\sum_j(p_{Aj} - q_{Aj})F_{Aj}$
+    \item Result: $\nabla_A = (0.12, -0.08)$
+    \end{itemize}
+\end{enumerate}
+\end{columns}
+
+\vspace{0.3cm}
+\centering
+\colorbox{yellow!20}{\textbf{Your turn:} Calculate gradient for point B using the values above}
+
 \end{frame}
 
 % SLIDE 71: CASE STUDY - GENOMICS
@@ -2668,6 +2965,87 @@ If yes to all → t-SNE is perfect!
 \note{
 [2 min] Encourage application to own work.
 }
+\end{frame}
+
+\begin{frame}{Same Data, Different Perplexities: Full Pipeline}
+
+Dataset: Iris (150 samples, 4 features)
+
+\begin{columns}
+\column{0.33\textwidth}
+\centering
+\textbf{Perplexity = 5}
+
+\footnotesize
+\texttt{tsne = TSNE(}\\
+\texttt{~~perplexity=5,}\\
+\texttt{~~random\_state=42)}\\
+\texttt{Y = tsne.fit\_transform(X)}
+
+\vspace{0.3cm}
+\begin{tikzpicture}[scale=0.5]
+    % Fragmented clusters
+    \foreach \x in {0.5,1.2,0.8,1.5} {
+        \foreach \y in {0.5,1.0,1.5} {
+            \draw[fill=blue!30] (\x,\y) circle (0.15);
+        }
+    }
+    \foreach \x in {2.5,3.0,2.8,3.2} {
+        \foreach \y in {0.5,1.0,1.5} {
+            \draw[fill=red!30] (\x,\y) circle (0.15);
+        }
+    }
+\end{tikzpicture}
+
+\textcolor{red}{Fragmented}\\
+\tiny{Over-interprets noise}
+
+\column{0.33\textwidth}
+\centering
+\textbf{Perplexity = 30}
+
+\footnotesize
+\texttt{tsne = TSNE(}\\
+\texttt{~~perplexity=30,}\\
+\texttt{~~random\_state=42)}\\
+\texttt{Y = tsne.fit\_transform(X)}
+
+\vspace{0.3cm}
+\begin{tikzpicture}[scale=0.5]
+    % Well-separated clusters
+    \draw[fill=blue!30] (0.5,1.5) circle (0.6);
+    \draw[fill=red!30] (2.5,1.5) circle (0.6);
+    \draw[fill=green!30] (1.5,0) circle (0.6);
+\end{tikzpicture}
+
+\textcolor{green}{Well-separated}\\
+\tiny{3 clear species}
+
+\column{0.33\textwidth}
+\centering
+\textbf{Perplexity = 100}
+
+\footnotesize
+\texttt{tsne = TSNE(}\\
+\texttt{~~perplexity=100,}\\
+\texttt{~~random\_state=42)}\\
+\texttt{Y = tsne.fit\_transform(X)}
+
+\vspace{0.3cm}
+\begin{tikzpicture}[scale=0.5]
+    % Merged blob
+    \draw[fill=gray!30] (1.5,0.8) circle (1.2);
+\end{tikzpicture}
+
+\textcolor{red}{Merged blob}\\
+\tiny{Structure lost}
+
+\end{columns}
+
+\vspace{0.5cm}
+\centering
+\textbf{Key:} Perplexity controls the balance between local and global focus
+
 \end{frame}
 
 % SLIDE 76: PART 7 - KEY TAKEAWAYS

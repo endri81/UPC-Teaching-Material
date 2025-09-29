@@ -9,8 +9,11 @@
 \usepackage{algorithmic}
 \usepackage{xcolor}
 \usepackage{soul}
-\usetikzlibrary{shapes.geometric, arrows, positioning}
-
+\usetikzlibrary{shapes.geometric, arrows, positioning, calc}
+\usepackage{newunicodechar}   % Allows you to define Unicode characters
+\usepackage{pifont}
+\newunicodechar{✓}{\checkmark}
+\newunicodechar{✗}{\ding{55}}
 \definecolor{warningcolor}{RGB}{255,0,0}
 \definecolor{intuitioncolor}{RGB}{0,100,0}
 \definecolor{ethicscolor}{RGB}{128,0,128}
@@ -82,7 +85,7 @@ Your data lives in 784 dimensions. Your screen has 2.\\
 \begin{center}
 \textbf{High-D Space (10D)}\\
 \vspace{0.2cm}
-\begin{tikzpicture}[scale=1.8]
+\begin{tikzpicture}[scale=1.4]
 % Draw three concentric shells representing different distances
 % Inner shell - near neighbors
 \foreach \i in {0,30,...,330} {
@@ -102,7 +105,7 @@ Your data lives in 784 dimensions. Your screen has 2.\\
 \vspace{0.2cm}
 
 \textbf{Three distinct distance shells}\\
-{\small Near \textcolor{green!60}{●} Medium \textcolor{orange!60}{●} Far \textcolor{blue!60}{●}}
+{\small Near \textcolor{green!60}{$ \bullet $} Medium \textcolor{orange!60}{$ \bullet $} Far \textcolor{blue!60}{$ \bullet $}}
 \end{center}
 
 \column{0.45\textwidth}
@@ -238,25 +241,70 @@ Preserves local structure\\
 \warning{Global structure may be sacrificed for local preservation}
 \end{frame}
 
+
 % Slide 7
 \begin{frame}{Why Dimensionality Reduction? Real-World Impact}
 \begin{center}
 \begin{tikzpicture}
-\node at (0,3) {\includegraphics[width=3cm]{./Figures/genomics_icon.png}};
-\node at (4,3) {\includegraphics[width=3cm]{./Figures/nlp_icon.png}};
-\node at (8,3) {\includegraphics[width=3cm]{./Figures/vision_icon.png}};
+% Genomics
+\node[draw, rectangle, minimum width=3cm, minimum height=2cm, fill=gray!20] (genomics) at (0,3) {
+    \begin{tikzpicture}[scale=0.3]
+    % DNA helix representation
+    \foreach \i in {0,0.5,...,3} {
+        \draw[blue, thick] (\i,0) sin (\i+0.25,0.3) cos (\i+0.5,0);
+        \draw[red, thick] (\i,0) cos (\i+0.25,-0.3) sin (\i+0.5,0);
+    }
+    \foreach \i in {0,0.5,...,3} {
+        \draw[gray] (\i,0.3) -- (\i,-0.3);
+    }
+    \end{tikzpicture}
+};
+\node[text width=3cm, align=center, below=0.1cm of genomics] 
+    {\textbf{Genomics}\\20,000 genes\\Find disease subtypes};
 
-\node[text width=3cm, align=center] at (0,1.5) {\textbf{Genomics}\\20,000 genes\\Find disease subtypes};
-\node[text width=3cm, align=center] at (4,1.5) {\textbf{NLP}\\50,000 words\\Discover semantics};
-\node[text width=3cm, align=center] at (8,1.5) {\textbf{Vision}\\Million pixels\\Reveal patterns};
+% NLP
+\node[draw, rectangle, minimum width=3cm, minimum height=2cm, fill=gray!20] (nlp) at (4,3) {
+    \begin{tikzpicture}[scale=0.25]
+    % Word cloud representation
+    \node[font=\tiny] at (0,0.8) {semantic};
+    \node[font=\scriptsize] at (1.2,0.3) {word};
+    \node[font=\tiny] at (-1,0.2) {text};
+    \node[font=\scriptsize] at (0.5,-0.5) {language};
+    \node[font=\tiny] at (-1.2,-0.3) {vector};
+    \node[font=\tiny] at (1.5,-0.8) {embed};
+    \node[font=\scriptsize] at (-0.8,1) {NLP};
+    \end{tikzpicture}
+};
+\node[text width=3cm, align=center, below=0.1cm of nlp] 
+    {\textbf{NLP}\\50,000 words\\Discover semantics};
 
-\draw[->, thick, red] (0,0.5) -- (4,0);
-\draw[->, thick, red] (4,0.5) -- (4,0);
-\draw[->, thick, red] (8,0.5) -- (4,0);
-\node at (4,-0.5) {\textbf{2D Visualization}};
+% Vision
+\node[draw, rectangle, minimum width=3cm, minimum height=2cm, fill=gray!20] (vision) at (8,3) {
+    \begin{tikzpicture}[scale=0.25]
+    % Pixel grid representation
+    \foreach \x in {0,...,5} {
+        \foreach \y in {0,...,4} {
+            \pgfmathsetmacro{\shade}{rnd*40+30}
+            \fill[gray!\shade] (\x*0.4,\y*0.4) rectangle ++(0.35,0.35);
+        }
+    }
+    \end{tikzpicture}
+};
+\node[text width=3cm, align=center, below=0.1cm of vision] 
+    {\textbf{Vision}\\Million pixels\\Reveal patterns};
+
+% Convergence arrows
+\coordinate (target) at (4,0);
+\draw[->, thick, red, line width=1.5pt] (genomics.south) -- (target);
+\draw[->, thick, red, line width=1.5pt] (nlp.south) -- (target);
+\draw[->, thick, red, line width=1.5pt] (vision.south) -- (target);
+
+% Target label
+\node[below=0.1cm] at (target) {\textbf{2D Visualization}};
 \end{tikzpicture}
 \end{center}
 
+\vspace{0.3cm}
 \textbf{Common Thread:} Data lives on low-dimensional manifold in high-D space
 \end{frame}
 
@@ -327,7 +375,6 @@ If point $j$ has probability $p_{j|i}$ of being $i$'s neighbor:
 \text{Information: } I(j) &= -\log p_{j|i} \text{ bits}\\
 \text{Total entropy: } H(P_i) &= -\sum_j p_{j|i}\log p_{j|i}
 \end{align}
-
 \vspace{0.3cm}
 \textbf{Example:}
 \begin{itemize}
@@ -337,8 +384,36 @@ If point $j$ has probability $p_{j|i}$ of being $i$'s neighbor:
 \end{itemize}
 
 \column{0.4\textwidth}
-\includegraphics[width=\textwidth]{./Figures/information_visual.png}
+\begin{tikzpicture}[scale=0.8]
+% Axes
+\draw[->] (0,0) -- (4.5,0) node[right] {$p_{j|i}$};
+\draw[->] (0,0) -- (0,4) node[above] {$I(j)$};
 
+% Plot -log(p)
+\draw[blue, thick, domain=0.1:4, samples=100] 
+    plot (\x, {-ln(\x/4)/ln(2)});
+
+% Mark specific points
+\filldraw[red] (4, 0) circle (2pt) node[below right] {$p=1$};
+\filldraw[red] (2, 1) circle (2pt) node[above left] {$p=0.5$};
+\filldraw[red] (0.4, 3.32) circle (2pt) node[left] {$p=0.01$};
+
+% Dotted lines to axes
+\draw[dotted, gray] (4,0) -- (4,0);
+\draw[dotted, gray] (2,1) -- (2,0);
+\draw[dotted, gray] (2,1) -- (0,1);
+\draw[dotted, gray] (0.4,3.32) -- (0.4,0);
+\draw[dotted, gray] (0.4,3.32) -- (0,3.32);
+
+% Axis labels
+\node at (0,-0.3) {0};
+\node at (2,-0.3) {0.5};
+\node at (4,-0.3) {1};
+\node at (-0.3,1) {1};
+\node at (-0.3,3.32) {6.64};
+\end{tikzpicture}
+
+\vspace{0.2cm}
 \intuition{Surprising events (unlikely neighbors) carry more information}
 \end{columns}
 \end{frame}
@@ -421,7 +496,7 @@ Large $\sigma_i$ reaches distant points
 \begin{frame}{Perplexity: The Intuitive Control Parameter}
 \begin{block}{Definition}
 $$\text{Perp}(P_i) = 2^{H(P_i)}$$
-where $H(P_i) = -\sum_j p_{j|i}\log_2 p_{j|i}$ is entropy in bits
+where $H(P_i) = -\sum_j p_{j|i}\log_2 p_{j|i}$ is entropy in bits.
 \end{block}
 
 \begin{columns}
@@ -434,11 +509,14 @@ where $H(P_i) = -\sum_j p_{j|i}\log_2 p_{j|i}$ is entropy in bits
 \end{itemize}
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/perplexity_visual.png}
+% Change is on this next line
+\includegraphics[width=0.7\textwidth]{./Figures/perplexity_visual.png}
 \end{columns}
 
 \intuition{Perplexity is "how many neighbors should each point care about"}
 \end{frame}
+
+
 
 % Slide 16
 \begin{frame}{Algorithm: Finding $\sigma_i$ via Binary Search}
@@ -448,11 +526,11 @@ where $H(P_i) = -\sum_j p_{j|i}\log_2 p_{j|i}$ is entropy in bits
 \FOR{each point $i$}
 \STATE target\_perp $\leftarrow$ user\_specified
 \STATE $\sigma_{min} \leftarrow 0$, $\sigma_{max} \leftarrow \infty$
-\WHILE{not converged}
+  \WHILE{not converged}
 \STATE $\sigma_i \leftarrow (\sigma_{min} + \sigma_{max})/2$
-\STATE Compute $p_{j|i}$ using current $\sigma_i$
-\STATE current\_perp $\leftarrow 2^{H(P_i)}$
-\IF{current\_perp $>$ target\_perp}
+  \STATE Compute $p_{j|i}$ using current $\sigma_i$
+  \STATE current\_perp $\leftarrow 2^{H(P_i)}$
+  \IF{current\_perp $>$ target\_perp}
 \STATE $\sigma_{max} \leftarrow \sigma_i$ \COMMENT{Too many neighbors}
 \ELSE
 \STATE $\sigma_{min} \leftarrow \sigma_i$ \COMMENT{Too few neighbors}
@@ -463,16 +541,15 @@ where $H(P_i) = -\sum_j p_{j|i}\log_2 p_{j|i}$ is entropy in bits
 \end{algorithm}
 \end{frame}
 
+
 % Slide 17
 \begin{frame}{Measuring Information Loss: KL Divergence}
 \begin{columns}
 \column{0.6\textwidth}
 \textbf{Cross-Entropy:} Bits using wrong distribution
 $$H(P,Q) = -\sum_j p_j \log q_j$$
-
 \textbf{KL Divergence:} Extra bits from using $Q$ instead of $P$
 $$\text{KL}(P||Q) = \sum_j p_j \log\frac{p_j}{q_j}$$
-
 \textbf{Critical Asymmetry:}
 \begin{itemize}
 \item Miss a neighbor: $p=0.3, q=0.01$\\
@@ -480,55 +557,79 @@ Penalty: $0.3 \log(30) \approx 1.02$ bits
 \item False neighbor: $p=0.01, q=0.3$\\
 Penalty: $0.01 \log(0.033) \approx -0.035$ bits
 \end{itemize}
-
+  
 \column{0.4\textwidth}
-\includegraphics[width=\textwidth]{./Figures/kl_divergence_asymmetry.png}
+\begin{tikzpicture}[scale=0.85]
+% Two scenarios visualization
+% Scenario 1: Missing neighbor (high penalty)
+\node[circle, fill=blue!50, minimum size=0.8cm] (p1) at (0,3) {$i$};
+\node[circle, fill=green!50, minimum size=0.8cm] (q1) at (2,3) {$j$};
+\draw[->, thick, red, line width=2pt] (p1) -- (q1) node[midway, above] {$p=0.3$};
+\draw[dashed, gray] (p1) to[bend left=30] node[midway, below] {$q=0.01$} (q1);
+\node[below=0.1cm of p1, text=red, font=\small\bfseries] {High penalty!};
+\node[right=0.1cm of q1, font=\scriptsize] {1.02 bits};
 
-\colorbox{red!20}{t-SNE heavily penalizes\\separating true neighbors!}
+% Scenario 2: False neighbor (low penalty)
+\node[circle, fill=blue!50, minimum size=0.8cm] (p2) at (0,0.5) {$i$};
+\node[circle, fill=gray!30, minimum size=0.8cm] (q2) at (2,0.5) {$j$};
+\draw[dashed, gray] (p2) to[bend right=30] node[midway, above] {$p=0.01$} (q2);
+\draw[->, thick, orange, line width=1pt] (p2) -- (q2) node[midway, below] {$q=0.3$};
+\node[below=0.1cm of p2, text=orange, font=\small] {Low penalty};
+\node[right=0.1cm of q2, font=\scriptsize] {0.035 bits};
+
+% Legend
+\node[font=\scriptsize, align=left, text width=3cm] at (1,-1.2) {
+    \textcolor{red}{\rule{0.3cm}{2pt}} True neighbor\\
+    \textcolor{gray}{- - -} Low probability\\
+    \textcolor{orange}{\rule{0.3cm}{1pt}} False neighbor
+};
+\end{tikzpicture}
+
+\vspace{0.3cm}
+\colorbox{red!20}{\parbox{0.9\columnwidth}{\centering\textbf{t-SNE heavily penalizes\\separating true neighbors!}}}
 \end{columns}
 \end{frame}
 
 % Slide 18
-\begin{frame}{Visual KL Divergence: What We're Minimizing}
+\begin{frame}{Visual KL Divergence: What We are Minimizing}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{./Figures/kl_divergence_visualization.png}
+\includegraphics[width=0.5\textwidth]{./Figures/kl_divergence_visualization.png}
 \end{center}
-
 \begin{itemize}
 \item \textbf{Blue bars:} High-D probability distribution $P_i$
 \item \textbf{Red bars:} Low-D probability distribution $Q_i$
 \item \textbf{Yellow area:} KL divergence (information lost)
 \end{itemize}
-
-\intuition{We're trying to make the red bars match the blue bars, but we care more about missing blues than extra reds}
+\intuition{We are trying to make the red bars match the blue bars, but we care more about missing blues than extra reds}
 \end{frame}
+
 
 % Slide 19
-\begin{frame}{The Original SNE Algorithm}
-\begin{columns}
-\column{0.5\textwidth}
-\textbf{High-D Similarities:}
-$$p_{j|i} = \frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_k \exp(-\|x_i-x_k\|^2/2\sigma_i^2)}$$
-
-\textbf{Low-D Similarities:}
-$$q_{j|i} = \frac{\exp(-\|y_i-y_j\|^2)}{\sum_k \exp(-\|y_i-y_k\|^2)}$$
-Note: Fixed variance = 1 in low-D
-
-\column{0.5\textwidth}
-\textbf{Cost Function:}
-$$C = \sum_i \text{KL}(P_i||Q_i)$$
-
-\textbf{Gradient Descent:}
-$$\frac{\partial C}{\partial y_i} = 2\sum_j (p_{j|i} - q_{j|i})(y_i - y_j)$$
-
-\includegraphics[width=\textwidth]{./Figures/sne_gradient_forces.png}
-\end{columns}
+  \begin{frame}{The Original SNE Algorithm}
+  \begin{columns}
+  \column{0.5\textwidth}
+  \textbf{High-D Similarities:}
+  $$p_{j|i} = \frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_k \exp(-\|x_i-x_k\|^2/2\sigma_i^2)}$$
+    
+    \textbf{Low-D Similarities:}
+  $$q_{j|i} = \frac{\exp(-\|y_i-y_j\|^2)}{\sum_k \exp(-\|y_i-y_k\|^2)}$$
+    Note: Fixed variance = 1 in low-D
+    
+    \column{0.5\textwidth}
+    \textbf{Cost Function:}
+    $$C = \sum_i \text{KL}(P_i||Q_i)$$
+      
+      \textbf{Gradient Descent:}
+    $$\frac{\partial C}{\partial y_i} = 2\sum_j (p_{j|i} - q_{j|i})(y_i - y_j)$$
+      
+      \includegraphics[width=0.5\textwidth]{./Figures/sne_gradient_forces.png}
+    \end{columns}
 \end{frame}
-
+    
 % Slide 20
-\begin{frame}{SNE's Fatal Flaw: The Crowding Problem Visualized}
+\begin{frame}{SNE Fatal Flaw: The Crowding Problem Visualized}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/crowding_problem_animation.png}
+\includegraphics[width=0.3\textwidth]{./Figures/crowding_problem_animation.png}
 \end{center}
 
 \begin{columns}
@@ -546,15 +647,16 @@ Area grows as $r^2$ not $r^{10}$\\
 \warning{Gaussian tails decay too fast to represent moderate distances}
 \end{frame}
 
-% Slide 21
-\begin{frame}{The Brilliant Solution: Student's t-Distribution}
-\begin{columns}
-\column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/gaussian_vs_t_comparison.png}
 
-\textbf{Mathematical Forms:}\\
-Gaussian: $\propto e^{-d^2}$\\
-Student's t: $\propto (1+d^2)^{-1}$
+% Slide 21
+\begin{frame}{The Brilliant Solution: Student t-Distribution}
+    \begin{columns}
+    \column{0.5\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/gaussian_vs_t_comparison.png}
+    
+    \textbf{Mathematical Forms:}\\
+    Gaussian: $\propto e^{-d^2}$\\
+    Student t: $\propto (1+d^2)^{-1}$
 
 \column{0.5\textwidth}
 \textbf{Key Differences:}
@@ -565,7 +667,7 @@ Student's t: $\propto (1+d^2)^{-1}$
 \item Natural repulsion at distance
 \end{itemize}
 
-\intuition{Think of it as creating "virtual space" that doesn't exist in 2D}
+\intuition{Think of it as creating "virtual space" that doesnt exist in 2D}
 \end{columns}
 
 \vspace{0.3cm}
@@ -573,88 +675,204 @@ Student's t: $\propto (1+d^2)^{-1}$
 \end{frame}
 
 % Slide 22
-\begin{frame}{Why Student's t? Quantitative Analysis}
+\begin{frame}{Why Student t? Quantitative Analysis}
 \begin{columns}
 \column{0.6\textwidth}
 \textbf{Similarity Ratio at Different Distances:}
-
 For $d_1 = 1$ and $d_2 = 3$:
-
-\textbf{Gaussian:}
+  
+  \textbf{Gaussian:}
 $$\frac{q(d_1)}{q(d_2)} = \frac{e^{-1}}{e^{-9}} = e^8 \approx 2981$$
-
-\textbf{Student's t:}
+  
+  \textbf{Student t:}
 $$\frac{q(d_1)}{q(d_2)} = \frac{1/(1+1)}{1/(1+9)} = 5$$
+  
+  \column{0.4\textwidth}
+\begin{tikzpicture}[scale=0.9]
+% Axes
+\draw[->] (0,0) -- (4.5,0) node[right, font=\scriptsize] {Distance};
+\draw[->] (0,0) -- (0,4) node[above, font=\scriptsize] {Similarity Ratio};
 
-\column{0.4\textwidth}
-\includegraphics[width=\textwidth]{./Figures/distance_ratio_plot.png}
+% Gaussian curve (exponential decay)
+\draw[blue, thick, domain=0:4, samples=100] 
+    plot (\x, {4*exp(-2*\x)}) node[right, font=\scriptsize] {Gaussian};
 
-\colorbox{yellow!30}{600× difference in\\representation capacity!}
+% Student t curve (polynomial decay)
+\draw[red, thick, domain=0:4, samples=100] 
+    plot (\x, {4/(1+\x*\x)}) node[right, font=\scriptsize] {Student t};
+
+% Mark d1=1 and d2=3
+\draw[dashed, gray] (1,0) node[below, font=\scriptsize] {$d_1$} -- (1,4);
+\draw[dashed, gray] (3,0) node[below, font=\scriptsize] {$d_2$} -- (3,4);
+
+% Mark ratios
+\filldraw[blue] (1, {4*exp(-2*1)}) circle (1.5pt);
+\filldraw[blue] (3, {4*exp(-2*3)}) circle (1.5pt);
+\draw[<->, blue, thick] (3.3, {4*exp(-2*1)}) -- (3.3, {4*exp(-2*3)}) 
+    node[midway, right, font=\tiny] {$\approx$2981};
+
+\filldraw[red] (1, {4/(1+1*1)}) circle (1.5pt);
+\filldraw[red] (3, {4/(1+3*3)}) circle (1.5pt);
+\draw[<->, red, thick] (3.6, {4/(1+1*1)}) -- (3.6, {4/(1+3*3)}) 
+    node[midway, right, font=\tiny] {$=$5};
+
+% Y-axis labels
+\node[left, font=\tiny] at (0,4) {High};
+\node[left, font=\tiny] at (0,0.2) {Low};
+\end{tikzpicture}
+
+\vspace{0.3cm}
+\colorbox{yellow!30}{\parbox{0.9\columnwidth}{\centering\textbf{600× difference in\\representation capacity!}}}
 \end{columns}
 
+\vspace{0.2cm}
 \warning{This is why SNE fails - it literally runs out of space}
 \end{frame}
 
 % Slide 23
 \begin{frame}{Visual Proof: How Heavy Tails Solve Crowding}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{./Figures/heavy_tails_solution_animation.png}
+\begin{tikzpicture}[scale=1.0]
+% Left side: SNE with Gaussian (crowded)
+\node[font=\bfseries] at (-3,3.5) {SNE (Gaussian)};
+\draw[thick] (-5,0) rectangle (-1,3);
+
+% Central cluster - crushed together
+\foreach \i in {1,...,15} {
+    \pgfmathsetmacro{\x}{-3 + rand*0.3}
+    \pgfmathsetmacro{\y}{1.5 + rand*0.3}
+    \filldraw[blue!70] (\x,\y) circle (2pt);
+}
+
+% Annotation
+\draw[->, red, thick] (-5.5,1.5) -- (-4.2,1.5);
+\node[left, font=\scriptsize, text width=1.5cm, align=right, text=red] at (-5.5,1.5) 
+    {All points\\crushed\\together};
+
+% Right side: t-SNE with Student t (well-separated)
+\node[font=\bfseries] at (3,3.5) {t-SNE (Student t)};
+\draw[thick] (1,0) rectangle (5,3);
+
+% Well-separated clusters
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{1.8 + rand*0.2}
+    \pgfmathsetmacro{\y}{2.2 + rand*0.2}
+    \filldraw[blue!70] (\x,\y) circle (2pt);
+}
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{4.2 + rand*0.2}
+    \pgfmathsetmacro{\y}{2.2 + rand*0.2}
+    \filldraw[green!70] (\x,\y) circle (2pt);
+}
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{3 + rand*0.2}
+    \pgfmathsetmacro{\y}{0.8 + rand*0.2}
+    \filldraw[red!70] (\x,\y) circle (2pt);
+}
+
+% Annotation
+\draw[->, green!70!black, thick] (5.5,1.5) -- (4.5,2);
+\node[right, font=\scriptsize, text width=1.5cm, text=green!70!black] at (5.5,1.5) 
+    {Natural\\separation};
+
+% Central arrow showing transformation
+\draw[->, ultra thick, orange] (-0.5,1.5) -- (0.5,1.5);
+\node[above, font=\scriptsize] at (0,1.7) {Heavy tails};
+\end{tikzpicture}
 \end{center}
 
+\vspace{0.3cm}
 \begin{itemize}
 \item \textbf{Left:} SNE with Gaussian - points crushed together
-\item \textbf{Right:} t-SNE with Student's t - natural separation
+\item \textbf{Right:} t-SNE with Student t - natural separation
 \item \textbf{Key:} Heavy tails allow moderate distances without penalty
 \end{itemize}
 
+\vspace{0.2cm}
 \intuition{Heavy tails act like a "pressure valve" for crowded points}
 \end{frame}
+
 
 % Slide 24
 \begin{frame}{The t-SNE Algorithm: Complete Specification}
 \begin{block}{Key Modifications from SNE}
 \begin{enumerate}
 \item \textbf{Symmetrized:} $p_{ij} = \frac{p_{j|i} + p_{i|j}}{2n}$ (simplifies gradient)
-\item \textbf{Student's t in low-D:} $q_{ij} \propto (1 + \|y_i - y_j\|^2)^{-1}$
-\item \textbf{Single KL:} $C = \text{KL}(P||Q)$ not $\sum_i \text{KL}(P_i||Q_i)$
-\end{enumerate}
-\end{block}
-
-\textbf{Complete Cost Function:}
-$$C = \sum_{i,j} p_{ij} \log\frac{p_{ij}}{q_{ij}}$$
-
-where $q_{ij} = \frac{(1 + \|y_i - y_j\|^2)^{-1}}{\sum_{k,l} (1 + \|y_k - y_l\|^2)^{-1}}$
-\end{frame}
-
-% Slide 25
-\begin{frame}{The t-SNE Gradient: Mathematical Elegance}
-\textbf{The Gradient:}
-$$\frac{\partial C}{\partial y_i} = 4\sum_j (p_{ij} - q_{ij})(y_i - y_j)(1 + \|y_i - y_j\|^2)^{-1}$$
-
-\begin{center}
-\begin{tikzpicture}[scale=1.5]
-\node[draw, fill=blue!20] (pq) at (0,0) {$(p_{ij} - q_{ij})$};
-\node[draw, fill=green!20] (dir) at (2,0) {$(y_i - y_j)$};
-\node[draw, fill=red!20] (weight) at (4,0) {$(1 + d_{ij}^2)^{-1}$};
-
-\node[below] at (0,-0.5) {Error};
-\node[below] at (2,-0.5) {Direction};
-\node[below] at (4,-0.5) {Adaptive weight};
-
-\draw[<->, thick] (0.5,0) -- (1.5,0);
-\draw[<->, thick] (2.5,0) -- (3.5,0);
-\end{tikzpicture}
-\end{center}
-
-\intuition{Forces get weaker with distance, preventing distant clusters from merging}
-\end{frame}
-
+\item \textbf{Student t in low-D:} $q_{ij} \propto (1 + \|y_i - y_j\|^2)^{-1}$
+  \item \textbf{Single KL:} $C = \text{KL}(P||Q)$ not $\sum_i \text{KL}(P_i||Q_i)$
+    \end{enumerate}
+  \end{block}
+  
+  \textbf{Complete Cost Function:}
+  $$C = \sum_{i,j} p_{ij} \log\frac{p_{ij}}{q_{ij}}$$
+    
+    where $q_{ij} = \frac{(1 + \|y_i - y_j\|^2)^{-1}}{\sum_{k,l} (1 + \|y_k - y_l\|^2)^{-1}}$
+      \end{frame}
+    
+    % Slide 25
+    \begin{frame}{The t-SNE Gradient: Mathematical Elegance}
+    \textbf{The Gradient:}
+    $$\frac{\partial C}{\partial y_i} = 4\sum_j (p_{ij} - q_{ij})(y_i - y_j)(1 + \|y_i - y_j\|^2)^{-1}$$
+      
+      \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+    \node[draw, fill=blue!20] (pq) at (0,0) {$(p_{ij} - q_{ij})$};
+    \node[draw, fill=green!20] (dir) at (2,0) {$(y_i - y_j)$};
+    \node[draw, fill=red!20] (weight) at (4,0) {$(1 + d_{ij}^2)^{-1}$};
+    
+    \node[below] at (0,-0.5) {Error};
+    \node[below] at (2,-0.5) {Direction};
+    \node[below] at (4,-0.5) {Adaptive weight};
+    
+    \draw[<->, thick] (0.5,0) -- (1.5,0);
+    \draw[<->, thick] (2.5,0) -- (3.5,0);
+    \end{tikzpicture}
+    \end{center}
+    
+    \intuition{Forces get weaker with distance, preventing distant clusters from merging}
+    \end{frame}
+    
 % Slide 26
 \begin{frame}{Visualizing the Gradient as Forces}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/gradient_force_field.png}
+\begin{tikzpicture}[scale=1.0]
+% Central reference point
+\node[circle, fill=blue!70, minimum size=0.6cm, label=center:{\color{white}\small$i$}] (center) at (0,0) {};
+
+% Attractive forces (neighbors that should be close)
+\foreach \angle/\dist in {30/2, 60/2.2, 90/1.8, 120/2.1} {
+    \pgfmathsetmacro{\x}{\dist*cos(\angle)}
+    \pgfmathsetmacro{\y}{\dist*sin(\angle)}
+    \node[circle, fill=green!60, minimum size=0.4cm] (n\angle) at (\x,\y) {};
+    \draw[->, thick, green!70!black, line width=1.5pt] (n\angle) -- 
+        ($(center)!0.7!(n\angle)$);
+    \node[font=\tiny] at ($(n\angle)!0.5!(center)$) [above left] {attract};
+}
+
+% Repulsive forces (distant points that should stay away)
+\foreach \angle/\dist in {210/1.5, 240/1.6, 270/1.4, 300/1.7, 330/1.5} {
+    \pgfmathsetmacro{\x}{\dist*cos(\angle)}
+    \pgfmathsetmacro{\y}{\dist*sin(\angle)}
+    \node[circle, fill=red!60, minimum size=0.4cm] (n\angle) at (\x,\y) {};
+    \draw[->, thick, red!70!black, line width=1.5pt] (center) -- 
+        ($(n\angle)!0.3!(center)$);
+    \node[font=\tiny] at ($(center)!0.4!(n\angle)$) [below right] {repel};
+}
+
+% Net force arrow on central point
+\draw[->, ultra thick, orange, line width=2pt] (center) -- (0.8,0.5) 
+    node[right, font=\small\bfseries] {Net gradient};
+
+% Legend
+\node[font=\scriptsize, align=left, fill=white, draw, rounded corners] at (3.5,-2) {
+    \textcolor{green!70!black}{\rule{0.4cm}{1.5pt}} Attractive ($p_{ij} > q_{ij}$)\\
+    \textcolor{red!70!black}{\rule{0.4cm}{1.5pt}} Repulsive ($p_{ij} < q_{ij}$)\\
+    \textcolor{orange}{\rule{0.4cm}{2pt}} Net force
+};
+\end{tikzpicture}
 \end{center}
 
+\vspace{0.3cm}
 \begin{columns}
 \column{0.5\textwidth}
 \textbf{Attractive Forces:}\\
@@ -669,8 +887,9 @@ Push points apart\\
 Create space
 \end{columns}
 
-\ethics{The algorithm literally simulates physical forces - misunderstanding this leads to misinterpretation}
-\end{frame}
+\vspace{0.1cm}
+\ethics{The algorithm simulates physical forces - misunderstanding this leads to misinterpretation}
+\end{frame}    
 
 % Slide 27
 \begin{frame}{Pseudo-code: The Core Optimization Loop}
@@ -700,13 +919,65 @@ Create space
 \begin{columns}
 \column{0.5\textwidth}
 \textbf{1. Early Exaggeration}
-\includegraphics[width=\textwidth]{./Figures/early_exaggeration.png}
+
+\begin{tikzpicture}[scale=0.6]
+% Before early exaggeration
+\begin{scope}[xshift=0cm]
+\node at (0,2.5) {\scriptsize Without};
+\draw[thick] (-1.5,-0.5) rectangle (1.5,2);
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{-0.5 + rand*0.8}
+    \pgfmathsetmacro{\y}{0.5 + rand*0.8}
+    \filldraw[blue!50] (\x,\y) circle (2pt);
+}
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{0.2 + rand*0.8}
+    \pgfmathsetmacro{\y}{0.3 + rand*0.8}
+    \filldraw[red!50] (\x,\y) circle (2pt);
+}
+\end{scope}
+
+% After early exaggeration
+\begin{scope}[xshift=4cm]
+\node at (0,2.5) {\scriptsize With (t<250)};
+\draw[thick] (-1.5,-0.5) rectangle (1.5,2);
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{-0.8 + rand*0.3}
+    \pgfmathsetmacro{\y}{1.3 + rand*0.3}
+    \filldraw[blue!70] (\x,\y) circle (2pt);
+}
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{0.6 + rand*0.3}
+    \pgfmathsetmacro{\y}{0.3 + rand*0.3}
+    \filldraw[red!70] (\x,\y) circle (2pt);
+}
+\end{scope}
+\end{tikzpicture}
+
 Multiply $P$ by 4 for first 250 iterations\\
 Forms tight clusters early
 
 \column{0.5\textwidth}
 \textbf{2. Momentum Schedule}
-\includegraphics[width=\textwidth]{./Figures/momentum_schedule.png}
+
+\begin{tikzpicture}[scale=0.6]
+\draw[->] (0,0) -- (5,0) node[right, font=\tiny] {Iteration};
+\draw[->] (0,0) -- (0,3) node[above, font=\tiny] {$\alpha$};
+
+% Momentum schedule
+\draw[thick, blue] (0,1.5) -- (2.5,1.5) node[midway, above, font=\tiny] {$\alpha=0.5$};
+\draw[thick, red] (2.5,1.5) -- (2.5,2.4);
+\draw[thick, red] (2.5,2.4) -- (5,2.4) node[midway, above, font=\tiny] {$\alpha=0.8$};
+
+% Mark iteration 250
+\draw[dashed, gray] (2.5,0) -- (2.5,3);
+\node[below, font=\tiny] at (2.5,0) {250};
+
+% Axis labels
+\node[left, font=\tiny] at (0,1.5) {0.5};
+\node[left, font=\tiny] at (0,2.4) {0.8};
+\end{tikzpicture}
+
 $\alpha = 0.5 \to 0.8$ at iteration 250\\
 Escapes local minima
 \end{columns}
@@ -741,7 +1012,29 @@ $$\log\sum_i e^{x_i} = \max(x) + \log\sum_i e^{x_i - \max(x)}$$
 \begin{frame}{Barnes-Hut Approximation: From $O(n^2)$ to $O(n\log n)$}
 \begin{columns}
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/barnes_hut_tree.png}
+\begin{tikzpicture}[scale=0.7]
+% Quadtree structure
+\draw[thick] (0,0) rectangle (4,4);
+\draw[thick] (2,0) -- (2,4);
+\draw[thick] (0,2) -- (4,2);
+\draw[thick] (1,2) -- (1,4);
+\draw[thick] (0,3) -- (2,3);
+
+% Points
+\foreach \x/\y in {0.5/3.5, 0.3/2.7, 1.5/3.2, 1.3/2.5, 2.8/3.5, 3.5/3.2, 2.5/1.5, 3.2/0.8, 0.8/0.5, 1.5/1.2} {
+    \filldraw[blue!70] (\x,\y) circle (2pt);
+}
+
+% Highlight one query point
+\filldraw[red] (0.5,0.3) circle (3pt);
+
+% Show approximation regions
+\draw[dashed, green!70!black, thick] (2,0) rectangle (4,2);
+\node[green!70!black, font=\tiny] at (3,1) {Approximate};
+
+\draw[dashed, orange, thick] (0,2) rectangle (1,4);
+\node[orange, font=\tiny] at (0.5,2.3) {Exact};
+\end{tikzpicture}
 
 \textbf{Key Idea:}\\
 Treat distant point clusters as single mass
@@ -761,15 +1054,72 @@ $$\frac{r_{cell}}{d_{to\_cell}} < \theta$$
 100K points: 200× faster
 \end{columns}
 
+\vspace{0.2cm}
 \intuition{Most computation is repulsive forces between distant points - approximate them!}
 \end{frame}
 
 % Slide 31
 \begin{frame}{Debugging t-SNE: Visual Diagnosis Guide}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{./Figures/debugging_visual_guide.png}
+\begin{tikzpicture}[scale=0.55]
+% Ball of points
+\node at (0,3.2) {\scriptsize\textbf{Ball of points}};
+\draw[thick] (-1,1.5) rectangle (1,3);
+\foreach \i in {1,...,20} {
+    \pgfmathsetmacro{\x}{rand*0.4}
+    \pgfmathsetmacro{\y}{2.25 + rand*0.4}
+    \filldraw[blue!50] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\tiny, text width=2cm, align=center] at (0,1.3) {Low $\eta$};
+
+% Scattered points
+\node at (3.5,3.2) {\scriptsize\textbf{Scattered}};
+\draw[thick] (2.5,1.5) rectangle (4.5,3);
+\foreach \i in {1,...,15} {
+    \pgfmathsetmacro{\x}{2.5 + rand*2}
+    \pgfmathsetmacro{\y}{1.5 + rand*1.5}
+    \filldraw[red!50] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\tiny, text width=2cm, align=center] at (3.5,1.3) {High $\eta$};
+
+% Fragmented clusters
+\node at (7,3.2) {\scriptsize\textbf{Fragmented}};
+\draw[thick] (6,1.5) rectangle (8,3);
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\x}{6.3 + rand*0.15}
+    \pgfmathsetmacro{\y}{2.6 + rand*0.15}
+    \filldraw[green!50] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\x}{7.5 + rand*0.15}
+    \pgfmathsetmacro{\y}{2.6 + rand*0.15}
+    \filldraw[green!50] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\x}{6.8 + rand*0.15}
+    \pgfmathsetmacro{\y}{1.8 + rand*0.15}
+    \filldraw[green!50] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\tiny, text width=2cm, align=center] at (7,1.3) {Low perplexity};
+
+% Good result
+\node at (10.5,3.2) {\scriptsize\textbf{Good}};
+\draw[thick] (9.5,1.5) rectangle (11.5,3);
+\foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\x}{10 + rand*0.25}
+    \pgfmathsetmacro{\y}{2.5 + rand*0.25}
+    \filldraw[blue!70] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\x}{10.8 + rand*0.25}
+    \pgfmathsetmacro{\y}{1.9 + rand*0.25}
+    \filldraw[red!70] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\tiny, text width=2cm, align=center] at (10.5,1.3) {Balanced};
+\end{tikzpicture}
 \end{center}
 
+\vspace{0.3cm}
 \begin{tabular}{l|l|l}
 \textbf{Symptom} & \textbf{Cause} & \textbf{Fix}\\
 \hline
@@ -780,15 +1130,73 @@ No structure & Too few iterations & Increase T\\
 Different each run & Not converged & More iterations
 \end{tabular}
 
+\vspace{0.2cm}
 \ethics{Always run multiple times - single runs can be misleading!}
 \end{frame}
 
 % Slide 32
 \begin{frame}{Perplexity Deep Dive: Your Main Control}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{./Figures/perplexity_comparison.png}
+\begin{tikzpicture}[scale=0.8]
+% Perplexity = 5
+\begin{scope}[xshift=0cm]
+\node at (0,3) {\textbf{Perp = 5}};
+\draw[thick] (-1.2,0) rectangle (1.2,2.5);
+\foreach \i in {1,...,3} {
+    \pgfmathsetmacro{\x}{-0.7 + rand*0.15}
+    \pgfmathsetmacro{\y}{2 + rand*0.15}
+    \filldraw[blue!70] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,3} {
+    \pgfmathsetmacro{\x}{0.6 + rand*0.15}
+    \pgfmathsetmacro{\y}{1.8 + rand*0.15}
+    \filldraw[red!70] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,3} {
+    \pgfmathsetmacro{\x}{-0.5 + rand*0.15}
+    \pgfmathsetmacro{\y}{0.7 + rand*0.15}
+    \filldraw[green!70] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,2} {
+    \pgfmathsetmacro{\x}{0.7 + rand*0.1}
+    \pgfmathsetmacro{\y}{0.5 + rand*0.1}
+    \filldraw[orange!70] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\scriptsize, text width=2.2cm, align=center] at (0,-0.3) {Very local\\Many fragments};
+\end{scope}
+
+% Perplexity = 30
+\begin{scope}[xshift=4.5cm]
+\node at (0,3) {\textbf{Perp = 30}};
+\draw[thick] (-1.2,0) rectangle (1.2,2.5);
+\foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\x}{-0.6 + rand*0.3}
+    \pgfmathsetmacro{\y}{1.8 + rand*0.3}
+    \filldraw[blue!70] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\x}{0.5 + rand*0.3}
+    \pgfmathsetmacro{\y}{0.6 + rand*0.3}
+    \filldraw[red!70] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\scriptsize, text width=2.2cm, align=center] at (0,-0.3) {Balanced\\Clear clusters};
+\end{scope}
+
+% Perplexity = 100
+\begin{scope}[xshift=9cm]
+\node at (0,3) {\textbf{Perp = 100}};
+\draw[thick] (-1.2,0) rectangle (1.2,2.5);
+\foreach \i in {1,...,12} {
+    \pgfmathsetmacro{\x}{-0.3 + rand*0.6}
+    \pgfmathsetmacro{\y}{1.25 + rand*0.8}
+    \filldraw[purple!60] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\scriptsize, text width=2.2cm, align=center] at (0,-0.3) {Global\\Merged};
+\end{scope}
+\end{tikzpicture}
 \end{center}
 
+\vspace{0.3cm}
 \begin{columns}
 \column{0.33\textwidth}
 \textbf{Perp = 5}\\
@@ -809,6 +1217,7 @@ Merges clusters\\
 Loses detail
 \end{columns}
 
+\vspace{0.2cm}
 \warning{Truth is what's consistent across multiple perplexity values}
 \end{frame}
 
@@ -822,73 +1231,120 @@ Loses detail
 \column{0.33\textwidth}
 \includegraphics[width=\textwidth]{./Figures/sin1_cluster_size.png}
 \textbf{Sin \#1: Cluster Sizes}\\
-1000 vs 100 points\\
-Look same size!
+  1000 vs 100 points\\
+  Look same size!
+    
+    \column{0.33\textwidth}
+  \includegraphics[width=\textwidth]{./Figures/sin2_distances.png}
+  \textbf{Sin \#2: Inter-cluster Distance}\\
+    Gap size meaningless\\
+    No global coordinates
+    
+    \column{0.33\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/sin3_position.png}
+    \textbf{Sin \#3: Absolute Position}\\
+      Top vs bottom\\
+      Rotation arbitrary
+      \end{columns}
+      
+      \vspace{0.3cm}
+      \colorbox{green!30}{\textbf{What you CAN trust:} Local neighborhoods and cluster separation}
+      \end{frame}
+      
+      % Slide 34
+      \begin{frame}{Case Study: MNIST Digits - Complete Pipeline}
+      \begin{columns}
+      \column{0.5\textwidth}
+      \textbf{Data:}
+      \begin{itemize}
+      \item 70,000 handwritten digits
+      \item $28×28 = 784$ dimensions
+      \item 10 classes (0-9)
+      \end{itemize}
+      
+      \textbf{Pipeline:}
+      \begin{enumerate}
+      \item Scale pixels to [0,1]
+      \item PCA to 50D (95\% variance)
+      \item Remove outliers ($>$ 3$\sigma$)
+      \item t-SNE with perp $=30$
+      \item Validate with NPr metric
+      \end{enumerate}
+      
+      \column{0.5\textwidth}
+      \includegraphics[width=0.8\textwidth]{./Figures/mnist_tsne_result.png}
+      
+      \textbf{Observations:}
+      \begin{itemize}
+      \item Clear digit separation
+      \item 4-9 proximity (visual similarity)
+      \item Sub-clusters = writing styles
+      \end{itemize}
+      \end{columns}
+      
+      \textit{Run tsne\_mnist.R for full analysis}
+      \end{frame}
 
-\column{0.33\textwidth}
-\includegraphics[width=\textwidth]{./Figures/sin2_distances.png}
-\textbf{Sin \#2: Inter-cluster Distance}\\
-Gap size meaningless\\
-No global coordinates
-
-\column{0.33\textwidth}
-\includegraphics[width=\textwidth]{./Figures/sin3_position.png}
-\textbf{Sin \#3: Absolute Position}\\
-Top vs bottom\\
-Rotation arbitrary
-\end{columns}
-
-\vspace{0.3cm}
-\colorbox{green!30}{\textbf{What you CAN trust:} Local neighborhoods and cluster separation}
-\end{frame}
-
-% Slide 34
-\begin{frame}{Case Study: MNIST Digits - Complete Pipeline}
-\begin{columns}
-\column{0.5\textwidth}
-\textbf{Data:}
-\begin{itemize}
-\item 70,000 handwritten digits
-\item 28×28 = 784 dimensions
-\item 10 classes (0-9)
-\end{itemize}
-
-\textbf{Pipeline:}
-\begin{enumerate}
-\item Scale pixels to [0,1]
-\item PCA to 50D (95\% variance)
-\item Remove outliers (>3σ)
-\item t-SNE with perp=30
-\item Validate with NPr metric
-\end{enumerate}
-
-\column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/mnist_tsne_result.png}
-
-\textbf{Observations:}
-\begin{itemize}
-\item Clear digit separation
-\item 4-9 proximity (visual similarity)
-\item Sub-clusters = writing styles
-\end{itemize}
-\end{columns}
-
-\textit{Run tsne\_mnist.R for full analysis}
-\end{frame}
 
 % Slide 35
 \begin{frame}{Validation: Beyond Visual Inspection}
+\begin{columns}
+\column{0.55\textwidth}
 \begin{block}{Quantitative Validation Metrics}
 \textbf{1. Neighborhood Preservation (NPr):}
 $$\text{NPr}(k) = \frac{1}{n}\sum_i \frac{|N_k^{high}(i) \cap N_k^{low}(i)|}{k}$$
-
+  
 \textbf{2. Trustworthiness:}
 $$T(k) = 1 - \frac{2}{nk(2n-3k-1)}\sum_i \sum_{j \in U_k(i)} (r(i,j) - k)$$
-
+  
 \textbf{3. Continuity:}
 $$C(k) = 1 - \frac{2}{nk(2n-3k-1)}\sum_i \sum_{j \in V_k(i)} (r'(i,j) - k)$$
 \end{block}
 
+\column{0.45\textwidth}
+\begin{tikzpicture}[scale=0.7]
+% High-dimensional space
+\node at (0,5) {\scriptsize\textbf{High-D Space}};
+\draw[thick] (-1.5,3.5) rectangle (1.5,4.8);
+\node[circle, fill=blue!70, minimum size=0.4cm, label=center:{\tiny$i$}] (hi) at (0,4.2) {};
+\foreach \angle in {30,90,150,210,270,330} {
+    \pgfmathsetmacro{\x}{0.5*cos(\angle)}
+    \pgfmathsetmacro{\y}{4.2+0.5*sin(\angle)}
+    \filldraw[green!60] (\x,\y) circle (2pt);
+}
+\node[font=\tiny, green!70!black] at (1.2,3.7) {$N_k^{high}$};
+
+% Low-dimensional space
+\node at (0,2.5) {\scriptsize\textbf{Low-D Space}};
+\draw[thick] (-1.5,0.7) rectangle (1.5,2);
+\node[circle, fill=blue!70, minimum size=0.4cm, label=center:{\tiny$i$}] (lo) at (0,1.4) {};
+\foreach \angle in {45,135,225,315} {
+    \pgfmathsetmacro{\x}{0.5*cos(\angle)}
+    \pgfmathsetmacro{\y}{1.4+0.5*sin(\angle)}
+    \filldraw[green!60] (\x,\y) circle (2pt);
+}
+\foreach \angle in {0,180} {
+    \pgfmathsetmacro{\x}{0.5*cos(\angle)}
+    \pgfmathsetmacro{\y}{1.4+0.5*sin(\angle)}
+    \filldraw[red!60] (\x,\y) circle (2pt);
+}
+\node[font=\tiny, green!70!black] at (1.2,0.9) {$N_k^{low}$};
+\node[font=\tiny, red!70!black] at (-1.3,1.6) {False};
+
+% Annotations
+\draw[<->, thick, orange] (-2,4.2) -- (-2,1.4);
+\node[left, font=\tiny, text width=1.2cm, align=right] at (-2.5,2.8) {Embedding\\distortion};
+
+% Metric interpretations
+\node[font=\tiny, text width=4.5cm, align=left] at (0,-0.5) {
+    \textcolor{green!70!black}{Green:} Preserved neighbors\\
+    \textcolor{red!70!black}{Red:} False neighbors (reduces $T$)\\
+    Missing neighbors reduce $C$
+};
+\end{tikzpicture}
+\end{columns}
+
+\vspace{0.3cm}
 \warning{Never publish t-SNE without these metrics!}
 \end{frame}
 
@@ -896,7 +1352,7 @@ $$C(k) = 1 - \frac{2}{nk(2n-3k-1)}\sum_i \sum_{j \in V_k(i)} (r'(i,j) - k)$$
 \begin{frame}{Stability Analysis: How Reliable Is Your Embedding?}
 \begin{columns}
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/stability_analysis.png}
+\includegraphics[width=0.5\textwidth]{./Figures/stability_analysis.png}
 
 \textbf{Protocol:}
 \begin{enumerate}
@@ -922,16 +1378,82 @@ $$C(k) = 1 - \frac{2}{nk(2n-3k-1)}\sum_i \sum_{j \in V_k(i)} (r'(i,j) - k)$$
 \end{itemize}
 \end{columns}
 
-\intuition{If results change dramatically between runs, don't trust them!}
+\intuition{If results change dramatically between runs, dont trust them!}
 \end{frame}
 
 % Slide 37
 \begin{frame}{Interactive t-SNE: Beyond Static Plots}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/interactive_tsne_demo.png}
+\begin{tikzpicture}[scale=0.6]
+% Main visualization window
+\draw[thick, fill=white] (0,0) rectangle (8,5);
+\node[above] at (4,5) {\scriptsize\textbf{Interactive t-SNE Viewer}};
+
+% Scatter plot with colored clusters
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{1.5 + rand*0.5}
+    \pgfmathsetmacro{\y}{3.5 + rand*0.5}
+    \filldraw[blue!70] (\x,\y) circle (2pt);
+}
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{4 + rand*0.6}
+    \pgfmathsetmacro{\y}{3.8 + rand*0.5}
+    \filldraw[red!70] (\x,\y) circle (2pt);
+}
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{6.5 + rand*0.5}
+    \pgfmathsetmacro{\y}{3.5 + rand*0.5}
+    \filldraw[green!70] (\x,\y) circle (2pt);
+}
+\foreach \i in {1,...,10} {
+    \pgfmathsetmacro{\x}{2.5 + rand*0.8}
+    \pgfmathsetmacro{\y}{1.2 + rand*0.7}
+    \filldraw[orange!70] (\x,\y) circle (2pt);
+}
+\foreach \i in {1,...,10} {
+    \pgfmathsetmacro{\x}{5.5 + rand*0.9}
+    \pgfmathsetmacro{\y}{1 + rand*0.8}
+    \filldraw[purple!70] (\x,\y) circle (2pt);
+}
+
+% Highlight one point with hover tooltip
+\filldraw[yellow, draw=black, thick] (4,3.8) circle (3pt);
+\draw[fill=yellow!20, draw=black] (4.5,4.2) rectangle (6.5,4.8);
+\node[font=\tiny, align=left] at (5.5,4.5) {Point ID: 127\\Class: B\\Value: 0.85};
+
+% Selection brush
+\draw[dashed, blue, thick, rounded corners] (5.2,0.5) rectangle (7,2);
+\node[font=\tiny, blue] at (6.1,0.3) {Selected: 18 pts};
+
+% Control panel on right
+\draw[thick, fill=gray!10] (8.2,0) rectangle (11,5);
+\node[font=\small\bfseries] at (9.6,4.7) {Controls};
+
+% Perplexity slider
+\draw[thick] (8.5,4.2) -- (10.7,4.2);
+\filldraw[blue] (9.8,4.2) circle (2pt);
+\node[font=\tiny, above] at (9.6,4.2) {Perplexity: 35};
+
+% Iteration counter
+\node[font=\tiny, align=left] at (9.6,3.7) {Iteration: 487/1000};
+\draw[fill=green!50] (8.5,3.5) rectangle (10.2,3.6);
+\draw[thick] (8.5,3.5) rectangle (10.7,3.6);
+
+% Buttons
+\foreach \y/\label in {3/Zoom In, 2.6/Reset View, 2.2/Export, 1.8/Compare} {
+    \draw[fill=blue!20, rounded corners] (8.5,\y-0.15) rectangle (10.7,\y+0.15);
+    \node[font=\tiny] at (9.6,\y) {\label};
+}
+
+% Linked data view
+\draw[thick, fill=white] (8.5,0.3) rectangle (10.7,1.4);
+\node[font=\tiny, align=left] at (9.6,1) {Raw Data\\ID 127:\\x1: 0.45\\x2: 0.89};
+\end{tikzpicture}
 \end{center}
 
+\vspace{0.2cm}
 \textbf{Interactive Features:}
+
 \begin{columns}
 \column{0.5\textwidth}
 \begin{itemize}
@@ -950,6 +1472,7 @@ $$C(k) = 1 - \frac{2}{nk(2n-3k-1)}\sum_i \sum_{j \in V_k(i)} (r'(i,j) - k)$$
 \end{itemize}
 \end{columns}
 
+\vspace{0.1cm}
 \textit{Demo: interactive\_tsne.html}
 \end{frame}
 
@@ -969,7 +1492,7 @@ $$C(k) = 1 - \frac{2}{nk(2n-3k-1)}\sum_i \sum_{j \in V_k(i)} (r'(i,j) - k)$$
 \begin{itemize}
 \item Slow on large data
 \item No global structure
-\item Can't embed new points
+\item Cant embed new points
 \item Many hyperparameters
 \end{itemize}
 
@@ -998,27 +1521,104 @@ $$C(k) = 1 - \frac{2}{nk(2n-3k-1)}\sum_i \sum_{j \in V_k(i)} (r'(i,j) - k)$$
 \begin{frame}{Data Preprocessing: Critical for Success}
 \begin{block}{Essential Preprocessing Steps}
 \begin{enumerate}
-\item \textbf{Scaling:} Standardize to mean=0, std=1
+\item \textbf{Scaling:} Standardize to $mean=0$, $std=1$
 \item \textbf{Missing Data:} Impute or remove (no NaN!)
 \item \textbf{Outliers:} Identify and handle separately
-\item \textbf{Dimensionality:} PCA if D > 50
+\item \textbf{Dimensionality:} PCA if $D > 50$
 \item \textbf{Normalization:} Consider domain-specific norms
 \end{enumerate}
 \end{block}
 
 \begin{center}
-\includegraphics[width=0.7\textwidth]{./Figures/preprocessing_pipeline.png}
+\begin{tikzpicture}[scale=0.85, node distance=1.5cm]
+% Pipeline flow
+\node[draw, rectangle, fill=blue!20, minimum width=2cm, minimum height=0.8cm] (raw) {Raw Data};
+\node[draw, rectangle, fill=green!20, minimum width=2cm, minimum height=0.8cm, right=of raw] (scale) {Scaling};
+\node[draw, rectangle, fill=green!20, minimum width=2cm, minimum height=0.8cm, right=of scale] (missing) {Handle Missing};
+\node[draw, rectangle, fill=green!20, minimum width=2cm, minimum height=0.8cm, below=0.8cm of missing] (outlier) {Remove Outliers};
+\node[draw, rectangle, fill=green!20, minimum width=2cm, minimum height=0.8cm, left=of outlier] (pca) {PCA (if D>50)};
+\node[draw, rectangle, fill=orange!20, minimum width=2cm, minimum height=0.8cm, left=of pca] (tsne) {t-SNE Ready};
+
+% Arrows
+\draw[->, thick] (raw) -- (scale);
+\draw[->, thick] (scale) -- (missing);
+\draw[->, thick] (missing) -- (outlier);
+\draw[->, thick] (outlier) -- (pca);
+\draw[->, thick] (pca) -- (tsne);
+
+% Annotations
+\node[font=\tiny, text width=2cm, align=center] at ($(raw)+(0,-0.7)$) {$X \in \mathbb{R}^{n \times D}$};
+\node[font=\tiny, text width=2cm, align=center] at ($(scale)+(0,-0.7)$) {$\mu=0, \sigma=1$};
+\node[font=\tiny, text width=2cm, align=center] at ($(tsne)+(0,-0.7)$) {Clean $X$};
+\end{tikzpicture}
 \end{center}
 
+\vspace{0.2cm}
 \warning{Bad preprocessing = bad embedding, regardless of parameters!}
 \end{frame}
 
 % Slide 40
 \begin{frame}{Common Failure Modes and Recovery}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{./Figures/failure_modes_gallery.png}
+\begin{tikzpicture}[scale=0.7]
+% Failure mode 1: Collapsed points
+\node at (0,4) {\scriptsize\textbf{Collapsed}};
+\draw[thick] (-1,2) rectangle (1,3.5);
+\foreach \i in {1,...,25} {
+    \pgfmathsetmacro{\x}{rand*0.15}
+    \pgfmathsetmacro{\y}{2.75 + rand*0.15}
+    \filldraw[blue!50] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\tiny, text=red] at (0,1.9) {Too clustered};
+
+% Failure mode 2: Fragmented
+\node at (3.5,4) {\scriptsize\textbf{Fragmented}};
+\draw[thick] (2.5,2) rectangle (4.5,3.5);
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\x}{2.7 + rand*0.12}
+    \pgfmathsetmacro{\y}{3.2 + rand*0.12}
+    \filldraw[green!60] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\x}{4.2 + rand*0.12}
+    \pgfmathsetmacro{\y}{3.2 + rand*0.12}
+    \filldraw[green!60] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\x}{3.5 + rand*0.12}
+    \pgfmathsetmacro{\y}{2.3 + rand*0.12}
+    \filldraw[green!60] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\tiny, text=red] at (3.5,1.9) {Over-split};
+
+% Failure mode 3: Scattered
+\node at (7,4) {\scriptsize\textbf{Scattered}};
+\draw[thick] (6,2) rectangle (8,3.5);
+\foreach \i in {1,...,20} {
+    \pgfmathsetmacro{\x}{6 + rand*2}
+    \pgfmathsetmacro{\y}{2 + rand*1.5}
+    \filldraw[red!50] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\tiny, text=red] at (7,1.9) {No structure};
+
+% Good result for comparison
+\node at (10.5,4) {\scriptsize\textbf{Good}};
+\draw[thick] (9.5,2) rectangle (11.5,3.5);
+\foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\x}{10 + rand*0.25}
+    \pgfmathsetmacro{\y}{3.1 + rand*0.25}
+    \filldraw[blue!70] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\x}{11 + rand*0.25}
+    \pgfmathsetmacro{\y}{2.5 + rand*0.25}
+    \filldraw[red!70] (\x,\y) circle (1.5pt);
+}
+\node[below, font=\tiny, text=green!70!black] at (10.5,1.9) {Balanced};
+\end{tikzpicture}
 \end{center}
 
+\vspace{0.3cm}
 \begin{columns}
 \column{0.5\textwidth}
 \textbf{Collapsed Points:}\\
@@ -1033,8 +1633,10 @@ Check preprocessing\\
 Verify true structure
 \end{columns}
 
+\vspace{0.2cm}
 \ethics{Failure often reveals data issues, not algorithm issues}
 \end{frame}
+
 
 % Slide 41
 \begin{frame}{Real-World Success: Single-Cell Genomics}
@@ -1059,8 +1661,56 @@ Verify true structure
 \end{enumerate}
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/single_cell_tsne.png}
+\begin{tikzpicture}[scale=0.85]
+% Main embedding space
+\draw[thick] (0,0) rectangle (5,4.5);
+\node[above] at (2.5,4.5) {\scriptsize\textbf{Single-Cell t-SNE}};
 
+% Major cell type clusters
+\foreach \i in {1,...,12} {
+    \pgfmathsetmacro{\x}{0.8 + rand*0.4}
+    \pgfmathsetmacro{\y}{3.5 + rand*0.4}
+    \filldraw[blue!70] (\x,\y) circle (2pt);
+}
+\node[font=\tiny] at (1,3) {T cells};
+
+\foreach \i in {1,...,15} {
+    \pgfmathsetmacro{\x}{3.8 + rand*0.5}
+    \pgfmathsetmacro{\y}{3.7 + rand*0.4}
+    \filldraw[red!70] (\x,\y) circle (2pt);
+}
+\node[font=\tiny] at (4.2,3.2) {B cells};
+
+\foreach \i in {1,...,10} {
+    \pgfmathsetmacro{\x}{1.5 + rand*0.4}
+    \pgfmathsetmacro{\y}{1.8 + rand*0.4}
+    \filldraw[green!70] (\x,\y) circle (2pt);
+}
+\node[font=\tiny] at (1.7,1.3) {NK cells};
+
+\foreach \i in {1,...,14} {
+    \pgfmathsetmacro{\x}{3.5 + rand*0.5}
+    \pgfmathsetmacro{\y}{1.5 + rand*0.5}
+    \filldraw[orange!70] (\x,\y) circle (2pt);
+}
+\node[font=\tiny] at (3.8,0.9) {Monocytes};
+
+% Rare cell type (highlighted)
+\foreach \i in {1,...,3} {
+    \pgfmathsetmacro{\x}{0.5 + rand*0.15}
+    \pgfmathsetmacro{\y}{0.5 + rand*0.15}
+    \filldraw[purple!70] (\x,\y) circle (2.5pt);
+}
+\draw[purple, thick, dashed] (0.3,0.3) circle (0.4cm);
+\draw[->, purple, thick] (0.7,0.7) -- (1.2,1.1);
+\node[font=\tiny, text=purple, align=left] at (1.8,1.1) {Rare type\\0.1\%};
+
+% Trajectory arrow
+\draw[->, thick, cyan, line width=1.5pt] (1.2,3.8) to[bend right=20] (3.8,3.9);
+\node[font=\tiny, text=cyan] at (2.5,4.3) {Trajectory};
+\end{tikzpicture}
+
+\vspace{0.2cm}
 \textbf{Discoveries:}
 \begin{itemize}
 \item Found 0.1\% rare cell type
@@ -1069,15 +1719,66 @@ Verify true structure
 \end{itemize}
 \end{columns}
 
+\vspace{0.2cm}
 \warning{Biological interpretation requires domain expertise!}
 \end{frame}
 
 % Slide 42
 \begin{frame}{Real-World Success: Word Embeddings}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/word_embeddings_tsne.png}
+\begin{tikzpicture}[scale=1.0]
+% Main embedding space
+\draw[thick] (0,0) rectangle (10,5);
+\node[above] at (5,5) {\scriptsize\textbf{Word2Vec + t-SNE Visualization}};
+
+% Country cluster
+\node[font=\scriptsize, blue!70] at (1.5,4) {France};
+\node[font=\scriptsize, blue!70] at (1.8,3.6) {Germany};
+\node[font=\scriptsize, blue!70] at (1.3,3.3) {Spain};
+\node[font=\scriptsize, blue!70] at (2.1,3.2) {Italy};
+\draw[blue!50, dashed, thick] (1.5,3.6) ellipse (0.9cm and 0.6cm);
+\node[font=\tiny, blue!70] at (1.5,2.7) {Countries};
+
+% Verb cluster
+\node[font=\scriptsize, red!70] at (8,4.2) {running};
+\node[font=\scriptsize, red!70] at (8.5,3.8) {walking};
+\node[font=\scriptsize, red!70] at (7.8,3.5) {jumping};
+\node[font=\scriptsize, red!70] at (8.3,3.3) {swimming};
+\draw[red!50, dashed, thick] (8.1,3.7) ellipse (0.8cm and 0.6cm);
+\node[font=\tiny, red!70] at (8.1,2.8) {Verbs};
+
+% Royalty/gender analogy
+\node[font=\scriptsize, purple!70] at (4.5,4) {king};
+\node[font=\scriptsize, purple!70] at (5.8,3.9) {queen};
+\node[font=\scriptsize, purple!70] at (4.3,2.8) {man};
+\node[font=\scriptsize, purple!70] at (5.6,2.7) {woman};
+\draw[->, purple, thick] (4.7,3.9) -- (5.6,3.85);
+\draw[->, purple, thick] (4.5,2.75) -- (5.4,2.7);
+\node[font=\tiny, purple] at (5.1,4.3) {gender};
+
+% Synonyms cluster
+\node[font=\scriptsize, green!70] at (2.5,1.5) {happy};
+\node[font=\scriptsize, green!70] at (3.1,1.3) {joyful};
+\node[font=\scriptsize, green!70] at (2.3,1.1) {glad};
+\node[font=\scriptsize, green!70] at (2.9,0.9) {cheerful};
+\draw[green!50, dashed, thick] (2.7,1.2) ellipse (0.7cm and 0.5cm);
+\node[font=\tiny, green!70] at (2.7,0.5) {Synonyms};
+
+% Numbers cluster
+\node[font=\scriptsize, orange!70] at (7.5,1.5) {one};
+\node[font=\scriptsize, orange!70] at (7.9,1.2) {two};
+\node[font=\scriptsize, orange!70] at (7.3,0.9) {three};
+\node[font=\scriptsize, orange!70] at (7.7,0.6) {four};
+\draw[orange!50, dashed, thick] (7.6,1.1) ellipse (0.6cm and 0.6cm);
+\node[font=\tiny, orange!70] at (7.6,0.2) {Numbers};
+
+% Analogy annotation
+\draw[->, cyan, thick, line width=1pt] (4.8,3.5) to[bend left=15] (5.5,3.3);
+\node[font=\tiny, text=cyan, align=center] at (6.2,3.5) {Analogies\\preserved};
+\end{tikzpicture}
 \end{center}
 
+\vspace{0.2cm}
 \begin{columns}
 \column{0.5\textwidth}
 \textbf{Semantic Clusters:}
@@ -1090,12 +1791,13 @@ Verify true structure
 \column{0.5\textwidth}
 \textbf{Revealed Relationships:}
 \begin{itemize}
-\item King - Man + Woman ≈ Queen
+\item King - Man + Woman $\sim$ Queen
 \item Analogies visible
 \item Bias detection
 \end{itemize}
 \end{columns}
 
+\vspace{0.2cm}
 \intuition{t-SNE reveals the geometry of language}
 \end{frame}
 
@@ -1103,7 +1805,56 @@ Verify true structure
 \begin{frame}{Real-World Success: Deep Learning Features}
 \begin{columns}
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/imagenet_tsne.png}
+\begin{tikzpicture}[scale=0.75]
+% Main embedding space
+\draw[thick] (0,0) rectangle (5,5);
+\node[above, font=\scriptsize] at (2.5,5) {\textbf{ImageNet t-SNE}};
+
+% Dog breeds cluster
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{0.8 + rand*0.4}
+    \pgfmathsetmacro{\y}{4 + rand*0.4}
+    \filldraw[brown!70] (\x,\y) circle (1.5pt);
+}
+\node[font=\tiny] at (1,3.5) {Dogs};
+
+% Cats cluster
+\foreach \i in {1,...,7} {
+    \pgfmathsetmacro{\x}{1.2 + rand*0.35}
+    \pgfmathsetmacro{\y}{2.5 + rand*0.35}
+    \filldraw[orange!70] (\x,\y) circle (1.5pt);
+}
+\node[font=\tiny] at (1.4,2) {Cats};
+
+% Vehicles cluster
+\foreach \i in {1,...,10} {
+    \pgfmathsetmacro{\x}{3.8 + rand*0.5}
+    \pgfmathsetmacro{\y}{4.2 + rand*0.4}
+    \filldraw[blue!70] (\x,\y) circle (1.5pt);
+}
+\node[font=\tiny] at (4.1,3.7) {Vehicles};
+
+% Birds cluster
+\foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\x}{3.5 + rand*0.3}
+    \pgfmathsetmacro{\y}{1.8 + rand*0.3}
+    \filldraw[green!70] (\x,\y) circle (1.5pt);
+}
+\node[font=\tiny] at (3.7,1.3) {Birds};
+
+% Furniture cluster
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{1.5 + rand*0.3}
+    \pgfmathsetmacro{\y}{0.6 + rand*0.3}
+    \filldraw[purple!70] (\x,\y) circle (1.5pt);
+}
+\node[font=\tiny] at (1.6,0.2) {Furniture};
+
+% Misclassification point
+\filldraw[red] (2.5,3) circle (2.5pt);
+\draw[->, red, thick] (2.8,3) -- (3.2,3.2);
+\node[font=\tiny, text=red] at (3.8,3) {Misclass.};
+\end{tikzpicture}
 
 \textbf{ImageNet CNN Features:}
 \begin{itemize}
@@ -1123,7 +1874,8 @@ Verify true structure
 \item Misclassifications at boundaries
 \end{itemize}
 
-\ethics{Visual similarity ≠ semantic similarity}
+\vspace{0.2cm}
+\ethics{Visual similarity $\neq$ semantic similarity}
 \end{columns}
 \end{frame}
 
@@ -1143,24 +1895,122 @@ Can embed new points\\
 Neural network based
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/parametric_tsne_architecture.png}
+\begin{tikzpicture}[scale=0.8]
+% Neural network architecture
+\node[font=\scriptsize] at (2.5,5) {\textbf{Neural Network}};
 
+% Input layer
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\y}{4.5 - \i*0.3}
+    \filldraw[blue!70] (0,\y) circle (3pt);
+}
+\node[left, font=\tiny] at (-0.3,3.6) {Input};
+\node[left, font=\tiny] at (-0.3,3.2) {$\mathbb{R}^D$};
+
+% Hidden layer 1
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\y}{4.5 - \i*0.25}
+    \filldraw[green!70] (1.5,\y) circle (3pt);
+}
+\node[below, font=\tiny] at (1.5,3.2) {500};
+
+% Hidden layer 2
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\y}{4.5 - \i*0.25}
+    \filldraw[green!70] (3,\y) circle (3pt);
+}
+\node[below, font=\tiny] at (3,3.2) {500};
+
+% Hidden layer 3
+\foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\y}{4.6 - \i*0.23}
+    \filldraw[green!70] (4.5,\y) circle (3pt);
+}
+\node[below, font=\tiny] at (4.5,3.1) {2000};
+
+% Output layer
+\filldraw[red!70] (6,4.3) circle (3pt);
+\filldraw[red!70] (6,3.7) circle (3pt);
+\node[right, font=\tiny] at (6.3,4) {Output};
+\node[right, font=\tiny] at (6.3,3.6) {$\mathbb{R}^2$};
+
+% Connections (sample)
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\y}{4.5 - \i*0.3}
+    \draw[gray, thin] (0.1,\y) -- (1.4,4.2);
+}
+\draw[gray, thin] (1.6,4) -- (2.9,4);
+\draw[gray, thin] (3.1,4) -- (4.4,4);
+\draw[gray, thin] (4.6,4) -- (5.9,4.3);
+\end{tikzpicture}
+
+\vspace{0.2cm}
 \textbf{Architecture:}\\
 Input → 500 → 500 → 2000 → 2
 \end{columns}
 
+\vspace{0.2cm}
 \textbf{Trade-offs:} Lower quality but handles streaming data
 \end{frame}
 
 % Slide 45
 \begin{frame}{Advanced: Multiscale t-SNE}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/multiscale_tsne.png}
+\begin{tikzpicture}[scale=0.9]
+% Three different perplexity embeddings
+\foreach \perp/\xshift in {5/0, 30/4, 100/8} {
+    \begin{scope}[xshift=\xshift cm]
+    \draw[thick] (0,0) rectangle (3,3.5);
+    \node[above, font=\scriptsize] at (1.5,3.5) {Perp=\perp};
+    
+    \ifnum\perp=5
+        % Very fragmented
+        \foreach \i in {1,...,3} {
+            \pgfmathsetmacro{\x}{0.5 + rand*0.15}
+            \pgfmathsetmacro{\y}{2.7 + rand*0.15}
+            \filldraw[blue!70] (\x,\y) circle (1.5pt);
+        }
+        \foreach \i in {1,...,3} {
+            \pgfmathsetmacro{\x}{2.3 + rand*0.15}
+            \pgfmathsetmacro{\y}{2.7 + rand*0.15}
+            \filldraw[blue!70] (\x,\y) circle (1.5pt);
+        }
+        \foreach \i in {1,...,3} {
+            \pgfmathsetmacro{\x}{1.4 + rand*0.15}
+            \pgfmathsetmacro{\y}{0.7 + rand*0.15}
+            \filldraw[red!70] (\x,\y) circle (1.5pt);
+        }
+    \fi
+    
+    \ifnum\perp=30
+        % Balanced
+        \foreach \i in {1,...,7} {
+            \pgfmathsetmacro{\x}{0.8 + rand*0.3}
+            \pgfmathsetmacro{\y}{2.5 + rand*0.3}
+            \filldraw[blue!70] (\x,\y) circle (1.5pt);
+        }
+        \foreach \i in {1,...,7} {
+            \pgfmathsetmacro{\x}{2 + rand*0.3}
+            \pgfmathsetmacro{\y}{0.8 + rand*0.3}
+            \filldraw[red!70] (\x,\y) circle (1.5pt);
+        }
+    \fi
+    
+    \ifnum\perp=100
+        % More merged
+        \foreach \i in {1,...,12} {
+            \pgfmathsetmacro{\x}{1.5 + rand*0.6}
+            \pgfmathsetmacro{\y}{1.75 + rand*0.8}
+            \filldraw[purple!60] (\x,\y) circle (1.5pt);
+        }
+    \fi
+    \end{scope}
+}
+\end{tikzpicture}
 \end{center}
 
 \textbf{Key Idea:} Use multiple perplexities simultaneously
 $$p_{ij} = \frac{1}{L}\sum_{l=1}^L p_{ij}^{(l)}$$
-
 where each $p_{ij}^{(l)}$ uses different perplexity
 
 \textbf{Benefits:} Captures structure at all scales\\
@@ -1173,13 +2023,38 @@ where each $p_{ij}^{(l)}$ uses different perplexity
 \column{0.5\textwidth}
 \textbf{Modified Cost:}
 $$C = \sum_t \text{KL}(P^{(t)}||Q^{(t)}) + \lambda\sum_{i,t} \|y_i^{(t)} - y_i^{(t-1)}\|^2$$
-
 First term: Standard t-SNE\\
 Second term: Temporal smoothness
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/dynamic_tsne.png}
+\begin{tikzpicture}[scale=0.7]
+% Time series of embeddings
+\foreach \t in {1,2,3} {
+    \begin{scope}[xshift=\t*2.5 cm]
+    \draw[thick] (0,0) rectangle (2,2.5);
+    \node[above, font=\tiny] at (1,2.5) {$t=\t$};
+    
+    % Points evolving over time
+    \foreach \i in {1,...,5} {
+        \pgfmathsetmacro{\x}{0.5 + rand*0.3 + \t*0.05}
+        \pgfmathsetmacro{\y}{1.8 + rand*0.2}
+        \filldraw[blue!70] (\x,\y) circle (1.5pt);
+    }
+    \foreach \i in {1,...,5} {
+        \pgfmathsetmacro{\x}{1.2 + rand*0.3 - \t*0.03}
+        \pgfmathsetmacro{\y}{0.6 + rand*0.2}
+        \filldraw[red!70] (\x,\y) circle (1.5pt);
+    }
+    
+    % Arrows showing temporal connection
+    \ifnum\t>1
+        \draw[->, orange, thick] (-0.3,1.25) -- (0.1,1.25);
+    \fi
+    \end{scope}
+}
+\end{tikzpicture}
 
+\vspace{0.2cm}
 \textbf{Applications:}
 \begin{itemize}
 \item Neural activity
@@ -1197,7 +2072,7 @@ Second term: Temporal smoothness
 \item \textbf{Convergence:} Gradient descent reaches local minimum
 \item \textbf{Order Preservation:} If $p_{ij} > p_{kl}$ then likely $q_{ij} > q_{kl}$
 \item \textbf{Neighborhood Topology:} k-NN graphs approximately preserved
-\item \textbf{Information Bound:} KL divergence ≥ 0
+\item \textbf{Information Bound:} KL divergence $\geq$ 0
 \end{enumerate}
 \end{block}
 
@@ -1219,15 +2094,37 @@ Second term: Temporal smoothness
 \column{0.5\textwidth}
 \textbf{Information in High-D:}
 $$I_{high} = -\sum_{i,j} p_{ij}\log p_{ij}$$
-
 \textbf{Information in Low-D:}
 $$I_{low} = -\sum_{i,j} p_{ij}\log q_{ij}$$
-
 \textbf{Information Loss:}
 $$\Delta I = \text{KL}(P||Q)$$
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/information_loss_diagram.png}
+\begin{tikzpicture}[scale=0.8]
+% High-D representation
+\node[draw, circle, fill=blue!20, minimum size=2cm] (highd) at (0,3) {};
+\node[font=\scriptsize, align=center] at (0,3) {High-D\\$P$};
+\node[left, font=\tiny] at (-1.2,3) {$I_{high}$};
+
+% Low-D representation
+\node[draw, circle, fill=red!20, minimum size=1.5cm] (lowd) at (0,0.5) {};
+\node[font=\scriptsize, align=center] at (0,0.5) {Low-D\\$Q$};
+\node[left, font=\tiny] at (-1,0.5) {$I_{low}$};
+
+% Information loss arrow
+\draw[->, thick, orange, line width=2pt] (highd) -- (lowd);
+\node[right, font=\scriptsize, text=orange, align=left] at (1.2,1.75) {Information\\Loss\\$\text{KL}(P||Q)$};
+
+% Entropy bars
+\draw[fill=blue!50] (3,2.5) rectangle (3.5,4);
+\node[right, font=\tiny] at (3.6,3.25) {Entropy in high-D};
+
+\draw[fill=red!50] (3,0.5) rectangle (3.5,1.8);
+\node[right, font=\tiny] at (3.6,1.15) {Entropy in low-D};
+
+\draw[<->, thick] (3.25,1.8) -- (3.25,2.5);
+\node[right, font=\tiny, text=orange] at (3.6,2.15) {Loss};
+\end{tikzpicture}
 
 \intuition{t-SNE finds the least lossy 2D representation}
 \end{columns}
@@ -1236,14 +2133,46 @@ $$\Delta I = \text{KL}(P||Q)$$
 % Slide 49
 \begin{frame}{Physical Analogy: N-Body Simulation}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/force_simulation.png}
+\begin{tikzpicture}[scale=1.0]
+% Central point
+\node[circle, fill=blue!70, minimum size=0.5cm] (center) at (0,0) {};
+
+% Attractive forces (neighbors)
+\foreach \angle in {30, 90, 150} {
+    \pgfmathsetmacro{\x}{1.5*cos(\angle)}
+    \pgfmathsetmacro{\y}{1.5*sin(\angle)}
+    \node[circle, fill=green!60, minimum size=0.4cm] (n\angle) at (\x,\y) {};
+    \draw[->, thick, green!70!black, line width=1.5pt] (n\angle) -- ($(center)!0.6!(n\angle)$);
+}
+\node[font=\small, text=green!70!black] at (1.8,2.2) {Attractive};
+
+% Repulsive forces (distant points)
+\foreach \angle in {210, 270, 330} {
+    \pgfmathsetmacro{\x}{2.5*cos(\angle)}
+    \pgfmathsetmacro{\y}{2.5*sin(\angle)}
+    \node[circle, fill=red!60, minimum size=0.4cm] (f\angle) at (\x,\y) {};
+    \draw[->, thick, red!70!black, line width=1.5pt] (center) -- ($(f\angle)!0.4!(center)$);
+}
+\node[font=\small, text=red!70!black] at (-2,-2.8) {Repulsive};
+
+% Force balance annotation
+\draw[->, ultra thick, orange, line width=2pt] (center) -- (0.5,0.3);
+\node[font=\small, text=orange] at (1.2,0.5) {Net force};
+
+% Legend
+\node[font=\scriptsize, align=left, draw, fill=white] at (4,0) {
+    \textcolor{green!70!black}{$\rightarrow$} Pull neighbors\\
+    \textcolor{red!70!black}{$\rightarrow$} Push others\\
+    \textcolor{orange}{$\rightarrow$} Net motion
+};
+\end{tikzpicture}
 \end{center}
 
 \begin{columns}
 \column{0.5\textwidth}
 \textbf{Attractive Forces:}\\
 Pull neighbors together\\
-Strength ∝ $p_{ij}$\\
+Strength $\propto$ $p_{ij}$\\
 Preserve structure
 
 \column{0.5\textwidth}
@@ -1253,7 +2182,8 @@ Create space\\
 Prevent collapse
 \end{columns}
 
-\colorbox{green!30}{System evolves to mechanical equilibrium = KL minimum}
+\vspace{0.2cm}
+\colorbox{green!30}{\parbox{0.95\textwidth}{\centering System evolves to mechanical equilibrium = KL minimum}}
 \end{frame}
 
 % Slide 50
@@ -1272,6 +2202,7 @@ TensorBoard & Web & Medium & Interactive
 \end{tabular}
 \end{center}
 
+\vspace{0.3cm}
 \textbf{Recommendations:}
 \begin{itemize}
 \item Start with sklearn for learning
@@ -1291,16 +2222,41 @@ TensorBoard & Web & Medium & Interactive
 \item Iterations: [1000, 2000, 5000]
 \item Early exag: [4, 12, 20]
 \end{itemize}
-
 Total: 180 combinations
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/hyperparameter_grid.png}
+\begin{tikzpicture}[scale=0.7]
+% Grid search visualization with proper color clamping
+\foreach \x in {0,...,4} {
+    \foreach \y in {0,...,3} {
+        \pgfmathsetmacro{\randval}{rand}
+        \pgfmathsetmacro{\quality}{20 + \randval*60}
+        \pgfmathsetmacro{\clampedquality}{min(100, max(0, \quality))}
+        \fill[blue!\clampedquality] (\x*0.8,\y*0.8) rectangle ++(0.7,0.7);
+    }
+}
+\node[below, font=\tiny] at (1.6,-0.3) {Perplexity};
+\node[left, font=\tiny, rotate=90] at (-0.3,1.2) {Learn rate};
 
+% Optimal point
+\filldraw[red] (2.4,2) circle (4pt);
+\node[right, font=\tiny, text=red] at (2.8,2) {Optimal};
+
+% Color bar legend
+\foreach \i in {0,...,10} {
+    \pgfmathsetmacro{\qual}{10*\i}
+    \fill[blue!\qual] (4.5,\i*0.3) rectangle (4.8,\i*0.3+0.3);
+}
+\node[right, font=\tiny] at (5,0) {Poor};
+\node[right, font=\tiny] at (5,3) {Good};
+\end{tikzpicture}
+
+\vspace{0.2cm}
 \textbf{Better: Bayesian Optimization}\\
 Reduces search from 180 to ~30
 \end{columns}
 
+\vspace{0.2cm}
 \warning{Default parameters are rarely optimal!}
 \end{frame}
 
@@ -1309,12 +2265,56 @@ Reduces search from 180 to ~30
 \begin{columns}
 \column{0.5\textwidth}
 \textbf{Feature Attribution:}
-\includegraphics[width=\textwidth]{./Figures/feature_attribution.png}
+
+\begin{tikzpicture}[scale=0.65]
+% t-SNE embedding
+\draw[thick] (0,0) rectangle (3,3);
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{0.8 + rand*0.3}
+    \pgfmathsetmacro{\y}{2.2 + rand*0.3}
+    \filldraw[blue!70] (\x,\y) circle (2pt);
+}
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{2 + rand*0.3}
+    \pgfmathsetmacro{\y}{0.8 + rand*0.3}
+    \filldraw[red!70] (\x,\y) circle (2pt);
+}
+
+% Selected cluster
+\draw[green, thick, dashed] (0.8,2.2) ellipse (0.5cm and 0.4cm);
+
+% Feature importance bars
+\draw[->, thick] (3.5,1.5) -- (4,1.5);
+\foreach \i/\val in {1/0.8, 2/0.5, 3/0.3} {
+    \draw[fill=green!50] (4.2,\i*0.5) rectangle (4.2+\val*1.5,\i*0.5+0.3);
+    \node[right, font=\tiny] at (4.2+\val*1.5+0.1,\i*0.5+0.15) {F\i};
+}
+\end{tikzpicture}
+
 Which features drive clustering?
 
 \column{0.5\textwidth}
 \textbf{Confidence Regions:}
-\includegraphics[width=\textwidth]{./Figures/confidence_regions.png}
+
+\begin{tikzpicture}[scale=0.65]
+% Main embedding
+\draw[thick] (0,0) rectangle (3,3);
+
+% Cluster with confidence
+\foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\x}{1.5 + rand*0.25}
+    \pgfmathsetmacro{\y}{2 + rand*0.25}
+    \filldraw[blue!70] (\x,\y) circle (2pt);
+}
+
+% Confidence ellipses
+\draw[blue!30, thick, fill=blue!10] (1.5,2) ellipse (0.7cm and 0.5cm);
+\draw[blue!50, thick, dashed] (1.5,2) ellipse (0.5cm and 0.35cm);
+\draw[blue!70, thick] (1.5,2) ellipse (0.35cm and 0.25cm);
+
+\node[below, font=\tiny, align=center] at (1.5,0.3) {95\% conf.\\Bootstrap};
+\end{tikzpicture}
+
 Bootstrap to show uncertainty
 \end{columns}
 
@@ -1401,8 +2401,8 @@ Memory error & Use Barnes-Hut
 \begin{block}{Publication Checklist}
 \begin{enumerate}
 \item[$\square$] Preprocessing documented
-\item[$\square$] Parameters reported (perp, η, iterations)
-\item[$\square$] Multiple runs (≥10)
+\item[$\square$] Parameters reported (perp, $\eta$, iterations)
+\item[$\square$] Multiple runs ($\geq$10)
 \item[$\square$] Stability metrics computed
 \item[$\square$] NPr(k) reported
 \item[$\square$] Trustworthiness measured
@@ -1554,18 +2554,49 @@ where $\nu$ = degrees of freedom
 $$q_{ij} \propto (1 + d_{ij}^2)^{-1}$$
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/different_df_comparison.png}
+\begin{tikzpicture}[scale=0.8]
+% Axes
+\draw[->] (0,0) -- (5,0) node[right, font=\scriptsize] {Distance};
+\draw[->] (0,0) -- (0,4) node[above, font=\scriptsize] {Similarity};
 
+% Plot different degrees of freedom
+% df = infinity (Gaussian)
+\draw[purple, thick, domain=0:4.5, samples=100] 
+    plot (\x, {3.5*exp(-\x*\x/2)});
+\node[right, font=\tiny, text=purple] at (3.5,0.2) {$\nu=\infty$};
+
+% df = 5
+\draw[orange, thick, domain=0:4.5, samples=100] 
+    plot (\x, {3.5*pow(1+\x*\x/5, -3)});
+\node[right, font=\tiny, text=orange] at (3.8,0.8) {$\nu=5$};
+
+% df = 2
+\draw[blue, thick, domain=0:4.5, samples=100] 
+    plot (\x, {3.5*pow(1+\x*\x/2, -1.5)});
+\node[right, font=\tiny, text=blue] at (4,1.5) {$\nu=2$};
+
+% df = 1 (best)
+\draw[red, very thick, domain=0:4.5, samples=100] 
+    plot (\x, {3.5*pow(1+\x*\x, -1)});
+\node[right, font=\tiny, text=red] at (4.2,2.2) {$\nu=1$ (best)};
+
+% Annotation for heavy tails
+\draw[->, thick, green!70!black] (3,0.5) -- (4.3,1);
+\node[below, font=\tiny, text=green!70!black, align=center] at (3.5,0.3) {Heavy\\tails};
+\end{tikzpicture}
+
+\vspace{0.2cm}
 \begin{tabular}{l|l}
 df & Tail behavior\\
 \hline
 1 & Heaviest (best)\\
 2 & Moderate\\
 5 & Light\\
-∞ & Gaussian (fails)
+$\infty$ & Gaussian (fails)
 \end{tabular}
 \end{columns}
 
+\vspace{0.2cm}
 \textbf{Mathematical Justification:} df = embedding dimension works optimally\\
 For 2D visualization: df = 1 is theoretically optimal!
 \end{frame}
@@ -1574,8 +2605,17 @@ For 2D visualization: df = 1 is theoretically optimal!
 \begin{frame}{Case Study: Debugging a Failed Embedding}
 \begin{columns}
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/failed_embedding.png}
-\textbf{Initial Result:} Meaningless blob
+\begin{tikzpicture}[scale=0.65]
+% Failed embedding - blob
+\node[above] at (2.5,3.5) {\scriptsize\textbf{Initial: Blob}};
+\draw[thick] (0,0) rectangle (5,3);
+\foreach \i in {1,...,40} {
+    \pgfmathsetmacro{\x}{2.5 + rand*0.8}
+    \pgfmathsetmacro{\y}{1.5 + rand*0.6}
+    \filldraw[gray!60] (\x,\y) circle (1.5pt);
+}
+\node[text=red, font=\small] at (2.5,1.5) {\textbf{?}};
+\end{tikzpicture}
 
 \textbf{Debugging Steps:}
 \begin{enumerate}
@@ -1587,13 +2627,34 @@ For 2D visualization: df = 1 is theoretically optimal!
 \end{enumerate}
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/fixed_embedding.png}
+\begin{tikzpicture}[scale=0.65]
+% Fixed embedding - clear clusters
+\node[above] at (2.5,3.5) {\scriptsize\textbf{After Fix: Clear!}};
+\draw[thick] (0,0) rectangle (5,3);
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{1 + rand*0.4}
+    \pgfmathsetmacro{\y}{2.2 + rand*0.4}
+    \filldraw[blue!70] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{3.8 + rand*0.4}
+    \pgfmathsetmacro{\y}{2.3 + rand*0.4}
+    \filldraw[red!70] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{2.5 + rand*0.5}
+    \pgfmathsetmacro{\y}{0.7 + rand*0.4}
+    \filldraw[green!70] (\x,\y) circle (1.5pt);
+}
+\end{tikzpicture}
+
 \textbf{After Removing Duplicates:}\\
 Clear structure emerges!
 
 \textbf{Lesson:} 5\% duplicate points destroyed entire embedding
 \end{columns}
 
+\vspace{0.2cm}
 \ethics{Always check data quality before blaming the algorithm}
 \end{frame}
 
@@ -1618,7 +2679,36 @@ Clear structure emerges!
 \end{itemize}
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/fraud_detection_tsne.png}
+\begin{tikzpicture}[scale=0.7]
+\draw[thick] (0,0) rectangle (5,4);
+\node[above] at (2.5,4) {\scriptsize\textbf{Fraud Detection}};
+
+% Normal transactions (many)
+\foreach \i in {1,...,50} {
+    \pgfmathsetmacro{\x}{0.5 + rand*4}
+    \pgfmathsetmacro{\y}{0.5 + rand*3}
+    \filldraw[green!40] (\x,\y) circle (1pt);
+}
+
+% Known fraud cluster
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{4 + rand*0.3}
+    \pgfmathsetmacro{\y}{3.3 + rand*0.3}
+    \filldraw[red!70] (\x,\y) circle (2pt);
+}
+\draw[red, dashed] (4.15,3.45) circle (0.4cm);
+\node[right, font=\tiny, text=red] at (4.6,3.5) {Known};
+
+% NEW fraud cluster discovered
+\foreach \i in {1,...,3} {
+    \pgfmathsetmacro{\x}{0.6 + rand*0.2}
+    \pgfmathsetmacro{\y}{0.6 + rand*0.2}
+    \filldraw[orange!80] (\x,\y) circle (2pt);
+}
+\draw[orange, thick, dashed] (0.7,0.7) circle (0.35cm);
+\node[right, font=\tiny, text=orange] at (1.1,0.7) {NEW!};
+\draw[->, orange, thick] (1.5,0.9) -- (1.1,0.8);
+\end{tikzpicture}
 
 \textbf{Discoveries:}
 \begin{itemize}
@@ -1628,6 +2718,7 @@ Clear structure emerges!
 \end{itemize}
 \end{columns}
 
+\vspace{0.2cm}
 \warning{Always combine with other validation methods for high-stakes decisions}
 \end{frame}
 
@@ -1652,8 +2743,32 @@ Clear structure emerges!
 \end{itemize}
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/acceleration_comparison.png}
+\begin{tikzpicture}[scale=0.7]
+% Bar chart comparing methods
+\draw[->] (0,0) -- (0,4) node[above, font=\scriptsize] {Speedup};
+\draw[->] (0,0) -- (5,0) node[right, font=\scriptsize] {Method};
 
+% Bars
+\draw[fill=blue!50] (0.5,0) rectangle (1,0.5);
+\node[below, font=\tiny, rotate=45, anchor=east] at (0.75,0) {Exact};
+
+\draw[fill=green!50] (1.5,0) rectangle (2,2);
+\node[below, font=\tiny, rotate=45, anchor=east] at (1.75,0) {Barnes-Hut};
+
+\draw[fill=orange!50] (2.5,0) rectangle (3,2.5);
+\node[below, font=\tiny, rotate=45, anchor=east] at (2.75,0) {FIt-SNE};
+
+\draw[fill=red!50] (3.5,0) rectangle (4,3);
+\node[below, font=\tiny, rotate=45, anchor=east] at (3.75,0) {GPU};
+
+% Values
+\node[font=\tiny] at (0.75,0.7) {1×};
+\node[font=\tiny] at (1.75,2.2) {20×};
+\node[font=\tiny] at (2.75,2.7) {50×};
+\node[font=\tiny] at (3.75,3.2) {100×};
+\end{tikzpicture}
+
+\vspace{0.2cm}
 \begin{tabular}{l|r|r}
 Method & Time & Quality\\
 \hline
@@ -1668,7 +2783,36 @@ GPU & 1\% & 98\%
 % Slide 66
 \begin{frame}{Handling Streaming Data: Online t-SNE}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/streaming_tsne.png}
+\begin{tikzpicture}[scale=0.9]
+% Three time steps
+\foreach \t in {1,2,3} {
+    \begin{scope}[xshift=\t*3.5 cm]
+    \draw[thick] (0,0) rectangle (3,3);
+    \node[above, font=\scriptsize] at (1.5,3) {$t=\t$};
+    
+    % Existing points
+    \foreach \i in {1,...,8} {
+        \pgfmathsetmacro{\x}{0.8 + rand*0.4}
+        \pgfmathsetmacro{\y}{2 + rand*0.6}
+        \filldraw[blue!70] (\x,\y) circle (1.5pt);
+    }
+    
+    % New incoming points
+    \ifnum\t>1
+        \foreach \i in {1,...,3} {
+            \pgfmathsetmacro{\x}{2 + rand*0.4}
+            \pgfmathsetmacro{\y}{0.8 + rand*0.4}
+            \filldraw[red!70] (\x,\y) circle (2pt);
+        }
+        \node[font=\tiny, text=red] at (2.2,0.3) {New};
+    \fi
+    \end{scope}
+}
+
+% Arrows showing time flow
+\draw[->, thick] (3.2,1.5) -- (3.8,1.5);
+\draw[->, thick] (6.7,1.5) -- (7.3,1.5);
+\end{tikzpicture}
 \end{center}
 
 \textbf{Three Approaches:}
@@ -1702,7 +2846,29 @@ GPU & 1\% & 98\%
 \end{itemize}
 
 \column{0.5\textwidth}
-\includegraphics[width=\textwidth]{./Figures/cross_validation_tsne.png}
+\begin{tikzpicture}[scale=0.7]
+% Training embedding
+\node[font=\scriptsize] at (2.5,5) {\textbf{Training (80\%)}};
+\draw[thick, blue] (0,3.5) rectangle (5,4.8);
+\foreach \i in {1,...,12} {
+    \pgfmathsetmacro{\x}{0.5 + rand*4}
+    \pgfmathsetmacro{\y}{3.7 + rand*1}
+    \filldraw[blue!60] (\x,\y) circle (1.5pt);
+}
+
+% Test embedding (overlaid)
+\node[font=\scriptsize] at (2.5,3.2) {\textbf{Test (20\%)}};
+\draw[thick, red, dashed] (0.2,1.8) rectangle (4.8,3);
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{0.7 + rand*3.5}
+    \pgfmathsetmacro{\y}{2 + rand*0.8}
+    \filldraw[red!60] (\x,\y) circle (1.5pt);
+}
+
+% Overlap indicator
+\draw[<->, green!70!black, thick] (2.3,3) -- (2.3,3.5);
+\node[right, font=\tiny, text=green!70!black] at (2.6,3.25) {Overlap};
+\end{tikzpicture}
 
 \textbf{Interpretation:}
 \begin{itemize}
@@ -1716,7 +2882,56 @@ GPU & 1\% & 98\%
 % Slide 68
 \begin{frame}{Combining with Other Methods: Ensemble Approaches}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/ensemble_methods.png}
+\begin{tikzpicture}[scale=0.85]
+% Three different method results
+% PCA
+\begin{scope}
+\node[font=\scriptsize] at (1.5,3.5) {\textbf{PCA}};
+\draw[thick] (0,0) rectangle (3,3);
+\foreach \i in {1,...,10} {
+    \pgfmathsetmacro{\x}{0.5 + \i*0.2}
+    \pgfmathsetmacro{\y}{0.5 + \i*0.2}
+    \filldraw[blue!60] (\x,\y) circle (1.5pt);
+}
+\draw[->, gray] (0.3,0.3) -- (2.7,2.7);
+\node[font=\tiny] at (1.5,0.3) {Linear};
+\end{scope}
+
+% t-SNE
+\begin{scope}[xshift=4cm]
+\node[font=\scriptsize] at (1.5,3.5) {\textbf{t-SNE}};
+\draw[thick] (0,0) rectangle (3,3);
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{0.7 + rand*0.3}
+    \pgfmathsetmacro{\y}{2.2 + rand*0.3}
+    \filldraw[red!60] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,5} {
+    \pgfmathsetmacro{\x}{2.2 + rand*0.3}
+    \pgfmathsetmacro{\y}{0.7 + rand*0.3}
+    \filldraw[green!60] (\x,\y) circle (1.5pt);
+}
+\node[font=\tiny] at (1.5,0.3) {Clusters};
+\end{scope}
+
+% UMAP
+\begin{scope}[xshift=8cm]
+\node[font=\scriptsize] at (1.5,3.5) {\textbf{UMAP}};
+\draw[thick] (0,0) rectangle (3,3);
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\x}{0.8 + rand*0.4}
+    \pgfmathsetmacro{\y}{2.3 + rand*0.4}
+    \filldraw[orange!60] (\x,\y) circle (1.5pt);
+}
+\foreach \i in {1,...,4} {
+    \pgfmathsetmacro{\x}{2.2 + rand*0.4}
+    \pgfmathsetmacro{\y}{0.8 + rand*0.4}
+    \filldraw[purple!60] (\x,\y) circle (1.5pt);
+}
+\draw[orange, dashed] (1,2.5) to[bend left] (2.4,1);
+\node[font=\tiny] at (1.5,0.3) {Topology};
+\end{scope}
+\end{tikzpicture}
 \end{center}
 
 \textbf{Complementary Strengths:}
@@ -1740,7 +2955,8 @@ Topology\\
 Scalable
 \end{columns}
 
-\colorbox{green!30}{Truth emerges from agreement across methods}
+\vspace{0.2cm}
+\colorbox{green!30}{\parbox{0.9\textwidth}{\centering Truth emerges from agreement across methods}}
 \end{frame}
 
 % Slide 69
@@ -1763,6 +2979,7 @@ Scalable
 \item Reproducibility → Deterministic methods
 \end{itemize}
 
+\vspace{0.2cm}
 \ethics{Using wrong tool can lead to wrong conclusions}
 \end{frame}
 
@@ -1781,11 +2998,33 @@ Embeddings & $O(n)$\\
 Gradients & $O(n)$
 \end{tabular}
 
+\vspace{0.3cm}
 \textbf{For 100K points:}\\
 Dense: 80GB\\
 Sparse: 800MB
 
 \column{0.5\textwidth}
+\begin{tikzpicture}[scale=0.7]
+% Memory comparison bar chart
+\draw[->] (0,0) -- (0,4.5) node[above, font=\scriptsize] {Memory (GB)};
+\draw[->] (0,0) -- (5,0) node[right, font=\scriptsize] {Approach};
+
+% Dense
+\draw[fill=red!50] (0.5,0) rectangle (1.2,4);
+\node[below, font=\tiny, rotate=45, anchor=east] at (0.85,0) {Dense};
+\node[font=\tiny] at (0.85,4.2) {80};
+
+% Sparse
+\draw[fill=green!50] (2,0) rectangle (2.7,0.4);
+\node[below, font=\tiny, rotate=45, anchor=east] at (2.35,0) {Sparse};
+\node[font=\tiny] at (2.35,0.6) {0.8};
+
+% Approximate
+\draw[fill=blue!50] (3.5,0) rectangle (4.2,0.2);
+\node[below, font=\tiny, rotate=45, anchor=east] at (3.85,0) {Approx};
+\node[font=\tiny] at (3.85,0.4) {0.4};
+\end{tikzpicture}
+
 \textbf{Optimization Tricks:}
 \begin{enumerate}
 \item Use float32 not float64
@@ -1794,8 +3033,6 @@ Sparse: 800MB
 \item Memory-mapped arrays
 \item Approximate methods
 \end{enumerate}
-
-\includegraphics[width=\textwidth]{./Figures/memory_optimization.png}
 \end{columns}
 \end{frame}
 
@@ -1832,22 +3069,56 @@ Sparse: 800MB
 \textbf{Corrections:}
 \begin{enumerate}
 \item Inter-cluster distance meaningless
-\item Visual size ≠ sample count
+\item Visual size $\neq$ sample count
 \item Position is arbitrary
 \item Multiple runs essential
 \end{enumerate}
 \end{columns}
 
 \vspace{0.3cm}
-\colorbox{red!30}{\textbf{These errors led to paper retractions!}}
+\colorbox{red!30}{\parbox{0.9\textwidth}{\centering\textbf{These errors led to paper retractions!}}}
 
+\vspace{0.2cm}
 \ethics{Peer reviewers should check t-SNE usage carefully}
 \end{frame}
 
 % Slide 73
 \begin{frame}{Interactive Demo: Building Intuition}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/interactive_playground.png}
+\begin{tikzpicture}[scale=0.9]
+% Interactive playground mockup
+\draw[thick, fill=gray!10] (0,0) rectangle (10,5);
+\node[above] at (5,5) {\textbf{t-SNE Interactive Playground}};
+
+% Control panel
+\draw[fill=blue!10] (0.5,0.5) rectangle (3,4.5);
+\node[font=\scriptsize] at (1.75,4.2) {Controls};
+
+% Sliders
+\foreach \y/\label in {3.5/Perplexity, 2.8/Learn Rate, 2.1/Iterations} {
+    \draw (0.7,\y) -- (2.8,\y);
+    \filldraw[blue] (1.8,\y) circle (2pt);
+    \node[right, font=\tiny] at (0.7,\y+0.15) {\label};
+}
+
+% Buttons
+\foreach \y/\label in {1.5/Reset, 1.2/Step, 0.9/Run} {
+    \draw[fill=green!30, rounded corners] (0.7,\y-0.1) rectangle (2.8,\y+0.1);
+    \node[font=\tiny] at (1.75,\y) {\label};
+}
+
+% Visualization area
+\draw[thick] (3.5,0.5) rectangle (9.5,4.5);
+\node[font=\scriptsize] at (6.5,4.2) {Embedding View};
+
+% Sample points with force vectors
+\foreach \i in {1,...,8} {
+    \pgfmathsetmacro{\x}{4.5 + rand*4}
+    \pgfmathsetmacro{\y}{1.5 + rand*2.5}
+    \filldraw[blue!70] (\x,\y) circle (2pt);
+    \draw[->, red, thin] (\x,\y) -- (\x+0.3,\y+0.2);
+}
+\end{tikzpicture}
 \end{center}
 
 \textbf{Interactive Playground Features:}
@@ -1882,13 +3153,37 @@ Financial & 100K & 50 & 55 min & 0.87
 \textbf{Setup:} Intel i7, 32GB RAM, openTSNE, perplexity=30\\
 \textbf{Quality:} Neighborhood preservation at k=30
 
+\vspace{0.3cm}
 \warning{Your results will vary based on hardware and implementation}
 \end{frame}
 
 % Slide 75
 \begin{frame}{The Art of Perplexity Selection}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{./Figures/perplexity_selection_guide.png}
+\begin{tikzpicture}[scale=0.9]
+% Decision tree for perplexity
+\node[draw, fill=blue!20, rounded corners] (start) at (0,4) {Dataset size $n$?};
+
+\node[draw, fill=green!20] (small) at (-3,2.5) {$n < 100$};
+\node[draw, fill=green!20] (medium) at (-1,2.5) {$100-1000$};
+\node[draw, fill=green!20] (large) at (1,2.5) {$1K-10K$};
+\node[draw, fill=green!20] (huge) at (3,2.5) {$>10K$};
+
+\node[draw, fill=yellow!20] (p1) at (-3,1) {perp=5-10};
+\node[draw, fill=yellow!20] (p2) at (-1,1) {perp=10-30};
+\node[draw, fill=yellow!20] (p3) at (1,1) {perp=30-50};
+\node[draw, fill=yellow!20] (p4) at (3,1) {perp=50-100};
+
+\draw[->, thick] (start) -- (small);
+\draw[->, thick] (start) -- (medium);
+\draw[->, thick] (start) -- (large);
+\draw[->, thick] (start) -- (huge);
+
+\draw[->, thick] (small) -- (p1);
+\draw[->, thick] (medium) -- (p2);
+\draw[->, thick] (large) -- (p3);
+\draw[->, thick] (huge) -- (p4);
+\end{tikzpicture}
 \end{center}
 
 \textbf{Data-Driven Guidelines:}
@@ -1910,23 +3205,27 @@ Financial & 100K & 50 & 55 min & 0.87
 \end{itemize}
 \end{columns}
 
-\colorbox{green!30}{Always try multiple values and look for consistency}
+\vspace{0.2cm}
+\colorbox{green!30}{\parbox{0.9\textwidth}{\centering Always try multiple values and look for consistency}}
 \end{frame}
 
 % Slide 76
 \begin{frame}{Integration with Machine Learning Pipelines}
 \begin{center}
-\begin{tikzpicture}[scale=0.8]
-\node[draw, fill=blue!20] (data) at (0,2) {Raw Data};
-\node[draw, fill=green!20] (feat) at (3,2) {Feature Engineering};
-\node[draw, fill=green!20] (scale) at (6,2) {Scaling};
-\node[draw, fill=yellow!20] (tsne) at (9,2) {t-SNE};
+\begin{tikzpicture}[scale=0.85, node distance=1.5cm]
+% Top row - preprocessing
+\node[draw, fill=blue!20, minimum width=1.5cm] (data) {Raw Data};
+\node[draw, fill=green!20, minimum width=1.5cm, right=of data] (feat) {Feature Eng};
+\node[draw, fill=green!20, minimum width=1.5cm, right=of feat] (scale) {Scaling};
+\node[draw, fill=yellow!20, minimum width=1.5cm, right=of scale] (tsne) {t-SNE};
 
-\node[draw, fill=orange!20] (viz) at (9,0) {Visualization};
-\node[draw, fill=orange!20] (cluster) at (6,0) {Clustering};
-\node[draw, fill=orange!20] (outlier) at (3,0) {Outlier Detection};
-\node[draw, fill=red!20] (validate) at (0,0) {Validation};
+% Bottom row - analysis
+\node[draw, fill=orange!20, minimum width=1.5cm, below=of tsne] (viz) {Visualization};
+\node[draw, fill=orange!20, minimum width=1.5cm, left=of viz] (cluster) {Clustering};
+\node[draw, fill=orange!20, minimum width=1.5cm, left=of cluster] (outlier) {Outlier Det};
+\node[draw, fill=red!20, minimum width=1.5cm, left=of outlier] (validate) {Validation};
 
+% Arrows
 \draw[->, thick] (data) -- (feat);
 \draw[->, thick] (feat) -- (scale);
 \draw[->, thick] (scale) -- (tsne);
@@ -1951,7 +3250,17 @@ Financial & 100K & 50 & 55 min & 0.87
 \begin{frame}{Final Exam: Test Your Mastery}
 \textbf{You have this failed t-SNE result:}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{./Figures/exam_problem.png}
+\begin{tikzpicture}[scale=0.4]
+\draw[thick] (0,0) rectangle (4,4);
+\node[above] at (2,4) {Failed Result};
+% Scattered mess
+\foreach \i in {1,...,30} {
+    \pgfmathsetmacro{\x}{0.5 + rand*3}
+    \pgfmathsetmacro{\y}{0.5 + rand*3}
+    \filldraw[gray!50] (\x,\y) circle (2pt);
+}
+\node[text=red, font=\Large] at (2,2) {\textbf{?}};
+\end{tikzpicture}
 \end{center}
 
 \textbf{Questions:}
@@ -1967,14 +3276,36 @@ Financial & 100K & 50 & 55 min & 0.87
 \small
 1. Low learning rate, few iterations, wrong perplexity\\
 2. Check convergence, run stability test, sweep perplexity\\
-3. Increase η → more iterations → adjust perplexity\\
+3. Increase $\eta$ → more iterations → adjust perplexity\\
 4. NPr metric, multiple runs, known structure test
 \end{frame}
 
 % Slide 78
 \begin{frame}{The Complete Journey: From Theory to Practice}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{./Figures/complete_journey.png}
+\begin{tikzpicture}[scale=0.85]
+% Four pillars
+\foreach \x/\label/\color in {0/Theory/blue, 3/Algorithm/green, 6/Practice/orange, 9/Ethics/red} {
+    \draw[thick, fill=\color!20] (\x,0) rectangle (\x+2,3);
+    \node[font=\small\bfseries] at (\x+1,2.7) {\label};
+}
+
+% Theory content
+\node[font=\tiny, align=left] at (1,1.5) {Info theory\\Max entropy\\KL divergence\\Heavy tails};
+
+% Algorithm content
+\node[font=\tiny, align=left] at (4,1.5) {Gradient\\Forces\\Barnes-Hut\\Optimization};
+
+% Practice content
+\node[font=\tiny, align=left] at (7,1.5) {Preprocessing\\Debugging\\Validation\\Tools};
+
+% Ethics content
+\node[font=\tiny, align=left] at (10,1.5) {Limitations\\Misuse\\Reporting\\Responsibility};
+
+% Foundation
+\draw[thick, fill=gray!30] (-0.5,-0.5) rectangle (11.5,-0.2);
+\node[font=\scriptsize] at (5.5,-0.35) {Deep Understanding};
+\end{tikzpicture}
 \end{center}
 
 \textbf{What We've Covered:}
@@ -2031,7 +3362,8 @@ Responsibility
 \end{itemize}
 \end{block}
 
-\colorbox{green!30}{\textbf{Remember: Practice makes perfect!}}
+\vspace{0.2cm}
+\colorbox{green!30}{\parbox{0.9\textwidth}{\centering\textbf{Remember: Practice makes perfect!}}}
 \end{frame}
 
 % Slide 80
@@ -2056,12 +3388,15 @@ Office Hours: Tuesdays 14:00-16:00
 
 \vspace{0.5cm}
 \begin{center}
-\colorbox{blue!30}{\textbf{May your embeddings be stable and your clusters meaningful!}}
+\colorbox{blue!30}{\parbox{0.8\textwidth}{\centering\textbf{May your embeddings be stable and your clusters meaningful!}}}
 \end{center}
 
+\vspace{0.3cm}
 \small
 This lecture incorporated feedback from G. Hinton, A. Karpathy, G. Sanderson,\\
 F. Viégas, and the UPC Academic Review Commission
 \end{frame}
+
+\end{document}
 
 \end{document}
