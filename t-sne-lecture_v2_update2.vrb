@@ -1,0 +1,28 @@
+\frametitle{Live Implementation: MNIST Pipeline}
+\textbf{Complete working pipeline in Python:}
+
+\begin{verbatim}
+import numpy as np
+from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+# Step 1: Load and preprocess
+X, labels = load_mnist()  # 70000 x 784
+X = StandardScaler().fit_transform(X)  # Zero mean, unit variance
+
+# Step 2: PCA preprocessing (critical for speed)
+pca = PCA(n_components=50, random_state=42)
+X_pca = pca.fit_transform(X)  # 70000 x 50
+print(f"Variance retained: {pca.explained_variance_ratio_.sum():.2%}")
+
+# Step 3: t-SNE with documented parameters
+tsne = TSNE(
+    n_components=2,
+    perplexity=30,        # ~30 effective neighbors
+    learning_rate=200,    # Standard for this dataset size
+    n_iter=1000,         # Ensure convergence
+    early_exaggeration=12, # Forms tight clusters
+    random_state=42      # Reproducibility
+)
+\end{verbatim}
