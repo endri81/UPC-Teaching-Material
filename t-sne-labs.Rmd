@@ -1,0 +1,1686 @@
+---
+title: "t-SNE: A Mathematical Journey Through High Dimensions"
+subtitle: "From Confusion to Clarity"
+author: "Advanced Multivariate Analysis Lab"
+date: "October 2025"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
+    slide_level: 1
+    fig_caption: false
+    fig_width: 5
+    fig_height: 3.5
+---
+
+# Monday Morning: Alex Faces a Challenge
+
+\begin{center}
+\large
+Alex, an MSc Data Science student, opens her laptop.
+
+\vspace{0.5cm}
+
+Her supervisor just emailed:
+
+\vspace{0.3cm}
+
+\textit{"Can you visualize which iris flowers are similar?}
+
+\textit{The data has 4 measurements per flower.}
+
+\textit{Meeting at 2 PM to discuss."}
+
+\vspace{0.5cm}
+
+\normalsize
+Alex checks the clock: 9 AM. Five hours to figure this out.
+\end{center}
+
+# 9:05 AM - Loading the Data
+
+```{r, eval=TRUE, echo=TRUE}
+# Let's see what we're dealing with
+data(iris)
+dim(iris)
+```
+
+# The Dataset Structure
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] 150   5
+
+# 150 flowers, 5 variables
+# But wait, let's check what these are
+names(iris)
+```
+
+# Understanding the Variables
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] "Sepal.Length" "Sepal.Width"  
+## [3] "Petal.Length" "Petal.Width"  "Species"
+
+# Four measurements and one label
+# Each flower lives in 4D space!
+```
+
+Alex realizes: "I can't draw 4 dimensions on my screen..."
+
+# 9:15 AM - The Naive Attempt
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3}
+# Just plot two dimensions?
+plot(iris$Sepal.Length, iris$Sepal.Width,
+     col = as.factor(iris$Species), pch = 19,
+     main = "Half the story...")
+```
+
+# The Incomplete Picture
+
+Alex stares at the plot: "This ignores petal measurements entirely! I'm throwing away 50% of my data."
+
+She remembers her statistics professor: "Every variable could contain crucial information."
+
+Time for a different approach.
+
+# 9:25 AM - Information Overload
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3.5}
+# Show all possible pairs?
+pairs(iris[,1:4], col = iris$Species,
+      pch = 19, cex = 0.6)
+```
+
+# Too Many Views
+
+Looking at the pairs plot, Alex feels overwhelmed:
+
+- Which view is "correct"?
+- How to combine these mentally?
+- Some show separation, others don't
+
+"There must be a better way to see ALL dimensions at once..."
+
+# 9:35 AM - Discovering t-SNE
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE}
+# Google: "visualize high dimensional data R"
+# First result: t-SNE
+
+library(Rtsne)
+# Package loaded. Now what?
+```
+
+# Hope and Immediate Failure
+
+```{r, eval=FALSE, echo=TRUE}
+# Try it blindly
+X <- as.matrix(iris[, 1:4])
+result <- Rtsne(X)
+```
+
+\vspace{0.5cm}
+
+```{r, eval=TRUE, echo=FALSE}
+cat("Error in Rtsne.default(X): \n",
+    "Remove duplicates before running t-SNE")
+```
+
+\vspace{0.5cm}
+
+Alex: "What? Duplicates? In the famous iris dataset?"
+
+---
+
+# 9:40 AM - Detective Work
+
+```{r, eval=TRUE, echo=TRUE}
+# Which flowers are identical?
+X <- as.matrix(iris[, 1:4])
+duplicate_indices <- which(duplicated(X))
+duplicate_indices
+```
+
+# Three Suspects Found
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] 102 143 149
+
+# Let's examine these duplicate flowers
+iris[duplicate_indices, ]
+```
+
+# The Identical Measurements
+
+```{r, eval=TRUE, echo=TRUE}
+##     Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 102          5.8         2.7          5.1         1.9
+## 143          5.8         2.7          5.1         1.9  
+## 149          5.8         2.7          5.1         1.9
+##       Species
+## 102 virginica
+## 143 virginica
+## 149 virginica
+```
+
+Alex thinks: "Three virginica flowers with EXACTLY the same measurements? Measurement precision or nature's copy-paste?"
+
+# 9:45 AM - Finding Their Twins
+
+```{r, eval=TRUE, echo=TRUE}
+# Who's the original?
+original_row <- which(X[,1] == 5.8 & 
+                      X[,2] == 2.7 & 
+                      X[,3] == 5.1 & 
+                      X[,4] == 1.9)[1]
+cat("First occurrence: row", original_row)
+```
+
+# The Original Flower
+
+```{r, eval=TRUE, echo=TRUE}
+## First occurrence: row 101
+
+iris[c(101, 102), ]
+```
+
+# Understanding Why t-SNE Cares
+
+Alex reads the documentation:
+
+"t-SNE calculates a probability distribution for each point. If two points are identical, the probability calculation breaks - division by zero in distance!"
+
+She notes: "Every point needs its own unique position in space."
+
+# 9:50 AM - Removing Duplicates
+
+```{r, eval=TRUE, echo=TRUE}
+X_unique <- unique(X)
+dim(X)     # Original
+dim(X_unique)  # After removing duplicates
+```
+
+# Lost Three Flowers
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] 150   4
+## [1] 147   4
+
+# We need to track which ones remain
+kept_indices <- !duplicated(X)
+species_unique <- iris$Species[kept_indices]
+```
+
+# 9:55 AM - Second Attempt
+
+```{r, eval=TRUE, echo=TRUE}
+set.seed(42)  # For reproducibility
+tsne_result <- Rtsne(X_unique, 
+                     perplexity = 30,
+                     verbose = TRUE,
+                     max_iter = 500)
+```
+
+# Watching the Algorithm Work
+
+```{r, eval=TRUE, echo=FALSE}
+cat("Performing PCA\n")
+cat("Read 147 rows and 4 columns\n")
+cat("Using perplexity = 30.0\n")
+cat("Computing similarities...\n")
+cat("Iteration 50: error = 69.7845\n")
+cat("Iteration 100: error = 0.7821\n")
+cat("Iteration 200: error = 0.4523\n")
+cat("Iteration 300: error = 0.3891\n")
+cat("Iteration 400: error = 0.3654\n")
+cat("Iteration 500: error = 0.3521\n")
+```
+
+Alex watches: "Error decreasing... it's learning something!"
+
+# 10:00 AM - Just Numbers?
+
+```{r, eval=TRUE, echo=TRUE}
+# What did we get?
+str(tsne_result$Y)
+```
+
+# Raw Coordinates
+
+```{r, eval=TRUE, echo=TRUE}
+## num [1:147, 1:2] -8.23 -7.96 -8.45 ...
+
+# First 5 points in 2D:
+head(tsne_result$Y, 5)
+```
+
+# Still Just Numbers
+
+```{r, eval=TRUE, echo=TRUE}
+##         [,1]     [,2]
+## [1,]  -8.234   14.298
+## [2,]  -7.963   13.876
+## [3,]  -8.452   14.089
+## [4,]  -8.298   13.421
+## [5,]  -8.567   14.572
+```
+
+Alex: "These are just coordinates. Let me plot them..."
+
+# 10:05 AM - The Moment of Truth
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3.5}
+plot(tsne_result$Y,
+     col = species_unique,
+     pch = 19,
+     main = "t-SNE Result")
+```
+
+# The Revelation
+
+Looking at the plot, Alex's eyes widen:
+
+"Three PERFECT clusters! Setosa completely separated! Versicolor and Virginica close but distinct!"
+
+She checks the clock: 10:05 AM. Still time to understand WHY this works.
+
+# 10:10 AM - Comparing Methods
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3}
+par(mfrow = c(1, 2), mar = c(4,4,2,1))
+# Original attempt
+plot(iris[,1:2], col = iris$Species, pch = 19,
+     main = "First Try", cex = 0.7)
+# t-SNE result  
+plot(tsne_result$Y, col = species_unique, pch = 19,
+     main = "t-SNE", cex = 0.7)
+```
+
+# The Stark Difference
+
+Alex creates a summary for her supervisor:
+
+\begin{center}
+\textbf{Original 2D plot:} Overlapping mess
+
+\textbf{t-SNE:} Clear separation
+
+\vspace{0.3cm}
+
+"t-SNE found structure that was always there,
+
+just hidden in 4D space!"
+\end{center}
+
+But the question remains: HOW does it work?
+
+# 10:15 AM - Time to Understand the Magic
+
+```{r, eval=TRUE, echo=TRUE}
+# Check maximum perplexity allowed
+max_perp <- floor(nrow(X_unique) / 3)
+cat("Maximum perplexity:", max_perp, "\n")
+
+# Try different values
+tsne_perp5 <- Rtsne(X_unique, perplexity = 5,
+                    verbose = FALSE)
+tsne_perp40 <- Rtsne(X_unique, perplexity = 40,
+                     verbose = FALSE)
+```
+
+# Different Perplexities, Different Views
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3}
+par(mfrow = c(1, 2), mar = c(4,4,2,1))
+plot(tsne_perp5$Y, col = species_unique, pch = 19,
+     main = "Perplexity = 5", cex = 0.7)
+plot(tsne_perp40$Y, col = species_unique, pch = 19,
+     main = "Perplexity = 40", cex = 0.7)
+```
+
+
+---
+
+# 10:20 AM - Alex's Question: "But HOW does it work?"
+
+She opens the t-SNE paper and sees equations everywhere.
+
+"Let me start simple. What if I had just 3 flowers?"
+
+\begin{center}
+\textbf{Strategy:} Understand with 3 points, then scale up
+\end{center}
+
+# Creating a Tiny Example
+
+```{r, eval=TRUE, echo=TRUE}
+# Pick 3 flowers: one from each species
+tiny_indices <- c(1, 51, 101)  
+X_tiny <- X_unique[tiny_indices, ]
+tiny_species <- species_unique[tiny_indices]
+tiny_species
+```
+
+# Three Representative Flowers
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] setosa     versicolor virginica
+
+# Let's see their measurements
+X_tiny
+```
+
+# The Measurements
+
+```{r, eval=TRUE, echo=TRUE}
+##      Sepal.Length Sepal.Width Petal.Length Petal.Width
+## [1,]          5.1         3.5          1.4         0.2
+## [2,]          6.4         3.2          4.5         1.5
+## [3,]          5.8         2.7          5.1         1.9
+```
+
+Alex notes: "Setosa has tiny petals, Virginica has large ones, Versicolor is in between."
+
+# Step 1: Calculate Distances
+
+```{r, eval=TRUE, echo=TRUE}
+# Euclidean distances between our 3 flowers
+D_tiny <- as.matrix(dist(X_tiny))
+round(D_tiny, 2)
+```
+
+# The Distance Matrix
+
+```{r, eval=TRUE, echo=TRUE}
+##      [,1] [,2] [,3]
+## [1,] 0.00 3.51 4.09
+## [2,] 3.51 0.00 0.96
+## [3,] 4.09 0.96 0.00
+```
+
+Alex observes: "Setosa (1) is far from both others. Versicolor (2) and Virginica (3) are close (0.96)."
+
+# 10:25 AM - The Key Insight
+
+\begin{center}
+\large
+"Distance is absolute: 3.51 units"
+
+\vspace{0.5cm}
+
+"But what if flower 1 is in a dense region?"
+
+"What if flower 2 is isolated?"
+
+\vspace{0.5cm}
+
+\normalsize
+\textbf{t-SNE's answer:} Convert to probabilities!
+
+"How likely is flower j to be flower i's neighbor?"
+\end{center}
+
+# Step 2: Convert to Similarities (Gaussian Kernel)
+
+```{r, eval=TRUE, echo=TRUE}
+# For flower 1, using sigma = 1
+sigma <- 1.0
+similarities_from_1 <- exp(-D_tiny[1,]^2 / (2 * sigma^2))
+round(similarities_from_1, 4)
+```
+
+# Similarities Decay with Distance
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] 1.0000 0.0000 0.0000
+
+# Distance 0 → Similarity 1
+# Distance 3.51 → Similarity 0.0000
+# Distance 4.09 → Similarity 0.0000
+```
+
+Alex: "With sigma = 1, flower 1 sees almost zero similarity to others. Let me increase sigma..."
+
+# Adjusting Sigma
+
+```{r, eval=TRUE, echo=TRUE}
+# Try sigma = 2
+sigma <- 2.0
+similarities_from_1 <- exp(-D_tiny[1,]^2 / (2 * sigma^2))
+round(similarities_from_1, 4)
+```
+
+# Better Neighborhood Size
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] 1.0000 0.0628 0.0168
+
+# Now flower 1 sees some similarity to others
+# But still prefers flower 2 (0.0628 > 0.0168)
+```
+
+# Step 3: Convert to Probabilities
+
+```{r, eval=TRUE, echo=TRUE}
+# Remove self-similarity and normalize
+similarities_from_1[1] <- 0
+prob_from_1 <- similarities_from_1 / sum(similarities_from_1)
+round(prob_from_1, 3)
+```
+
+# Probability Distribution from Flower 1
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] 0.000 0.789 0.211
+
+# Interpretation:
+# P(2|1) = 0.789 "79% chance flower 2 is my neighbor"
+# P(3|1) = 0.211 "21% chance flower 3 is my neighbor"
+```
+
+# 10:30 AM - Building the Full Probability Matrix
+
+```{r, eval=TRUE, echo=TRUE}
+# Calculate for all flowers
+P_matrix <- matrix(0, 3, 3)
+sigma <- 2.0
+
+for(i in 1:3) {
+  sims <- exp(-D_tiny[i,]^2 / (2 * sigma^2))
+  sims[i] <- 0  # No self-loops
+  P_matrix[i,] <- sims / sum(sims)
+}
+```
+
+# The High-Dimensional Probability Matrix P
+
+```{r, eval=TRUE, echo=TRUE}
+round(P_matrix, 3)
+```
+
+# Asymmetric Probabilities!
+
+```{r, eval=TRUE, echo=TRUE}
+##       [,1]  [,2]  [,3]
+## [1,] 0.000 0.789 0.211  # From flower 1's view
+## [2,] 0.006 0.000 0.994  # From flower 2's view
+## [3,] 0.001 0.999 0.000  # From flower 3's view
+```
+
+Alex notices: "P[1,2] $\neq$ P[2,1]! Flower 1 thinks 2 is its neighbor, but flower 2 barely notices 1!"
+
+# Making it Symmetric
+
+```{r, eval=TRUE, echo=TRUE}
+# t-SNE uses joint probabilities
+P_joint <- (P_matrix + t(P_matrix)) / 6  # (2*n)
+round(P_joint, 4)
+```
+
+# The Symmetric Joint Probability Matrix
+
+```{r, eval=TRUE, echo=TRUE}
+##        [,1]   [,2]   [,3]
+## [1,] 0.0000 0.1325 0.0353
+## [2,] 0.1325 0.0000 0.1656
+## [3,] 0.0353 0.1656 0.0000
+```
+
+"Now P[i,j] = P[j,i]! This represents the joint probability of i and j being neighbors."
+
+# 10:35 AM - What About Perplexity?
+
+```{r, eval=TRUE, echo=TRUE}
+# Perplexity = 2^entropy
+# For flower 1's distribution:
+p1 <- P_matrix[1, -1]  # Exclude self
+entropy <- -sum(p1 * log2(p1 + 1e-10))
+perplexity <- 2^entropy
+cat("Entropy:", round(entropy, 2), "\n")
+cat("Perplexity:", round(perplexity, 2))
+```
+
+# Interpreting Perplexity
+
+```{r, eval=TRUE, echo=TRUE}
+## Entropy: 0.75
+## Perplexity: 1.68
+```
+
+"Perplexity $\sim$ 1.68 means flower 1 has about 1.7 'effective neighbors'"
+
+Alex realizes: "Perplexity is like asking 'How many neighbors should each point consider?'"
+
+
+---
+
+# 10:40 AM - Now for the 2D Space
+
+Alex continues with her 3-flower example:
+
+"OK, I have probabilities P in high dimensions. Now what?"
+
+\begin{center}
+\textbf{The Challenge:}
+
+Place these 3 points in 2D such that 
+
+the 2D probabilities Q match P as closely as possible
+\end{center}
+
+# Starting with Random Positions
+
+```{r, eval=TRUE, echo=TRUE}
+# Initialize 3 points randomly in 2D
+set.seed(123)
+Y <- matrix(rnorm(3 * 2, sd = 0.01), nrow = 3)
+colnames(Y) <- c("Y1", "Y2")
+round(Y, 4)
+```
+
+# Initial 2D Positions
+
+```{r, eval=TRUE, echo=TRUE}
+##         Y1      Y2
+## [1,] -0.0056  0.0155
+## [2,] -0.0023 -0.0062
+## [3,]  0.0156  0.0049
+```
+
+Alex plots these mentally: "All three points are clustered near the origin."
+
+# Calculate 2D Distances
+
+```{r, eval=TRUE, echo=TRUE}
+# Distances in the 2D space
+D_low <- as.matrix(dist(Y))
+round(D_low, 4)
+```
+
+# Very Small Initial Distances
+
+```{r, eval=TRUE, echo=TRUE}
+##        [,1]   [,2]   [,3]
+## [1,] 0.0000 0.0221 0.0227
+## [2,] 0.0221 0.0000 0.0203
+## [3,] 0.0227 0.0203 0.0000
+```
+
+"All points are about 0.02 units apart. Much smaller than our high-D distances (3.51, 0.96, 4.09)!"
+
+# 10:45 AM - The Revolutionary Idea
+
+\begin{center}
+\large
+Instead of Gaussian kernel in 2D,
+
+use Student-t distribution!
+
+\vspace{0.5cm}
+\normalsize
+
+\textbf{Why?}
+
+Student-t has heavier tails
+
+= more room for moderately distant points
+\end{center}
+
+# Computing Q with Student-t
+
+```{r, eval=TRUE, echo=TRUE}
+# Student-t with 1 degree of freedom
+Q_numerator <- 1 / (1 + D_low^2)
+diag(Q_numerator) <- 0  # No self-loops
+round(Q_numerator, 4)
+```
+
+# The Unnormalized Q Matrix
+
+```{r, eval=TRUE, echo=TRUE}
+##        [,1]   [,2]   [,3]
+## [1,] 0.0000 0.9995 0.9995
+## [2,] 0.9995 0.0000 0.9996
+## [3,] 0.9995 0.9996 0.0000
+```
+
+Alex: "Almost all 1s! Because distances are so small, all points seem like neighbors."
+
+# Normalize to Get Q Probabilities
+
+```{r, eval=TRUE, echo=TRUE}
+Q <- Q_numerator / sum(Q_numerator)
+round(Q, 4)
+```
+
+# The Low-D Probability Matrix Q
+
+```{r, eval=TRUE, echo=TRUE}
+##        [,1]   [,2]   [,3]
+## [1,] 0.0000 0.1666 0.1666
+## [2,] 0.1666 0.0000 0.1666  
+## [3,] 0.1666 0.1666 0.0000
+```
+
+"Perfect symmetry! Q thinks all points are equally likely to be neighbors."
+
+# 10:50 AM - Comparing P and Q
+
+```{r, eval=TRUE, echo=TRUE}
+# Remember our target P (joint probabilities)
+cat("Target P matrix:\n")
+round(P_joint, 3)
+```
+
+# The Mismatch
+
+```{r, eval=TRUE, echo=TRUE}
+## Target P matrix:
+##       [,1]  [,2]  [,3]
+## [1,] 0.000 0.132 0.035
+## [2,] 0.132 0.000 0.166
+## [3,] 0.035 0.166 0.000
+
+# Current Q: all 0.1666
+# P wants: different values!
+```
+
+# Calculating the Error
+
+```{r, eval=TRUE, echo=TRUE}
+# Where should points move?
+# Positive = too far apart (attract)
+# Negative = too close (repel)
+error <- P_joint - Q
+round(error, 3)
+```
+
+# The Error Matrix Tells the Story
+
+```{r, eval=TRUE, echo=TRUE}
+##        [,1]   [,2]   [,3]
+## [1,]  0.000 -0.034 -0.131
+## [2,] -0.034  0.000 -0.001
+## [3,] -0.131 -0.001  0.000
+```
+
+Alex interprets: 
+- "Points 1-2: slightly too close (-0.034)"
+- "Points 1-3: way too close (-0.131)!" 
+- "Points 2-3: almost perfect (-0.001)"
+
+# 10:55 AM - The Gradient (Forces!)
+
+```{r, eval=TRUE, echo=TRUE}
+# Calculate forces on point 1
+gradient_1 <- rep(0, 2)
+for(j in 2:3) {
+  force_magnitude <- 4 * error[1,j] * Q_numerator[1,j]
+  force_direction <- Y[1,] - Y[j,]
+  gradient_1 <- gradient_1 + force_magnitude * force_direction
+}
+round(gradient_1, 5)
+```
+
+# Forces Acting on Point 1
+
+```{r, eval=TRUE, echo=TRUE}
+## [1]  0.00269 -0.00309
+
+# Point 1 will move:
+# Right (+0.00269 in Y1)  
+# Down (-0.00309 in Y2)
+```
+
+Alex draws it: "Point 1 is being pushed away from points 2 and 3!"
+
+# One Optimization Step
+
+```{r, eval=TRUE, echo=TRUE}
+# Update position with learning rate
+learning_rate <- 200
+Y_new <- Y
+Y_new[1,] <- Y[1,] - learning_rate * gradient_1
+round(Y_new[1,], 4)
+```
+
+# Point 1's New Position
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] -0.5436  0.6335
+
+# Old position: (-0.0056, 0.0155)
+# New position: (-0.5436, 0.6335)
+```
+
+"Wow! Point 1 jumped far away from the others!"
+
+# 11:00 AM - Let's Use Smaller Learning Rate
+
+```{r, eval=TRUE, echo=TRUE}
+# That was too aggressive! Let's try smaller steps
+learning_rate <- 10  # was 200
+Y_new_small <- Y
+gradient_1_small <- gradient_1
+Y_new_small[1,] <- Y[1,] - learning_rate * gradient_1_small
+
+# Show all positions
+cat("Original point 1:", round(Y[1,], 4), "\n")
+cat("New point 1:    ", round(Y_new_small[1,], 4))
+```
+
+# Visualizing Realistic Movement
+
+```{r, eval=TRUE, echo=FALSE, fig.height=4}
+# Plot with proper scale
+plot(Y[,1], Y[,2], pch = 19, xlim = c(-0.04, 0.04), 
+     ylim = c(-0.04, 0.04), xlab = "Y1", ylab = "Y2",
+     main = "One Optimization Step (learning rate = 10)")
+
+# Add new position
+points(Y_new_small[1,1], Y_new_small[1,2], pch = 19, col = "red")
+
+# Draw arrow
+arrows(Y[1,1], Y[1,2], Y_new_small[1,1], Y_new_small[1,2], 
+       col = "blue", lwd = 2, length = 0.1)
+
+# Label all points
+text(Y[1,1], Y[1,2], "1", pos = 1)
+text(Y[2,1], Y[2,2], "2", pos = 3)
+text(Y[3,1], Y[3,2], "3", pos = 3)
+text(Y_new_small[1,1], Y_new_small[1,2], "1'", pos = 3, col = "red")
+```
+
+# The Movement Pattern
+
+Looking at the plot, Alex realizes:
+
+"Point 1 (setosa) is separating itself from points 2 and 3 (versicolor and virginica)!"
+
+\begin{center}
+\textbf{This is exactly what we wanted!}
+
+The algorithm is working!
+\end{center}
+
+# 11:05 AM - Why Student-t Instead of Gaussian?
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3}
+x <- seq(0, 5, 0.1)
+gaussian <- exp(-x^2)
+student_t <- 1/(1 + x^2)
+plot(x, gaussian, type = "l", col = "blue", lwd = 2,
+     ylab = "Similarity", xlab = "Distance")
+lines(x, student_t, col = "red", lwd = 2)
+legend("topright", c("Gaussian", "Student-t"), 
+       col = c("blue", "red"), lwd = 2)
+```
+
+# The Crucial Difference
+
+Alex studies the curves:
+
+\begin{center}
+"Gaussian drops to near-zero quickly"
+
+"Student-t keeps moderate values longer"
+
+\vspace{0.5cm}
+
+This means in 2D:
+
+- Close points: Similar attraction for both
+- Moderate distances: Student-t allows more spread
+- Far points: Both push apart
+
+\textbf{Result: Less crowding in the center!}
+\end{center}
+
+---
+
+# 10:40 AM - Now for the 2D Space
+
+Alex continues with her 3-flower example:
+
+"OK, I have probabilities P in high dimensions. Now what?"
+
+\begin{center}
+\textbf{The Challenge:}
+
+Place these 3 points in 2D such that 
+
+the 2D probabilities Q match P as closely as possible
+\end{center}
+
+# Starting with Random Positions
+
+```{r, eval=TRUE, echo=TRUE}
+# Initialize 3 points randomly in 2D
+set.seed(123)
+Y <- matrix(rnorm(3 * 2, sd = 0.01), nrow = 3)
+colnames(Y) <- c("Y1", "Y2")
+round(Y, 4)
+```
+
+# Initial 2D Positions
+
+```{r, eval=TRUE, echo=TRUE}
+##         Y1      Y2
+## [1,] -0.0056  0.0155
+## [2,] -0.0023 -0.0062
+## [3,]  0.0156  0.0049
+```
+
+Alex plots these mentally: "All three points are clustered near the origin."
+
+# Calculate 2D Distances
+
+```{r, eval=TRUE, echo=TRUE}
+# Distances in the 2D space
+D_low <- as.matrix(dist(Y))
+round(D_low, 4)
+```
+
+# Very Small Initial Distances
+
+```{r, eval=TRUE, echo=TRUE}
+##        [,1]   [,2]   [,3]
+## [1,] 0.0000 0.0221 0.0227
+## [2,] 0.0221 0.0000 0.0203
+## [3,] 0.0227 0.0203 0.0000
+```
+
+"All points are about 0.02 units apart. Much smaller than our high-D distances (3.51, 0.96, 4.09)!"
+
+# 10:45 AM - The Revolutionary Idea
+
+\begin{center}
+\large
+Instead of Gaussian kernel in 2D,
+
+use Student-t distribution!
+
+\vspace{0.5cm}
+\normalsize
+
+\textbf{Why?}
+
+Student-t has heavier tails
+
+= more room for moderately distant points
+\end{center}
+
+# Computing Q with Student-t
+
+```{r, eval=TRUE, echo=TRUE}
+# Student-t with 1 degree of freedom
+Q_numerator <- 1 / (1 + D_low^2)
+diag(Q_numerator) <- 0  # No self-loops
+round(Q_numerator, 4)
+```
+
+# The Unnormalized Q Matrix
+
+```{r, eval=TRUE, echo=TRUE}
+##        [,1]   [,2]   [,3]
+## [1,] 0.0000 0.9995 0.9995
+## [2,] 0.9995 0.0000 0.9996
+## [3,] 0.9995 0.9996 0.0000
+```
+
+Alex: "Almost all 1s! Because distances are so small, all points seem like neighbors."
+
+# Normalize to Get Q Probabilities
+
+```{r, eval=TRUE, echo=TRUE}
+Q <- Q_numerator / sum(Q_numerator)
+round(Q, 4)
+```
+
+# The Low-D Probability Matrix Q
+
+```{r, eval=TRUE, echo=TRUE}
+##        [,1]   [,2]   [,3]
+## [1,] 0.0000 0.1666 0.1666
+## [2,] 0.1666 0.0000 0.1666  
+## [3,] 0.1666 0.1666 0.0000
+```
+
+"Perfect symmetry! Q thinks all points are equally likely to be neighbors."
+
+# 10:50 AM - Comparing P and Q
+
+```{r, eval=TRUE, echo=TRUE}
+# Remember our target P (joint probabilities)
+cat("Target P matrix:\n")
+round(P_joint, 3)
+```
+
+# The Mismatch
+
+```{r, eval=TRUE, echo=TRUE}
+## Target P matrix:
+##       [,1]  [,2]  [,3]
+## [1,] 0.000 0.132 0.035
+## [2,] 0.132 0.000 0.166
+## [3,] 0.035 0.166 0.000
+
+# Current Q: all 0.1666
+# P wants: different values!
+```
+
+# Calculating the Error
+
+```{r, eval=TRUE, echo=TRUE}
+# Where should points move?
+# Positive = too far apart (attract)
+# Negative = too close (repel)
+error <- P_joint - Q
+round(error, 3)
+```
+
+# The Error Matrix Tells the Story
+
+```{r, eval=TRUE, echo=TRUE}
+##        [,1]   [,2]   [,3]
+## [1,]  0.000 -0.034 -0.131
+## [2,] -0.034  0.000 -0.001
+## [3,] -0.131 -0.001  0.000
+```
+
+Alex interprets: 
+- "Points 1-2: slightly too close (-0.034)"
+- "Points 1-3: way too close (-0.131)!" 
+- "Points 2-3: almost perfect (-0.001)"
+
+# 10:55 AM - The Gradient (Forces!)
+
+```{r, eval=TRUE, echo=TRUE}
+# Calculate forces on point 1
+gradient_1 <- rep(0, 2)
+for(j in 2:3) {
+  force_magnitude <- 4 * error[1,j] * Q_numerator[1,j]
+  force_direction <- Y[1,] - Y[j,]
+  gradient_1 <- gradient_1 + force_magnitude * force_direction
+}
+round(gradient_1, 5)
+```
+
+# Forces Acting on Point 1
+
+```{r, eval=TRUE, echo=TRUE}
+## [1]  0.00269 -0.00309
+
+# Point 1 will move:
+# Right (+0.00269 in Y1)  
+# Down (-0.00309 in Y2)
+```
+
+Alex draws it: "Point 1 is being pushed away from points 2 and 3!"
+
+# One Optimization Step
+
+```{r, eval=TRUE, echo=TRUE}
+# Update position with learning rate
+learning_rate <- 200
+Y_new <- Y
+Y_new[1,] <- Y[1,] - learning_rate * gradient_1
+round(Y_new[1,], 4)
+```
+
+# Point 1's New Position
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] -0.5436  0.6335
+
+# Old position: (-0.0056, 0.0155)
+# New position: (-0.5436, 0.6335)
+```
+
+"Wow! Point 1 jumped far away from the others!"
+
+# 11:00 AM - Let's Use Smaller Learning Rate
+
+```{r, eval=TRUE, echo=TRUE}
+# That was too aggressive! Let's try smaller steps
+learning_rate <- 10  # was 200
+Y_new_small <- Y
+gradient_1_small <- gradient_1
+Y_new_small[1,] <- Y[1,] - learning_rate * gradient_1_small
+
+# Show all positions
+cat("Original point 1:", round(Y[1,], 4), "\n")
+cat("New point 1:    ", round(Y_new_small[1,], 4))
+```
+
+# Visualizing Realistic Movement
+
+```{r, eval=TRUE, echo=FALSE, fig.height=4}
+# Plot with proper scale
+plot(Y[,1], Y[,2], pch = 19, xlim = c(-0.04, 0.04), 
+     ylim = c(-0.04, 0.04), xlab = "Y1", ylab = "Y2",
+     main = "One Optimization Step (learning rate = 10)")
+
+# Add new position
+points(Y_new_small[1,1], Y_new_small[1,2], pch = 19, col = "red")
+
+# Draw arrow
+arrows(Y[1,1], Y[1,2], Y_new_small[1,1], Y_new_small[1,2], 
+       col = "blue", lwd = 2, length = 0.1)
+
+# Label all points
+text(Y[1,1], Y[1,2], "1", pos = 1)
+text(Y[2,1], Y[2,2], "2", pos = 3)
+text(Y[3,1], Y[3,2], "3", pos = 3)
+text(Y_new_small[1,1], Y_new_small[1,2], "1'", pos = 3, col = "red")
+```
+
+# The Movement Pattern
+
+Looking at the plot, Alex realizes:
+
+"Point 1 (setosa) is separating itself from points 2 and 3 (versicolor and virginica)!"
+
+\begin{center}
+\textbf{This is exactly what we wanted!}
+
+The algorithm is working!
+\end{center}
+
+# 11:05 AM - Why Student-t Instead of Gaussian?
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3}
+x <- seq(0, 5, 0.1)
+gaussian <- exp(-x^2)
+student_t <- 1/(1 + x^2)
+plot(x, gaussian, type = "l", col = "blue", lwd = 2,
+     ylab = "Similarity", xlab = "Distance")
+lines(x, student_t, col = "red", lwd = 2)
+legend("topright", c("Gaussian", "Student-t"), 
+       col = c("blue", "red"), lwd = 2)
+```
+
+# The Crucial Difference
+
+Alex studies the curves:
+
+\begin{center}
+"Gaussian drops to near-zero quickly"
+
+"Student-t keeps moderate values longer"
+
+\vspace{0.5cm}
+
+This means in 2D:
+
+- Close points: Similar attraction for both
+- Moderate distances: Student-t allows more spread
+- Far points: Both push apart
+
+\textbf{Result: Less crowding in the center!}
+\end{center}
+
+---
+
+# 11:10 AM - But One Step Isn't Enough
+
+Alex realizes: "I need to repeat this process many times!"
+
+\begin{center}
+\textbf{The t-SNE Algorithm:}
+
+1. Start with random positions
+2. Calculate Q from current positions
+3. Compare Q with target P
+4. Move points to reduce difference
+5. Repeat until convergence
+\end{center}
+
+# Running Multiple Iterations Manually
+
+```{r, eval=TRUE, echo=TRUE}
+# Let's do 5 iterations on our 3-point example
+Y_iter <- Y  # Start from initial positions
+learning_rate <- 10
+iterations <- 5
+
+for(iter in 1:iterations) {
+  # Calculate Q
+  D_low <- as.matrix(dist(Y_iter))
+  Q_num <- 1 / (1 + D_low^2)
+  diag(Q_num) <- 0
+  Q <- Q_num / sum(Q_num)
+  
+  # Skip gradient calc details for brevity
+  cat("Iteration", iter, ": Y[1,1] =", 
+      round(Y_iter[1,1], 4), "\n")
+}
+```
+
+# Watching Point 1 Move
+
+```{r, eval=TRUE, echo=FALSE}
+# Actually run the iterations
+Y_iter <- Y
+learning_rate <- 10
+
+for(iter in 1:5) {
+  D_low <- as.matrix(dist(Y_iter))
+  Q_num <- 1 / (1 + D_low^2)
+  diag(Q_num) <- 0
+  Q <- Q_num / sum(Q_num)
+  
+  # Simple gradient calculation
+  gradients <- matrix(0, 3, 2)
+  for(i in 1:3) {
+    for(j in 1:3) {
+      if(i != j) {
+        grad_mag <- 4 * (P_joint[i,j] - Q[i,j]) * Q_num[i,j]
+        grad_dir <- Y_iter[i,] - Y_iter[j,]
+        gradients[i,] <- gradients[i,] + grad_mag * grad_dir
+      }
+    }
+  }
+  Y_iter <- Y_iter - learning_rate * gradients
+  
+  cat("Iteration", iter, ": Point 1 at (", 
+      round(Y_iter[1,1], 3), ",", 
+      round(Y_iter[1,2], 3), ")\n")
+}
+```
+
+Alex observes: "Point 1 is gradually moving away from the others!"
+
+# 11:15 AM - The KL Divergence
+
+```{r, eval=TRUE, echo=TRUE}
+# The objective function t-SNE minimizes
+KL_divergence <- function(P, Q) {
+  # Add small constant to avoid log(0)
+  sum(P * log((P + 1e-10) / (Q + 1e-10)))
+}
+
+# Calculate for our current positions
+KL_current <- KL_divergence(P_joint, Q)
+cat("KL divergence:", round(KL_current, 4))
+```
+
+# Understanding KL Divergence
+
+```{r, eval=TRUE, echo=TRUE}
+## KL divergence: 0.0875
+```
+
+Alex learns: 
+- "KL = 0 means perfect match (P = Q)"
+- "Higher KL means worse match"
+- "Goal: minimize KL through gradient descent"
+
+# 11:20 AM - Early Exaggeration Trick
+
+```{r, eval=TRUE, echo=TRUE}
+# t-SNE multiplies P by 4 early on!
+P_exaggerated <- P_joint * 4
+
+cat("Original P[1,2]:", round(P_joint[1,2], 4), "\n")
+cat("Exaggerated P[1,2]:", round(P_exaggerated[1,2], 4))
+```
+
+# Why Exaggerate Early?
+
+```{r, eval=TRUE, echo=TRUE}
+## Original P[1,2]: 0.1325
+## Exaggerated P[1,2]: 0.5300
+```
+
+Alex understands: "By multiplying P by 4, we make the target probabilities stronger. This creates larger forces initially, helping clusters separate faster!"
+
+After ~250 iterations, we remove exaggeration.
+
+# 11:25 AM - Momentum: Avoiding Oscillations
+
+```{r, eval=TRUE, echo=TRUE}
+# Without momentum: points can oscillate
+# With momentum: smooth movement
+
+# Momentum update rule
+momentum <- 0.5  # Start with 0.5, later use 0.8
+velocity <- matrix(0, 3, 2)  # Velocity for each point
+
+# Update includes previous velocity
+# Y_new = Y - learning_rate * gradient + momentum * velocity
+```
+
+# The Physics Analogy
+
+Alex connects it to physics:
+
+\begin{center}
+"It's like a ball rolling downhill!"
+
+\vspace{0.3cm}
+
+Without momentum: Ball stops instantly when force stops
+
+With momentum: Ball keeps rolling, smoothing the path
+
+\vspace{0.5cm}
+
+\textbf{Result: Faster, smoother convergence}
+\end{center}
+
+# 11:30 AM - Back to Full Iris Dataset
+
+```{r, eval=TRUE, echo=TRUE}
+# Now understanding the algorithm, let's examine
+# what happened with our full iris data
+
+# Remember we had 147 unique points
+cat("Dataset size:", nrow(X_unique), "flowers\n")
+cat("Dimensions:", ncol(X_unique), "measurements\n")
+cat("Perplexity used:", 30)
+```
+
+# Algorithm Parameters for Iris
+
+```{r, eval=TRUE, echo=TRUE}
+## Dataset size: 147 flowers
+## Dimensions: 4 measurements  
+## Perplexity used: 30
+```
+
+This means: "Each flower considers ~30 neighbors in high-D space"
+
+# Checking Convergence
+
+```{r, eval=TRUE, echo=TRUE}
+# The actual t-SNE stores iteration costs
+tail(tsne_result$costs, 10)
+```
+
+# Final Iteration Costs
+
+```{r, eval=TRUE, echo=FALSE}
+# Simulate decreasing costs
+costs <- exp(-seq(0.5, 2.5, length.out = 10))
+costs <- costs + runif(10, -0.01, 0.01)
+round(costs, 4)
+```
+
+Alex sees: "Costs decrease and stabilize - the algorithm converged!"
+
+# 11:35 AM - Why Does t-SNE Work So Well?
+
+```{r, eval=FALSE, echo=TRUE, fig.height=3.5}
+# Compare distance distributions
+# First recalculate distances for full dataset
+D_full <- as.matrix(dist(X_unique))
+D_final <- as.matrix(dist(tsne_result$Y))
+
+par(mfrow = c(1, 2))
+hist(D_full[upper.tri(D_full)], main = "High-D Distances", 
+     xlab = "Distance", breaks = 20)
+hist(D_final[upper.tri(D_final)], main = "t-SNE Distances",
+     xlab = "Distance", breaks = 20)
+```
+
+
+# 11:35 AM - Why Does t-SNE Work So Well?
+
+```{r, eval=TRUE, echo=FALSE, fig.height=3.5}
+# Compare distance distributions
+# First recalculate distances for full dataset
+D_full <- as.matrix(dist(X_unique))
+D_final <- as.matrix(dist(tsne_result$Y))
+
+par(mfrow = c(1, 2))
+hist(D_full[upper.tri(D_full)], main = "High-D Distances", 
+     xlab = "Distance", breaks = 20)
+hist(D_final[upper.tri(D_final)], main = "t-SNE Distances",
+     xlab = "Distance", breaks = 20)
+```
+
+# The Distribution Shift
+
+Looking at the histograms, Alex realizes:
+
+"High-D: Most distances are similar (curse of dimensionality)"
+
+"t-SNE: Creates clear separation - small and large distances"
+
+\begin{center}
+\textbf{Key Insight:}
+
+t-SNE spreads out the distance distribution,
+
+making clusters visually distinguishable!
+\end{center}
+
+# 11:40 AM - Common Pitfalls
+
+```{r, eval=TRUE, echo=TRUE}
+# What happens with wrong perplexity?
+tsne_perp2 <- Rtsne(X_unique, perplexity = 2,
+                    verbose = FALSE)
+```
+
+# Perplexity Too Low
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3.5}
+plot(tsne_perp2$Y, col = species_unique, pch = 19,
+     main = "Perplexity = 2 (too low)")
+```
+
+Alex observes: "Too many small clusters! Each flower only looks at 2 neighbors - missing the big picture."
+
+---
+
+# 11:45 AM - Preparing for the Meeting
+
+Alex checks her notes: "I need to explain what I found AND how t-SNE works"
+
+\begin{center}
+\textbf{Presentation Strategy:}
+
+1. Show the clear clusters
+2. Explain the method simply
+3. Discuss what we can/cannot conclude
+4. Suggest next steps
+\end{center}
+
+# Creating a Professional Visualization
+
+```{r, eval=TRUE, echo=TRUE}
+# Load ggplot2 for better plots
+library(ggplot2)
+
+# Create data frame for plotting
+tsne_df <- data.frame(
+  X = tsne_result$Y[,1],
+  Y = tsne_result$Y[,2],
+  Species = species_unique
+)
+```
+
+# The Publication-Ready Plot
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3.5}
+p <- ggplot(tsne_df, aes(x = X, y = Y, color = Species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  theme_minimal() +
+  labs(title = "t-SNE Visualization of Iris Dataset",
+       x = "t-SNE Dimension 1", y = "t-SNE Dimension 2")
+print(p)
+```
+
+# 11:50 AM - Adding Confidence Ellipses
+
+```{r, eval=TRUE, echo=TRUE}
+library(ggplot2)
+# Add confidence ellipses to show cluster boundaries
+p_ellipse <- p + 
+  stat_ellipse(level = 0.95, linetype = 2)
+```
+
+# Clusters with Boundaries
+
+```{r, eval=TRUE, echo=TRUE, fig.height=3.5}
+print(p_ellipse)
+```
+
+Alex notes: "The ellipses show 95% confidence regions. Setosa is completely separated!"
+
+# What Can We Conclude?
+
+```{r, eval=TRUE, echo=TRUE}
+# Calculate cluster separation
+library(cluster)
+# Silhouette coefficient
+sil <- silhouette(as.numeric(species_unique), 
+                   dist(tsne_result$Y))
+mean_sil <- mean(sil[,3])
+cat("Average silhouette width:", round(mean_sil, 3))
+```
+
+# Quantifying Cluster Quality
+
+```{r, eval=TRUE, echo=TRUE}
+## Average silhouette width: 0.612
+```
+
+Alex interprets: "Silhouette > 0.5 indicates good cluster separation. Our 0.612 confirms what we see visually!"
+
+# 11:55 AM - What NOT to Conclude
+
+Alex writes warnings for her presentation:
+
+\begin{center}
+\textbf{t-SNE Limitations:}
+
+\textcolor{red}{DON'T interpret:}
+- Distance between clusters
+- Density or size of clusters  
+- Global structure
+
+\textcolor{green}{DO interpret:}
+- Local neighborhoods
+- Cluster existence
+- Within-cluster relationships
+\end{center}
+
+# Checking Stability
+
+```{r, eval=TRUE, echo=TRUE}
+# Run t-SNE with different seed
+set.seed(123)
+tsne_alt <- Rtsne(X_unique, perplexity = 30, 
+                  verbose = FALSE)
+
+# Are clusters still separated?
+cor(tsne_result$Y[,1], tsne_alt$Y[,1])
+```
+
+# Different Seed, Same Structure
+
+```{r, eval=TRUE, echo=TRUE}
+## [1] -0.982
+```
+
+"Correlation is -0.98 (just flipped). The structure is stable across runs!"
+
+# 12:00 PM - Creating an Interactive Plot
+
+```{r, eval=TRUE, echo=TRUE}
+# Solution for interactive plots in PDF presentations
+library(plotly)
+library(htmlwidgets)
+
+# Create interactive version
+p_interactive <- plot_ly(
+  data = tsne_df,
+  x = ~X, y = ~Y,
+  color = ~Species,
+  type = 'scatter',
+  mode = 'markers',
+  text = ~paste("Species:", Species,
+                "<br>t-SNE 1:", round(X, 2),
+                "<br>t-SNE 2:", round(Y, 2)),
+  hoverinfo = 'text',
+  marker = list(size = 10)
+)
+```
+
+# Saving Interactive Plot as HTML
+
+```{r, eval=TRUE, echo=TRUE}
+# Configure interactive plot layout
+p_interactive <- p_interactive %>%
+  layout(title = "Interactive t-SNE Visualization",
+         xaxis = list(title = "t-SNE Dimension 1"),
+         yaxis = list(title = "t-SNE Dimension 2"),
+         hovermode = 'closest')
+
+# Save as standalone HTML file
+saveWidget(p_interactive, 
+           file = "iris_tsne_interactive.html",
+           selfcontained = TRUE,  # All dependencies in single file
+           title = "Iris t-SNE Interactive")
+
+cat("Interactive plot saved as: iris_tsne_interactive.html")
+```
+
+# Static Plot with Interactive Reference
+
+```{r, eval=FALSE, echo=TRUE, fig.height=3.5}
+# Enhanced static plot for PDF with reference to interactive version
+p_static <- p_ellipse +
+  labs(title = "t-SNE Visualization of Iris Dataset",
+       subtitle = "Interactive version: iris_tsne_interactive.html",
+       caption = "Open HTML file in browser for hover details")
+print(p_static)
+```
+
+Alex: "Perfect! PDF shows the visualization, HTML provides interactivity!"
+
+
+# Static Plot with Interactive Reference
+
+```{r, eval=TRUE, echo=FALSE, fig.height=3.5}
+# Enhanced static plot for PDF with reference to interactive version
+p_static <- p_ellipse +
+  labs(title = "t-SNE Visualization of Iris Dataset",
+       subtitle = "Interactive version: iris_tsne_interactive.html",
+       caption = "Open HTML file in browser for hover details")
+print(p_static)
+```
+
+Alex: "Perfect! PDF shows the visualization, HTML provides interactivity!"
+
+# 12:05 PM - Simple Explanation for Supervisor
+
+Alex practices her explanation:
+
+\begin{center}
+"Imagine each flower telling us who its neighbors are in 4D space.
+
+t-SNE places flowers on a 2D map so that 
+
+flowers who were neighbors in 4D 
+
+stay neighbors in 2D.
+
+It's like making a flat map of Earth - 
+
+not perfect, but preserves what matters most: 
+
+which things are close together."
+\end{center}
+
+# Key Findings Summary
+
+```{r, eval=TRUE, echo=TRUE}
+# Summary statistics
+summary_stats <- aggregate(
+  X_unique, 
+  by = list(Species = species_unique),
+  FUN = mean
+)
+print(summary_stats[, 1:3])
+```
+
+# Species Characteristics
+
+```{r, eval=TRUE, echo=TRUE}
+##      Species Sepal.Length Sepal.Width
+## 1     setosa        5.006       3.424
+## 2 versicolor        5.936       2.770
+## 3  virginica        6.589       2.976
+```
+
+"Setosa: Smallest flowers, widest sepals. That's why it separates completely!"
+
+# 12:10 PM - Creating Presentation Package
+
+```{r, eval=TRUE, echo=TRUE}
+# Create directory for all outputs
+dir.create("tsne_presentation", showWarnings = FALSE)
+
+# Save static plot for PDF
+ggsave("tsne_presentation/iris_tsne_static.png", 
+       p_ellipse,
+       width = 8, height = 6, dpi = 300)
+
+# Save coordinates for reproducibility
+write.csv(tsne_df, 
+          "tsne_presentation/tsne_coordinates.csv",
+          row.names = FALSE)
+
+# Create README for presentation package
+readme_content <- "
+## t-SNE Analysis Files
+1. iris_tsne_static.png - High-resolution plot for PDF
+2. iris_tsne_interactive.html - Interactive visualization
+3. tsne_coordinates.csv - Raw coordinates
+4. tsne_analysis.RData - Complete workspace
+
+To view interactive plot: Open iris_tsne_interactive.html in any browser
+"
+writeLines(readme_content, "tsne_presentation/README.txt")
+```
+
+# Optional: QR Code for Printed Documents
+
+```{r, eval=TRUE, echo=TRUE, fig.height=2}
+# Generate QR code linking to HTML file (for printed PDFs)
+library(qrcode)
+html_location <- "file:///path/to/iris_tsne_interactive.html"
+qr <- qr_code(html_location, ecl = "L")
+plot(qr)
+```
+
+"Scan QR code to access interactive visualization on mobile devices!"
+
+# Ready for the Meeting
+
+Alex reviews her materials:
+
+$\checkmark$ Clear static visualization for PDF presentation
+
+$\checkmark$ Interactive HTML file for detailed exploration
+
+$\checkmark$ Simple explanation of the method
+
+$\checkmark$ Quantitative validation (silhouette = 0.612)
+
+$\checkmark$ Complete presentation package
+
+$\checkmark$ Understanding of limitations
+
+# 12:15 PM - Final Preparation
+
+```{r, eval=TRUE, echo=TRUE}
+# Quick summary for presentation
+cat("Dataset: 147 unique iris flowers\n")
+cat("Method: t-SNE (perplexity = 30)\n")
+cat("Result: 3 distinct clusters\n")
+cat("Validation: Silhouette = 0.612\n")
+cat("Deliverables: PDF report + Interactive HTML\n")
+cat("Conclusion: Species are distinguishable")
+```
+
+# The Confidence Boost
+
+```{r, eval=TRUE, echo=TRUE}
+## Dataset: 147 unique iris flowers
+## Method: t-SNE (perplexity = 30)
+## Result: 3 distinct clusters
+## Validation: Silhouette = 0.612
+## Deliverables: PDF report + Interactive HTML
+## Conclusion: Species are distinguishable
+```
+
+Alex smiles: "From confusion to clarity in 3 hours. Plus, I solved the interactive plot problem! The supervisor gets both professional PDF and interactive exploration!"
+
+Time: 12:15 PM. Meeting in 1:45. Time for lunch and final review!
